@@ -1,6 +1,7 @@
 import csv
 import os
 import nltk
+from nltk.corpus import wordnet as wn
 
 folder = '/Users/lenka/Desktop/training_data'
 
@@ -48,7 +49,17 @@ def find_features(row):
     features['first_word_same'] = (row['def1'].split(' ')[0].lower() == row['def2'].split(' ')[0].lower())
     features['len difference'] = abs(len(row['def1'].split(' ')) - len(row['def2'].split(' ')[0]))
 
-    # number of matching words in same/diff place
+    wordmatch = 0
+    for word in row['def1'].split(' ')[0].lower():
+        if word in row['def2'].lower():
+            wordmatch+=1
+
+    features['wordmatch'] = wordmatch
+
+    features['synsets'] = len(wn.synsets(row['lemma'])) #for specific pos e.g. wn.synsets('dog', pos=wn.VERB)
+
+    #if features['synsets'] == 0:
+    #    print('no synset for ',row['lemma']) TODO MULTILIGNUAL WN
 
     return features
 
@@ -73,4 +84,5 @@ if __name__ == '__main__':
         train_set, test_set = prepare_data(data[lang])
         classifier = nltk.NaiveBayesClassifier.train(train_set)
         print(nltk.classify.accuracy(classifier, test_set))
+        classifier.show_most_informative_features(5)
         print('\n')
