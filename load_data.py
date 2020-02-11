@@ -3,6 +3,9 @@ import os
 import nltk
 from nltk.corpus import wordnet as wn
 import random
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import Levenshtein
 
 folder = '/Users/lenka/Desktop/training_data'
 
@@ -39,10 +42,27 @@ def analyze_by_class(dataset):
             separated[class_value] = list()
         separated[class_value].append(vector[0])
 
-    #for s in separated:
-    #    print(s, len(separated[s]))
+    for s in separated:
+        print(s, len(separated[s]))
 
     return separated
+
+def get_jaccard_sim(str1, str2):
+    a = set(str1.split())
+    b = set(str2.split())
+    c = a.intersection(b)
+    return float(len(c)) / (len(a) + len(b) - len(c))
+
+
+def get_cosine_sim(*strs):
+    vectors = [t for t in get_vectors(*strs)]
+    return cosine_similarity(vectors)
+
+def get_vectors(*strs):
+    text = [t for t in strs]
+    vectorizer = CountVectorizer(text)
+    vectorizer.fit(text)
+    return vectorizer.transform(text).toarray()
 
 
 def find_features(row):
@@ -50,14 +70,27 @@ def find_features(row):
     features['first_word_same'] = (row['def1'].split(' ')[0].lower() == row['def2'].split(' ')[0].lower())
     features['len difference'] = abs(len(row['def1'].split(' ')) - len(row['def2'].split(' ')[0]))
 
+    features['jaccard'] = get_jaccard_sim(row['def1'], row['def2'])
+
+    features['cosine'] = get_cosine_sim(row['def1'], row['def2'])[0,1]
+
+    features['levenshtein'] = Levenshtein.distance(row['def1'], row['def2'])
+
+    #if features['cosine']>0.9:
+    #    print(row['def1'], row['def2'], features['cosine'])
+
+    '''
     wordmatch = 0
     for word in row['def1'].split(' ')[0].lower():
         if word in row['def2'].lower():
             wordmatch+=1
 
     features['wordmatch'] = wordmatch
+    '''
 
     features['synsets'] = len(wn.synsets(row['lemma'])) #for specific pos e.g. wn.synsets('dog', pos=wn.VERB)
+
+
 
     # if features['synsets'] == 0:
     #    print('no synset for ',row['lemma']) TODO MULTILIGNUAL WN
