@@ -5,16 +5,17 @@ from nltk.corpus import wordnet as wn
 import random
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import Levenshtein
 
-folder = '/Users/lenka/Desktop/training_data'
+# import Levenshtein
+
+folder = 'C:\\Users\\syim\\Documents\\ELEXIS\\codalab\\public_dat\\train'
 
 
 def load_training_data(folder):
     loaded_data = {}
     for filename in os.listdir(folder):
         if filename.endswith(".tsv"):
-            with open(folder+'/'+filename, encoding='utf-8') as tsvfile:
+            with open(folder + '/' + filename, encoding='utf-8') as tsvfile:
 
                 reader = csv.reader(tsvfile, delimiter='\t')
                 lang = filename.split('.')[0]
@@ -27,8 +28,7 @@ def load_training_data(folder):
                                 'def2': row[3]}
                     loaded_data[lang].append((data_row, row[4]))
 
-
-    #for lang in loaded_data:
+    # for lang in loaded_data:
     #    print(lang, len(loaded_data[lang]))
 
     return loaded_data
@@ -38,7 +38,7 @@ def analyze_by_class(dataset):
     separated = dict()
     for vector in dataset:
         class_value = vector[1]
-        if (class_value not in separated):
+        if class_value not in separated:
             separated[class_value] = list()
         separated[class_value].append(vector[0])
 
@@ -46,6 +46,7 @@ def analyze_by_class(dataset):
         print(s, len(separated[s]))
 
     return separated
+
 
 def get_jaccard_sim(str1, str2):
     a = set(str1.split())
@@ -57,6 +58,7 @@ def get_jaccard_sim(str1, str2):
 def get_cosine_sim(*strs):
     vectors = [t for t in get_vectors(*strs)]
     return cosine_similarity(vectors)
+
 
 def get_vectors(*strs):
     text = [t for t in strs]
@@ -72,11 +74,11 @@ def find_features(row):
 
     features['jaccard'] = get_jaccard_sim(row['def1'], row['def2'])
 
-    features['cosine'] = get_cosine_sim(row['def1'], row['def2'])[0,1]
+    features['cosine'] = get_cosine_sim(row['def1'], row['def2'])[0, 1]
 
-    features['levenshtein'] = Levenshtein.distance(row['def1'], row['def2'])
+    # features['levenshtein'] = Levenshtein.distance(row['def1'], row['def2'])
 
-    #if features['cosine']>0.9:
+    # if features['cosine']>0.9:
     #    print(row['def1'], row['def2'], features['cosine'])
 
     '''
@@ -88,9 +90,7 @@ def find_features(row):
     features['wordmatch'] = wordmatch
     '''
 
-    features['synsets'] = len(wn.synsets(row['lemma'])) #for specific pos e.g. wn.synsets('dog', pos=wn.VERB)
-
-
+    features['synsets'] = len(wn.synsets(row['lemma']))  # for specific pos e.g. wn.synsets('dog', pos=wn.VERB)
 
     # if features['synsets'] == 0:
     #    print('no synset for ',row['lemma']) TODO MULTILIGNUAL WN
@@ -100,27 +100,30 @@ def find_features(row):
 
 def prepare_data(dataset):
     featuresets = [(find_features(row), label) for (row, label) in dataset]
+    return split_data(featuresets)
+
+
+def split_data(featuresets):
     f = int(len(featuresets) / 5)
     train_set, test_set = featuresets[f:], featuresets[:f]
-    print(len(train_set), len(test_set))
     return train_set, test_set
 
 
 def get_baseline(test_set):
     TP = 0
     for el in test_set:
-        if el[1]=='none':
-            TP+=1
+        if el[1] == 'none':
+            TP += 1
 
-    return float(TP/len(test_set))
+    return float(TP / len(test_set))
 
 
 def balance_classes(separated):
     second_biggest_class = 0
     for el in separated:
         if el != 'none':
-          if len(separated[el])>second_biggest_class:
-              second_biggest_class = len(separated[el])
+            if len(separated[el]) > second_biggest_class:
+                second_biggest_class = len(separated[el])
 
     separated['none'] = separated['none'][:second_biggest_class]
 
@@ -134,11 +137,10 @@ def balance_classes(separated):
     return balanced
 
 
-def train_and_test_classifiers(data):
-    train_set, test_set = prepare_data(data)
+def train_and_test_classifiers(train_set, test_set):
     naive_bayes = nltk.NaiveBayesClassifier.train(train_set)
     print('naive bayes: ', nltk.classify.accuracy(naive_bayes, test_set))
-    #naive_bayes.show_most_informative_features(5)
+    # naive_bayes.show_most_informative_features(5)
 
     decision_tree = nltk.DecisionTreeClassifier.train(train_set)
     print('desicion tree: ', nltk.classify.accuracy(decision_tree, test_set))
@@ -157,7 +159,7 @@ if __name__ == '__main__':
     data = load_training_data(folder)
 
     for lang in data:
-        if lang=='english':
+        if lang == 'english':
             continue
 
         print(lang)
@@ -165,8 +167,9 @@ if __name__ == '__main__':
         separated = analyze_by_class(data[lang])
         balanced = balance_classes(separated)
 
-        print('balanced dataset: ',len(balanced))
-        train_and_test_classifiers(balanced)
+        print('balanced dataset: ', len(balanced))
+        train_set, test_set = prepare_data(balanced)
+        train_and_test_classifiers(train_set, test_set)
 
-        #print('whole dataset: ', len(data[lang]))
-        #train_and_test_classifiers(data[lang])
+        # print('whole dataset: ', len(data[lang]))
+        # train_and_test_classifiers(data[lang])
