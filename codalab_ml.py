@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 
-from load_data import split_data, get_baseline, difference_in_length, first_word_same, jaccard_sim, cosine
+from load_data import split_data, difference_in_length, first_word_same, jaccard_sim, cosine
 from load_data import train_and_test_classifiers
 
 folder = 'C:\\Users\\syim\\Documents\\ELEXIS\\codalab\\public_dat\\train'
@@ -59,9 +59,9 @@ def extract_features(data, feats_to_scale):
     return feat
 
 
-def convert_to_nltk_dataset(features, labels):
+def convert_to_nltk_dataset(feats, labels):
     converted = []
-    for index, row in features.iterrows():
+    for index, row in feats.iterrows():
         converted.append((row.to_dict(), labels[index]))
     return converted
 
@@ -80,7 +80,6 @@ def prepare_data(df_features, labels):
 def run_cv_with_dataset(model, trainset, y_train):
     scores = cross_val_score(model, trainset, y_train, cv=5)
     print('Cross validation scores for model' + model.__class__.__name__)
-    scores
     print("Accuracy: %0.4f (+/- %0.4f)" % (scores.mean(), scores.std() * 2))
 
 
@@ -93,30 +92,29 @@ def cross_val_models(models, x_train, y_train):
 
 
 def get_baseline_df(y_test):
-    TP = 0
+    tp = 0
     for index in y_test.index:
         if y_test[index] == 'none':
-            TP += 1
+            tp += 1
 
-    return float(TP / len(y_test))
+    return float(tp / len(y_test))
 
 
-def train_models_sklearn(X_train, y_train, y_test):
+def train_models_sklearn(x_train, y_train):
     lr = LogisticRegression(solver='lbfgs', multi_class='multinomial') \
-        .fit(X_train, y_train)
+        .fit(x_train, y_train)
     # lr_scaled = LogisticRegression( solver = 'lbfgs', multi_class = 'multinomial').fit(X_train_scaled, y_train)
 
-    ## Linear kernal won't work very well, experiment with nonlinear ones.
+    # Linear kernal won't work very well, experiment with nonlinear ones.
     svm_model = svm.LinearSVC(C=1.0) \
-        .fit(X_train, y_train)
+        .fit(x_train, y_train)
     # svm_scaled = svm.LinearSVC().fit(X_train_scaled, y_train)
 
     rf = RandomForestClassifier(max_depth=5, random_state=0) \
-        .fit(X_train, y_train)
+        .fit(x_train, y_train)
     # rf_scaled = RandomForestClassifier(max_depth = 5, random_state=0).fit(X_train_scaled, y_train)
 
-    models = {}
-    models['unscaled'] = [lr, svm_model, rf]
+    models = {'unscaled': [lr, svm_model, rf]}
     # models['scaled'] = [lr_scaled, svm_scaled, rf_scaled]
 
     return models
@@ -175,8 +173,7 @@ if __name__ == '__main__':
     train_and_test_classifiers(all_train_and_testset['nltk']['trainset'], all_train_and_testset['nltk']['testset'])
 
     trained_models = train_models_sklearn(all_train_and_testset['pd']['x_trainset'],
-                                          all_train_and_testset['pd']['y_trainset'],
-                                          all_train_and_testset['pd']['y_testset'])
+                                          all_train_and_testset['pd']['y_trainset'])
 
     cross_val_models(trained_models, all_train_and_testset['pd']['x_trainset'],
                      all_train_and_testset['pd']['y_trainset'])
