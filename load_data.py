@@ -4,6 +4,7 @@ import nltk
 from nltk.corpus import wordnet as wn
 import random
 
+from nltk.metrics.scores import (precision, recall)
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer
@@ -158,6 +159,7 @@ def balance_classes(separated):
 
 def train_and_test_classifiers(train_set, test_set):
     naive_bayes = nltk.NaiveBayesClassifier.train(train_set)
+
     print('naive bayes: ', nltk.classify.accuracy(naive_bayes, test_set))
     # naive_bayes.show_most_informative_features(5)
 

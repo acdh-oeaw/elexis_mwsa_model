@@ -37,6 +37,7 @@ def load_training_data():
 
 
 def spacy_nlp(sentence):
+
     return nlp(sentence)
 
 
@@ -146,37 +147,57 @@ def compare_on_testset(models, testset_x, testset_y, testset_x_scaled):
         score = estimator.score(testset_x, testset_y)
         print('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
 
-        estimator.predict(testset_x_scaled)
-        score = estimator.score(testset_x_scaled, testset_y)
-        print('\t\t' + "Accuracy for scaled featureset: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
+        # estimator.predict(testset_x_scaled)
+        # score = estimator.score(testset_x_scaled, testset_y)
+        # print('\t\t' + "Accuracy for scaled featureset: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
+
+
+def open_file():
+    now = datetime.now()
+    return open("reports\\" + now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
+
+
+def configure():
+    pd.set_option('display.max_colwidth', -1)
+
+
+def load_and_preprocess():
+    all_data = load_training_data()
+    en_data = all_data['english_kd']
+    balanced = balance_dataset(en_data)
+
+    balanced['processed_1'] = balanced['def1'].map(spacy_nlp)
+    balanced['processed_2'] = balanced['def2'].map(spacy_nlp)
+
+    return balanced
+
+
+def train(data):
+    train_and_test_classifiers(data['nltk']['trainset'], data['nltk']['testset'])
+    trained_models = train_models_sklearn(data['pd']['x_trainset'],
+                                          data['pd']['y_trainset'])
+    cross_val_models(trained_models, data['pd']['x_trainset'],
+                     data['pd']['y_trainset'])
+
+    compare_on_testset(trained_models, data['pd']['x_testset'],
+                       data['pd']['y_testset'], data['pd']['x_testset'])
 
 
 if __name__ == '__main__':
-    now = datetime.now()
-    report = open(now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
-
     nlp = spacy.load('en_core_web_lg')
-    pd.set_option('display.max_colwidth', -1)
 
-    all_data = load_training_data()
-    en_data = all_data['english_kd']
-    balanced_en_data = balance_dataset(en_data)
+    report_file = open_file()
+    configure()
 
-    balanced_en_data['processed_1'] = balanced_en_data['def1'].map(spacy_nlp)
-    balanced_en_data['processed_2'] = balanced_en_data['def2'].map(spacy_nlp)
+    balanced_en_data = load_and_preprocess()
 
-    report.write((str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + '\n'))
+    report_file.write((str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + '\n'))
 
     features = extract_features(balanced_en_data, ['similarities'])
+
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 
-    train_and_test_classifiers(all_train_and_testset['nltk']['trainset'], all_train_and_testset['nltk']['testset'])
+    train(all_train_and_testset)
 
-    trained_models = train_models_sklearn(all_train_and_testset['pd']['x_trainset'],
-                                          all_train_and_testset['pd']['y_trainset'])
 
-    cross_val_models(trained_models, all_train_and_testset['pd']['x_trainset'],
-                     all_train_and_testset['pd']['y_trainset'])
 
-    compare_on_testset(trained_models, all_train_and_testset['pd']['x_testset'],
-                       all_train_and_testset['pd']['y_testset'], all_train_and_testset['pd']['x_testset'])
