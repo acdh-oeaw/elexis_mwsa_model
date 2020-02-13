@@ -3,7 +3,11 @@ import os
 import nltk
 from nltk.corpus import wordnet as wn
 import random
+
+from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics.pairwise import cosine_similarity
 
 # import Levenshtein
@@ -67,14 +71,30 @@ def get_vectors(*strs):
     return vectorizer.transform(text).toarray()
 
 
+def first_word_same(row):
+    return row['def1'].split(' ')[0].lower() == row['def2'].split(' ')[0].lower()
+
+
+def difference_in_length(row):
+    return abs(len(row['def1'].split(' ')) - len(row['def2'].split(' ')[0]))
+
+
+def jaccard_sim(row):
+    return get_jaccard_sim(row['def1'], row['def2'])
+
+
+def cosine(row):
+    return get_cosine_sim(row['def1'], row['def2'])[0, 1]
+
+
 def find_features(row):
     features = {}
-    features['first_word_same'] = (row['def1'].split(' ')[0].lower() == row['def2'].split(' ')[0].lower())
-    features['len difference'] = abs(len(row['def1'].split(' ')) - len(row['def2'].split(' ')[0]))
+    features['first_word_same'] = (first_word_same(row))
+    features['len difference'] = difference_in_length(row)
 
-    features['jaccard'] = get_jaccard_sim(row['def1'], row['def2'])
+    features['jaccard'] = jaccard_sim(row)
 
-    features['cosine'] = get_cosine_sim(row['def1'], row['def2'])[0, 1]
+    features['cosine'] = cosine(row)
 
     # features['levenshtein'] = Levenshtein.distance(row['def1'], row['def2'])
 
@@ -105,8 +125,7 @@ def prepare_data(dataset):
 
 def split_data(featuresets):
     f = int(len(featuresets) / 5)
-    train_set, test_set = featuresets[f:], featuresets[:f]
-    return train_set, test_set
+    return featuresets[f:], featuresets[:f]
 
 
 def get_baseline(test_set):
