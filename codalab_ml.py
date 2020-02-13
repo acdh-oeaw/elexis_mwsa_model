@@ -1,6 +1,10 @@
 import os
 import pandas as pd
 import spacy
+from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+
 from load_data import split_data
 from load_data import train_and_test_classifiers
 from tqdm import tqdm_notebook as tqdm
@@ -57,11 +61,42 @@ def extract_features(data):
 
 def convert_to_nltk_dataset(features, labels):
     converted = []
-
     for index, row in features.iterrows():
         converted.append((row.to_dict(), labels[index]))
-
     return converted
+
+
+def prepare_data(df_features, labels):
+    data_holder = {'nltk': {}, 'pd': {}}
+
+    features_nltk = convert_to_nltk_dataset(df_features, labels)
+    data_holder['nltk']['trainset'], data_holder['nltk']['testset'] = split_data(features_nltk)
+    df_features['relation'] = labels
+    data_holder['pd']['trainset'], data_holder['pd']['trainset'] = split_data(df_features)
+    return data_holder
+
+
+def train_models(X_train, y_train, X_train_scaled):
+    print('baseline: ', str(get_baseline(y_test)) + '\n')
+
+    lr = LogisticRegression(solver='lbfgs', multi_class='multinomial')\
+        .fit(X_train, y_train)
+    # lr_scaled = LogisticRegression( solver = 'lbfgs', multi_class = 'multinomial').fit(X_train_scaled, y_train)
+
+    ## Linear kernal won't work very well, experiment with nonlinear ones.
+    svm_model = svm.LinearSVC(C=10.0)\
+        .fit(X_train, y_train)
+    # svm_scaled = svm.LinearSVC().fit(X_train_scaled, y_train)
+
+    rf = RandomForestClassifier(max_depth=5, random_state=0)\
+        .fit(X_train, y_train)
+    # rf_scaled = RandomForestClassifier(max_depth = 5, random_state=0).fit(X_train_scaled, y_train)
+
+    models = {}
+    models['unscaled'] = [lr, svm_model, rf]
+    # models['scaled'] = [lr_scaled, svm_scaled, rf_scaled]
+
+    return models
 
 
 if __name__ == '__main__':
@@ -74,28 +109,28 @@ if __name__ == '__main__':
     en_data_spacy = en_data.apply(lambda x: spacy_nlp(x) if x.name in ['def1', 'def2'] else x)
 
     features = extract_features(en_data_spacy)
-    #features['relation'] = en_data_spacy['relation']
+
+    all_train_and_testset = prepare_data(features, en_data_spacy['relation'])
+
+    train_and_test_classifiers(all_train_and_testset['nltk']['trainset'], all_train_and_testset['nltk']['testset'])
+
+    # features['relation'] = en_data_spacy['relation']
 #    features_nltk = [(features, label) for index, (feature, label) in features.iterrows()]
 
-    features_nltk = convert_to_nltk_dataset(features, en_data_spacy['relation'])
 
-    trainset, testset = split_data(features_nltk)
+# train_and_test_classifiers(data['english_nuig'])
 
-    train_and_test_classifiers(trainset, testset)
+# for lang in data:
+#     if lang=='english':
+#         continue
+#
+#     print(lang)
+#
+#     separated = analyze_by_class(data[lang])
+#     balanced = balance_classes(separated)
+#
+#     print('balanced dataset: ',len(balanced))
+#     train_and_test_classifiers(balanced)
 
-    # train_and_test_classifiers(data['english_nuig'])
-
-    # for lang in data:
-    #     if lang=='english':
-    #         continue
-    #
-    #     print(lang)
-    #
-    #     separated = analyze_by_class(data[lang])
-    #     balanced = balance_classes(separated)
-    #
-    #     print('balanced dataset: ',len(balanced))
-    #     train_and_test_classifiers(balanced)
-
-    # print('whole dataset: ', len(data[lang]))
-    # train_and_test_classifiers(data[lang])
+# print('whole dataset: ', len(data[lang]))
+# train_and_test_classifiers(data[lang])
