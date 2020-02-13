@@ -183,15 +183,18 @@ def train(data):
                        data['pd']['y_testset'], data['pd']['x_testset'])
 
 
-if __name__ == '__main__':
-    nlp = spacy.load('en_core_web_lg')
+def count_relation_and_sort():
+    return str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + "\n"
 
-    report_file = open_file()
+
+if __name__ == '__main__':
     configure()
+    nlp = spacy.load('en_core_web_lg')
+    report_file = open_file()
 
     balanced_en_data = load_and_preprocess()
 
-    report_file.write((str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + '\n'))
+    report_file.write(count_relation_and_sort())
 
     features = extract_features(balanced_en_data, ['similarities'])
 
