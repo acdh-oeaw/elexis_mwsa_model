@@ -6,7 +6,7 @@ import spacy
 from sklearn import svm, preprocessing
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, classification_report, confusion_matrix
 from sklearn.model_selection import cross_val_score
 
 from load_data import split_data, difference_in_length, first_word_same, jaccard_sim, cosine
@@ -112,7 +112,7 @@ def train_models_sklearn(x_train, y_train):
         .fit(x_train, y_train)
     # svm_scaled = svm.LinearSVC().fit(X_train_scaled, y_train)
 
-    rf = RandomForestClassifier(max_depth=5, random_state=0) \
+    rf = RandomForestClassifier(max_depth=10, random_state=0) \
         .fit(x_train, y_train)
     # rf_scaled = RandomForestClassifier(max_depth = 5, random_state=0).fit(X_train_scaled, y_train)
 
@@ -139,20 +139,21 @@ def balance_dataset(imbalanced_set):
 
 
 def compare_on_testset(models, testset_x, testset_y, testset_x_scaled):
-    print('Model Evaluation on Testset: ' + '\n')
-    print('\t' + 'BASELINE: ' + str(get_baseline_df(testset_y)) + '\n')
+    report_file.write('Model Evaluation on Testset: \n')
+    report_file.write('\t' + 'BASELINE: ' + str(get_baseline_df(testset_y)) + '\n')
 
     for estimator in models['unscaled']:
+        report_file.write('\t' + estimator.__class__.__name__)
+        report_file.write(str(estimator))
+
         predicted = estimator.predict(testset_x)
+        report_file.write(str(classification_report(testset_y, predicted)) + '\n')
+        report_file.write(str(confusion_matrix(testset_y, predicted)) + '\n')
 
-        print('\t' + estimator.__class__.__name__)
-        print('\t\t' + "F-Score:" + str(f1_score(testset_y, predicted, average = 'macro')))
+        report_file.write('\t\t' + "F-Score:" + str(f1_score(testset_y, predicted, average = 'macro')) + '\n')
+
         score = estimator.score(testset_x, testset_y)
-        print('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
-
-        # estimator.predict(testset_x_scaled)
-        # score = estimator.score(testset_x_scaled, testset_y)
-        # print('\t\t' + "Accuracy for scaled featureset: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
+        report_file.write('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
 
 
 def open_file():
@@ -204,6 +205,8 @@ if __name__ == '__main__':
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 
     train(all_train_and_testset)
+
+    report_file.close()
 
 
 
