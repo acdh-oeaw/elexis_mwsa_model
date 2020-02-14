@@ -6,6 +6,7 @@ import spacy
 from sklearn import svm, preprocessing
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import f1_score
 from sklearn.model_selection import cross_val_score
 
 from load_data import split_data, difference_in_length, first_word_same, jaccard_sim, cosine
@@ -142,8 +143,10 @@ def compare_on_testset(models, testset_x, testset_y, testset_x_scaled):
     print('\t' + 'BASELINE: ' + str(get_baseline_df(testset_y)) + '\n')
 
     for estimator in models['unscaled']:
-        estimator.predict(testset_x)
+        predicted = estimator.predict(testset_x)
+
         print('\t' + estimator.__class__.__name__)
+        print('\t\t' + "F-Score:" + str(f1_score(testset_y, predicted, average = 'macro')))
         score = estimator.score(testset_x, testset_y)
         print('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
 

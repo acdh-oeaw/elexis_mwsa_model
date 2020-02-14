@@ -1,10 +1,11 @@
 import csv
 import os
 import nltk
+from nltk import collections
 from nltk.corpus import wordnet as wn
 import random
 
-from nltk.metrics.scores import (precision, recall)
+from nltk.metrics.scores import (precision, recall, f_measure)
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer
@@ -157,16 +158,51 @@ def balance_classes(separated):
     return balanced
 
 
-def train_and_test_classifiers(train_set, test_set):
-    naive_bayes = nltk.NaiveBayesClassifier.train(train_set)
+def metrics(classifiers, test_set):
+    for classifier in classifiers:
+        print(classifier.__class__.__name__, '\n')
+        ref_set, classified, labels, classified_labels = classify_elements(classifier, test_set)
 
-    print('naive bayes: ', nltk.classify.accuracy(naive_bayes, test_set))
-    # naive_bayes.show_most_informative_features(5)
-
-    decision_tree = nltk.DecisionTreeClassifier.train(train_set)
-    print('desicion tree: ', nltk.classify.accuracy(decision_tree, test_set))
+        print('\taccuracy: ', nltk.classify.accuracy(classifier, test_set))
+        print_precision_recall_fmeasure(classified, ref_set)
+        print_confusion_matrix(classified_labels, labels)
 
     print('baseline: ', str(get_baseline(test_set)) + '\n')
+
+
+def classify_elements(classifier, test_set):
+    ref_set, classified, labels, classified_labels = collections.defaultdict(set), collections.defaultdict(set), [], []
+
+    for i, (feats, label) in enumerate(test_set):
+        ref_set[label].add(i)
+        labels.append(label)
+        observed = classifier.classify(feats)
+        classified_labels.append(observed)
+        classified[observed].add(i)
+
+    return ref_set, classified, labels, classified_labels
+
+
+def print_confusion_matrix(classified_labels, labels):
+    confusion_matrix = nltk.ConfusionMatrix(labels, classified_labels)
+    print(confusion_matrix.pretty_format(sort_by_count=True, show_percents=True, truncate=9))
+
+
+def print_precision_recall_fmeasure(classified, ref_set):
+    for label in ['exact', 'related', 'broader', 'narrower', 'none']:
+        print('\t' + label + ":")
+        print('\t\tPrecision: ', precision(ref_set[label], classified[label]))
+        print('\t\tRecall: ', recall(ref_set[label], classified[label]))
+        print('\t\tF-measure', f_measure(ref_set[label], classified[label]))
+        print('\n')
+
+
+def train_and_test_classifiers(train_set, test_set):
+    decision_tree = nltk.DecisionTreeClassifier.train(train_set)
+    naive_bayes = nltk.NaiveBayesClassifier.train(train_set)
+
+    metrics([decision_tree, naive_bayes], test_set)
+    # naive_bayes.show_most_informative_features(5)
 
     # quite slow
     # max_ent = nltk.MaxentClassifier.train(train_set, trace=-1)
