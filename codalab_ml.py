@@ -26,29 +26,12 @@ def load_data(file_path):
 
     return loaded_data
 
-
-def load_training_data():
-    combined_set = {}
-
-    for filename in os.listdir(folder):
-        if filename.endswith(".tsv"):
-            combined_set[filename.split('.')[0]] = load_data(folder + '/' + filename)
-
-    return combined_set
-
-
-def spacy_nlp(sentence):
-
-    return nlp(sentence)
-
-
-def sentence2vec(row):
-    return row['processed_1'].similarity(row['processed_2'])
-
-
 def extract_features(data, feats_to_scale):
-    feat = pd.DataFrame()
+    def sentence2vec(row):
+        return row['processed_1'].similarity(row['processed_2'])
 
+    feat = pd.DataFrame()
+    print(data)
     feat['similarities'] = data.apply(lambda row: sentence2vec(row), axis=1)
     feat['first_word_same'] = data.apply(lambda row: first_word_same(row), axis=1)
     feat['len_diff'] = data.apply(lambda row: difference_in_length(row), axis=1)
@@ -130,14 +113,6 @@ def is_none(df):
     return df['relation'] == 'none'
 
 
-def balance_dataset(imbalanced_set):
-    none = imbalanced_set[is_none(imbalanced_set) == True]
-    second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
-    balanced = imbalanced_set.drop(none.index[second_biggest:])
-
-    return balanced.sample(frac=1)
-
-
 def compare_on_testset(models, testset_x, testset_y, testset_x_scaled):
     report_file.write('Model Evaluation on Testset: \n')
     report_file.write('\t' + 'BASELINE: ' + str(get_baseline_df(testset_y)) + '\n')
@@ -166,12 +141,28 @@ def configure():
 
 
 def load_and_preprocess():
+    def load_training_data():
+        combined_set = {}
+
+        for filename in os.listdir(folder):
+            if filename.endswith(".tsv"):
+                combined_set[filename.split('.')[0]] = load_data(folder + '/' + filename)
+
+        return combined_set
+
+    def balance_dataset(imbalanced_set):
+        none = imbalanced_set[is_none(imbalanced_set) == True]
+        second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
+        balanced = imbalanced_set.drop(none.index[second_biggest:])
+
+        return balanced.sample(frac=1)
+
     all_data = load_training_data()
     en_data = all_data['english_kd']
     balanced = balance_dataset(en_data)
 
-    balanced['processed_1'] = balanced['def1'].map(spacy_nlp)
-    balanced['processed_2'] = balanced['def2'].map(spacy_nlp)
+    balanced['processed_1'] = balanced['def1'].map(nlp)
+    balanced['processed_2'] = balanced['def2'].map(nlp)
 
     return balanced
 
