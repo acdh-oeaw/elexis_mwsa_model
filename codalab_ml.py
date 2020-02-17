@@ -121,6 +121,7 @@ def train_models_sklearn(x_train, y_train):
     return tuned_models
 
 
+# TODO Restructure this function
 def tune_hyperparams(estimators, x_train, y_train):
     result = []
     for estimator in estimators['unscaled']:
@@ -172,6 +173,7 @@ def compare_on_testset(models, testset_x, testset_y):
     report_file.write('Model Evaluation on Testset: \n')
     report_file.write('\t' + 'BASELINE: ' + str(get_baseline_df(testset_y)) + '\n')
 
+    #TODO Restructure this part
     for estimator in models['unscaled']:
         report_file.write('\t' + estimator.__class__.__name__)
         report_file.write(str(estimator))
@@ -195,22 +197,25 @@ def configure():
     pd.set_option('display.max_colwidth', -1)
 
 
+def load_training_data():
+    combined_set = {}
+
+    for filename in os.listdir(folder):
+        if filename.endswith(".tsv"):
+            combined_set[filename.split('.')[0]] = load_data(folder + '/' + filename)
+
+    return combined_set
+
+
+def balance_dataset(imbalanced_set):
+    none = imbalanced_set[is_none(imbalanced_set) == True]
+    second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
+    result = imbalanced_set.drop(none.index[second_biggest:])
+
+    return result.sample(frac=1, random_state=7)
+
+
 def load_and_preprocess():
-    def load_training_data():
-        combined_set = {}
-
-        for filename in os.listdir(folder):
-            if filename.endswith(".tsv"):
-                combined_set[filename.split('.')[0]] = load_data(folder + '/' + filename)
-
-        return combined_set
-
-    def balance_dataset(imbalanced_set):
-        none = imbalanced_set[is_none(imbalanced_set) == True]
-        second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
-        result = imbalanced_set.drop(none.index[second_biggest:])
-
-        return result.sample(frac=1, random_state=7)
 
     all_data = load_training_data()
     en_data = all_data['english_kd']
