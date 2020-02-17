@@ -1,13 +1,14 @@
 import os
-from datetime import datetime
-
-import pandas as pd
 import spacy
-from sklearn import svm, preprocessing
+import pandas as pd
+
+from datetime import datetime
+from sklearn import svm, preprocessing, tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score, classification_report, confusion_matrix
 from sklearn.model_selection import cross_val_score
+from sklearn.naive_bayes import ComplementNB, MultinomialNB
 
 from load_data import split_data, difference_in_length, first_word_same, jaccard_sim, cosine
 from load_data import train_and_test_classifiers
@@ -64,8 +65,8 @@ def prepare_data(df_features, labels):
 
 def run_cv_with_dataset(model, trainset, y_train):
     scores = cross_val_score(model, trainset, y_train, cv=5)
-    print('Cross validation scores for model' + model.__class__.__name__)
-    print("Accuracy: %0.4f (+/- %0.4f)" % (scores.mean(), scores.std() * 2))
+    report_file.write('Cross validation scores for model' + model.__class__.__name__ + '\n')
+    report_file.write("Accuracy: %0.4f (+/- %0.4f)" % (scores.mean(), scores.std() * 2) + '\n')
 
 
 def cross_val_models(models, x_train, y_train):
@@ -86,20 +87,19 @@ def get_baseline_df(y_test):
 
 
 def train_models_sklearn(x_train, y_train):
-    lr = LogisticRegression(solver='lbfgs', multi_class='multinomial') \
-        .fit(x_train, y_train)
+    lr = LogisticRegression(solver='lbfgs', multi_class='multinomial').fit(x_train, y_train)
     # lr_scaled = LogisticRegression( solver = 'lbfgs', multi_class = 'multinomial').fit(X_train_scaled, y_train)
 
     # Linear kernal won't work very well, experiment with nonlinear ones.
-    svm_model = svm.LinearSVC(C=1.0) \
-        .fit(x_train, y_train)
+    svm_model = svm.LinearSVC(C=1.0) .fit(x_train, y_train)
     # svm_scaled = svm.LinearSVC().fit(X_train_scaled, y_train)
 
-    rf = RandomForestClassifier(max_depth=10, random_state=0) \
-        .fit(x_train, y_train)
+    rf = RandomForestClassifier(max_depth=10, random_state=0).fit(x_train, y_train)
     # rf_scaled = RandomForestClassifier(max_depth = 5, random_state=0).fit(X_train_scaled, y_train)
 
-    models = {'unscaled': [lr, svm_model, rf]}
+    dt = tree.DecisionTreeClassifier().fit(x_train, y_train)
+
+    models = {'unscaled': [lr, svm_model, rf, dt]}
     # models['scaled'] = [lr_scaled, svm_scaled, rf_scaled]
 
     return models
@@ -167,15 +167,15 @@ def load_and_preprocess():
     return balanced
 
 
-def train(data):
+def train(data, with_testset = False):
     train_and_test_classifiers(data['nltk']['trainset'], data['nltk']['testset'])
     trained_models = train_models_sklearn(data['pd']['x_trainset'],
                                           data['pd']['y_trainset'])
     cross_val_models(trained_models, data['pd']['x_trainset'],
                      data['pd']['y_trainset'])
 
-    compare_on_testset(trained_models, data['pd']['x_testset'],
-                       data['pd']['y_testset'], data['pd']['x_testset'])
+    #compare_on_testset(trained_models, data['pd']['x_testset'],
+    #                  data['pd']['y_testset'], data['pd']['x_testset'])
 
 
 def count_relation_and_sort():
