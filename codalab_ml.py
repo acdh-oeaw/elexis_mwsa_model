@@ -155,7 +155,7 @@ def load_and_preprocess():
         second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
         balanced = imbalanced_set.drop(none.index[second_biggest:])
 
-        return balanced.sample(frac=1)
+        return balanced.sample(frac=1, random_state = 7)
 
     all_data = load_training_data()
     en_data = all_data['english_kd']
@@ -191,7 +191,7 @@ if __name__ == '__main__':
 
     report_file.write(count_relation_and_sort())
 
-    features = extract_features(balanced_en_data, ['similarities'])
+    features = extract_features(balanced_en_data, ['similarities', 'len_diff'])
 
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 
