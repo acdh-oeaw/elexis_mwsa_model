@@ -1,6 +1,6 @@
 import warnings
 
-from sklearn.svm import LinearSVC, SVC
+from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
 warnings.filterwarnings('ignore')
@@ -9,7 +9,7 @@ import spacy
 import pandas as pd
 from pprint import pprint
 from datetime import datetime
-from sklearn import svm, preprocessing, tree
+from sklearn import preprocessing
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score, classification_report, confusion_matrix
@@ -168,7 +168,7 @@ def is_none(df):
     return df['relation'] == 'none'
 
 
-def compare_on_testset(models, testset_x, testset_y, testset_x_scaled):
+def compare_on_testset(models, testset_x, testset_y):
     report_file.write('Model Evaluation on Testset: \n')
     report_file.write('\t' + 'BASELINE: ' + str(get_baseline_df(testset_y)) + '\n')
 
@@ -208,9 +208,9 @@ def load_and_preprocess():
     def balance_dataset(imbalanced_set):
         none = imbalanced_set[is_none(imbalanced_set) == True]
         second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
-        balanced = imbalanced_set.drop(none.index[second_biggest:])
+        result = imbalanced_set.drop(none.index[second_biggest:])
 
-        return balanced.sample(frac=1, random_state=7)
+        return result.sample(frac=1, random_state=7)
 
     all_data = load_training_data()
     en_data = all_data['english_kd']
@@ -229,8 +229,9 @@ def train(data, with_testset=False):
     cross_val_models(trained_models, data['pd']['x_trainset'],
                      data['pd']['y_trainset'])
 
-    # compare_on_testset(trained_models, data['pd']['x_testset'],
-    #                  data['pd']['y_testset'], data['pd']['x_testset'])
+    if with_testset:
+        compare_on_testset(trained_models, data['pd']['x_testset'],
+                           data['pd']['y_testset'])
 
 
 def count_relation_and_sort():
