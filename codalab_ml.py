@@ -18,7 +18,7 @@ from sklearn.model_selection import cross_val_score, GridSearchCV
 from load_data import split_data, difference_in_length, first_word_same, jaccard_sim, cosine
 from load_data import train_and_test_classifiers
 
-folder = 'C:\\Users\\syim\\Documents\\ELEXIS\\codalab\\public_dat\\train'
+folder = 'data/train'
 
 
 def add_column_names(df):
@@ -190,7 +190,7 @@ def compare_on_testset(models, testset_x, testset_y):
 
 def open_file():
     now = datetime.now()
-    return open("reports\\" + now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
+    return open("reports/" + now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
 
 
 def configure():
