@@ -1,3 +1,9 @@
+# TODO: Stopwords, Lemmatizer
+# TODO: Our own Word2Vec
+# TODO: Feature Selection: correlation analysis, feature elimination
+# TODO: Ask papers/results
+# TODO: Ask Tanja
+
 import warnings
 
 from sklearn.svm import SVC
@@ -93,7 +99,20 @@ def get_baseline_df(y_test):
 
 
 def train_models_sklearn(x_train, y_train):
-    lr = {'estimator': LogisticRegression(), 'parameters': {}}
+    lr = {'estimator': LogisticRegression(),
+          'parameters': {
+               'penalty': [ 'l2', 'none','elasticnet'],
+              # 'dual': [False],
+               'C': [1.0,2.0,3.0],
+               'fit_intercept': [True, False],
+               'class_weight':[dict,'balanced',None],
+              # #'solver':['newton-cg','lbfgs','liblinear','sag','saga'],
+               'solver':['newton-cg','sag','lbfgs','saga'],
+               'max_iter':[100,200,300,400],
+               'multi_class':['auto','ovr','multinomial'],
+               'n_jobs':[-1]
+            }
+        }
     svm_model = {
         'estimator': SVC(),
         'parameters': {
@@ -114,7 +133,7 @@ def train_models_sklearn(x_train, y_train):
     }
     dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
-    models = {'unscaled': [svm_model]}
+    models = {'unscaled': [lr]}
 
     tuned_models = tune_hyperparams(models, x_train, y_train)
 
@@ -145,7 +164,7 @@ def tune_hyperparams(estimators, x_train, y_train):
 
             means = grid_search.cv_results_['mean_test_score']
             stds = grid_search.cv_results_['std_test_score']
-            report_file.write('Precision: \n')
+            report_file.write(score + '\n')
             for mean, std, parameters in zip(means, stds, grid_search.cv_results_['params']):
                 report_file.write("%0.3f (+/-%0.03f) for %r"
                                   % (mean, std * 2, parameters) + '\n')
@@ -206,7 +225,7 @@ def load_training_data():
 
     return combined_set
 
-
+# TODO Oversampling, Ensemble Learning Techniques
 def balance_dataset(imbalanced_set):
     none = imbalanced_set[is_none(imbalanced_set) == True]
     second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
@@ -218,7 +237,7 @@ def balance_dataset(imbalanced_set):
 def load_and_preprocess():
 
     all_data = load_training_data()
-    en_data = all_data['english_kd']
+    en_data = all_data['english_nuig']
     balanced = balance_dataset(en_data)
 
     balanced['processed_1'] = balanced['def1'].map(nlp)
