@@ -32,17 +32,9 @@ def add_column_names(df):
     df.columns = column_names
 
 
-def pos_count(column):
-    pos = []
-
-    for token in column:
-        pos.append(token.pos)
-    return list(set(pos))
-
-
 def diff_pos_count(col1, col2):
-    pos_def1 = pos_count(col1)
-    pos_def2 = pos_count(col2)
+    pos_def1 = list(set([token.pos for token in col1]))
+    pos_def2 = list(set([token.pos for token in col2]))
 
     return len(pos_def1) - len(pos_def2)
 
@@ -57,7 +49,7 @@ def load_data(file_path):
 def extract_features(data, feats_to_scale):
 
     feat = pd.DataFrame()
-    print(data)
+
     feat['similarities'] = data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
     feat['first_word_same'] = data.apply(lambda row: first_word_same(row['def1'], row['def2']), axis=1)
     feat['len_diff'] = data.apply(lambda row: difference_in_length(row['def1'], row['def2']), axis=1)
