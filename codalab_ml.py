@@ -1,4 +1,3 @@
-# TODO: Stopwords, Lemmatizer
 # TODO: Our own Word2Vec
 # TODO: Feature Selection: correlation analysis, feature elimination
 # TODO: Ask papers/results
@@ -242,12 +241,30 @@ def balance_dataset(imbalanced_set):
 
 
 def load_and_preprocess():
+    def lemmatizer(doc):
+        doc = [token.lemma_ for token in doc if token.lemma_ != '-PRON-']
+        doc = u' '.join(doc)
+        return nlp.make_doc(doc)
+
+
+    def remove_stopwords(doc):
+        # TODO: ADD 'etc' to stopwords list
+        doc = [token.text for token in doc if token.is_stop != True and token.is_punct != True]
+        return doc
+
+
     all_data = load_training_data()
     en_data = all_data['english_kd']
     balanced = balance_dataset(en_data)
 
     balanced['processed_1'] = balanced['def1'].map(nlp)
     balanced['processed_2'] = balanced['def2'].map(nlp)
+
+    balanced['lemmatized_1'] = balanced['processed_1'].map(lemmatizer)
+    balanced['stopwords_removed'] = balanced['lemmatized_1'].map(remove_stopwords)
+
+    balanced['lemmatized_2'] = balanced['processed_2'].map(lemmatizer)
+    balanced['stopwords_removed'] = balanced['lemmatized_2'].map(remove_stopwords)
 
     return balanced
 
