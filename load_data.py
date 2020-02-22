@@ -73,29 +73,27 @@ def get_vectors(*strs):
     return vectorizer.transform(text).toarray()
 
 
-def first_word_same(row):
-    return row['def1'].split(' ')[0].lower() == row['def2'].split(' ')[0].lower()
+def first_word_same(col1, col2):
+    return col1.split(' ')[0].lower() == col2.split(' ')[0].lower()
 
 
-def difference_in_length(row):
-    return abs(len(row['def1'].split(' ')) - len(row['def2'].split(' ')[0]))
+def difference_in_length(col1, col2):
+    return abs(len(col1.split(' ')) - len(col2.split(' ')[0]))
 
 
-def jaccard_sim(row):
-    return get_jaccard_sim(row['def1'], row['def2'])
+def jaccard_sim(col1, col2):
+    return get_jaccard_sim(col1, col2)
 
 
-def cosine(row):
-    return get_cosine_sim(row['def1'], row['def2'])[0, 1]
+def cosine(col1, col2):
+    return get_cosine_sim(col1, col2)[0, 1]
 
 
 def find_features(row):
     features = {}
-    features['first_word_same'] = (first_word_same(row))
-    features['len difference'] = difference_in_length(row)
-
-    features['jaccard'] = jaccard_sim(row)
-
+    features['first_word_same'] = (first_word_same(row['def1'], row['def2']))
+    features['len difference'] = difference_in_length(row['def1'], row['def2'])
+    features['jaccard'] = jaccard_sim(row['def1'], row['def2'])
     features['cosine'] = cosine(row)
 
     # features['levenshtein'] = Levenshtein.distance(row['def1'], row['def2'])

@@ -32,6 +32,21 @@ def add_column_names(df):
     df.columns = column_names
 
 
+def pos_count(column):
+    pos = []
+
+    for token in column:
+        pos.append(token.pos)
+    return list(set(pos))
+
+
+def diff_pos_count(col1, col2):
+    pos_def1 = pos_count(col1)
+    pos_def2 = pos_count(col2)
+
+    return len(pos_def1) - len(pos_def2)
+
+
 def load_data(file_path):
     loaded_data = pd.read_csv(file_path, sep='\t', header=None)
     add_column_names(loaded_data)
@@ -40,16 +55,15 @@ def load_data(file_path):
 
 
 def extract_features(data, feats_to_scale):
-    def sentence2vec(row):
-        return row['processed_1'].similarity(row['processed_2'])
 
     feat = pd.DataFrame()
     print(data)
-    feat['similarities'] = data.apply(lambda row: sentence2vec(row), axis=1)
-    feat['first_word_same'] = data.apply(lambda row: first_word_same(row), axis=1)
-    feat['len_diff'] = data.apply(lambda row: difference_in_length(row), axis=1)
-    feat['jaccard'] = data.apply(lambda row: jaccard_sim(row), axis=1)
-    feat['cos'] = data.apply(lambda row: cosine(row), axis=1)
+    feat['similarities'] = data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
+    feat['first_word_same'] = data.apply(lambda row: first_word_same(row['def1'], row['def2']), axis=1)
+    feat['len_diff'] = data.apply(lambda row: difference_in_length(row['def1'], row['def2']), axis=1)
+    feat['jaccard'] = data.apply(lambda row: jaccard_sim(row['def1'], row['def2']), axis=1)
+    feat['cos'] = data.apply(lambda row: cosine(row['def1'], row['def2']), axis=1)
+    feat['pos_diff'] = data.apply(lambda row: diff_pos_count(row['processed_1'], row['processed_2']), axis=1)
 
     for c_name in feats_to_scale:
         feat[c_name] = preprocessing.scale(feat[c_name])
@@ -101,18 +115,18 @@ def get_baseline_df(y_test):
 def train_models_sklearn(x_train, y_train):
     lr = {'estimator': LogisticRegression(),
           'parameters': {
-               'penalty': [ 'l2', 'none','elasticnet'],
+              'penalty': ['l2', 'none', 'elasticnet'],
               # 'dual': [False],
-               'C': [1.0,2.0,3.0],
-               'fit_intercept': [True, False],
-               'class_weight':[dict,'balanced',None],
+              'C': [1.0, 2.0, 3.0],
+              'fit_intercept': [True, False],
+              'class_weight': [dict, 'balanced', None],
               # #'solver':['newton-cg','lbfgs','liblinear','sag','saga'],
-               'solver':['newton-cg','sag','lbfgs','saga'],
-               'max_iter':[100,200,300,400],
-               'multi_class':['auto','ovr','multinomial'],
-               'n_jobs':[-1]
-            }
-        }
+              'solver': ['newton-cg', 'sag', 'lbfgs', 'saga'],
+              'max_iter': [100, 200, 300, 400],
+              'multi_class': ['auto', 'ovr', 'multinomial'],
+              'n_jobs': [-1]
+          }
+          }
     svm_model = {
         'estimator': SVC(),
         'parameters': {
@@ -124,11 +138,11 @@ def train_models_sklearn(x_train, y_train):
         'estimator': RandomForestClassifier(),
         'parameters': {
             'bootstrap': [True],
-            'max_depth': [2, 3, 5, 7, 10],
-            'max_features': [2, 3],
+            'max_depth': [2, 5, 10, 15],
+            'max_features': [2, 3, 0.5, 0.2, 'auto', 'sqrt', 'log2', None],
             'min_samples_leaf': [3, 4, 5],
-            'min_samples_split': [2, 5, 8, 10, 12],
-            'n_estimators': [50, 100, 200]
+            'min_samples_split': [2, 5, 8, 10, 15],
+            'n_estimators': [100, 200, 500]
         }
     }
     dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
@@ -162,12 +176,12 @@ def tune_hyperparams(estimators, x_train, y_train):
             grid_search.fit(x_train, y_train)
             print()
 
-            means = grid_search.cv_results_['mean_test_score']
-            stds = grid_search.cv_results_['std_test_score']
+            # means = grid_search.cv_results_['mean_test_score']
+            # stds = grid_search.cv_results_['std_test_score']
             report_file.write(score + '\n')
-            for mean, std, parameters in zip(means, stds, grid_search.cv_results_['params']):
-                report_file.write("%0.3f (+/-%0.03f) for %r"
-                                  % (mean, std * 2, parameters) + '\n')
+            #  for mean, std, parameters in zip(means, stds, grid_search.cv_results_['params']):
+            #      report_file.write("%0.3f (+/-%0.03f) for %r"
+            #                        % (mean, std * 2, parameters) + '\n')
 
             report_file.write("Best score: %0.3f" % grid_search.best_score_ + '\n')
             report_file.write("Best parameters set:\n")
@@ -192,7 +206,7 @@ def compare_on_testset(models, testset_x, testset_y):
     report_file.write('Model Evaluation on Testset: \n')
     report_file.write('\t' + 'BASELINE: ' + str(get_baseline_df(testset_y)) + '\n')
 
-    #TODO Restructure this part
+    # TODO Restructure this part
     for estimator in models['unscaled']:
         report_file.write('\t' + estimator.__class__.__name__)
         report_file.write(str(estimator))
@@ -225,6 +239,7 @@ def load_training_data():
 
     return combined_set
 
+
 # TODO Oversampling, Ensemble Learning Techniques
 def balance_dataset(imbalanced_set):
     none = imbalanced_set[is_none(imbalanced_set) == True]
@@ -235,9 +250,8 @@ def balance_dataset(imbalanced_set):
 
 
 def load_and_preprocess():
-
     all_data = load_training_data()
-    en_data = all_data['english_nuig']
+    en_data = all_data['english_kd']
     balanced = balance_dataset(en_data)
 
     balanced['processed_1'] = balanced['def1'].map(nlp)
@@ -271,7 +285,7 @@ if __name__ == '__main__':
 
     report_file.write(count_relation_and_sort())
 
-    features = extract_features(balanced_en_data, ['similarities', 'len_diff'])
+    features = extract_features(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
 
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 
