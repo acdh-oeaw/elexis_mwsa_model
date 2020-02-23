@@ -54,36 +54,32 @@ def convert_to_text(token_array):
     return seperator.join(token_array)
 
 
-def tfidf(col1, col2):
-    temp = pd.DataFrame()
-    temp['col1'] = col1
-    temp['col2'] = col2
+def join_definitions(col1, col2):
     joined_definitions = pd.concat([col1, col2])
-    values = joined_definitions.apply(convert_to_text).values.T
-    vectorizer = TfidfVectorizer()
+    return joined_definitions.apply(lambda tokens: ' '.join(tokens)).values.T
 
-    result = vectorizer.fit_transform(values)
 
-    half = int(result.get_shape()[0] / 2)
-    tfidf_array = result.todense()
-    result1 = tfidf_array[0:half]
-    result2 = tfidf_array[half:]
+def tfidf(col1, col2):
+    tfidf_holder = pd.DataFrame()
+    tfidf_holder['col1'] = col1
+    tfidf_holder['col2'] = col2
 
-    df_result1 = []
-    df_result2 = []
-    for row in result1:
-        # print(row)
-        df_result1.append(row.tolist()[0])
+    values = join_definitions(col1, col2)
+    tfidf_holder['tfidf_1'] , tfidf_holder['tfidf_2']  = tfidf_vectors(values)
 
-    for row in result2:
-        df_result2.append(row.tolist()[0])
+    return tfidf_holder.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0, 1], axis=1)
 
-    temp['tfidf_1'] = df_result1
-    temp['tfidf_2'] = df_result2
 
-    temp['cos_tfidf'] = temp.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0, 1], axis=1)
+def tfidf_vectors(values):
+    tfidf_matrix = TfidfVectorizer().fit_transform(values)
 
-    return temp['cos_tfidf']
+    split_index = int(tfidf_matrix.get_shape()[0]/ 2)
+    tfidf_array = tfidf_matrix.todense()
+
+    df_result1 = [row.tolist()[0] for row in tfidf_array[0:split_index]]
+    df_result2 = [row.tolist()[0] for row in tfidf_array[split_index:]]
+
+    return df_result1, df_result2
 
 
 def extract_features(data, feats_to_scale):
