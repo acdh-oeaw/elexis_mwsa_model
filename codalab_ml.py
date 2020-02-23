@@ -10,7 +10,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
-warnings.filterwarnings('ignore')
+import features
+
+# warnings.filterwarnings('ignore')
 import os
 import spacy
 import pandas as pd
@@ -46,9 +48,10 @@ def load_data(file_path):
 
     return loaded_data
 
-def convertToText(tokenArray):
+
+def convert_to_text(token_array):
     seperator = ' '
-    return seperator.join(tokenArray)
+    return seperator.join(token_array)
 
 
 def tfidf(col1, col2):
@@ -56,20 +59,20 @@ def tfidf(col1, col2):
     temp['col1'] = col1
     temp['col2'] = col2
     joined_definitions = pd.concat([col1, col2])
-    values = joined_definitions.apply(convertToText).values.T
+    values = joined_definitions.apply(convert_to_text).values.T
     vectorizer = TfidfVectorizer()
 
     result = vectorizer.fit_transform(values)
 
-    half = int(result.get_shape()[0]/2)
-    densearray = result.todense()
-    result1 = densearray[0:half]
-    result2 = densearray[half:]
+    half = int(result.get_shape()[0] / 2)
+    tfidf_array = result.todense()
+    result1 = tfidf_array[0:half]
+    result2 = tfidf_array[half:]
 
     df_result1 = []
     df_result2 = []
     for row in result1:
-        #print(row)
+        # print(row)
         df_result1.append(row.tolist()[0])
 
     for row in result2:
@@ -78,23 +81,22 @@ def tfidf(col1, col2):
     temp['tfidf_1'] = df_result1
     temp['tfidf_2'] = df_result2
 
-    temp['cos_tfidf'] = temp.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0,1], axis=1)
+    temp['cos_tfidf'] = temp.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0, 1], axis=1)
 
     return temp['cos_tfidf']
 
 
 def extract_features(data, feats_to_scale):
-
     feat = pd.DataFrame()
 
-    #feat['similarities'] = data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
-    #feat['first_word_same'] = data.apply(lambda row: first_word_same(row['def1'], row['def2']), axis=1)
-    #feat['len_diff'] = data.apply(lambda row: difference_in_length(row['def1'], row['def2']), axis=1)
-    #feat['jaccard'] = data.apply(lambda row: jaccard_sim(row['def1'], row['def2']), axis=1)
-    #feat['cos'] = data.apply(lambda row: cosine(row['def1'], row['def2']), axis=1)
-    #feat['pos_diff'] = data.apply(lambda row: diff_pos_count(row['processed_1'], row['processed_2']), axis=1)
-    feat['cos_tfidf'] = tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
-
+    feat[features.SIMILARITY] = data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
+    feat[features.FIRST_WORD_SAME] = data.apply(lambda row: first_word_same(row['def1'], row['def2']), axis=1)
+    feat[features.LEN_DIFF] = data.apply(lambda row: difference_in_length(row['def1'], row['def2']), axis=1)
+    feat[features.JACCARD] = data.apply(lambda row: jaccard_sim(row['def1'], row['def2']), axis=1)
+    feat[features.COSINE] = data.apply(lambda row: cosine(row['def1'], row['def2']), axis=1)
+    feat[features.POS_COUNT_DIFF] = data.apply(lambda row: diff_pos_count(row['processed_1'], row['processed_2']),
+                                               axis=1)
+    feat[features.TFIDF_COS] = tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
 
     for c_name in feats_to_scale:
         feat[c_name] = preprocessing.scale(feat[c_name])
@@ -286,12 +288,10 @@ def load_and_preprocess():
         doc = u' '.join(doc)
         return nlp.make_doc(doc)
 
-
     def remove_stopwords(doc):
         # TODO: ADD 'etc' to stopwords list
         doc = [token.text for token in doc if token.is_stop != True and token.is_punct != True]
         return doc
-
 
     all_data = load_training_data()
     en_data = all_data['english_kd']
@@ -333,8 +333,8 @@ if __name__ == '__main__':
     balanced_en_data = load_and_preprocess()
 
     report_file.write(count_relation_and_sort())
-    #'similarities', 'len_diff', 'pos_diff'
-    features = extract_features(balanced_en_data, [])
+
+    features = extract_features(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
 
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 

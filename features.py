@@ -1,0 +1,7 @@
+SIMILARITY = 'similarities'
+FIRST_WORD_SAME = 'first_word_same'
+LEN_DIFF = 'len_diff'
+JACCARD = 'jaccard'
+COSINE = 'cos'
+TFIDF_COS = 'cos_tfidf'
+POS_COUNT_DIFF = 'pos_diff'
