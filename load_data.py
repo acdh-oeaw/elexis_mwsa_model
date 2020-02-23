@@ -6,10 +6,7 @@ from nltk.corpus import wordnet as wn
 import random
 
 from nltk.metrics.scores import (precision, recall, f_measure)
-from sklearn import svm
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.linear_model import LogisticRegression
 from sklearn.metrics.pairwise import cosine_similarity
 
 # import Levenshtein

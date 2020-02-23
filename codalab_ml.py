@@ -5,6 +5,8 @@
 
 import warnings
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
@@ -44,17 +46,55 @@ def load_data(file_path):
 
     return loaded_data
 
+def convertToText(tokenArray):
+    seperator = ' '
+    return seperator.join(tokenArray)
+
+
+def tfidf(col1, col2):
+    temp = pd.DataFrame()
+    temp['col1'] = col1
+    temp['col2'] = col2
+    joined_definitions = pd.concat([col1, col2])
+    values = joined_definitions.apply(convertToText).values.T
+    vectorizer = TfidfVectorizer()
+
+    result = vectorizer.fit_transform(values)
+
+    half = int(result.get_shape()[0]/2)
+    densearray = result.todense()
+    result1 = densearray[0:half]
+    result2 = densearray[half:]
+
+    df_result1 = []
+    df_result2 = []
+    for row in result1:
+        #print(row)
+        df_result1.append(row.tolist()[0])
+
+    for row in result2:
+        df_result2.append(row.tolist()[0])
+
+    temp['tfidf_1'] = df_result1
+    temp['tfidf_2'] = df_result2
+
+    temp['cos_tfidf'] = temp.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0,1], axis=1)
+
+    return temp['cos_tfidf']
+
 
 def extract_features(data, feats_to_scale):
 
     feat = pd.DataFrame()
 
-    feat['similarities'] = data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
-    feat['first_word_same'] = data.apply(lambda row: first_word_same(row['def1'], row['def2']), axis=1)
-    feat['len_diff'] = data.apply(lambda row: difference_in_length(row['def1'], row['def2']), axis=1)
-    feat['jaccard'] = data.apply(lambda row: jaccard_sim(row['def1'], row['def2']), axis=1)
-    feat['cos'] = data.apply(lambda row: cosine(row['def1'], row['def2']), axis=1)
-    feat['pos_diff'] = data.apply(lambda row: diff_pos_count(row['processed_1'], row['processed_2']), axis=1)
+    #feat['similarities'] = data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
+    #feat['first_word_same'] = data.apply(lambda row: first_word_same(row['def1'], row['def2']), axis=1)
+    #feat['len_diff'] = data.apply(lambda row: difference_in_length(row['def1'], row['def2']), axis=1)
+    #feat['jaccard'] = data.apply(lambda row: jaccard_sim(row['def1'], row['def2']), axis=1)
+    #feat['cos'] = data.apply(lambda row: cosine(row['def1'], row['def2']), axis=1)
+    #feat['pos_diff'] = data.apply(lambda row: diff_pos_count(row['processed_1'], row['processed_2']), axis=1)
+    feat['cos_tfidf'] = tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
+
 
     for c_name in feats_to_scale:
         feat[c_name] = preprocessing.scale(feat[c_name])
@@ -261,10 +301,10 @@ def load_and_preprocess():
     balanced['processed_2'] = balanced['def2'].map(nlp)
 
     balanced['lemmatized_1'] = balanced['processed_1'].map(lemmatizer)
-    balanced['stopwords_removed'] = balanced['lemmatized_1'].map(remove_stopwords)
+    balanced['stopwords_removed_1'] = balanced['lemmatized_1'].map(remove_stopwords)
 
     balanced['lemmatized_2'] = balanced['processed_2'].map(lemmatizer)
-    balanced['stopwords_removed'] = balanced['lemmatized_2'].map(remove_stopwords)
+    balanced['stopwords_removed_2'] = balanced['lemmatized_2'].map(remove_stopwords)
 
     return balanced
 
@@ -293,8 +333,8 @@ if __name__ == '__main__':
     balanced_en_data = load_and_preprocess()
 
     report_file.write(count_relation_and_sort())
-
-    features = extract_features(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
+    #'similarities', 'len_diff', 'pos_diff'
+    features = extract_features(balanced_en_data, [])
 
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 
