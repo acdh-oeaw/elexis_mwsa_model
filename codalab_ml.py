@@ -65,7 +65,7 @@ def tfidf(col1, col2):
     tfidf_holder['col2'] = col2
 
     values = join_definitions(col1, col2)
-    tfidf_holder['tfidf_1'] , tfidf_holder['tfidf_2']  = tfidf_vectors(values)
+    tfidf_holder['tfidf_1'], tfidf_holder['tfidf_2'] = tfidf_vectors(values)
 
     return tfidf_holder.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0, 1], axis=1)
 
@@ -176,7 +176,7 @@ def train_models_sklearn(x_train, y_train):
     }
     dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
-    models = {'unscaled': [lr]}
+    models = {'unscaled': [lr, svm_model, rf]}
 
     tuned_models = tune_hyperparams(models, x_train, y_train)
 
