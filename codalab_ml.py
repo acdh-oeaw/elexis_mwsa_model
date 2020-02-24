@@ -73,7 +73,7 @@ def tfidf(col1, col2):
 def tfidf_vectors(values):
     tfidf_matrix = TfidfVectorizer().fit_transform(values)
 
-    split_index = int(tfidf_matrix.get_shape()[0]/ 2)
+    split_index = int(tfidf_matrix.get_shape()[0] / 2)
     tfidf_array = tfidf_matrix.todense()
 
     df_result1 = [row.tolist()[0] for row in tfidf_array[0:split_index]]
@@ -176,7 +176,7 @@ def train_models_sklearn(x_train, y_train):
     }
     dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
-    models = {'unscaled': [lr, svm_model, rf]}
+    models = {'unscaled': [rf]}
 
     tuned_models = tune_hyperparams(models, x_train, y_train)
 
@@ -227,8 +227,8 @@ def is_not_none(df):
     return df['relation'] != 'none'
 
 
-def is_none(df):
-    return df['relation'] == 'none'
+def has_label(df, label):
+    return df['relation'] == label
 
 
 def compare_on_testset(models, testset_x, testset_y):
@@ -269,29 +269,97 @@ def load_training_data():
     return combined_set
 
 
-# TODO Oversampling, Ensemble Learning Techniques
-def balance_dataset(imbalanced_set):
-    none = imbalanced_set[is_none(imbalanced_set) == True]
+def undersample_dataset(imbalanced_set):
+    none = imbalanced_set[has_label(imbalanced_set, 'none') == True]
     second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
     result = imbalanced_set.drop(none.index[second_biggest:])
 
     return result.sample(frac=1, random_state=7)
 
 
-def load_and_preprocess():
-    def lemmatizer(doc):
-        doc = [token.lemma_ for token in doc if token.lemma_ != '-PRON-']
-        doc = u' '.join(doc)
-        return nlp.make_doc(doc)
+def lemmatizer(doc):
+    doc = [token.lemma_ for token in doc if token.lemma_ != '-PRON-']
+    doc = u' '.join(doc)
+    return nlp.make_doc(doc)
 
-    def remove_stopwords(doc):
-        # TODO: ADD 'etc' to stopwords list
-        doc = [token.text for token in doc if token.is_stop != True and token.is_punct != True]
-        return doc
 
+def remove_stopwords(doc):
+    # TODO: ADD 'etc' to stopwords list
+    doc = [token.text for token in doc if token.is_stop != True and token.is_punct != True]
+    return doc
+
+
+def filter_small_length(dataset, threshold):
+    return len(dataset.index) > threshold
+
+
+def sort(lst):
+    return sorted(lst, key=len)
+
+
+def upsample_from_bigger_set(smallest_by_label, bigger_by_label):
+    biggeset_label, biggest_label_size = find_biggest_label_and_size(smallest_by_label)
+
+    return upsample_by_diff(bigger_by_label, biggeset_label, biggest_label_size, smallest_by_label)
+
+
+def upsample_by_diff(bigger_by_label, biggeset_label, biggest_label_size, smallest_by_label):
+    for key in smallest_by_label:
+        if key != biggeset_label:
+            diff = biggest_label_size - len(smallest_by_label[key].index)
+            if diff > 0:
+                new_data = bigger_by_label[key].sample(n=diff, random_state=7, replace=True)
+                smallest_by_label[key] = smallest_by_label[key].append(new_data)
+
+    return smallest_by_label
+
+
+def find_biggest_label_and_size(smallest_by_label):
+    largest_label = None
+    largest_label_size = 0
+
+    for key in smallest_by_label:
+        if len(smallest_by_label[key].index) > largest_label_size:
+            largest_label_size = len(smallest_by_label[key].index)
+            largest_label = key
+
+    return largest_label, largest_label_size
+
+
+def combine_labels(dict_by_label):
+    df = pd.DataFrame()
+
+    for key in dict_by_label:
+        df = df.append(dict_by_label[key])
+
+    return df.sample(frac=1, random_state=7)
+
+
+def sort_dataset(all_data, dataset_lang):
+    lang_data = []
+    for key in all_data.keys():
+        if dataset_lang in key:
+            lang_data.append(all_data[key])
+    sorted_sets = list(filter(lambda elem: filter_small_length(elem, 100), sort(lang_data)))
+    return sorted_sets
+
+
+def categorize_by_label(df):
+    relation_labels = df['relation'].unique()
+    smallest_by_label = {}
+    for relation in relation_labels:
+        smallest_by_label[relation] = df[has_label(df, relation)]
+
+    return smallest_by_label
+
+
+
+def load_and_preprocess(dataset_lang, balancing = 'oversampling'):
     all_data = load_training_data()
-    en_data = all_data['english_kd']
-    balanced = balance_dataset(en_data)
+
+    sorted_sets = sort_dataset(all_data, dataset_lang)
+
+    balanced = balance_dataset(sorted_sets, balancing)
 
     balanced['processed_1'] = balanced['def1'].map(nlp)
     balanced['processed_2'] = balanced['def2'].map(nlp)
@@ -303,6 +371,24 @@ def load_and_preprocess():
     balanced['stopwords_removed_2'] = balanced['lemmatized_2'].map(remove_stopwords)
 
     return balanced
+
+
+def balance_dataset(sorted_sets, balancing):
+    if balancing == 'undersampling':
+        result = undersample_dataset(sorted_sets[0])
+
+    else:
+        smallest = sorted_sets[0]
+        bigger = sorted_sets[1]
+
+        smallest_by_label = categorize_by_label(smallest)
+        bigger_by_label = categorize_by_label(bigger)
+
+        result = combine_labels(upsample_from_bigger_set(smallest_by_label, bigger_by_label))
+
+    return result
+
+
 
 
 def train(data, with_testset=False):
@@ -326,7 +412,7 @@ if __name__ == '__main__':
     nlp = spacy.load('en_core_web_lg')
     report_file = open_file()
 
-    balanced_en_data = load_and_preprocess()
+    balanced_en_data = load_and_preprocess('english')
 
     report_file.write(count_relation_and_sort())
 
