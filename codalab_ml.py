@@ -353,7 +353,6 @@ def categorize_by_label(df):
     return smallest_by_label
 
 
-
 def load_and_preprocess(dataset_lang, balancing = 'oversampling'):
     all_data = load_training_data()
 
@@ -387,8 +386,6 @@ def balance_dataset(sorted_sets, balancing):
         result = combine_labels(upsample_from_bigger_set(smallest_by_label, bigger_by_label))
 
     return result
-
-
 
 
 def train(data, with_testset=False):
