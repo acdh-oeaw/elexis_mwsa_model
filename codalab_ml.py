@@ -391,7 +391,7 @@ def balance_dataset(sorted_sets, balancing):
 
 
 def train(data, with_testset=False):
-    train_and_test_classifiers(data['nltk']['trainset'], data['nltk']['testset'])
+    #train_and_test_classifiers(data['nltk']['trainset'], data['nltk']['testset'])
     trained_models = train_models_sklearn(data['pd']['x_trainset'],
                                           data['pd']['y_trainset'])
     cross_val_models(trained_models, data['pd']['x_trainset'],
