@@ -93,9 +93,9 @@ def extract_features(data, feats_to_scale):
     feat[features.POS_COUNT_DIFF] = data.apply(lambda row: diff_pos_count(row['processed_1'], row['processed_2']),
                                                axis=1)
     feat[features.TFIDF_COS] = tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
-
-    for c_name in feats_to_scale:
-        feat[c_name] = preprocessing.scale(feat[c_name])
+    if len(feats_to_scale) > 0:
+        for c_name in feats_to_scale:
+            feat[c_name] = preprocessing.scale(feat[c_name])
 
     return feat
 
@@ -277,10 +277,9 @@ def undersample_dataset(imbalanced_set):
     return result.sample(frac=1, random_state=7)
 
 
-def lemmatizer(doc):
+def lemmatizer(doc, spacy_model):
     doc = [token.lemma_ for token in doc if token.lemma_ != '-PRON-']
-    doc = u' '.join(doc)
-    return nlp.make_doc(doc)
+    return spacy_model.make_doc(u' '.join(doc))
 
 
 def remove_stopwords(doc):
@@ -353,20 +352,23 @@ def categorize_by_label(df):
     return smallest_by_label
 
 
-def load_and_preprocess(dataset_lang, balancing = 'oversampling'):
+def load_and_preprocess(dataset_lang, spacy_model, balancing = 'oversampling'):
     all_data = load_training_data()
 
     sorted_sets = sort_dataset(all_data, dataset_lang)
 
     balanced = balance_dataset(sorted_sets, balancing)
 
-    balanced['processed_1'] = balanced['def1'].map(nlp)
-    balanced['processed_2'] = balanced['def2'].map(nlp)
+    balanced['processed_1'] = balanced['def1'].map(spacy_model)
+    balanced['processed_2'] = balanced['def2'].map(spacy_model)
 
-    balanced['lemmatized_1'] = balanced['processed_1'].map(lemmatizer)
+    balanced['lemmatized_1'] = balanced['processed_1'].map(lambda doc: lemmatizer(doc, spacy_model))
     balanced['stopwords_removed_1'] = balanced['lemmatized_1'].map(remove_stopwords)
+    print(balanced['lemmatized_1'])
+    print(balanced['stopwords_removed_1'])
 
-    balanced['lemmatized_2'] = balanced['processed_2'].map(lemmatizer)
+    balanced['lemmatized_2'] = balanced['processed_2'].map(lambda doc: lemmatizer(doc, spacy_model))
+    print(balanced['lemmatized_2'])
     balanced['stopwords_removed_2'] = balanced['lemmatized_2'].map(remove_stopwords)
 
     return balanced
@@ -409,11 +411,11 @@ if __name__ == '__main__':
     nlp = spacy.load('en_core_web_lg')
     report_file = open_file()
 
-    balanced_en_data = load_and_preprocess('english')
+    balanced_en_data = load_and_preprocess('english', nlp)
 
     report_file.write(count_relation_and_sort())
 
-    features = extract_features(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
+    features = extract_features(balanced_en_data, feats_to_scale = ['similarities', 'len_diff', 'pos_diff'])
 
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 
