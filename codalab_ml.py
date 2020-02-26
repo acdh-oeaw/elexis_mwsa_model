@@ -4,6 +4,7 @@
 # TODO: Ask Tanja
 
 import warnings
+from copy import deepcopy
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -297,14 +298,14 @@ def sort(lst):
 
 
 def upsample_from_bigger_set(smallest_by_label, bigger_by_label):
-    biggeset_label, biggest_label_size = find_biggest_label_and_size(smallest_by_label)
+    biggest_label, biggest_label_size = find_biggest_label_and_size(smallest_by_label)
 
-    return upsample_by_diff(bigger_by_label, biggeset_label, biggest_label_size, smallest_by_label)
+    return upsample_by_diff(bigger_by_label, biggest_label, biggest_label_size, smallest_by_label)
 
 
-def upsample_by_diff(bigger_by_label, biggeset_label, biggest_label_size, smallest_by_label):
+def upsample_by_diff(bigger_by_label, biggest_label, biggest_label_size, smallest_by_label):
     for key in smallest_by_label:
-        if key != biggeset_label:
+        if key != biggest_label:
             diff = biggest_label_size - len(smallest_by_label[key].index)
             if diff > 0:
                 new_data = bigger_by_label[key].sample(n=diff, random_state=7, replace=True)
@@ -313,16 +314,16 @@ def upsample_by_diff(bigger_by_label, biggeset_label, biggest_label_size, smalle
     return smallest_by_label
 
 
-def find_biggest_label_and_size(smallest_by_label):
-    largest_label = None
-    largest_label_size = 0
+def find_biggest_label_and_size(dataset_by_label):
+    biggest_label = None
+    biggest_label_size = 0
 
-    for key in smallest_by_label:
-        if len(smallest_by_label[key].index) > largest_label_size:
-            largest_label_size = len(smallest_by_label[key].index)
-            largest_label = key
+    for key in dataset_by_label:
+        if len(dataset_by_label[key].index) > biggest_label_size:
+            biggest_label_size = len(dataset_by_label[key].index)
+            biggest_label = key
 
-    return largest_label, largest_label_size
+    return biggest_label, biggest_label_size
 
 
 def combine_labels(dict_by_label):
@@ -374,6 +375,31 @@ def load_and_preprocess(dataset_lang, spacy_model, balancing = 'oversampling'):
     return balanced
 
 
+# do this or related too
+def switch_broader_and_narrower(dataset_by_label):
+    biggest_label, biggest_label_size = find_biggest_label_and_size(dataset_by_label)
+    original_df = deepcopy(dataset_by_label)
+
+    for key in ['narrower', 'broader', 'related', 'exact']:
+        if biggest_label_size - len(original_df[key].index) > 0:
+            opposite_data = swap_columns(key, original_df)
+            dataset_by_label[key] = dataset_by_label[key].append(opposite_data)
+
+    return dataset_by_label
+
+
+def swap_columns(key, original_df):
+    opposite_relation = {'narrower':'broader', 'broader':'narrower', 'related':'related', 'exact':'exact'}
+    opposite_data = original_df[opposite_relation[key]].copy(deep=True)
+
+    temp = opposite_data['def1'].copy(deep=True)
+    opposite_data['def1'] = opposite_data['def2']
+    opposite_data['def2'] = temp
+    opposite_data['relation'] = key
+
+    return opposite_data
+
+
 def balance_dataset(sorted_sets, balancing):
     if balancing == 'undersampling':
         result = undersample_dataset(sorted_sets[0])
@@ -384,14 +410,13 @@ def balance_dataset(sorted_sets, balancing):
 
         smallest_by_label = categorize_by_label(smallest)
         bigger_by_label = categorize_by_label(bigger)
-
+        smallest_by_label = switch_broader_and_narrower(smallest_by_label)
         result = combine_labels(upsample_from_bigger_set(smallest_by_label, bigger_by_label))
 
     return result
 
 
 def train(data, with_testset=False):
-    #train_and_test_classifiers(data['nltk']['trainset'], data['nltk']['testset'])
     trained_models = train_models_sklearn(data['pd']['x_trainset'],
                                           data['pd']['y_trainset'])
     cross_val_models(trained_models, data['pd']['x_trainset'],
