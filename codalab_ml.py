@@ -8,6 +8,7 @@ from copy import deepcopy
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
@@ -177,7 +178,7 @@ def train_models_sklearn(x_train, y_train):
     }
     dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
-    models = {'unscaled': [rf]}
+    models = {'unscaled': [lr, svm_model, rf]}
 
     tuned_models = tune_hyperparams(models, x_train, y_train)
 
@@ -353,12 +354,28 @@ def categorize_by_label(df):
     return smallest_by_label
 
 
-def load_and_preprocess(dataset_lang, spacy_model, balancing = 'oversampling'):
+def one_hot_encode(dataset):
+    pos_numpy = dataset['pos'].to_numpy().reshape(-1, 1)
+    encoder = OneHotEncoder(handle_unknown='ignore')\
+        .fit(pos_numpy)\
+
+    encoded_array = encoder.transform(pos_numpy).toarray()
+
+    encoded_dataframe = pd.DataFrame(data=encoded_array[0:, 0:],
+                                     index=dataset.index,
+                                     columns=encoder.categories_[0])
+
+    return pd.concat([dataset, encoded_dataframe], axis=1)
+
+
+def load_and_preprocess(dataset_lang, spacy_model, balancing='oversampling'):
     all_data = load_training_data()
 
     sorted_sets = sort_dataset(all_data, dataset_lang)
 
     balanced = balance_dataset(sorted_sets, balancing)
+
+    balanced = one_hot_encode(balanced)
 
     balanced['processed_1'] = balanced['def1'].map(spacy_model)
     balanced['processed_2'] = balanced['def2'].map(spacy_model)
@@ -389,7 +406,7 @@ def switch_broader_and_narrower(dataset_by_label):
 
 
 def swap_columns(key, original_df):
-    opposite_relation = {'narrower':'broader', 'broader':'narrower', 'related':'related', 'exact':'exact'}
+    opposite_relation = {'narrower': 'broader', 'broader': 'narrower', 'related': 'related', 'exact': 'exact'}
     opposite_data = original_df[opposite_relation[key]].copy(deep=True)
 
     temp = opposite_data['def1'].copy(deep=True)
@@ -440,7 +457,7 @@ if __name__ == '__main__':
 
     report_file.write(count_relation_and_sort())
 
-    features = extract_features(balanced_en_data, feats_to_scale = ['similarities', 'len_diff', 'pos_diff'])
+    features = extract_features(balanced_en_data, feats_to_scale=['similarities', 'len_diff', 'pos_diff'])
 
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 
