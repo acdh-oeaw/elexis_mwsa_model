@@ -87,9 +87,6 @@ def prepare_data(dataset):
     return split_data(featuresets)
 
 
-def split_data(featuresets):
-    f = int(len(featuresets) / 5)
-    return featuresets[f:], featuresets[:f]
 
 
 def get_baseline(test_set):
