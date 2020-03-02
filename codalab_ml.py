@@ -6,13 +6,8 @@
 import warnings
 from copy import deepcopy
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.preprocessing import OneHotEncoder
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
-
-import features
 
 # warnings.filterwarnings('ignore')
 import os
@@ -20,14 +15,13 @@ import spacy
 import pandas as pd
 from pprint import pprint
 from datetime import datetime
-from sklearn import preprocessing
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score, classification_report, confusion_matrix
 from sklearn.model_selection import cross_val_score, GridSearchCV
 
-from load_data import split_data, difference_in_length, first_word_same, jaccard_sim, cosine
-from load_data import train_and_test_classifiers
+from FeatureExtractor import FeatureExtractor
+from load_data import split_data
 
 folder = 'data/train'
 
@@ -35,13 +29,6 @@ folder = 'data/train'
 def add_column_names(df):
     column_names = ['word', 'pos', 'def1', 'def2', 'relation']
     df.columns = column_names
-
-
-def diff_pos_count(col1, col2):
-    pos_def1 = list(set([token.pos for token in col1]))
-    pos_def2 = list(set([token.pos for token in col2]))
-
-    return len(pos_def1) - len(pos_def2)
 
 
 def load_data(file_path):
@@ -54,110 +41,6 @@ def load_data(file_path):
 def convert_to_text(token_array):
     seperator = ' '
     return seperator.join(token_array)
-
-
-def join_definitions(col1, col2):
-    joined_definitions = pd.concat([col1, col2])
-    return joined_definitions.apply(lambda tokens: ' '.join(tokens)).values.T
-
-
-def tfidf(col1, col2):
-    tfidf_holder = pd.DataFrame()
-    tfidf_holder['col1'] = col1
-    tfidf_holder['col2'] = col2
-
-    values = join_definitions(col1, col2)
-    tfidf_holder['tfidf_1'], tfidf_holder['tfidf_2'] = tfidf_vectors(values)
-
-    return tfidf_holder.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0, 1], axis=1)
-
-
-def tfidf_vectors(values):
-    tfidf_matrix = TfidfVectorizer().fit_transform(values)
-
-    split_index = int(tfidf_matrix.get_shape()[0] / 2)
-    tfidf_array = tfidf_matrix.todense()
-
-    df_result1 = [row.tolist()[0] for row in tfidf_array[0:split_index]]
-    df_result2 = [row.tolist()[0] for row in tfidf_array[split_index:]]
-
-    return df_result1, df_result2
-
-
-def intersection(lst1, lst2):
-    lst3 = [value for value in lst1 if value in lst2]
-    return lst3
-
-
-def matching_lemma_normalized(doc1, doc2):
-    lemma_1_list = [token.text for token in doc1 if token.is_stop != True and token.is_punct != True]
-    lemma_2_list = [token.text for token in doc2 if token.is_stop != True and token.is_punct != True]
-
-    combined_length = (len(lemma_1_list) + len(lemma_2_list))
-
-    if combined_length == 0:
-        return 0.0
-
-    return len(intersection(lemma_1_list, lemma_2_list)) / combined_length
-
-def count_pos(col1, col2):
-    pos_counter = pd.DataFrame()
-
-    for index, doc in col1.items():
-        for token in doc:
-            if token.pos_ in pos_counter.columns:
-                pos_counter[token.pos_][index] = pos_counter[token.pos_][index]+1
-            else:
-                pos_counter[token.pos_] = pd.Series(0,index=col1.index)
-                pos_counter[token.pos_][index] = pos_counter[token.pos_][index]+1
-
-    for index, doc in col2.items():
-        for token in doc:
-            if token.pos_ in pos_counter.columns:
-                pos_counter[token.pos_][index] = pos_counter[token.pos_][index]-1
-            else:
-                pos_counter[token.pos_] = pd.Series(0,index=col2.index)
-                pos_counter[token.pos_][index] = pos_counter[token.pos_][index]-1
-
-    for pos in pos_counter.columns:
-        pos_counter[pos] = preprocessing.scale(pos_counter[pos])
-    return pos_counter
-
-
-def extract_features(data, feats_to_scale):
-    feat = pd.DataFrame()
-
-    feat[features.SIMILARITY] = data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
-    feat[features.FIRST_WORD_SAME] = data.apply(lambda row: first_word_same(row['def1'], row['def2']), axis=1)
-    feat[features.LEN_DIFF] = data.apply(lambda row: difference_in_length(row['def1'], row['def2']), axis=1)
-    feat[features.JACCARD] = data.apply(lambda row: jaccard_sim(row['def1'], row['def2']), axis=1)
-    feat[features.COSINE] = data.apply(lambda row: cosine(row['def1'], row['def2']), axis=1)
-    feat[features.POS_COUNT_DIFF] = data.apply(lambda row: diff_pos_count(row['processed_1'], row['processed_2']),
-                                               axis=1)
-    feat[features.LEMMA_MATCH] = data.apply(lambda row: matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
-    feat[features.TFIDF_COS] = tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
-    one_hot_pos(data, feat)
-    feat = pd.concat([feat, count_pos(data['processed_1'], data['processed_2'])], axis=1)
-
-    if len(feats_to_scale) > 0:
-        for c_name in feats_to_scale:
-            feat[c_name] = preprocessing.scale(feat[c_name])
-
-    return feat
-
-
-def one_hot_pos(data, feat):
-    data = one_hot_encode(data)
-
-    feat[features.POS_ADJ] = data[features.POS_ADJ]
-    feat[features.POS_ADV] = data[features.POS_ADV]
-    feat[features.POS_CONJ] = data[features.POS_CONJ]
-    feat[features.POS_INJ] = data[features.POS_INJ]
-    feat[features.POS_N] = data[features.POS_N]
-    feat[features.POS_NUM] = data[features.POS_NUM]
-    feat[features.POS_PN] = data[features.POS_PN]
-    feat[features.POS_PP] = data[features.POS_PP]
-    feat[features.POS_V] = data[features.POS_V]
 
 
 def convert_to_nltk_dataset(feats, labels):
@@ -423,20 +306,6 @@ def categorize_by_label(df):
     return smallest_by_label
 
 
-def one_hot_encode(dataset):
-    pos_numpy = dataset['pos'].to_numpy().reshape(-1, 1)
-    encoder = OneHotEncoder(handle_unknown='ignore')\
-        .fit(pos_numpy)
-
-    encoded_array = encoder.transform(pos_numpy).toarray()
-
-    encoded_dataframe = pd.DataFrame(data=encoded_array[0:, 0:],
-                                     index=dataset.index,
-                                     columns=encoder.categories_[0])
-
-    return pd.concat([dataset, encoded_dataframe], axis=1)
-
-
 def load_and_preprocess(dataset_lang, spacy_model, balancing='oversampling'):
     all_data = load_training_data()
 
@@ -515,6 +384,7 @@ def count_relation_and_sort():
     return str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + "\n"
 
 
+
 if __name__ == '__main__':
     configure()
     nlp = spacy.load('en_core_web_lg')
@@ -524,7 +394,10 @@ if __name__ == '__main__':
 
     report_file.write(count_relation_and_sort())
 
-    features = extract_features(balanced_en_data, feats_to_scale=['similarities', 'len_diff', 'pos_diff'])
+    features = FeatureExtractor(feats_to_scale=['similarities', 'len_diff', 'pos_diff']).extract_features(
+        balanced_en_data)
+
+    # features = extract_features(balanced_en_data, feats_to_scale=['similarities', 'len_diff', 'pos_diff'])
 
     all_train_and_testset = prepare_data(features, balanced_en_data['relation'])
 

@@ -51,39 +51,6 @@ def analyze_by_class(dataset):
     return separated
 
 
-def get_jaccard_sim(str1, str2):
-    a = set(str1.split())
-    b = set(str2.split())
-    c = a.intersection(b)
-    return float(len(c)) / (len(a) + len(b) - len(c))
-
-
-def get_cosine_sim(*strs):
-    vectors = [t for t in get_vectors(*strs)]
-    return cosine_similarity(vectors)
-
-
-def get_vectors(*strs):
-    text = [t for t in strs]
-    vectorizer = CountVectorizer(text)
-    vectorizer.fit(text)
-    return vectorizer.transform(text).toarray()
-
-
-def first_word_same(col1, col2):
-    return col1.split(' ')[0].lower() == col2.split(' ')[0].lower()
-
-
-def difference_in_length(col1, col2):
-    return abs(len(col1.split(' ')) - len(col2.split(' ')[0]))
-
-
-def jaccard_sim(col1, col2):
-    return get_jaccard_sim(col1, col2)
-
-
-def cosine(col1, col2):
-    return get_cosine_sim(col1, col2)[0, 1]
 
 
 def find_features(row):
