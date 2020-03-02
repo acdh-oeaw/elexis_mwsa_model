@@ -8,8 +8,9 @@ import features
 
 
 class FeatureExtractor:
-    def __init__(self, feats_to_scale):
-        self.feats_to_scale = feats_to_scale
+    def __init__(self, data):
+        self.__data = data
+        self.__feat = pd.DataFrame()
 
     @staticmethod
     def __first_word_same(col1, col2):
@@ -18,10 +19,6 @@ class FeatureExtractor:
     @staticmethod
     def __difference_in_length(col1, col2):
         return abs(len(col1.split(' ')) - len(col2.split(' ')[0]))
-
-    @staticmethod
-    def __jaccard_sim(col1, col2):
-        return FeatureExtractor.__get_jaccard_sim(col1, col2)
 
     @staticmethod
     def __get_jaccard_sim(str1, str2):
@@ -150,30 +147,56 @@ class FeatureExtractor:
             pos_counter[pos] = preprocessing.scale(pos_counter[pos])
         return pos_counter
 
-    def extract_features(self, data):
-        feat = pd.DataFrame()
+    def similarity(self):
+        self.__feat[features.SIMILARITY] = self.__data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
+        return self
 
-        feat[features.SIMILARITY] = data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
-        feat[features.FIRST_WORD_SAME] = data.apply(
+    def first_word(self):
+        self.__feat[features.FIRST_WORD_SAME] = self.__data.apply(
             lambda row: FeatureExtractor.__first_word_same(row['def1'], row['def2']), axis=1)
-        feat[features.LEN_DIFF] = data.apply(
+        return self
+
+    def difference_in_length(self):
+        self.__feat[features.LEN_DIFF] = self.__data.apply(
             lambda row: FeatureExtractor.__difference_in_length(row['def1'], row['def2']), axis=1)
-        feat[features.JACCARD] = data.apply(lambda row: FeatureExtractor.__jaccard_sim(row['def1'], row['def2']), axis=1)
-        feat[features.COSINE] = data.apply(lambda row: FeatureExtractor.__cosine(row['def1'], row['def2']), axis=1)
-        feat[features.POS_COUNT_DIFF] = data.apply(
+        return self
+
+    def jaccard(self):
+        self.__feat[features.JACCARD] = self.__data.apply(lambda row: FeatureExtractor.__get_jaccard_sim(row['def1'], row['def2']), axis=1)
+        return self
+
+    def cosine(self):
+        self.__feat[features.COSINE] = self.__data.apply(lambda row: FeatureExtractor.__cosine(row['def1'], row['def2']), axis=1)
+        return self
+
+    def diff_pos_count(self):
+        self.__feat[features.POS_COUNT_DIFF] = self.__data.apply(
             lambda row: FeatureExtractor.__diff_pos_count(row['processed_1'], row['processed_2']),
             axis=1)
-        feat[features.LEMMA_MATCH] = data.apply(
+        return self
+
+    def matching_lemma(self):
+        self.__feat[features.LEMMA_MATCH] = self.__data.apply(
             lambda row: FeatureExtractor.__matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
-        feat[features.TFIDF_COS] = FeatureExtractor.__tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
-        FeatureExtractor.__one_hot_pos(data, feat)
-        feat = pd.concat([feat, FeatureExtractor.__count_pos(data['processed_1'], data['processed_2'])], axis=1)
+        return self
 
-        self.scale_features(feat)
+    def tfidf(self):
+        self.__feat[features.TFIDF_COS] = FeatureExtractor.__tfidf(self.__data['stopwords_removed_1'], self.__data['stopwords_removed_2'])
+        return self
 
-        return feat
+    def ont_hot_pos(self):
+        FeatureExtractor.__one_hot_pos(self.__data, self.__feat)
+        return self
 
-    def scale_features(self, feat):
-        if len(self.feats_to_scale) > 0:
-            for c_name in self.feats_to_scale:
-                feat[c_name] = preprocessing.scale(feat[c_name])
+    def count_each_pos(self):
+        self.__feat = pd.concat([self.__feat, FeatureExtractor.__count_pos(self.__data['processed_1'], self.__data['processed_2'])], axis=1)
+        return self
+
+    def extract(self):
+        return self.__feat
+
+    def scale(self, feats_to_scale):
+        if len(feats_to_scale) > 0:
+            for c_name in feats_to_scale:
+                self.__feat[c_name] = preprocessing.scale(self.__feat[c_name])
+        return self

@@ -225,8 +225,19 @@ if __name__ == '__main__':
 
     #report_file.write(count_relation_and_sort())
 
-    features = FeatureExtractor(feats_to_scale=['similarities', 'len_diff', 'pos_diff']).extract_features(
-        balanced_en_data)
+    features = FeatureExtractor(balanced_en_data)\
+        .similarity()\
+        .first_word()\
+        .difference_in_length()\
+        .jaccard()\
+        .cosine()\
+        .diff_pos_count()\
+        .count_each_pos()\
+        .matching_lemma()\
+        .ont_hot_pos()\
+        .tfidf()\
+        .scale(['similarities', 'len_diff', 'pos_diff'])\
+        .extract()
 
     model_trainer = ModelTrainer(features, balanced_en_data['relation'])
     models = model_trainer.train()
