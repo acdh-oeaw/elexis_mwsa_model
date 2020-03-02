@@ -458,7 +458,7 @@ def balance_dataset(sorted_sets, balancing):
         smallest_by_label = switch_broader_and_narrower(smallest_by_label)
         result = combine_labels(upsample_from_bigger_set(smallest_by_label, bigger_by_label))
 
-    return result
+    return result.reset_index()
 
 
 def train(data, with_testset=False):
