@@ -84,6 +84,23 @@ def tfidf_vectors(values):
     return df_result1, df_result2
 
 
+def intersection(lst1, lst2):
+    lst3 = [value for value in lst1 if value in lst2]
+    return lst3
+
+
+def matching_lemma_normalized(doc1, doc2):
+    lemma_1_list = [token.text for token in doc1 if token.is_stop != True and token.is_punct != True]
+    lemma_2_list = [token.text for token in doc2 if token.is_stop != True and token.is_punct != True]
+
+    combined_length = (len(lemma_1_list) + len(lemma_2_list))
+
+    if combined_length == 0:
+        return 0.0
+
+    return len(intersection(lemma_1_list, lemma_2_list)) / combined_length
+
+
 def extract_features(data, feats_to_scale):
     feat = pd.DataFrame()
 
@@ -94,7 +111,18 @@ def extract_features(data, feats_to_scale):
     feat[features.COSINE] = data.apply(lambda row: cosine(row['def1'], row['def2']), axis=1)
     feat[features.POS_COUNT_DIFF] = data.apply(lambda row: diff_pos_count(row['processed_1'], row['processed_2']),
                                                axis=1)
+    feat[features.LEMMA_MATCH] = data.apply(lambda row: matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
     feat[features.TFIDF_COS] = tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
+    feat[features.POS_ADJ] = data[features.POS_ADJ]
+    feat[features.POS_ADV] = data[features.POS_ADV]
+    feat[features.POS_CONJ] = data[features.POS_CONJ]
+    feat[features.POS_INJ] = data[features.POS_INJ]
+    feat[features.POS_N] = data[features.POS_N]
+    feat[features.POS_NUM] = data[features.POS_NUM]
+    feat[features.POS_PN] = data[features.POS_PN]
+    feat[features.POS_PP] = data[features.POS_PP]
+    feat[features.POS_V] = data[features.POS_V]
+
     if len(feats_to_scale) > 0:
         for c_name in feats_to_scale:
             feat[c_name] = preprocessing.scale(feat[c_name])
