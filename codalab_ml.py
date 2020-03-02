@@ -100,6 +100,29 @@ def matching_lemma_normalized(doc1, doc2):
 
     return len(intersection(lemma_1_list, lemma_2_list)) / combined_length
 
+def count_pos(col1, col2):
+    pos_counter = pd.DataFrame()
+
+    for index, doc in col1.items():
+        for token in doc:
+            if token.pos_ in pos_counter.columns:
+                pos_counter[token.pos_][index] = pos_counter[token.pos_][index]+1
+            else:
+                pos_counter[token.pos_] = pd.Series(0,index=col1.index)
+                pos_counter[token.pos_][index] = pos_counter[token.pos_][index]+1
+
+    for index, doc in col2.items():
+        for token in doc:
+            if token.pos_ in pos_counter.columns:
+                pos_counter[token.pos_][index] = pos_counter[token.pos_][index]-1
+            else:
+                pos_counter[token.pos_] = pd.Series(0,index=col2.index)
+                pos_counter[token.pos_][index] = pos_counter[token.pos_][index]-1
+
+    for pos in pos_counter.columns:
+        pos_counter[pos] = preprocessing.scale(pos_counter[pos])
+    return pos_counter
+
 
 def extract_features(data, feats_to_scale):
     feat = pd.DataFrame()
@@ -114,6 +137,7 @@ def extract_features(data, feats_to_scale):
     feat[features.LEMMA_MATCH] = data.apply(lambda row: matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
     feat[features.TFIDF_COS] = tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
     one_hot_pos(data, feat)
+    feat = pd.concat([feat, count_pos(data['processed_1'], data['processed_2'])], axis=1)
 
     if len(feats_to_scale) > 0:
         for c_name in feats_to_scale:
@@ -199,20 +223,31 @@ def train_models_sklearn(x_train, y_train):
             'kernel': ['rbf', 'linear', 'poly', 'sigmoid']
         }
     }
+    # rf = {
+    #     #     'estimator': RandomForestClassifier(),
+    #     #     'parameters': {
+    #     #         'bootstrap': [True],
+    #     #         'max_depth': [2, 5, 10, 15],
+    #     #         'max_features': [2, 3, 0.5, 0.2, 'auto', 'sqrt', 'log2', None],
+    #     #         'min_samples_leaf': [3, 4, 5],
+    #     #         'min_samples_split': [2, 5, 8, 10, 15],
+    #     #         'n_estimators': [100, 200, 500]
+    #     #     }
+    #     # }
     rf = {
         'estimator': RandomForestClassifier(),
         'parameters': {
             'bootstrap': [True],
-            'max_depth': [2, 5, 10, 15],
-            'max_features': [2, 3, 0.5, 0.2, 'auto', 'sqrt', 'log2', None],
-            'min_samples_leaf': [3, 4, 5],
-            'min_samples_split': [2, 5, 8, 10, 15],
-            'n_estimators': [100, 200, 500]
+            'max_depth': [30, 50],
+            'max_features': [None],
+            'min_samples_leaf': [3, 5],
+            'min_samples_split': [2, 5, 8],
+            'n_estimators': [500, 600]
         }
     }
     dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
-    models = {'unscaled': [lr, svm_model, rf]}
+    models = {'unscaled': [svm_model]}
 
     tuned_models = tune_hyperparams(models, x_train, y_train)
 
