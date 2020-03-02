@@ -113,6 +113,18 @@ def extract_features(data, feats_to_scale):
                                                axis=1)
     feat[features.LEMMA_MATCH] = data.apply(lambda row: matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
     feat[features.TFIDF_COS] = tfidf(data['stopwords_removed_1'], data['stopwords_removed_2'])
+    one_hot_pos(data, feat)
+
+    if len(feats_to_scale) > 0:
+        for c_name in feats_to_scale:
+            feat[c_name] = preprocessing.scale(feat[c_name])
+
+    return feat
+
+
+def one_hot_pos(data, feat):
+    data = one_hot_encode(data)
+
     feat[features.POS_ADJ] = data[features.POS_ADJ]
     feat[features.POS_ADV] = data[features.POS_ADV]
     feat[features.POS_CONJ] = data[features.POS_CONJ]
@@ -122,12 +134,6 @@ def extract_features(data, feats_to_scale):
     feat[features.POS_PN] = data[features.POS_PN]
     feat[features.POS_PP] = data[features.POS_PP]
     feat[features.POS_V] = data[features.POS_V]
-
-    if len(feats_to_scale) > 0:
-        for c_name in feats_to_scale:
-            feat[c_name] = preprocessing.scale(feat[c_name])
-
-    return feat
 
 
 def convert_to_nltk_dataset(feats, labels):
@@ -385,7 +391,7 @@ def categorize_by_label(df):
 def one_hot_encode(dataset):
     pos_numpy = dataset['pos'].to_numpy().reshape(-1, 1)
     encoder = OneHotEncoder(handle_unknown='ignore')\
-        .fit(pos_numpy)\
+        .fit(pos_numpy)
 
     encoded_array = encoder.transform(pos_numpy).toarray()
 
@@ -402,8 +408,6 @@ def load_and_preprocess(dataset_lang, spacy_model, balancing='oversampling'):
     sorted_sets = sort_dataset(all_data, dataset_lang)
 
     balanced = balance_dataset(sorted_sets, balancing)
-
-    balanced = one_hot_encode(balanced)
 
     balanced['processed_1'] = balanced['def1'].map(spacy_model)
     balanced['processed_2'] = balanced['def2'].map(spacy_model)
