@@ -1,7 +1,6 @@
 # TODO: Our own Word2Vec
 # TODO: Feature Selection: correlation analysis, feature elimination
-# TODO: Ask papers/results
-# TODO: Ask Tanja
+
 
 import warnings
 from copy import deepcopy
@@ -10,6 +9,7 @@ from copy import deepcopy
 import os
 import spacy
 import pandas as pd
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from feature_extractor import FeatureExtractor
 from model_trainer import ModelTrainer
@@ -79,10 +79,12 @@ def lemmatizer(doc, spacy_model):
     return spacy_model.make_doc(u' '.join(doc))
 
 
-def remove_stopwords(doc):
+def remove_stopwords(doc, output = 'text'):
     # TODO: ADD 'etc' to stopwords list
-    doc = [token.text for token in doc if token.is_stop != True and token.is_punct != True]
-    return doc
+    if output == 'token':
+        return [token for token in doc if token.is_stop != True and token.is_punct != True]
+
+    return [token.text for token in doc if token.is_stop != True and token.is_punct != True]
 
 
 def filter_small_length(dataset, threshold):
@@ -219,7 +221,7 @@ def count_relation_and_sort():
 if __name__ == '__main__':
     configure()
     nlp = spacy.load('en_core_web_lg')
-
+    nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
 
     balanced_en_data = load_and_preprocess('english', nlp)
 
@@ -236,8 +238,8 @@ if __name__ == '__main__':
         .matching_lemma()\
         .ont_hot_pos()\
         .tfidf()\
-        .scale(['similarities', 'len_diff', 'pos_diff'])\
+        .avg_count_synsets()\
+        .scale(['similarities', 'len_diff', 'pos_diff', 'synset_count_1', 'synset_count_2'])\
         .extract()
 
-    model_trainer = ModelTrainer(features, balanced_en_data['relation'])
-    models = model_trainer.train()
+    models = ModelTrainer(features, balanced_en_data['relation']).train()

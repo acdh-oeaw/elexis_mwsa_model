@@ -147,6 +147,24 @@ class FeatureExtractor:
             pos_counter[pos] = preprocessing.scale(pos_counter[pos])
         return pos_counter
 
+    @staticmethod
+    def __count_avg_synset(doc):
+
+        doc_sw_removed = FeatureExtractor.remove_stopwords(doc, 'token')
+        count = 0
+        for token in doc_sw_removed:
+            count = count + len(token._.wordnet.synsets())
+
+        return count/len(doc)
+
+    @staticmethod
+    def remove_stopwords(doc, output = 'text'):
+        # TODO: ADD 'etc' to stopwords list
+        if output == 'token':
+            return [token for token in doc if token.is_stop != True and token.is_punct != True]
+
+        return [token.text for token in doc if token.is_stop != True and token.is_punct != True]
+
     def similarity(self):
         self.__feat[features.SIMILARITY] = self.__data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
         return self
@@ -190,6 +208,11 @@ class FeatureExtractor:
 
     def count_each_pos(self):
         self.__feat = pd.concat([self.__feat, FeatureExtractor.__count_pos(self.__data['processed_1'], self.__data['processed_2'])], axis=1)
+        return self
+
+    def avg_count_synsets(self):
+        self.__feat['synset_count_1'] = self.__data['processed_1'].map(lambda doc: self.__count_avg_synset(doc))
+        self.__feat['synset_count_2'] = self.__data['processed_2'].map(lambda doc: self.__count_avg_synset(doc))
         return self
 
     def extract(self):
