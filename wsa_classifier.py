@@ -3,6 +3,7 @@ from copy import deepcopy
 
 import pandas as pd
 import spacy
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from classifier_config import ClassifierConfig
 from feature_extractor import FeatureExtractor
@@ -21,9 +22,9 @@ def lemmatizer(doc, spacy_model):
 def remove_stopwords(doc, output='text'):
     # TODO: ADD 'etc' to stopwords list
     if output == 'token':
-        return [token for token in doc if token.is_stop != True and token.is_punct != True]
+        return [token for token in doc if token.is_stop is not True and token.is_punct is not True]
 
-    return [token.text for token in doc if token.is_stop != True and token.is_punct != True]
+    return [token.text for token in doc if token.is_stop is not True and token.is_punct is not True]
 
 
 class DataLoader:
@@ -33,13 +34,15 @@ class DataLoader:
 
         self._language = config.language
         self._nlp = spacy.load(config.language_model)
+        self._nlp.add_pipe(WordnetAnnotator(self._nlp.lang), after='tagger')
         self._model_trainer = ModelTrainer(config.testset_ratio)
         self._balancing = config.balancing_strategy
         self._feature_extractor = feature_extractor
         self._folder = config.folder
         self._data = None
 
-    def __add_column_names(self, df):
+    @staticmethod
+    def __add_column_names(df):
         column_names = ['word', 'pos', 'def1', 'def2', 'relation']
         df.columns = column_names
 

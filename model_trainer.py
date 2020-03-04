@@ -14,7 +14,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 def open_file():
     now = datetime.now()
-    return open("reports/" + now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
+    return open("../reports/" + now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
 
 class BaseClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self):
