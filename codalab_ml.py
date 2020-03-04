@@ -196,21 +196,20 @@ def balance_dataset(sorted_sets, balancing):
     return result.reset_index()
 
 
-#def count_relation_and_sort():
+# def count_relation_and_sort():
 #    return str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + "\n"
 
 
 class DataLoader:
-    def __init__(self, spacy_pipeline, language, feature_extractor, model_trainer, balancing='oversampling'):
-        assert spacy_pipeline is not None
-        assert language is not None
+    def __init__(self, config, feature_extractor):
         assert isinstance(feature_extractor, FeatureExtractor)
+        assert isinstance(config, ClassifierConfig)
 
-        self._language = language
-        self._nlp = spacy_pipeline
+        self._language = config.language
+        self._nlp = spacy.load(config.language_model)
+        self._model_trainer = ModelTrainer(config.testset_ratio)
+        self._balancing = config.balancing_strategy
         self._feature_extractor = feature_extractor
-        self._model_trainer = model_trainer
-        self._balancing = balancing
         self._data = None
 
     def __load_and_balance(self):
@@ -242,16 +241,24 @@ class DataLoader:
         self._feature_extractor.extract(self._data, feats_to_scale)
         return self
 
-    def train(self, with_testset = False):
-        self._model_trainer.train(self._feature_extractor.feats,self._data['relation'], with_testset)
+    def train(self, with_testset=False):
+        self._model_trainer.train(self._feature_extractor.feats, self._data['relation'], with_testset)
+
+
+class ClassifierConfig:
+    def __init__(self, language_model, language, balancing_strategy='oversampling', testset_ratio=0.0,
+                 with_testset=False):
+        self.language_model = language_model
+        self.language = language
+        self.with_testset = with_testset
+        self.testset_ratio = testset_ratio
+        self.balancing_strategy = balancing_strategy
 
 
 if __name__ == '__main__':
     configure()
-    nlp = spacy.load('de_core_news_md')
-    ##nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
 
-    # balanced_en_data = loa\d_preprocess('german', nlp)
+    german_config = ClassifierConfig('de_core_news_md', "german", balancing_strategy="none")
 
     feature_extractor = FeatureExtractor() \
         .first_word() \
@@ -264,18 +271,8 @@ if __name__ == '__main__':
         .cosine() \
         .jaccard() \
         .difference_in_length()
-    # .extract(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
-    #balanced_en_data['relation']
-    model_trainer = ModelTrainer(0.2)
 
-    word_sense_classifier = DataLoader(nlp, "german", feature_extractor, model_trainer, "none")
-    word_sense_classifier.load_data()\
-        .extract_features(['similarities', 'len_diff', 'pos_diff'])\
+    german_classifier = DataLoader(german_config, feature_extractor)
+    german_classifier.load_data() \
+        .extract_features(['similarities', 'len_diff', 'pos_diff']) \
         .train(with_testset=True)
-    # report_file.write(count_relation_and_sort())
-
-    # ['similarities', 'len_diff', 'pos_diff','synset_count_1','synset_count_2']
-    #        .avg_count_synsets()\
-    # ['similarities', 'len_diff', 'pos_diff']
-    # .avg_count_synsets()\
-
