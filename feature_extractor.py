@@ -90,6 +90,7 @@ class CosineExtractor(BaseFeatureExtractor):
         feats[features.COSINE] = data.apply(
             lambda row: self.__cosine(row['def1'], row['def2']), axis=1)
 
+
 class JaccardExtractor(BaseFeatureExtractor):
     @staticmethod
     def __get_jaccard_sim(str1, str2):
@@ -116,6 +117,7 @@ class DiffPosCountExtractor(BaseFeatureExtractor):
         feats[features.POS_COUNT_DIFF] = data.apply(
             lambda row: self.__diff_pos_count(row['processed_1'], row['processed_2']),
             axis=1)
+
 
 class MatchingLemmaExtractor(BaseFeatureExtractor):
 
@@ -171,7 +173,9 @@ class TfIdfExtractor(BaseFeatureExtractor):
 
     def extract(self, data, feats):
         feats[features.TFIDF_COS] = self.__tfidf(data['stopwords_removed_1'],
-                                                                   data['stopwords_removed_2'])
+                                                 data['stopwords_removed_2'])
+
+
 class OneHotPosExtractor(BaseFeatureExtractor):
 
     @staticmethod
@@ -195,6 +199,7 @@ class OneHotPosExtractor(BaseFeatureExtractor):
 
     def extract(self, data, feats):
         self.__one_hot_pos(data, feats)
+
 
 class CountEachPosExtractor(BaseFeatureExtractor):
 
@@ -231,8 +236,7 @@ class CountEachPosExtractor(BaseFeatureExtractor):
 class FeatureExtractor:
     def __init__(self, feature_extractors=[]):
         self._feature_extractors = feature_extractors
-        self.__feat = pd.DataFrame()
-
+        self.feats = pd.DataFrame()
 
     def similarity(self):
         self._feature_extractors.append(SimilarityExtractor())
@@ -280,10 +284,10 @@ class FeatureExtractor:
 
     def extract(self, data, feats_to_scale):
         for extractor in self._feature_extractors:
-            extractor.extract(data, self.__feat)
+            extractor.extract(data, self.feats)
 
         if len(feats_to_scale) > 0:
             for c_name in feats_to_scale:
-                self.__feat[c_name] = preprocessing.scale(self.__feat[c_name])
+                self.feats[c_name] = preprocessing.scale(self.feats[c_name])
 
-        return self.__feat
+        return self.feats

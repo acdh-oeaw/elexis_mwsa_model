@@ -196,22 +196,27 @@ def balance_dataset(sorted_sets, balancing):
     return result.reset_index()
 
 
-def count_relation_and_sort():
-    return str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + "\n"
+#def count_relation_and_sort():
+#    return str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + "\n"
 
 
 class DataLoader:
-    def __init__(self, spacy_pipeline, language, balancing='oversampling'):
+    def __init__(self, spacy_pipeline, language, feature_extractor, model_trainer, balancing='oversampling'):
+        assert spacy_pipeline is not None
+        assert language is not None
+        assert isinstance(feature_extractor, FeatureExtractor)
+
         self._language = language
         self._nlp = spacy_pipeline
+        self._feature_extractor = feature_extractor
+        self._model_trainer = model_trainer
         self._balancing = balancing
+        self._data = None
 
     def __load_and_balance(self):
         all_data = load_training_data()
         sorted_sets = sort_dataset(all_data, self._language)
-
         data = balance_dataset(sorted_sets, self._balancing)
-
         self.__preprocess(data)
 
         return data
@@ -226,12 +231,19 @@ class DataLoader:
         data['lemmatized_2'] = data['processed_2'].map(lambda doc: lemmatizer(doc, self._nlp))
         print(data['lemmatized_2'])
         data['stopwords_removed_2'] = data['lemmatized_2'].map(remove_stopwords)
-
+        self._data = data
 
     def load_data(self):
         data = self.__load_and_balance()
         self.__preprocess(data)
-        return data
+        return self
+
+    def extract_features(self, feats_to_scale):
+        self._feature_extractor.extract(self._data, feats_to_scale)
+        return self
+
+    def train(self, with_testset = False):
+        self._model_trainer.train(self._feature_extractor.feats,self._data['relation'], with_testset)
 
 
 if __name__ == '__main__':
@@ -239,28 +251,31 @@ if __name__ == '__main__':
     nlp = spacy.load('de_core_news_md')
     ##nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
 
-    #balanced_en_data = loa\d_preprocess('german', nlp)
+    # balanced_en_data = loa\d_preprocess('german', nlp)
 
-    classifier = DataLoader(nlp, "german", "none")
-    balanced_en_data = classifier.load_data()
+    feature_extractor = FeatureExtractor() \
+        .first_word() \
+        .similarity() \
+        .diff_pos_count() \
+        .tfidf() \
+        .ont_hot_pos() \
+        .matching_lemma() \
+        .count_each_pos() \
+        .cosine() \
+        .jaccard() \
+        .difference_in_length()
+    # .extract(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
+    #balanced_en_data['relation']
+    model_trainer = ModelTrainer(0.2)
+
+    word_sense_classifier = DataLoader(nlp, "german", feature_extractor, model_trainer, "none")
+    word_sense_classifier.load_data()\
+        .extract_features(['similarities', 'len_diff', 'pos_diff'])\
+        .train(with_testset=True)
     # report_file.write(count_relation_and_sort())
 
-#['similarities', 'len_diff', 'pos_diff','synset_count_1','synset_count_2']
-#        .avg_count_synsets()\
-    #['similarities', 'len_diff', 'pos_diff']
-    features = FeatureExtractor() \
-        .first_word()\
-        .similarity()\
-        .diff_pos_count()\
-        .tfidf()\
-        .ont_hot_pos()\
-        .matching_lemma()\
-        .count_each_pos()\
-        .cosine()\
-        .jaccard()\
-        .difference_in_length()\
-        .extract(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
+    # ['similarities', 'len_diff', 'pos_diff','synset_count_1','synset_count_2']
+    #        .avg_count_synsets()\
+    # ['similarities', 'len_diff', 'pos_diff']
     # .avg_count_synsets()\
 
-    models = ModelTrainer(features, balanced_en_data['relation'], 0.2)\
-        .train(with_testset=True)

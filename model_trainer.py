@@ -2,7 +2,7 @@ from datetime import datetime
 from pprint import pprint
 from random import random
 
-from pandas import np
+import numpy as np
 from sklearn.base import ClassifierMixin, BaseEstimator
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -40,10 +40,13 @@ class RandomClassifier(BaseEstimator, ClassifierMixin):
 
 class ModelTrainer:
 
-    def __init__(self, features, labels, testset_ratio):
+    def __init__(self, testset_ratio):
         self._report_file = open_file()
-        self._x_trainset, self._x_testset = self.__split_data(features, testset_ratio)
-        self._y_trainset, self._y_testset = self.__split_data(labels, testset_ratio)
+        self._testset_ratio = testset_ratio
+
+        self._x_trainset, self._x_testset = None, None
+        self._y_trainset, self._y_testset = None, None
+
 
     def __split_data(self, featuresets, testset_ratio):
         f = int(len(featuresets) * testset_ratio)
@@ -95,7 +98,7 @@ class ModelTrainer:
         }
         dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
-        models = {'unscaled': [svm_model]}
+        models = {'unscaled': [rf]}
 
         tuned_models = self.__tune_hyperparams(models)
 
@@ -180,7 +183,10 @@ class ModelTrainer:
 
         return result
 
-    def train(self, with_testset=False):
+    def train(self, data, labels, with_testset=False):
+        self._x_trainset, self._x_testset = self.__split_data(data, self._testset_ratio)
+        self._y_trainset, self._y_testset = self.__split_data(labels, self._testset_ratio)
+
         trained_models = self.__train_models_sklearn()
 
         self.cross_val_models(trained_models, self._x_trainset,
