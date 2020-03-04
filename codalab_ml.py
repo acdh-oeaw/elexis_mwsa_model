@@ -51,7 +51,6 @@ def has_label(df, label):
     return df['relation'] == label
 
 
-
 def configure():
     pd.set_option('display.max_colwidth', -1)
 
@@ -79,7 +78,7 @@ def lemmatizer(doc, spacy_model):
     return spacy_model.make_doc(u' '.join(doc))
 
 
-def remove_stopwords(doc, output = 'text'):
+def remove_stopwords(doc, output='text'):
     # TODO: ADD 'etc' to stopwords list
     if output == 'token':
         return [token for token in doc if token.is_stop != True and token.is_punct != True]
@@ -151,28 +150,6 @@ def categorize_by_label(df):
     return smallest_by_label
 
 
-def load_and_preprocess(dataset_lang, spacy_model, balancing='oversampling'):
-    all_data = load_training_data()
-
-    sorted_sets = sort_dataset(all_data, dataset_lang)
-
-    balanced = balance_dataset(sorted_sets, balancing)
-
-    balanced['processed_1'] = balanced['def1'].map(spacy_model)
-    balanced['processed_2'] = balanced['def2'].map(spacy_model)
-
-    balanced['lemmatized_1'] = balanced['processed_1'].map(lambda doc: lemmatizer(doc, spacy_model))
-    balanced['stopwords_removed_1'] = balanced['lemmatized_1'].map(remove_stopwords)
-    print(balanced['lemmatized_1'])
-    print(balanced['stopwords_removed_1'])
-
-    balanced['lemmatized_2'] = balanced['processed_2'].map(lambda doc: lemmatizer(doc, spacy_model))
-    print(balanced['lemmatized_2'])
-    balanced['stopwords_removed_2'] = balanced['lemmatized_2'].map(remove_stopwords)
-
-    return balanced
-
-
 def switch_broader_and_narrower(dataset_by_label):
     biggest_label, biggest_label_size = find_biggest_label_and_size(dataset_by_label)
     original_df = deepcopy(dataset_by_label)
@@ -201,14 +178,20 @@ def balance_dataset(sorted_sets, balancing):
     if balancing == 'undersampling':
         result = undersample_dataset(sorted_sets[0])
 
-    else:
+    elif balancing == 'oversampling':
         smallest = sorted_sets[0]
-        bigger = sorted_sets[1]
-
         smallest_by_label = categorize_by_label(smallest)
-        bigger_by_label = categorize_by_label(bigger)
         smallest_by_label = switch_broader_and_narrower(smallest_by_label)
+        if len(sorted_sets) > 1:
+            bigger = sorted_sets[1]
+        else:
+            bigger = deepcopy(sorted_sets[0])
+
+        bigger_by_label = categorize_by_label(bigger)
         result = combine_labels(upsample_from_bigger_set(smallest_by_label, bigger_by_label))
+
+    else:
+        return sorted_sets[0]
 
     return result.reset_index()
 
@@ -217,29 +200,66 @@ def count_relation_and_sort():
     return str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + "\n"
 
 
+class DataLoader:
+    def __init__(self, spacy_pipeline, language, balancing='oversampling'):
+        self._language = language
+        self._nlp = spacy_pipeline
+        self._balancing = balancing
+
+    def __load_and_balance(self):
+        all_data = load_training_data()
+        sorted_sets = sort_dataset(all_data, self._language)
+
+        data = balance_dataset(sorted_sets, self._balancing)
+
+        self.__preprocess(data)
+
+        return data
+
+    def __preprocess(self, data):
+        data['processed_1'] = data['def1'].map(self._nlp)
+        data['processed_2'] = data['def2'].map(self._nlp)
+        data['lemmatized_1'] = data['processed_1'].map(lambda doc: lemmatizer(doc, self._nlp))
+        data['stopwords_removed_1'] = data['lemmatized_1'].map(remove_stopwords)
+        print(data['lemmatized_1'])
+        print(data['stopwords_removed_1'])
+        data['lemmatized_2'] = data['processed_2'].map(lambda doc: lemmatizer(doc, self._nlp))
+        print(data['lemmatized_2'])
+        data['stopwords_removed_2'] = data['lemmatized_2'].map(remove_stopwords)
+
+
+    def load_data(self):
+        data = self.__load_and_balance()
+        self.__preprocess(data)
+        return data
+
 
 if __name__ == '__main__':
     configure()
-    nlp = spacy.load('en_core_web_lg')
-    nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
+    nlp = spacy.load('de_core_news_md')
+    ##nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
 
-    balanced_en_data = load_and_preprocess('english', nlp)
+    #balanced_en_data = loa\d_preprocess('german', nlp)
 
-    #report_file.write(count_relation_and_sort())
+    classifier = DataLoader(nlp, "german", "none")
+    balanced_en_data = classifier.load_data()
+    # report_file.write(count_relation_and_sort())
 
-    features = FeatureExtractor(balanced_en_data)\
-        .similarity()\
+#['similarities', 'len_diff', 'pos_diff','synset_count_1','synset_count_2']
+#        .avg_count_synsets()\
+    #['similarities', 'len_diff', 'pos_diff']
+    features = FeatureExtractor() \
         .first_word()\
-        .difference_in_length()\
-        .jaccard()\
-        .cosine()\
+        .similarity()\
         .diff_pos_count()\
-        .count_each_pos()\
-        .matching_lemma()\
-        .ont_hot_pos()\
         .tfidf()\
-        .avg_count_synsets()\
-        .scale(['similarities', 'len_diff', 'pos_diff', 'synset_count_1', 'synset_count_2'])\
-        .extract()
+        .ont_hot_pos()\
+        .matching_lemma()\
+        .count_each_pos()\
+        .cosine()\
+        .jaccard()\
+        .difference_in_length()\
+        .extract(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
+    # .avg_count_synsets()\
 
     models = ModelTrainer(features, balanced_en_data['relation']).train()

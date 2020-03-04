@@ -8,21 +8,40 @@ from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
+
 def open_file():
     now = datetime.now()
     return open("reports/" + now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
 
+
 class ModelTrainer:
 
     def __init__(self, features, labels):
-        self.__report_file = open_file()
+        self._report_file = open_file()
         self.__x_trainset, self.__x_testset = self.__split_data(features)
         self.__y_trainset, self.__y_testset = self.__split_data(labels)
-
 
     def __split_data(self, featuresets):
         f = int(len(featuresets) / 5)
         return featuresets[f:], featuresets[:f]
+
+    def compare_on_testset(self, models, testset_x, testset_y):
+        self._report_file.write('Model Evaluation on Testset: \n')
+        self._report_file.write('\t' + 'BASELINE: ' + str(self.__get_baseline_df(testset_y)) + '\n')
+
+        # TODO Restructure this part
+        for estimator in models['unscaled']:
+            self._report_file.write('\t' + estimator.__class__.__name__)
+            self._report_file.write(str(estimator))
+
+            predicted = estimator.predict(testset_x)
+            self._report_file.write(str(classification_report(testset_y, predicted)) + '\n')
+            self._report_file.write(str(confusion_matrix(testset_y, predicted)) + '\n')
+
+            self._report_file.write('\t\t' + "F-Score:" + str(f1_score(testset_y, predicted, average='weighted')) + '\n')
+
+            score = estimator.score(testset_x, testset_y)
+            self._report_file.write('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
 
     def __train_models_sklearn(self):
         lr = {'estimator': LogisticRegression(),
@@ -76,8 +95,7 @@ class ModelTrainer:
 
         return tuned_models
 
-
-    def __get_baseline(test_set):
+    def __get_baseline(self, test_set):
         TP = 0
         for el in test_set:
             if el[1] == 'none':
@@ -85,31 +103,29 @@ class ModelTrainer:
 
         return float(TP / len(test_set))
 
-
-
     def __run_cv_with_dataset(self, model, trainset, y_train):
         scores = cross_val_score(model, trainset, y_train, cv=5)
-        self.__report_file.write('Cross validation scores for model' + model.__class__.__name__ + '\n')
-        self.__report_file.write("Accuracy: %0.4f (+/- %0.4f)" % (scores.mean(), scores.std() * 2) + '\n')
+        self._report_file.write('Cross validation scores for model' + model.__class__.__name__ + '\n')
+        self._report_file.write("Accuracy: %0.4f (+/- %0.4f)" % (scores.mean(), scores.std() * 2) + '\n')
 
     def predict(self, models):
-        self.__report_file.write('Model Evaluation on Testset: \n')
-        self.__report_file.write('\t' + 'BASELINE: ' + str(self.__get_baseline_df(self.__y_testset)) + '\n')
+        self._report_file.write('Model Evaluation on Testset: \n')
+        self._report_file.write('\t' + 'BASELINE: ' + str(self.__get_baseline_df(self.__y_testset)) + '\n')
 
         # TODO Restructure this part
         for estimator in models['unscaled']:
-            self.__report_file.write('\t' + estimator.__class__.__name__)
-            self.__report_file.write(str(estimator))
+            self._report_file.write('\t' + estimator.__class__.__name__)
+            self._report_file.write(str(estimator))
 
             predicted = estimator.predict(self.__x_testset)
-            self.__report_file.write(str(classification_report(self.__y_testset, predicted)) + '\n')
-            self.__report_file.write(str(confusion_matrix(self.__y_testset, predicted)) + '\n')
+            self._report_file.write(str(classification_report(self.__y_testset, predicted)) + '\n')
+            self._report_file.write(str(confusion_matrix(self.__y_testset, predicted)) + '\n')
 
-            self.__report_file.write(
+            self._report_file.write(
                 '\t\t' + "F-Score:" + str(f1_score(self.__y_testset, predicted, average='weighted')) + '\n')
 
             score = estimator.score(self.__x_testset, self.__y_testset)
-            self.__report_file.write('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
+            self._report_file.write('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
 
     def cross_val_models(self, models, x_train, y_train):
         for estimator in models:
@@ -141,16 +157,16 @@ class ModelTrainer:
                 # means = grid_search.cv_results_['mean_test_score']
                 # stds = grid_search.cv_results_['std_test_score']
 
-                self.__report_file.write(score + '\n')
+                self._report_file.write(score + '\n')
                 #  for mean, std, parameters in zip(means, stds, grid_search.cv_results_['params']):
                 #      report_file.write("%0.3f (+/-%0.03f) for %r"
                 #                        % (mean, std * 2, parameters) + '\n')
 
-                self.__report_file.write("Best score: %0.3f" % grid_search.best_score_ + '\n')
-                self.__report_file.write("Best parameters set:\n")
+                self._report_file.write("Best score: %0.3f" % grid_search.best_score_ + '\n')
+                self._report_file.write("Best parameters set:\n")
                 best_parameters = grid_search.best_estimator_.get_params()
                 for param_name in sorted(params.keys()):
-                    self.__report_file.write("\t%s: %r" % (param_name, best_parameters[param_name]) + '\n')
+                    self._report_file.write("\t%s: %r" % (param_name, best_parameters[param_name]) + '\n')
 
                 result.append(grid_search.best_estimator_)
 
@@ -164,6 +180,5 @@ class ModelTrainer:
         if with_testset:
             self.predict(trained_models)
 
-        self.__report_file.close()
+        self._report_file.close()
         return trained_models
-

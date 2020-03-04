@@ -7,33 +7,76 @@ from sklearn.preprocessing import OneHotEncoder
 import features
 
 
-class FeatureExtractor:
-    def __init__(self, data):
-        self.__data = data
-        self.__feat = pd.DataFrame()
+class BaseFeatureExtractor:
+    def extract(self, data, feats):
+        pass
+
+
+class FirstWordSame(BaseFeatureExtractor):
+    def __init__(self):
+        pass
 
     @staticmethod
     def __first_word_same(col1, col2):
         return col1.split(' ')[0].lower() == col2.split(' ')[0].lower()
 
+    def extract(self, data, feats):
+        feats[features.FIRST_WORD_SAME] = data.apply(
+            lambda row: FirstWordSame.__first_word_same(row['def1'], row['def2']), axis=1)
+        return feats
+
+
+class AvgSynsetCountExtractor(BaseFeatureExtractor):
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def remove_stopwords(doc, output='text'):
+        # TODO: ADD 'etc' to stopwords list
+        if output == 'token':
+            return [token for token in doc if token.is_stop != True and token.is_punct != True]
+
+        return [token.text for token in doc if token.is_stop != True and token.is_punct != True]
+
+    def __count_avg_synset(self, doc):
+        doc_sw_removed = self.remove_stopwords(doc, 'token')
+        count = 0
+        for token in doc_sw_removed:
+            count = count + len(token._.wordnet.synsets())
+
+        return count / len(doc)
+
+    def extract(self, data, feats):
+        feats['synset_count_1'] = data['processed_1'].map(lambda doc: self.__count_avg_synset(doc))
+        feats['synset_count_2'] = data['processed_2'].map(lambda doc: self.__count_avg_synset(doc))
+
+
+class SimilarityExtractor(BaseFeatureExtractor):
+    def __init__(self):
+        pass
+
+    def extract(self, data, feats):
+        feats[features.SIMILARITY] = data.apply(
+            lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
+
+
+class DifferenceInLengthExtractor(BaseFeatureExtractor):
     @staticmethod
     def __difference_in_length(col1, col2):
         return abs(len(col1.split(' ')) - len(col2.split(' ')[0]))
 
-    @staticmethod
-    def __get_jaccard_sim(str1, str2):
-        a = set(str1.split())
-        b = set(str2.split())
-        c = a.intersection(b)
-        return float(len(c)) / (len(a) + len(b) - len(c))
+    def extract(self, data, feats):
+        feats[features.LEN_DIFF] = data.apply(
+            lambda row: self.__difference_in_length(row['def1'], row['def2']), axis=1)
 
-    @staticmethod
-    def __cosine(col1, col2):
-        return FeatureExtractor.__get_cosine_sim(col1, col2)[0, 1]
 
-    @staticmethod
-    def __get_cosine_sim(*strs):
-        vectors = [t for t in FeatureExtractor.__get_vectors(*strs)]
+class CosineExtractor(BaseFeatureExtractor):
+
+    def __cosine(self, col1, col2):
+        return self.__get_cosine_sim(col1, col2)[0, 1]
+
+    def __get_cosine_sim(self, *strs):
+        vectors = [t for t in self.__get_vectors(*strs)]
         return cosine_similarity(vectors)
 
     @staticmethod
@@ -43,6 +86,25 @@ class FeatureExtractor:
         vectorizer.fit(text)
         return vectorizer.transform(text).toarray()
 
+    def extract(self, data, feats):
+        feats[features.COSINE] = data.apply(
+            lambda row: self.__cosine(row['def1'], row['def2']), axis=1)
+
+class JaccardExtractor(BaseFeatureExtractor):
+    @staticmethod
+    def __get_jaccard_sim(str1, str2):
+        a = set(str1.split())
+        b = set(str2.split())
+        c = a.intersection(b)
+        return float(len(c)) / (len(a) + len(b) - len(c))
+
+    def extract(self, data, feats):
+        feats[features.JACCARD] = data.apply(
+            lambda row: self.__get_jaccard_sim(row['def1'], row['def2']), axis=1)
+
+
+class DiffPosCountExtractor(BaseFeatureExtractor):
+
     @staticmethod
     def __diff_pos_count(col1, col2):
         pos_def1 = list(set([token.pos for token in col1]))
@@ -50,13 +112,19 @@ class FeatureExtractor:
 
         return len(pos_def1) - len(pos_def2)
 
+    def extract(self, data, feats):
+        feats[features.POS_COUNT_DIFF] = data.apply(
+            lambda row: self.__diff_pos_count(row['processed_1'], row['processed_2']),
+            axis=1)
+
+class MatchingLemmaExtractor(BaseFeatureExtractor):
+
     @staticmethod
     def __intersection(lst1, lst2):
         lst3 = [value for value in lst1 if value in lst2]
         return lst3
 
-    @staticmethod
-    def __matching_lemma_normalized(doc1, doc2):
+    def __matching_lemma_normalized(self, doc1, doc2):
         lemma_1_list = [token.text for token in doc1 if token.is_stop != True and token.is_punct != True]
         lemma_2_list = [token.text for token in doc2 if token.is_stop != True and token.is_punct != True]
 
@@ -65,21 +133,27 @@ class FeatureExtractor:
         if combined_length == 0:
             return 0.0
 
-        return len(FeatureExtractor.__intersection(lemma_1_list, lemma_2_list)) / combined_length
+        return len(self.__intersection(lemma_1_list, lemma_2_list)) / combined_length
+
+    def extract(self, data, feats):
+        feats[features.LEMMA_MATCH] = data.apply(
+            lambda row: self.__matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
+
+
+class TfIdfExtractor(BaseFeatureExtractor):
 
     @staticmethod
     def __join_definitions(col1, col2):
         joined_definitions = pd.concat([col1, col2])
         return joined_definitions.apply(lambda tokens: ' '.join(tokens)).values.T
 
-    @staticmethod
-    def __tfidf(col1, col2):
+    def __tfidf(self, col1, col2):
         tfidf_holder = pd.DataFrame()
         tfidf_holder['col1'] = col1
         tfidf_holder['col2'] = col2
 
-        values = FeatureExtractor.__join_definitions(col1, col2)
-        tfidf_holder['tfidf_1'], tfidf_holder['tfidf_2'] = FeatureExtractor.__tfidf_vectors(values)
+        values = self.__join_definitions(col1, col2)
+        tfidf_holder['tfidf_1'], tfidf_holder['tfidf_2'] = self.__tfidf_vectors(values)
 
         return tfidf_holder.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0, 1], axis=1)
 
@@ -95,19 +169,10 @@ class FeatureExtractor:
 
         return df_result1, df_result2
 
-    @staticmethod
-    def __one_hot_pos(data, feat):
-        data = FeatureExtractor.__one_hot_encode(data)
-
-        feat[features.POS_ADJ] = data[features.POS_ADJ]
-        feat[features.POS_ADV] = data[features.POS_ADV]
-        feat[features.POS_CONJ] = data[features.POS_CONJ]
-        feat[features.POS_INJ] = data[features.POS_INJ]
-        feat[features.POS_N] = data[features.POS_N]
-        feat[features.POS_NUM] = data[features.POS_NUM]
-        feat[features.POS_PN] = data[features.POS_PN]
-        feat[features.POS_PP] = data[features.POS_PP]
-        feat[features.POS_V] = data[features.POS_V]
+    def extract(self, data, feats):
+        feats[features.TFIDF_COS] = self.__tfidf(data['stopwords_removed_1'],
+                                                                   data['stopwords_removed_2'])
+class OneHotPosExtractor(BaseFeatureExtractor):
 
     @staticmethod
     def __one_hot_encode(dataset):
@@ -122,6 +187,16 @@ class FeatureExtractor:
                                          columns=encoder.categories_[0])
 
         return pd.concat([dataset, encoded_dataframe], axis=1)
+
+    def __one_hot_pos(self, data, feat):
+        data = self.__one_hot_encode(data)
+        for pos in set(data['pos']):
+            feat[pos] = data[pos]
+
+    def extract(self, data, feats):
+        self.__one_hot_pos(data, feats)
+
+class CountEachPosExtractor(BaseFeatureExtractor):
 
     @staticmethod
     def __count_pos(col1, col2):
@@ -147,79 +222,68 @@ class FeatureExtractor:
             pos_counter[pos] = preprocessing.scale(pos_counter[pos])
         return pos_counter
 
-    @staticmethod
-    def __count_avg_synset(doc):
+    def extract(self, data, feats):
+        result = self.__count_pos(data['processed_1'], data['processed_2'])
+        for pos in set(result.columns):
+            feats[pos] = result[pos]
 
-        doc_sw_removed = FeatureExtractor.remove_stopwords(doc, 'token')
-        count = 0
-        for token in doc_sw_removed:
-            count = count + len(token._.wordnet.synsets())
 
-        return count/len(doc)
+class FeatureExtractor:
+    def __init__(self, feature_extractors=[]):
+        self._feature_extractors = feature_extractors
+        self.__feat = pd.DataFrame()
 
-    @staticmethod
-    def remove_stopwords(doc, output = 'text'):
-        # TODO: ADD 'etc' to stopwords list
-        if output == 'token':
-            return [token for token in doc if token.is_stop != True and token.is_punct != True]
-
-        return [token.text for token in doc if token.is_stop != True and token.is_punct != True]
 
     def similarity(self):
-        self.__feat[features.SIMILARITY] = self.__data.apply(lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
+        self._feature_extractors.append(SimilarityExtractor())
         return self
 
     def first_word(self):
-        self.__feat[features.FIRST_WORD_SAME] = self.__data.apply(
-            lambda row: FeatureExtractor.__first_word_same(row['def1'], row['def2']), axis=1)
+        self._feature_extractors.append(FirstWordSame())
         return self
 
     def difference_in_length(self):
-        self.__feat[features.LEN_DIFF] = self.__data.apply(
-            lambda row: FeatureExtractor.__difference_in_length(row['def1'], row['def2']), axis=1)
+        self._feature_extractors.append(DifferenceInLengthExtractor())
         return self
 
     def jaccard(self):
-        self.__feat[features.JACCARD] = self.__data.apply(lambda row: FeatureExtractor.__get_jaccard_sim(row['def1'], row['def2']), axis=1)
+        self._feature_extractors.append(JaccardExtractor())
         return self
 
     def cosine(self):
-        self.__feat[features.COSINE] = self.__data.apply(lambda row: FeatureExtractor.__cosine(row['def1'], row['def2']), axis=1)
+        self._feature_extractors.append(CosineExtractor())
         return self
 
     def diff_pos_count(self):
-        self.__feat[features.POS_COUNT_DIFF] = self.__data.apply(
-            lambda row: FeatureExtractor.__diff_pos_count(row['processed_1'], row['processed_2']),
-            axis=1)
+        self._feature_extractors.append(DiffPosCountExtractor())
         return self
 
     def matching_lemma(self):
-        self.__feat[features.LEMMA_MATCH] = self.__data.apply(
-            lambda row: FeatureExtractor.__matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
+        self._feature_extractors.append(MatchingLemmaExtractor())
         return self
 
     def tfidf(self):
-        self.__feat[features.TFIDF_COS] = FeatureExtractor.__tfidf(self.__data['stopwords_removed_1'], self.__data['stopwords_removed_2'])
+        self._feature_extractors.append(TfIdfExtractor())
         return self
 
     def ont_hot_pos(self):
-        FeatureExtractor.__one_hot_pos(self.__data, self.__feat)
+        self._feature_extractors.append(OneHotPosExtractor())
         return self
 
     def count_each_pos(self):
-        self.__feat = pd.concat([self.__feat, FeatureExtractor.__count_pos(self.__data['processed_1'], self.__data['processed_2'])], axis=1)
+        self._feature_extractors.append(CountEachPosExtractor())
         return self
 
     def avg_count_synsets(self):
-        self.__feat['synset_count_1'] = self.__data['processed_1'].map(lambda doc: self.__count_avg_synset(doc))
-        self.__feat['synset_count_2'] = self.__data['processed_2'].map(lambda doc: self.__count_avg_synset(doc))
+        self._feature_extractors.append(AvgSynsetCountExtractor())
         return self
 
-    def extract(self):
-        return self.__feat
+    def extract(self, data, feats_to_scale):
+        for extractor in self._feature_extractors:
+            extractor.extract(data, self.__feat)
 
-    def scale(self, feats_to_scale):
         if len(feats_to_scale) > 0:
             for c_name in feats_to_scale:
                 self.__feat[c_name] = preprocessing.scale(self.__feat[c_name])
-        return self
+
+        return self.__feat
