@@ -53,40 +53,33 @@ def analyze_by_class(dataset):
 
 
 
-def find_features(row):
-    features = {}
-    features['first_word_same'] = (first_word_same(row['def1'], row['def2']))
-    features['len difference'] = difference_in_length(row['def1'], row['def2'])
-    features['jaccard'] = jaccard_sim(row['def1'], row['def2'])
-    features['cosine'] = cosine(row)
-
-    # features['levenshtein'] = Levenshtein.distance(row['def1'], row['def2'])
-
-    # if features['cosine']>0.9:
-    #    print(row['def1'], row['def2'], features['cosine'])
-
-    '''
-    wordmatch = 0
-    for word in row['def1'].split(' ')[0].lower():
-        if word in row['def2'].lower():
-            wordmatch+=1
-
-    features['wordmatch'] = wordmatch
-    '''
-
-    features['synsets'] = len(wn.synsets(row['lemma']))  # for specific pos e.g. wn.synsets('dog', pos=wn.VERB)
-
-    # if features['synsets'] == 0:
-    #    print('no synset for ',row['lemma']) TODO MULTILIGNUAL WN
-
-    return features
-
-
-def prepare_data(dataset):
-    featuresets = [(find_features(row), label) for (row, label) in dataset]
-    return split_data(featuresets)
-
-
+# def find_features(row):
+#     features = {}
+#     features['first_word_same'] = (first_word_same(row['def1'], row['def2']))
+#     features['len difference'] = difference_in_length(row['def1'], row['def2'])
+#     features['jaccard'] = jaccard_sim(row['def1'], row['def2'])
+#     features['cosine'] = cosine(row)
+#
+#     # features['levenshtein'] = Levenshtein.distance(row['def1'], row['def2'])
+#
+#     # if features['cosine']>0.9:
+#     #    print(row['def1'], row['def2'], features['cosine'])
+#
+#     '''
+#     wordmatch = 0
+#     for word in row['def1'].split(' ')[0].lower():
+#         if word in row['def2'].lower():
+#             wordmatch+=1
+#
+#     features['wordmatch'] = wordmatch
+#     '''
+#
+#     features['synsets'] = len(wn.synsets(row['lemma']))  # for specific pos e.g. wn.synsets('dog', pos=wn.VERB)
+#
+#     # if features['synsets'] == 0:
+#     #    print('no synset for ',row['lemma']) TODO MULTILIGNUAL WN
+#
+#     return features
 
 
 def get_baseline(test_set):
@@ -184,8 +177,8 @@ if __name__ == '__main__':
         balanced = balance_classes(separated)
 
         print('balanced dataset: ', len(balanced))
-        train_set, test_set = prepare_data(balanced)
-        train_and_test_classifiers(train_set, test_set)
+        #train_set, test_set = prepare_data(balanced)
+        #train_and_test_classifiers(train_set, test_set)
 
         # print('whole dataset: ', len(data[lang]))
         # train_and_test_classifiers(data[lang])

@@ -262,4 +262,5 @@ if __name__ == '__main__':
         .extract(balanced_en_data, ['similarities', 'len_diff', 'pos_diff'])
     # .avg_count_synsets()\
 
-    models = ModelTrainer(features, balanced_en_data['relation']).train()
+    models = ModelTrainer(features, balanced_en_data['relation'], 0.2)\
+        .train(with_testset=True)
