@@ -1,11 +1,12 @@
 import logging
+import uuid
 from datetime import datetime
 from pprint import pprint
 from random import random
 
 import numpy as np
 from sklearn.base import ClassifierMixin, BaseEstimator
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix, f1_score
 from sklearn.model_selection import cross_val_score, GridSearchCV
@@ -103,7 +104,7 @@ class ModelTrainer:
         }
         dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
-        models = {'unscaled': [rf]}
+        models = {'unscaled': [svm_model]}
 
         tuned_models = self.__tune_hyperparams(models)
 
@@ -180,6 +181,10 @@ class ModelTrainer:
                 if score is 'f1' and grid_search.best_score_ > best_f1:
                     self.best_f1_model = grid_search.best_estimator_
 
+        voting_clf = VotingClassifier(estimators = list(map(lambda estimator: ("".join([estimator.__class__.__name__, str(uuid.uuid4())]), estimator), result)), voting = 'hard')
+        voting_clf.fit(self._x_trainset, self._y_trainset)
+
+        result.append(voting_clf)
         return result
 
     def train(self, data, labels, with_testset=False):
