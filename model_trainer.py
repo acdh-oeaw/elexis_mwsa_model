@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from pprint import pprint
 from random import random
@@ -15,6 +16,7 @@ from sklearn.tree import DecisionTreeClassifier
 def open_file():
     now = datetime.now()
     return open("../reports/" + now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
+
 
 class BaseClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self):
@@ -40,12 +42,15 @@ class RandomClassifier(BaseEstimator, ClassifierMixin):
 
 class ModelTrainer:
 
-    def __init__(self, testset_ratio):
-        self._report_file = open_file()
+    def __init__(self, testset_ratio, logger_name):
         self._testset_ratio = testset_ratio
 
         self._x_trainset, self._x_testset = None, None
         self._y_trainset, self._y_testset = None, None
+
+        self.best_f1_model = None
+
+        self._logger = logging.getLogger(logger_name)
 
 
     def __split_data(self, featuresets, testset_ratio):
@@ -116,27 +121,27 @@ class ModelTrainer:
 
     def __run_cv_with_dataset(self, model, trainset, y_train):
         scores = cross_val_score(model, trainset, y_train, cv=5)
-        self._report_file.write('Cross validation scores for model' + model.__class__.__name__ + '\n')
-        self._report_file.write("Accuracy: %0.4f (+/- %0.4f)" % (scores.mean(), scores.std() * 2) + '\n')
+        self._logger.info('Cross validation scores for model' + model.__class__.__name__ + '\n')
+        self._logger.info("Accuracy: %0.4f (+/- %0.4f)" % (scores.mean(), scores.std() * 2) + '\n')
 
     def predict_on_testset(self, models):
-        self._report_file.write('Model Evaluation on Testset: \n')
-        self._report_file.write('\t' + 'BASELINE: ' + str(self.__get_baseline_df()) + '\n')
+        self._logger.info('Model Evaluation on Testset: \n')
+        self._logger.info('\t' + 'BASELINE: ' + str(self.__get_baseline_df()) + '\n')
         models.append(BaseClassifier())
         # TODO Restructure this part
         for estimator in models:
-            self._report_file.write('\t' + estimator.__class__.__name__)
-            self._report_file.write(str(estimator))
+            self._logger.info('\t' + estimator.__class__.__name__)
+            self._logger.info(str(estimator))
 
             predicted = estimator.predict(self._x_testset)
-            self._report_file.write(str(classification_report(self._y_testset, predicted)) + '\n')
-            self._report_file.write(str(confusion_matrix(self._y_testset, predicted)) + '\n')
+            self._logger.info(str(classification_report(self._y_testset, predicted)) + '\n')
+            self._logger.info(str(confusion_matrix(self._y_testset, predicted)) + '\n')
 
-            self._report_file.write(
+            self._logger.info(
                 '\t\t' + "F-Score:" + str(f1_score(self._y_testset, predicted, average='weighted')) + '\n')
 
             score = estimator.score(self._x_testset, self._y_testset)
-            self._report_file.write('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
+            self._logger.info('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
 
     def cross_val_models(self, models, x_train, y_train):
         for estimator in models:
@@ -146,6 +151,7 @@ class ModelTrainer:
 
     def __tune_hyperparams(self, estimators):
         result = []
+        best_f1 = 0.0
         for estimator in estimators['unscaled']:
             params = estimator['parameters']
 
@@ -163,23 +169,16 @@ class ModelTrainer:
                 print("parameters:")
                 pprint(params)
                 grid_search.fit(self._x_trainset, self._y_trainset)
-                print()
 
-                # means = grid_search.cv_results_['mean_test_score']
-                # stds = grid_search.cv_results_['std_test_score']
-
-                self._report_file.write(score + '\n')
-                #  for mean, std, parameters in zip(means, stds, grid_search.cv_results_['params']):
-                #      report_file.write("%0.3f (+/-%0.03f) for %r"
-                #                        % (mean, std * 2, parameters) + '\n')
-
-                self._report_file.write("Best score: %0.3f" % grid_search.best_score_ + '\n')
-                self._report_file.write("Best parameters set:\n")
                 best_parameters = grid_search.best_estimator_.get_params()
-                for param_name in sorted(params.keys()):
-                    self._report_file.write("\t%s: %r" % (param_name, best_parameters[param_name]) + '\n')
-
                 result.append(grid_search.best_estimator_)
+
+                self._logger.info('\n'.join([score, "Best score: %0.3f" % grid_search.best_score_, "Best parameters set: "]))
+                for param_name in sorted(params.keys()):
+                    self._logger.info("\t%s: %r" % (param_name, best_parameters[param_name]) + '\n')
+
+                if score is 'f1' and grid_search.best_score_ > best_f1:
+                    self.best_f1_model = grid_search.best_estimator_
 
         return result
 
@@ -194,5 +193,4 @@ class ModelTrainer:
         if with_testset:
             self.predict_on_testset(trained_models)
 
-        self._report_file.close()
         return trained_models

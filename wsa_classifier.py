@@ -1,5 +1,7 @@
+import logging
 import os
 from copy import deepcopy
+from datetime import datetime
 
 import pandas as pd
 import spacy
@@ -26,20 +28,29 @@ def remove_stopwords(doc, output='text'):
 
     return [token.text for token in doc if token.is_stop is not True and token.is_punct is not True]
 
-
-class DataLoader:
+class WordSenseAlignmentClassifier:
     def __init__(self, config, feature_extractor):
         assert isinstance(feature_extractor, FeatureExtractor)
         assert isinstance(config, ClassifierConfig)
 
         self._language = config.language
-        self._nlp = spacy.load(config.language_model)
-        self._nlp.add_pipe(WordnetAnnotator(self._nlp.lang), after='tagger')
-        self._model_trainer = ModelTrainer(config.testset_ratio)
         self._balancing = config.balancing_strategy
-        self._feature_extractor = feature_extractor
+        self._nlp = spacy.load(config.language_model)
         self._folder = config.folder
+        self.__configure_logger(config)
+
+        self._nlp.add_pipe(WordnetAnnotator(self._nlp.lang), after='tagger')
+        self._model_trainer = ModelTrainer(config.testset_ratio, self._logger.name)
+        self._feature_extractor = feature_extractor
         self._data = None
+
+    def __configure_logger(self, config):
+        self._LOG_FILENAME = '_'.join(
+            [config.language, config.balancing_strategy, str(config.with_testset), datetime.now().strftime("%Y%m%d-%H%M%S"),'.log'])
+        self._logger = logging.getLogger('WordSenseAlignmentClassifierLogger')
+        self._logger.setLevel(logging.INFO)
+        handler = logging.FileHandler(self._LOG_FILENAME)
+        self._logger.addHandler(handler)
 
     @staticmethod
     def __add_column_names(df):
@@ -180,10 +191,7 @@ class DataLoader:
         data['processed_2'] = data['def2'].map(self._nlp)
         data['lemmatized_1'] = data['processed_1'].map(lambda doc: lemmatizer(doc, self._nlp))
         data['stopwords_removed_1'] = data['lemmatized_1'].map(remove_stopwords)
-        print(data['lemmatized_1'])
-        print(data['stopwords_removed_1'])
         data['lemmatized_2'] = data['processed_2'].map(lambda doc: lemmatizer(doc, self._nlp))
-        print(data['lemmatized_2'])
         data['stopwords_removed_2'] = data['lemmatized_2'].map(remove_stopwords)
         self._data = data
 
@@ -198,3 +206,4 @@ class DataLoader:
 
     def train(self, with_testset=False):
         self._model_trainer.train(self._feature_extractor.feats, self._data['relation'], with_testset)
+

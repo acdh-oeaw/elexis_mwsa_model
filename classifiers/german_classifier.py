@@ -1,7 +1,7 @@
 # TODO: Our own Word2Vec
 # TODO: Feature Selection: correlation analysis, feature elimination
-
-
+import logging
+import os
 import warnings
 
 # warnings.filterwarnings('ignore')
@@ -10,14 +10,12 @@ from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from classifier_config import ClassifierConfig
 from feature_extractor import FeatureExtractor
-from wsa_classifier import DataLoader
+from wsa_classifier import WordSenseAlignmentClassifier
 
 
 def configure():
     pd.set_option('display.max_colwidth', -1)
-
-# def count_relation_and_sort():
-#    return str(balanced_en_data.groupby('relation').count().word.sort_values(ascending=False)) + "\n"
+    logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
 
 if __name__ == '__main__':
@@ -37,7 +35,7 @@ if __name__ == '__main__':
         .jaccard() \
         .difference_in_length()
 
-    german_classifier = DataLoader(german_config, feature_extractor)
+    german_classifier = WordSenseAlignmentClassifier(german_config, feature_extractor)
     german_classifier.load_data() \
         .extract_features(['similarities', 'len_diff', 'pos_diff']) \
         .train(with_testset=True)
