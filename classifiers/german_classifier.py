@@ -10,6 +10,7 @@ from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from classifier_config import ClassifierConfig
 from feature_extractor import FeatureExtractor
+from model_trainer import ModelTrainer
 from wsa_classifier import WordSenseAlignmentClassifier
 
 
@@ -35,7 +36,8 @@ if __name__ == '__main__':
         .jaccard() \
         .difference_in_length()
 
-    german_classifier = WordSenseAlignmentClassifier(german_config, feature_extractor)
+    model_trainer = ModelTrainer(german_config.testset_ratio, german_config.logger)
+    german_classifier = WordSenseAlignmentClassifier(german_config, feature_extractor, model_trainer)
     german_classifier.load_data() \
         .extract_features(['similarities', 'len_diff', 'pos_diff']) \
         .train(with_testset=True)

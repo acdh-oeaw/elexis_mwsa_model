@@ -54,7 +54,7 @@ class ModelTrainer:
         self._logger = logging.getLogger(logger_name)
 
 
-    def __split_data(self, featuresets, testset_ratio):
+    def split_data(self, featuresets, testset_ratio):
         f = int(len(featuresets) * testset_ratio)
         return featuresets[f:], featuresets[:f]
 
@@ -80,44 +80,46 @@ class ModelTrainer:
                 'kernel': ['rbf', 'linear', 'poly', 'sigmoid']
             }
         }
-        # rf = {
-        #     #     'estimator': RandomForestClassifier(),
-        #     #     'parameters': {
-        #     #         'bootstrap': [True],
-        #     #         'max_depth': [2, 5, 10, 15],
-        #     #         'max_features': [2, 3, 0.5, 0.2, 'auto', 'sqrt', 'log2', None],
-        #     #         'min_samples_leaf': [3, 4, 5],
-        #     #         'min_samples_split': [2, 5, 8, 10, 15],
-        #     #         'n_estimators': [100, 200, 500]
-        #     #     }
-        #     # }
         rf = {
-            'estimator': RandomForestClassifier(),
-            'parameters': {
-                'bootstrap': [True],
-                'max_depth': [30, 50],
-                'max_features': [None],
-                'min_samples_leaf': [3, 5],
-                'min_samples_split': [2, 5, 8],
-                'n_estimators': [500, 600]
-            }
-        }
+                 'estimator': RandomForestClassifier(),
+                 'parameters': {
+                     'bootstrap': [True],
+                     'class_weight': ['balanced', 'balanced_subsample','None'],
+                     'max_depth': [30, 50, 80],
+                     'max_features': [2, 10, 15, 'auto', 'sqrt', 'log2', None],
+                     'min_samples_leaf': [3, 5],
+                     'min_samples_split': [2, 5, 8],
+                     'n_estimators': [500, 800],
+                     'n_jobs':[-1]
+                 }
+             }
+        # rf = {
+        #     'estimator': RandomForestClassifier(),
+        #     'parameters': {
+        #         'bootstrap': [True],
+        #         'max_depth': [30, 50],
+        #         'max_features': [None],
+        #         'min_samples_leaf': [3, 5],
+        #         'min_samples_split': [2, 5, 8],
+        #         'n_estimators': [500, 600]
+        #     }
+        # }
         dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
-        models = {'unscaled': [svm_model]}
+        models = {'unscaled': [dt]}
 
         tuned_models = self.__tune_hyperparams(models)
 
         return tuned_models
 
-    def __get_baseline_df(self):
+    def get_baseline_df(self, y_testset):
         tp = 0
 
-        for index in self._y_testset.index:
-            if self._y_testset[index] == 'none':
+        for index in y_testset.index:
+            if y_testset[index] == 'none':
                 tp += 1
 
-        return float(tp / len(self._y_testset))
+        return float(tp / len(y_testset))
 
 
     def __run_cv_with_dataset(self, model, trainset, y_train):
@@ -127,7 +129,7 @@ class ModelTrainer:
 
     def predict_on_testset(self, models):
         self._logger.info('Model Evaluation on Testset: \n')
-        self._logger.info('\t' + 'BASELINE: ' + str(self.__get_baseline_df()) + '\n')
+        self._logger.info('\t' + 'BASELINE: ' + str(self.get_baseline_df(self._y_testset)) + '\n')
         models.append(BaseClassifier())
         # TODO Restructure this part
         for estimator in models:
@@ -188,8 +190,8 @@ class ModelTrainer:
         return result
 
     def train(self, data, labels, with_testset=False):
-        self._x_trainset, self._x_testset = self.__split_data(data, self._testset_ratio)
-        self._y_trainset, self._y_testset = self.__split_data(labels, self._testset_ratio)
+        self._x_trainset, self._x_testset = self.split_data(data, self._testset_ratio)
+        self._y_trainset, self._y_testset = self.split_data(labels, self._testset_ratio)
 
         trained_models = self.__train_models_sklearn()
 

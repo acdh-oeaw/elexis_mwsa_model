@@ -29,8 +29,9 @@ def remove_stopwords(doc, output='text'):
     return [token.text for token in doc if token.is_stop is not True and token.is_punct is not True]
 
 class WordSenseAlignmentClassifier:
-    def __init__(self, config, feature_extractor):
+    def __init__(self, config, feature_extractor, model_trainer):
         assert isinstance(feature_extractor, FeatureExtractor)
+        assert isinstance(model_trainer, ModelTrainer)
         assert isinstance(config, ClassifierConfig)
 
         self._language = config.language
@@ -38,16 +39,17 @@ class WordSenseAlignmentClassifier:
         self._nlp = spacy.load(config.language_model)
         self._folder = config.folder
         self.__configure_logger(config)
-
-        self._nlp.add_pipe(WordnetAnnotator(self._nlp.lang), after='tagger')
-        self._model_trainer = ModelTrainer(config.testset_ratio, self._logger.name)
+        if config.with_wordnet is True:
+            self._nlp.add_pipe(WordnetAnnotator(self._nlp.lang), after='tagger')
+        self._model_trainer = model_trainer
+            #ModelTrainer(config.testset_ratio, self._logger.name)
         self._feature_extractor = feature_extractor
         self._data = None
 
     def __configure_logger(self, config):
         self._LOG_FILENAME = '_'.join(
             [config.language, config.balancing_strategy, str(config.with_testset), datetime.now().strftime("%Y%m%d-%H%M%S"),'.log'])
-        self._logger = logging.getLogger('WordSenseAlignmentClassifierLogger')
+        self._logger = logging.getLogger(config.logger)
         self._logger.setLevel(logging.INFO)
         handler = logging.FileHandler(self._LOG_FILENAME)
         self._logger.addHandler(handler)
@@ -206,4 +208,7 @@ class WordSenseAlignmentClassifier:
 
     def train(self, with_testset=False):
         self._model_trainer.train(self._feature_extractor.feats, self._data['relation'], with_testset)
+
+    def get_preprocessed_data(self):
+        return self._data
 
