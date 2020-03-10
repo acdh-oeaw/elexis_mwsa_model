@@ -47,7 +47,7 @@ class WordSenseAlignmentClassifier:
         self._data = None
 
     def __configure_logger(self, config):
-        self._LOG_FILENAME = '_'.join(
+        self._LOG_FILENAME = 'reports/'+'_'.join(
             [config.language, config.balancing_strategy, str(config.with_testset), datetime.now().strftime("%Y%m%d-%H%M%S"),'.log'])
         self._logger = logging.getLogger(config.logger)
         self._logger.setLevel(logging.INFO)

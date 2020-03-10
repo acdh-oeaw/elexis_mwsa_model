@@ -1,23 +1,13 @@
 import logging
 import uuid
-from datetime import datetime
 from pprint import pprint
 from random import random
 
 import numpy as np
 from sklearn.base import ClassifierMixin, BaseEstimator
-from sklearn.ensemble import RandomForestClassifier, VotingClassifier
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import VotingClassifier
 from sklearn.metrics import classification_report, confusion_matrix, f1_score
 from sklearn.model_selection import cross_val_score, GridSearchCV
-from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
-
-
-def open_file():
-    now = datetime.now()
-    return open("../reports/" + now.strftime("%Y%m%d%H%M%S") + ".txt", "a")
-
 
 class BaseClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self):
@@ -52,6 +42,7 @@ class ModelTrainer:
         self.best_f1_model = None
 
         self._logger = logging.getLogger(logger_name)
+        self._models = []
 
 
     def split_data(self, featuresets, testset_ratio):
@@ -59,58 +50,12 @@ class ModelTrainer:
         return featuresets[f:], featuresets[:f]
 
     def __train_models_sklearn(self):
-        lr = {'estimator': LogisticRegression(),
-              'parameters': {
-                  'penalty': ['l2', 'none', 'elasticnet'],
-                  # 'dual': [False],
-                  'C': [1.0, 2.0, 3.0],
-                  'fit_intercept': [True, False],
-                  'class_weight': [dict, 'balanced', None],
-                  # #'solver':['newton-cg','lbfgs','liblinear','sag','saga'],
-                  'solver': ['newton-cg', 'sag', 'lbfgs', 'saga'],
-                  'max_iter': [100, 200, 300, 400],
-                  'multi_class': ['auto', 'ovr', 'multinomial'],
-                  'n_jobs': [-1]
-              }
-              }
-        svm_model = {
-            'estimator': SVC(),
-            'parameters': {
-                'C': [3, 5, 10],
-                'kernel': ['rbf', 'linear', 'poly', 'sigmoid']
-            }
-        }
-        rf = {
-                 'estimator': RandomForestClassifier(),
-                 'parameters': {
-                     'bootstrap': [True],
-                     'class_weight': ['balanced', 'balanced_subsample','None'],
-                     'max_depth': [30, 50, 80],
-                     'max_features': [2, 10, 15, 'auto', 'sqrt', 'log2', None],
-                     'min_samples_leaf': [3, 5],
-                     'min_samples_split': [2, 5, 8],
-                     'n_estimators': [500, 800],
-                     'n_jobs':[-1]
-                 }
-             }
-        # rf = {
-        #     'estimator': RandomForestClassifier(),
-        #     'parameters': {
-        #         'bootstrap': [True],
-        #         'max_depth': [30, 50],
-        #         'max_features': [None],
-        #         'min_samples_leaf': [3, 5],
-        #         'min_samples_split': [2, 5, 8],
-        #         'n_estimators': [500, 600]
-        #     }
-        # }
-        dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
-
-        models = {'unscaled': [dt]}
-
-        tuned_models = self.__tune_hyperparams(models)
+        tuned_models = self.__tune_hyperparams(self._models)
 
         return tuned_models
+
+    def add_estimators(self, estimators):
+        self._models = self._models + estimators
 
     def get_baseline_df(self, y_testset):
         tp = 0
@@ -155,7 +100,7 @@ class ModelTrainer:
     def __tune_hyperparams(self, estimators):
         result = []
         best_f1 = 0.0
-        for estimator in estimators['unscaled']:
+        for estimator in estimators:
             params = estimator['parameters']
 
             scores = ['precision', 'recall', 'f1']
