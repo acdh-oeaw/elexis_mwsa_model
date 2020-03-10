@@ -6,6 +6,9 @@ import warnings
 
 # warnings.filterwarnings('ignore')
 import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
 from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from classifier_config import ClassifierConfig
@@ -37,7 +40,22 @@ if __name__ == '__main__':
         .avg_count_synsets() \
         .difference_in_length()
 
+    rf = {
+        'estimator': RandomForestClassifier(),
+        'parameters': {
+            'bootstrap': [True],
+            'class_weight': ['balanced', 'balanced_subsample','None'],
+            'max_depth': [30, 50, 80],
+            'max_features': [2, 10, 15, 'auto', 'sqrt', 'log2', None],
+            'min_samples_leaf': [3, 5],
+            'min_samples_split': [2, 5, 8],
+            'n_estimators': [500, 800],
+            'n_jobs':[-1]
+        }
+    }
+
     model_trainer = ModelTrainer(english_config.testset_ratio, english_config.logger)
+    model_trainer.add_estimators([rf])
     english_classifier = WordSenseAlignmentClassifier(english_config, feature_extractor, model_trainer)
     english_classifier.load_data() \
         .extract_features(['similarities', 'len_diff', 'pos_diff']) \
