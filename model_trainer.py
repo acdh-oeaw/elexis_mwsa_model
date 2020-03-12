@@ -7,28 +7,30 @@ import numpy as np
 from sklearn.base import ClassifierMixin, BaseEstimator
 from sklearn.ensemble import VotingClassifier
 from sklearn.metrics import classification_report, confusion_matrix, f1_score
-from sklearn.model_selection import cross_val_score, GridSearchCV
+from sklearn.model_selection import GridSearchCV, cross_validate
+
 
 class BaseClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self):
         pass
 
-    def fit(self, X, y):
+    def fit(self, x, y):
         return self
 
     def predict(self, X):
         return np.array(['none' for x in X.index])
 
+
 class RandomClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self):
         pass
 
-    def fit(self, X, y):
+    def fit(self, x, y):
         return self
 
-    def predict(self, X):
-        relations = ['related','narrower','broader','exact','none']
-        return np.array([random.choice(relations) for x in X.index])
+    def predict(self, x):
+        relations = ['related', 'narrower', 'broader', 'exact', 'none']
+        return np.array([random.choice(relations) for x in x.index])
 
 
 class ModelTrainer:
@@ -43,7 +45,6 @@ class ModelTrainer:
 
         self._logger = logging.getLogger(logger_name)
         self._models = []
-
 
     def split_data(self, featuresets, testset_ratio):
         f = int(len(featuresets) * testset_ratio)
@@ -66,11 +67,13 @@ class ModelTrainer:
 
         return float(tp / len(y_testset))
 
-
     def __run_cv_with_dataset(self, model, trainset, y_train):
-        scores = cross_val_score(model, trainset, y_train, cv=5)
+        scores = cross_validate(model, trainset, y_train, cv=5, scoring=['f1_weighted', 'balanced_accuracy'])
         self._logger.info('Cross validation scores for model' + model.__class__.__name__ + '\n')
-        self._logger.info("Accuracy: %0.4f (+/- %0.4f)" % (scores.mean(), scores.std() * 2) + '\n')
+        self._logger.info("F1_WEIGHTED: %0.4f (+/- %0.4f)" % (
+            scores['test_f1_weighted'].mean(), scores['test_f1_weighted'].std() * 2) + '\n')
+        self._logger.info("BALANCED_ACCURACY: %0.4f (+/- %0.4f)" % (
+            scores['test_balanced_accuracy'].mean(), scores['test_balanced_accuracy'].std() * 2) + '\n')
 
     def predict_on_testset(self, models):
         self._logger.info('Model Evaluation on Testset: \n')
@@ -95,8 +98,6 @@ class ModelTrainer:
         for estimator in models:
             self.__run_cv_with_dataset(estimator, x_train, y_train)
 
-        # TODO Restructure this function
-
     def __tune_hyperparams(self, estimators):
         result = []
         best_f1 = 0.0
@@ -118,21 +119,27 @@ class ModelTrainer:
                 pprint(params)
                 grid_search.fit(self._x_trainset, self._y_trainset)
 
-                best_parameters = grid_search.best_estimator_.get_params()
-                result.append(grid_search.best_estimator_)
-
-                self._logger.info('\n'.join([score, "Best score: %0.3f" % grid_search.best_score_, "Best parameters set: "]))
-                for param_name in sorted(params.keys()):
-                    self._logger.info("\t%s: %r" % (param_name, best_parameters[param_name]) + '\n')
+                best_estimator = grid_search.best_estimator_
+                result.append(best_estimator)
 
                 if score is 'f1' and grid_search.best_score_ > best_f1:
-                    self.best_f1_model = grid_search.best_estimator_
+                    self.best_f1_model = best_estimator
 
-        voting_clf = VotingClassifier(estimators = list(map(lambda estimator: ("".join([estimator.__class__.__name__, str(uuid.uuid4())]), estimator), result)), voting = 'hard')
+                self._logger.info(
+                    '\n'.join([score, "Best score: %0.3f" % grid_search.best_score_, "Best parameters set: "]))
+                for param_name in sorted(params.keys()):
+                    self._logger.info("\t%s: %r" % (param_name, best_estimator.get_params()[param_name]) + '\n')
+
+        voting_clf = VotingClassifier(estimators=list(
+            map(lambda estimator: ("".join([estimator.__class__.__name__, str(uuid.uuid4())]), estimator), result)),
+            voting='hard')
         voting_clf.fit(self._x_trainset, self._y_trainset)
 
         result.append(voting_clf)
         return result
+
+    def cross_validate(self, trained_models, x, y):
+        self.cross_val_models(trained_models, x, y)
 
     def train(self, data, labels, with_testset=False):
         self._x_trainset, self._x_testset = self.split_data(data, self._testset_ratio)

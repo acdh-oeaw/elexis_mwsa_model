@@ -207,7 +207,7 @@ class WordSenseAlignmentClassifier:
         return self
 
     def train(self, with_testset=False):
-        self._model_trainer.train(self._feature_extractor.feats, self._data['relation'], with_testset)
+        models = self._model_trainer.train(self._feature_extractor.feats, self._data['relation'], with_testset)
 
     def get_preprocessed_data(self):
         return self._data
