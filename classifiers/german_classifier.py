@@ -1,5 +1,3 @@
-# TODO: Our own Word2Vec
-# TODO: Feature Selection: correlation analysis, feature elimination
 import logging
 import os
 import warnings
@@ -26,7 +24,7 @@ def configure():
 if __name__ == '__main__':
     configure()
 
-    german_config = ClassifierConfig('de_core_news_md', "german", 'data/train', balancing_strategy="none",testset_ratio=0.2)
+    german_config = ClassifierConfig('de_core_news_md', "german", 'data/train', balancing_strategy="none",testset_ratio=0.2, logger = 'de_all_features_nonebalance')
 
     feature_extractor = FeatureExtractor() \
         .first_word() \

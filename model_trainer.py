@@ -1,5 +1,7 @@
 import logging
+import pickle
 import uuid
+from datetime import datetime
 from pprint import pprint
 from random import random
 
@@ -74,6 +76,7 @@ class ModelTrainer:
             scores['test_f1_weighted'].mean(), scores['test_f1_weighted'].std() * 2) + '\n')
         self._logger.info("BALANCED_ACCURACY: %0.4f (+/- %0.4f)" % (
             scores['test_balanced_accuracy'].mean(), scores['test_balanced_accuracy'].std() * 2) + '\n')
+        return scores
 
     def predict_on_testset(self, models):
         self._logger.info('Model Evaluation on Testset: \n')
@@ -95,8 +98,16 @@ class ModelTrainer:
             self._logger.info('\t\t' + "Accuracy: %0.4f (+/- %0.4f)" % (score.mean(), score.std() * 2) + '\n')
 
     def cross_val_models(self, models, x_train, y_train):
+        best_f1_estimator = None
+        best_f1_score = None
+
         for estimator in models:
-            self.__run_cv_with_dataset(estimator, x_train, y_train)
+            scores = self.__run_cv_with_dataset(estimator, x_train, y_train)
+            if best_f1_score is None or scores['test_f1_weighted'].mean() > best_f1_score:
+                best_f1_score = scores['test_f1_weighted'].mean()
+                best_f1_estimator = estimator
+
+        self.best_f1_model = estimator
 
     def __tune_hyperparams(self, estimators):
         result = []
@@ -141,6 +152,16 @@ class ModelTrainer:
     def cross_validate(self, trained_models, x, y):
         self.cross_val_models(trained_models, x, y)
 
+        return self
+
+    def save_best_model(self):
+
+        filename = 'models/'+self._logger.name + self.best_f1_model.__class__.__name__ + datetime.now().strftime(
+            "%Y%m%d-%H%M") + '.pickle'
+
+        with open(filename, 'wb') as file:
+            pickle.dump(self.best_f1_model, file)
+
     def train(self, data, labels, with_testset=False):
         self._x_trainset, self._x_testset = self.split_data(data, self._testset_ratio)
         self._y_trainset, self._y_testset = self.split_data(labels, self._testset_ratio)
@@ -149,6 +170,9 @@ class ModelTrainer:
 
         self.cross_val_models(trained_models, self._x_trainset,
                               self._y_trainset)
+
+        self.save_best_model()
+
         if with_testset:
             self.predict_on_testset(trained_models)
 

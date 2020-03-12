@@ -1,7 +1,5 @@
-# TODO: Our own Word2Vec
-# TODO: Feature Selection: correlation analysis, feature elimination
-
-
+import logging
+import os
 import warnings
 
 # warnings.filterwarnings('ignore')
@@ -19,6 +17,7 @@ from wsa_classifier import WordSenseAlignmentClassifier
 
 def configure():
     pd.set_option('display.max_colwidth', -1)
+    logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
 
 if __name__ == '__main__':

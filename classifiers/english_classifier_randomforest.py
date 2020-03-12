@@ -1,15 +1,12 @@
 # TODO: Our own Word2Vec
 # TODO: Feature Selection: correlation analysis, feature elimination
-
-
+import logging
+import os
 import warnings
 
 # warnings.filterwarnings('ignore')
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
-from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from classifier_config import ClassifierConfig
 from feature_extractor import FeatureExtractor
@@ -19,6 +16,7 @@ from wsa_classifier import WordSenseAlignmentClassifier
 
 def configure():
     pd.set_option('display.max_colwidth', -1)
+    logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
 
 if __name__ == '__main__':
