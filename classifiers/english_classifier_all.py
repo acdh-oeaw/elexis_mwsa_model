@@ -2,7 +2,6 @@ import logging
 import os
 import warnings
 
-# warnings.filterwarnings('ignore')
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -23,8 +22,8 @@ def configure():
 if __name__ == '__main__':
     configure()
 
-    english_config = ClassifierConfig('en_core_web_lg', "english", '../data/train', balancing_strategy="none",
-                                      testset_ratio=0.2, with_wordnet= True)
+    english_config = ClassifierConfig('en_core_web_lg', "english", 'data/train', balancing_strategy="none",
+                                      testset_ratio=0.2, with_wordnet= True, dataset='english_nuig')
 
     feature_extractor = FeatureExtractor() \
         .first_word() \

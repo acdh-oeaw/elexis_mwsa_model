@@ -19,8 +19,8 @@ class BaseClassifier(BaseEstimator, ClassifierMixin):
     def fit(self, x, y):
         return self
 
-    def predict(self, X):
-        return np.array(['none' for x in X.index])
+    def predict(self, x):
+        return np.array(['none' for x in x.index])
 
 
 class RandomClassifier(BaseEstimator, ClassifierMixin):
@@ -48,7 +48,8 @@ class ModelTrainer:
         self._logger = logging.getLogger(logger_name)
         self._models = []
 
-    def split_data(self, featuresets, testset_ratio):
+    @staticmethod
+    def split_data(featuresets, testset_ratio):
         f = int(len(featuresets) * testset_ratio)
         return featuresets[f:], featuresets[:f]
 
@@ -60,7 +61,8 @@ class ModelTrainer:
     def add_estimators(self, estimators):
         self._models = self._models + estimators
 
-    def get_baseline_df(self, y_testset):
+    @staticmethod
+    def get_baseline_df(y_testset):
         tp = 0
 
         for index in y_testset.index:
@@ -82,7 +84,7 @@ class ModelTrainer:
         self._logger.info('Model Evaluation on Testset: \n')
         self._logger.info('\t' + 'BASELINE: ' + str(self.get_baseline_df(self._y_testset)) + '\n')
         models.append(BaseClassifier())
-        # TODO Restructure this part
+
         for estimator in models:
             self._logger.info('\t' + estimator.__class__.__name__)
             self._logger.info(str(estimator))
@@ -107,7 +109,7 @@ class ModelTrainer:
                 best_f1_score = scores['test_f1_weighted'].mean()
                 best_f1_estimator = estimator
 
-        self.best_f1_model = estimator
+        self.best_f1_model = best_f1_estimator
 
     def __tune_hyperparams(self, estimators):
         result = []
@@ -142,7 +144,7 @@ class ModelTrainer:
                     self._logger.info("\t%s: %r" % (param_name, best_estimator.get_params()[param_name]) + '\n')
 
         voting_clf = VotingClassifier(estimators=list(
-            map(lambda estimator: ("".join([estimator.__class__.__name__, str(uuid.uuid4())]), estimator), result)),
+            map(lambda classifier: ("".join([classifier.__class__.__name__, str(uuid.uuid4())]), classifier), result)),
             voting='hard')
         voting_clf.fit(self._x_trainset, self._y_trainset)
 

@@ -2,7 +2,6 @@
 # TODO: Feature Selection: correlation analysis, feature elimination
 import logging
 import os
-import warnings
 
 # warnings.filterwarnings('ignore')
 import pandas as pd
@@ -23,7 +22,7 @@ if __name__ == '__main__':
     configure()
 
     english_config = ClassifierConfig('en_core_web_lg', "english", '../data/train', balancing_strategy="none",
-                                      testset_ratio=0.2, with_wordnet= True)
+                                      testset_ratio=0.2, with_wordnet=True)
 
     feature_extractor = FeatureExtractor() \
         .first_word() \
@@ -42,13 +41,13 @@ if __name__ == '__main__':
         'estimator': RandomForestClassifier(),
         'parameters': {
             'bootstrap': [True],
-            'class_weight': ['balanced', 'balanced_subsample','None'],
+            'class_weight': ['balanced', 'balanced_subsample', 'None'],
             'max_depth': [30, 50, 80],
             'max_features': [2, 10, 15, 'auto', 'sqrt', 'log2', None],
             'min_samples_leaf': [3, 5],
             'min_samples_split': [2, 5, 8],
             'n_estimators': [500, 800],
-            'n_jobs':[-1]
+            'n_jobs': [-1]
         }
     }
 

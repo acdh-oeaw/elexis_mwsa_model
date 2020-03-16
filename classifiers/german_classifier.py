@@ -1,6 +1,5 @@
 import logging
 import os
-import warnings
 
 # warnings.filterwarnings('ignore')
 import pandas as pd
@@ -86,7 +85,7 @@ if __name__ == '__main__':
     dt = {'estimator': DecisionTreeClassifier(), 'parameters': {}}
 
     model_trainer = ModelTrainer(german_config.testset_ratio, german_config.logger)
-    model_trainer.add_estimators([dt])
+    model_trainer.add_estimators([lr, svm_model, rf])
     german_classifier = WordSenseAlignmentClassifier(german_config, feature_extractor, model_trainer)
     german_classifier.load_data() \
         .extract_features(['similarities', 'len_diff', 'pos_diff']) \

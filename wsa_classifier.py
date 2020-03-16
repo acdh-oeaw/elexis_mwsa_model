@@ -35,6 +35,7 @@ class WordSenseAlignmentClassifier:
         assert isinstance(config, ClassifierConfig)
 
         self._language = config.language
+        self._dataset_name = config.dataset
         self._balancing = config.balancing_strategy
         self._nlp = spacy.load(config.language_model)
         self._folder = config.folder
@@ -45,6 +46,7 @@ class WordSenseAlignmentClassifier:
             #ModelTrainer(config.testset_ratio, self._logger.name)
         self._feature_extractor = feature_extractor
         self._data = None
+        self._is_testdata = config.is_testdata
 
     def __configure_logger(self, config):
         self._LOG_FILENAME = 'reports/'+'_'.join(
@@ -54,14 +56,16 @@ class WordSenseAlignmentClassifier:
         handler = logging.FileHandler(self._LOG_FILENAME)
         self._logger.addHandler(handler)
 
-    @staticmethod
-    def __add_column_names(df):
+    def _add_column_names(self, df):
         column_names = ['word', 'pos', 'def1', 'def2', 'relation']
+        if self._is_testdata is True:
+            column_names.remove('relation')
+
         df.columns = column_names
 
     def __load_data(self, file_path):
         loaded_data = pd.read_csv(file_path, sep='\t', header=None)
-        self.__add_column_names(loaded_data)
+        self._add_column_names(loaded_data)
 
         return loaded_data
 
@@ -182,6 +186,9 @@ class WordSenseAlignmentClassifier:
 
     def __load_and_balance(self):
         all_data = self.__load_training_data()
+        if self._dataset_name is not None:
+            all_data = {self._dataset_name: all_data[self._dataset_name]}
+
         sorted_sets = self.__sort_dataset(all_data, self._language)
         data = self.__balance_dataset(sorted_sets, self._balancing)
         self.__preprocess(data)
