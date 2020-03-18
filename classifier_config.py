@@ -7,9 +7,9 @@ class ClassifierConfig:
         self.folder = folder
         self.with_testset = with_testset
         self.testset_ratio = testset_ratio
-        self.balancing_strategy = balancing_strategy
+        self.balancing_strategy = balancing_strategy#undersampling/oversampling/swap
         self.logger = logger
-        self.with_wordnet = with_wordnet
+        self.with_wordnet = with_wordnet#Use only for English
         self.dataset=dataset
         self.is_testdata = is_testdata
 

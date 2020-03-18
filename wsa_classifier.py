@@ -166,8 +166,7 @@ class WordSenseAlignmentClassifier:
     def __balance_dataset(self, sorted_sets, balancing):
         if balancing == 'undersampling':
             result = self.__undersample_dataset(sorted_sets[0])
-
-        elif balancing == 'oversampling':
+        elif balancing == 'oversampling' or 'swap':
             smallest = sorted_sets[0]
             smallest_by_label = self.__categorize_by_label(smallest)
             smallest_by_label = self.__switch_broader_and_narrower(smallest_by_label)
@@ -176,9 +175,11 @@ class WordSenseAlignmentClassifier:
             else:
                 bigger = deepcopy(sorted_sets[0])
 
-            bigger_by_label = self.__categorize_by_label(bigger)
-            result = self.__combine_labels(self.__upsample_from_bigger_set(smallest_by_label, bigger_by_label))
-
+            if balancing == 'oversampling':
+                bigger_by_label = self.__categorize_by_label(bigger)
+                result = self.__combine_labels(self.__upsample_from_bigger_set(smallest_by_label, bigger_by_label))
+            else:
+                result = self.__combine_labels(smallest_by_label)
         else:
             return sorted_sets[0]
 
