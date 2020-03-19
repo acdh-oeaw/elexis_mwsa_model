@@ -1,4 +1,5 @@
 SIMILARITY = 'similarities'
+SIMILARITY_DIFF_TO_TARGET = 'simdiff_to_target'
 FIRST_WORD_SAME = 'first_word_same'
 LEN_DIFF = 'len_diff'
 JACCARD = 'jaccard'

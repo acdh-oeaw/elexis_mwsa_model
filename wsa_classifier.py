@@ -166,7 +166,7 @@ class WordSenseAlignmentClassifier:
     def __balance_dataset(self, sorted_sets, balancing):
         if balancing == 'undersampling':
             result = self.__undersample_dataset(sorted_sets[0])
-        elif balancing == 'oversampling' or 'swap':
+        elif balancing == 'oversampling' or balancing == 'swap':
             smallest = sorted_sets[0]
             smallest_by_label = self.__categorize_by_label(smallest)
             smallest_by_label = self.__switch_broader_and_narrower(smallest_by_label)
@@ -199,6 +199,7 @@ class WordSenseAlignmentClassifier:
     def __preprocess(self, data):
         data['processed_1'] = data['def1'].map(self._nlp)
         data['processed_2'] = data['def2'].map(self._nlp)
+        data['word_processed'] = data['word'].map(self._nlp)
         data['lemmatized_1'] = data['processed_1'].map(lambda doc: lemmatizer(doc, self._nlp))
         data['stopwords_removed_1'] = data['lemmatized_1'].map(remove_stopwords)
         data['lemmatized_2'] = data['processed_2'].map(lambda doc: lemmatizer(doc, self._nlp))

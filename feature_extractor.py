@@ -51,6 +51,26 @@ class AvgSynsetCountExtractor(BaseFeatureExtractor):
         feats['synset_count_2'] = data['processed_2'].map(lambda doc: self.__count_avg_synset(doc))
 
 
+class ToTargetSimilarityDiffExtractor(BaseFeatureExtractor):
+    def __init__(self):
+        pass
+
+    def __calculate_max_similarity(self, target, spacy_doc):
+        similarities = []
+        for token in spacy_doc:
+            if token.is_stop is False:
+                similarities.append(target.similarity(token))
+            #else:
+            #print(token.text)
+        if len(similarities) == 0:
+            return 0.0
+        return max(similarities)
+
+    def extract(self, data, feats):
+        result = data.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_1']), axis=1)
+        result2 = data.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_2']), axis=1)
+        feats[features.SIMILARITY_DIFF_TO_TARGET] = result-result2
+
 class SimilarityExtractor(BaseFeatureExtractor):
     def __init__(self):
         pass
@@ -240,6 +260,10 @@ class FeatureExtractor:
 
     def similarity(self):
         self._feature_extractors.append(SimilarityExtractor())
+        return self
+
+    def similarity_diff_to_target(self):
+        self._feature_extractors.append(ToTargetSimilarityDiffExtractor())
         return self
 
     def first_word(self):

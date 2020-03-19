@@ -1,11 +1,13 @@
-# TODO: Our own Word2Vec
-# TODO: Feature Selection: correlation analysis, feature elimination
 import logging
 import os
+import warnings
 
-# warnings.filterwarnings('ignore')
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from classifier_config import ClassifierConfig
 from feature_extractor import FeatureExtractor
@@ -21,8 +23,8 @@ def configure():
 if __name__ == '__main__':
     configure()
 
-    english_config = ClassifierConfig('en_core_web_lg', "english", '../data/train', balancing_strategy="none",
-                                      testset_ratio=0.2, with_wordnet=True)
+    english_config = ClassifierConfig('en_core_web_lg', "english", 'data/train', balancing_strategy="none",
+                                      testset_ratio=0.2, with_wordnet= True, dataset='english_nuig', logger = 'en_nuig')
 
     feature_extractor = FeatureExtractor() \
         .first_word() \
@@ -34,21 +36,21 @@ if __name__ == '__main__':
         .count_each_pos() \
         .cosine() \
         .jaccard() \
-        .similarity_diff_to_target()\
         .avg_count_synsets() \
-        .difference_in_length()
+        .difference_in_length()\
+        .similarity_diff_to_target()
 
     rf = {
         'estimator': RandomForestClassifier(),
         'parameters': {
             'bootstrap': [True],
-            'class_weight': ['balanced', 'balanced_subsample', 'None'],
+            'class_weight': ['balanced', 'balanced_subsample'],
             'max_depth': [30, 50, 80],
-            'max_features': [2, 10, 15, 'auto', 'sqrt', 'log2', None],
+            'max_features': [15, 5, 'auto', 'sqrt', 'log2', None],
             'min_samples_leaf': [3, 5],
             'min_samples_split': [2, 5, 8],
-            'n_estimators': [500, 800],
-            'n_jobs': [-1]
+            'n_estimators': [300, 500],
+            'n_jobs':[5]
         }
     }
 

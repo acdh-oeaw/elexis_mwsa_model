@@ -68,4 +68,4 @@ if __name__ == '__main__':
     german_classifier = WordSenseAlignmentClassifier(german_config, feature_extractor, model_trainer)
     german_classifier.load_data() \
         .extract_features(['similarities', 'len_diff', 'pos_diff']) \
-        .train(with_testset=False)
+        .train(with_testset=True)
