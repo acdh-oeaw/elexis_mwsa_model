@@ -3,7 +3,7 @@ from sklearn import preprocessing
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import OneHotEncoder
-
+from nltk.corpus import wordnet as wn
 import features
 
 
@@ -60,16 +60,19 @@ class ToTargetSimilarityDiffExtractor(BaseFeatureExtractor):
         for token in spacy_doc:
             if token.is_stop is False:
                 similarities.append(target.similarity(token))
-            #else:
-            #print(token.text)
+            # else:
+            # print(token.text)
         if len(similarities) == 0:
             return 0.0
         return max(similarities)
 
     def extract(self, data, feats):
-        result = data.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_1']), axis=1)
-        result2 = data.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_2']), axis=1)
-        feats[features.SIMILARITY_DIFF_TO_TARGET] = result-result2
+        result = data.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_1']),
+                            axis=1)
+        result2 = data.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_2']),
+                             axis=1)
+        feats[features.SIMILARITY_DIFF_TO_TARGET] = result - result2
+
 
 class SimilarityExtractor(BaseFeatureExtractor):
     def __init__(self):
@@ -221,6 +224,47 @@ class OneHotPosExtractor(BaseFeatureExtractor):
         self.__one_hot_pos(data, feats)
 
 
+class MaxDependencyTreeDepthExtractor(BaseFeatureExtractor):
+
+    def __traverse_to_root(self, token, depth):
+        if token.dep_ == 'ROOT':
+            return depth
+        else:
+            return self.__traverse_to_root(token.head, depth + 1)
+
+    def __max_dep_tree_depth(self, doc):
+        max_deptree_depth = []
+        for token in doc:
+            max_deptree_depth.append(self.__traverse_to_root(token, 0))
+
+        return max(max_deptree_depth)
+
+    def extract(self, data, feats):
+        feats['max_depth_deptree_1'] = data['processed_1'].map(lambda doc: self.__max_dep_tree_depth(doc))
+        feats['max_depth_deptree_2'] = data['processed_2'].map(lambda doc: self.__max_dep_tree_depth(doc))
+
+
+class TargetWordSynsetCount(BaseFeatureExtractor):
+
+    def __init__(self):
+        self._tag_map = {'adjective':wn.ADJ,
+                   'adverb':wn.ADV,
+                   'conjunction':None,
+                   'interjection':None,
+                   'noun':wn.NOUN,
+                   'number':None,
+                   'preposition':wn.ADV,
+                   'pronoun':None,
+                   'verb':wn.VERB}
+
+    def __targetword_synset_count(self, row):
+        return len(wn.synsets(row['word'], self._tag_map[row['pos']]))
+
+    def extract(self, data, feats):
+        feats['target_word_synset_count'] = data.apply(lambda row: self.__targetword_synset_count(row), axis=1)
+
+
+
 class CountEachPosExtractor(BaseFeatureExtractor):
 
     @staticmethod
@@ -304,6 +348,14 @@ class FeatureExtractor:
 
     def avg_count_synsets(self):
         self._feature_extractors.append(AvgSynsetCountExtractor())
+        return self
+
+    def target_word_synset_count(self):
+        self._feature_extractors.append(TargetWordSynsetCount())
+        return self
+
+    def max_dependency_tree_depth(self):
+        self._feature_extractors.append(MaxDependencyTreeDepthExtractor())
         return self
 
     def extract(self, data, feats_to_scale):
