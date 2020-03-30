@@ -215,6 +215,10 @@ class WordSenseAlignmentClassifier:
         self._feature_extractor.extract(self._data, feats_to_scale)
         return self
 
+    def select_features(self, feats_to_include):
+        self._feature_extractor.keep_feats(feats_to_include)
+        return self
+
     def train(self, with_testset=False):
         models = self._model_trainer.train(self._feature_extractor.feats, self._data['relation'], with_testset)
 

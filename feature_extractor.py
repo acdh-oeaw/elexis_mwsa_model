@@ -47,9 +47,9 @@ class AvgSynsetCountExtractor(BaseFeatureExtractor):
         return count / len(doc)
 
     def extract(self, data, feats):
-        feats['synset_count_1'] = data['processed_1'].map(lambda doc: self.__count_avg_synset(doc))
-        feats['synset_count_2'] = data['processed_2'].map(lambda doc: self.__count_avg_synset(doc))
-
+        data['synset_count_1'] = data['processed_1'].map(lambda doc: self.__count_avg_synset(doc))
+        data['synset_count_2'] = data['processed_2'].map(lambda doc: self.__count_avg_synset(doc))
+        feats['synsets_count_diff'] = data['synset_count_1']-data['synset_count_2']
 
 class ToTargetSimilarityDiffExtractor(BaseFeatureExtractor):
     def __init__(self):
@@ -82,6 +82,15 @@ class SimilarityExtractor(BaseFeatureExtractor):
         feats[features.SIMILARITY] = data.apply(
             lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
 
+
+class TokenCountNormalizedDiff(BaseFeatureExtractor):
+    def extract(self, data, feats):
+        data['token_count_1'] = data['processed_1'].map(lambda doc: len(doc))
+        data['token_count_2'] = data['processed_2'].map(lambda doc: len(doc))
+        data['token_count_1_norm'] = data['token_count_1']/data['token_count_1'].mean()
+        data['token_count_2_norm'] = data['token_count_2']/data['token_count_2'].mean()
+
+        feats['token_count_norm_diff'] = data['token_count_1_norm']-data['token_count_2_norm']
 
 class DifferenceInLengthExtractor(BaseFeatureExtractor):
     @staticmethod
@@ -358,6 +367,10 @@ class FeatureExtractor:
         self._feature_extractors.append(MaxDependencyTreeDepthExtractor())
         return self
 
+    def token_count_norm_diff(self):
+        self._feature_extractors.append(TokenCountNormalizedDiff())
+        return self
+
     def extract(self, data, feats_to_scale):
         for extractor in self._feature_extractors:
             extractor.extract(data, self.feats)
@@ -367,3 +380,11 @@ class FeatureExtractor:
                 self.feats[c_name] = preprocessing.scale(self.feats[c_name])
 
         return self.feats
+
+    def keep_feats(self, feats_to_include):
+        for feat_name in self.feats.columns:
+            if feat_name not in feats_to_include:
+                self.feats = self.feats.drop(feat_name, axis=1)
+
+        return self.feats
+
