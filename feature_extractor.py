@@ -5,7 +5,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import OneHotEncoder
 from nltk.corpus import wordnet as wn
 import features
-
+import tensorflow as tf
+import tensorflow_hub as hub
+import numpy as np
 
 class BaseFeatureExtractor:
     def extract(self, data, feats):
@@ -306,6 +308,45 @@ class CountEachPosExtractor(BaseFeatureExtractor):
             feats[pos] = result[pos]
 
 
+class ElmoSimilarity(BaseFeatureExtractor):
+    def __init__(self):
+        self._elmo = hub.Module("https://tfhub.dev/google/elmo/3", trainable=True)
+        self._tfsess = tf.Session()
+
+    def __elmo_vectors(self, x):
+        embeddings = self._elmo(x.tolist(), signature="default", as_dict=True)["elmo"]
+
+        self._tfsess.run(tf.global_variables_initializer())
+        self._tfsess.run(tf.tables_initializer())
+        # return average of ELMo features
+        return self._tfsess.run(tf.reduce_mean(embeddings,1))
+
+    def extract(self, data, feats):
+        list_train = [data[i:i+100] for i in range(0,data.shape[0],100)]
+
+        elmo_def1 = [self.__elmo_vectors(batch['def1']) for batch in list_train]
+        elmo_def2 = [self.__elmo_vectors(batch['def2']) for batch in list_train]
+        elmo_def1_new= np.concatenate(elmo_def1, axis = 0)
+        elmo_def2_new= np.concatenate(elmo_def2, axis = 0)
+        elmo_def1_series = pd.Series(elmo_def1_new.tolist())
+        elmo_def2_series = pd.Series(elmo_def2_new.tolist())
+        data['elmo1'] = elmo_def1_series
+        data['elmo2'] = elmo_def2_series
+        feats['elmo_sim'] = data.apply(lambda row: cosine_similarity([row['elmo1']], [row['elmo2']])[0][0], axis=1)
+        self._tfsess.close()
+
+class SemicolonCounter(BaseFeatureExtractor):
+    def __count_semicolon(self, doc):
+        return len([token for token in doc if token.text is ';'])
+
+    def extract(self, data, feats):
+        data['semicol_count1'] = data['processed_1'].map(lambda doc: self.__count_semicolon(doc))
+        data['semicol_count2'] = data['processed_2'].map(lambda doc: self.__count_semicolon(doc))
+        feats['semicol_count1_norm'] = data['semicol_count1'].map(lambda row: row/data['semicol_count1'].mean())
+        feats['semicol_count2_norm'] = data['semicol_count2'].map(lambda row: row/data['semicol_count2'].mean())
+        feats['semicol_diff'] = feats['semicol_count1_norm']-feats['semicol_count2_norm']
+
+
 class FeatureExtractor:
     def __init__(self, feature_extractors=[]):
         self._feature_extractors = feature_extractors
@@ -370,6 +411,16 @@ class FeatureExtractor:
     def token_count_norm_diff(self):
         self._feature_extractors.append(TokenCountNormalizedDiff())
         return self
+
+    def semicol_count(self):
+        self._feature_extractors.append(SemicolonCounter())
+        return self
+
+
+    def elmo_similarity(self):
+        self._feature_extractors.append(ElmoSimilarity())
+        return self
+
 
     def extract(self, data, feats_to_scale):
         for extractor in self._feature_extractors:

@@ -1,4 +1,3 @@
-
 class ClassifierConfig:
     def __init__(self, language_model, language, folder, balancing_strategy='oversampling', testset_ratio=0.0,
                  with_testset=False, with_wordnet = False, logger='default', dataset=None, is_testdata = False):

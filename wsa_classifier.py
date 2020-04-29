@@ -2,7 +2,7 @@ import logging
 import os
 from copy import deepcopy
 from datetime import datetime
-
+import numpy as np
 import pandas as pd
 import spacy
 from spacy_wordnet.wordnet_annotator import WordnetAnnotator
@@ -93,11 +93,15 @@ class WordSenseAlignmentClassifier:
         return combined_set
 
     def __undersample_dataset(self, imbalanced_set):
-        none = imbalanced_set[has_label(imbalanced_set, 'none') == True]
-        second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
+        none, second_biggest = self.__extract_two_top_groups(imbalanced_set)
         result = imbalanced_set.drop(none.index[second_biggest:])
 
         return result.sample(frac=1, random_state=7)
+
+    def __extract_two_top_groups(self, imbalanced_set):
+        none = imbalanced_set[has_label(imbalanced_set, 'none') == True]
+        second_biggest = imbalanced_set.groupby('relation').count().word.sort_values(ascending=False)[1]
+        return none, second_biggest
 
     def __categorize_by_label(self, df):
         relation_labels = df['relation'].unique()
@@ -180,10 +184,27 @@ class WordSenseAlignmentClassifier:
                 result = self.__combine_labels(self.__upsample_from_bigger_set(smallest_by_label, bigger_by_label))
             else:
                 result = self.__combine_labels(smallest_by_label)
+
+        elif balancing == 'split_biggest' and not self._is_testdata:
+            by_label = self.__categorize_by_label(sorted_sets[0])
+            none, second_biggest = self.__extract_two_top_groups(sorted_sets[0])
+            splitted = np.array_split(none, int(len(none)/second_biggest))
+
+            self.__replace_none_by_splitted(by_label, splitted)
+            result = self.__combine_labels(by_label)
+
         else:
             return sorted_sets[0]
 
         return result.reset_index()
+
+
+
+    def __replace_none_by_splitted(self, df, splitted):
+        df.pop('none',None)
+        for splitted_df in splitted:
+            df[splitted_df.iloc[0]['relation']]=splitted_df
+
 
     def __load_and_balance(self):
         all_data = self.__load_training_data()
