@@ -1,0 +1,7 @@
+md5: 9befbcde61ad00a947ab240eba191144
+outs:
+- md5: e19c70421e93de33af99c18dc00a7e8a
+  path: portuguese.tsv
+  cache: true
+  metric: false
+  persist: false

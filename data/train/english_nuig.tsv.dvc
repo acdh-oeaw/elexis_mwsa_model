@@ -1,0 +1,7 @@
+md5: 53ebcc3171320d1d439e5a722e435d63
+outs:
+- md5: 0980b9519f2aa83aecbf46f793ed4102
+  path: english_nuig.tsv
+  cache: true
+  metric: false
+  persist: false

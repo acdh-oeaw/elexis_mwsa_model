@@ -1,0 +1,7 @@
+md5: 5e4ad47e46d4f36a0279211b565d6169
+outs:
+- md5: 063619224ade12e1a97ffa7c50fb0095
+  path: hungarian.tsv
+  cache: true
+  metric: false
+  persist: false

@@ -1,0 +1,7 @@
+md5: c3e4bf0ba0491e9e330edab5fdb77b2d
+outs:
+- md5: 73413f05f4d417808fdf8034e6e6594a
+  path: russian.tsv
+  cache: true
+  metric: false
+  persist: false

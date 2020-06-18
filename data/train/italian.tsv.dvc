@@ -1,0 +1,7 @@
+md5: 2b208bc2dc07ec332bcace89c65363f6
+outs:
+- md5: fe23e306227ad75dbce8490fd871123d
+  path: italian.tsv
+  cache: true
+  metric: false
+  persist: false

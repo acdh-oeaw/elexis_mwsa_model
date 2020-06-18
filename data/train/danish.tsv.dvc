@@ -1,0 +1,7 @@
+md5: 735db7c4e38443801733b87b6c79dc9c
+outs:
+- md5: 174fd984c51bc7f0a7fd31995e00a998
+  path: danish.tsv
+  cache: true
+  metric: false
+  persist: false

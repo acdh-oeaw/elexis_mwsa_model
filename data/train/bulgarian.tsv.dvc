@@ -1,0 +1,7 @@
+md5: 31467258aaa1453a29f76d73c519886e
+outs:
+- md5: 41538ec67b402e107bb7a3da46b39763
+  path: bulgarian.tsv
+  cache: true
+  metric: false
+  persist: false

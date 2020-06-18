@@ -1,0 +1,7 @@
+md5: d897fe5915ee853cca87e5eef5647dd0
+outs:
+- md5: 1bb509ac379c0b3b52e9727d54d6a172
+  path: basque.tsv
+  cache: true
+  metric: false
+  persist: false

@@ -28,6 +28,7 @@ def remove_stopwords(doc, output='text'):
 
     return [token.text for token in doc if token.is_stop is not True and token.is_punct is not True]
 
+
 class WordSenseAlignmentClassifier:
     def __init__(self, config, feature_extractor, model_trainer):
         assert isinstance(feature_extractor, FeatureExtractor)
@@ -43,14 +44,15 @@ class WordSenseAlignmentClassifier:
         if config.with_wordnet is True:
             self._nlp.add_pipe(WordnetAnnotator(self._nlp.lang), after='tagger')
         self._model_trainer = model_trainer
-            #ModelTrainer(config.testset_ratio, self._logger.name)
+        # ModelTrainer(config.testset_ratio, self._logger.name)
         self._feature_extractor = feature_extractor
         self._data = None
         self._is_testdata = config.is_testdata
 
     def __configure_logger(self, config):
-        self._LOG_FILENAME = 'reports/'+'_'.join(
-            [config.language, config.balancing_strategy, str(config.with_testset), datetime.now().strftime("%Y%m%d-%H%M%S"),'.log'])
+        self._LOG_FILENAME = 'reports/' + '_'.join(
+            [config.language, config.balancing_strategy, str(config.with_testset),
+             datetime.now().strftime("%Y%m%d-%H%M%S"), '.log'])
         self._logger = logging.getLogger(config.logger)
         self._logger.setLevel(logging.INFO)
         handler = logging.FileHandler(self._LOG_FILENAME)
@@ -188,7 +190,7 @@ class WordSenseAlignmentClassifier:
         elif balancing == 'split_biggest' and not self._is_testdata:
             by_label = self.__categorize_by_label(sorted_sets[0])
             none, second_biggest = self.__extract_two_top_groups(sorted_sets[0])
-            splitted = np.array_split(none, int(len(none)/second_biggest))
+            splitted = np.array_split(none, int(len(none) / second_biggest))
 
             self.__replace_none_by_splitted(by_label, splitted)
             result = self.__combine_labels(by_label)
@@ -198,13 +200,10 @@ class WordSenseAlignmentClassifier:
 
         return result.reset_index()
 
-
-
     def __replace_none_by_splitted(self, df, splitted):
-        df.pop('none',None)
+        df.pop('none', None)
         for splitted_df in splitted:
-            df[splitted_df.iloc[0]['relation']]=splitted_df
-
+            df[splitted_df.iloc[0]['relation']] = splitted_df
 
     def __load_and_balance(self):
         all_data = self.__load_training_data()
@@ -245,4 +244,3 @@ class WordSenseAlignmentClassifier:
 
     def get_preprocessed_data(self):
         return self._data
-
