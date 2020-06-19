@@ -2,7 +2,7 @@ import spacy
 import logging
 from sklearn.base import BaseEstimator, TransformerMixin
 
-from mwsa.util import SupportedLanguages
+from mwsa.service.util import SupportedLanguages
 import features
 
 

@@ -5,9 +5,9 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
-from mwsa.util import SupportedLanguages
+from mwsa import SupportedLanguages
 
-from scikit_pipeline.pipeline import SpacyProcessor, FirstWordSameProcessor, FeatureSelector, SimilarityProcessor
+from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, FeatureSelector, SimilarityProcessor
 
 
 def load_data(file_path, is_testdata=False):

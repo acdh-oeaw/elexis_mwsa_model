@@ -2,8 +2,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 
-from mwsa.util import SupportedLanguages
-from scikit_pipeline.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector
+from mwsa.service.util import SupportedLanguages
+from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector
 
 
 class MwsaModelTrainer(object):
