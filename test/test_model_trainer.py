@@ -7,7 +7,7 @@ from sklearn.model_selection import GridSearchCV
 from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
-    UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer
+    UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer
 import features
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
@@ -73,9 +73,6 @@ class Test_Mwsa_Model_Trainer:
         assert model.best_estimator_
 
 
-
-
-
 class Test_Transformer:
     @pytest.fixture
     def spacy_processed(self):
@@ -89,6 +86,14 @@ class Test_Transformer:
                             'stopwords_removed_2']
 
         return spacy.transform(df)
+
+    def test_matching_lemma_transformer(self, spacy_processed):
+        matching_lemma_transformer = MatchingLemmaTransformer()
+
+        transformed = matching_lemma_transformer.fit_transform(spacy_processed)
+
+        assert features.LEMMA_MATCH in transformed.columns
+        transformed[features.LEMMA_MATCH].apply(lambda x: x <= 1.0)
 
     def test_one_hot_pos_transformer(self, spacy_processed):
         one_hot_transformer = OneHotPosTransformer()

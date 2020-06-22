@@ -132,6 +132,36 @@ class OneHotPosTransformer(BaseEstimator, TransformerMixin):
         return pd.concat([X, encoded_dataframe], axis=1)
 
 
+class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        X[features.LEMMA_MATCH] = X.apply(
+            lambda row: self.__matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
+
+        return X
+
+    @staticmethod
+    def __intersection(lst1, lst2):
+        lst3 = [value for value in lst1 if value in lst2]
+        return lst3
+
+    def __matching_lemma_normalized(self, doc1, doc2):
+        lemma_1_list = [token.text for token in doc1 if token.is_stop is not True and token.is_punct is not True]
+        lemma_2_list = [token.text for token in doc2 if token.is_stop is not True and token.is_punct is not True]
+
+        combined_length = (len(lemma_1_list) + len(lemma_2_list))
+
+        if combined_length == 0:
+            return 0.0
+
+        return len(self.__intersection(lemma_1_list, lemma_2_list)) / combined_length
+
+
 class DiffPosCountTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
