@@ -1,0 +1,2 @@
+dvc run -n train -f train.dvc -d mwsa/preprocess.py -d features.pickle -d labels.pickle -o mwsa/output/models/en.pkl python -m mwsa.preprocess features.pickle labels.pickle
+dvc run -n evaluate -f evaluate.dvc -d mwsa/evaluate.py -d mwsa/output/models/en.pkl -d data/test/english_nuig.tsv -d data/reference_data/english_nuig.tsv -o mwsa/output/metrics/metrics_en.txt -o mwsa/output/predictions/en_predictions.txt python -m mwsa.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
