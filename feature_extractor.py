@@ -291,7 +291,7 @@ class CountEachPosExtractor(BaseFeatureExtractor):
                     pos_counter[token.pos_][index] = pos_counter[token.pos_][index] + 1
 
         for index, doc in col2.items():
-            for token in doc:
+            for token in doc:€
                 if token.pos_ in pos_counter.columns:
                     pos_counter[token.pos_][index] = pos_counter[token.pos_][index] - 1
                 else:

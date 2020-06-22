@@ -1,6 +1,8 @@
 import pandas as pd
 import spacy
 import logging
+
+from sklearn import preprocessing
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
 
@@ -161,6 +163,44 @@ class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
 
         return len(self.__intersection(lemma_1_list, lemma_2_list)) / combined_length
 
+
+class CountEachPosTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None, **fit_params):
+        result = self.__count_pos(X['processed_1'], X['processed_2'])
+        for pos in set(result.columns):
+            X.loc[:, pos] = result[pos]
+
+        return X
+
+    @staticmethod
+    def __count_pos(col1, col2):
+        pos_counter = pd.DataFrame()
+
+        for index, doc in col1.items():
+            for token in doc:
+                if token.pos_ in pos_counter.columns:
+                    pos_counter[token.pos_][index] = pos_counter[token.pos_][index] + 1
+                else:
+                    pos_counter[token.pos_] = pd.Series(0, index=col1.index)
+                    pos_counter[token.pos_][index] = pos_counter[token.pos_][index] + 1
+
+        for index, doc in col2.items():
+            for token in doc:
+                if token.pos_ in pos_counter.columns:
+                    pos_counter[token.pos_][index] = pos_counter[token.pos_][index] - 1
+                else:
+                    pos_counter[token.pos_] = pd.Series(0, index=col2.index)
+                    pos_counter[token.pos_][index] = pos_counter[token.pos_][index] - 1
+
+        for pos in pos_counter.columns:
+            pos_counter[pos] = preprocessing.scale(pos_counter[pos])
+        return pos_counter
 
 class DiffPosCountTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):

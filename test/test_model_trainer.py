@@ -7,7 +7,8 @@ from sklearn.model_selection import GridSearchCV
 from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
-    UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer
+    UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
+    CountEachPosTransformer
 import features
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
@@ -87,6 +88,14 @@ class Test_Transformer:
 
         return spacy.transform(df)
 
+    def test_count_each_pos_transformer(self, spacy_processed):
+        count_pos_transformer = CountEachPosTransformer()
+
+        transformed = count_pos_transformer.fit_transform(spacy_processed)
+
+        assert 'NUM' in transformed.columns
+        assert 'NOUN' in transformed.columns
+
     def test_matching_lemma_transformer(self, spacy_processed):
         matching_lemma_transformer = MatchingLemmaTransformer()
 
@@ -104,7 +113,6 @@ class Test_Transformer:
         for pos in spacy_processed['pos']:
             assert pos in transformed.columns
             transformed[pos].apply(lambda x: x == 1.0)
-
 
     def test_similarity_transformer_IT(self, spacy_processed):
         similarity_processor = SimilarityProcessor()
