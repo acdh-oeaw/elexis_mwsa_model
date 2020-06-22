@@ -30,7 +30,7 @@ if __name__ == '__main__':
         .first_word() \
         .similarity() \
         .tfidf() \
-        .ont_hot_pos() \
+        .one_hot_pos() \
         .matching_lemma() \
         .count_each_pos() \
         .jaccard() \

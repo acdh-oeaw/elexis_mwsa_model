@@ -12,7 +12,7 @@ german_config = ClassifierConfig('en_core_web_lg', "english", 'data/test', balan
 
 feature_extractor = FeatureExtractor() \
     .diff_pos_count() \
-    .ont_hot_pos() \
+    .one_hot_pos() \
     .matching_lemma() \
     .count_each_pos() \
     .avg_count_synsets() \

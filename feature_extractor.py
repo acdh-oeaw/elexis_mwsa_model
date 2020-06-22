@@ -388,7 +388,7 @@ class FeatureExtractor:
         self._feature_extractors.append(TfIdfExtractor())
         return self
 
-    def ont_hot_pos(self):
+    def one_hot_pos(self):
         self._feature_extractors.append(OneHotPosExtractor())
         return self
 

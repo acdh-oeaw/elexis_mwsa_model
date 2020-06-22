@@ -13,6 +13,7 @@ stages:
     - features.pickle
     - labels.pickle
     - mwsa/preprocess.py
+    - mwsa/service/model_trainer.py
     outs:
     - mwsa/output/models/en.pkl
   evaluate:

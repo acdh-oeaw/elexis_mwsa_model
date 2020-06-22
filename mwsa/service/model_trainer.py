@@ -3,12 +3,15 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 
 from mwsa.service.util import SupportedLanguages
-from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector
+from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector, \
+    DiffPosCountTransformer, OneHotPosTransformer
 
 
 class MwsaModelTrainer(object):
     def __init__(self):
         english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor()),
+                                           ('diff_pos_count', DiffPosCountTransformer()),
+                                           ('one_hot_pos', OneHotPosTransformer()),
                                            ('first_word_same', FirstWordSameProcessor()),
                                            ('similarity', SimilarityProcessor()),
                                            ('feature_selector', FeatureSelector()),

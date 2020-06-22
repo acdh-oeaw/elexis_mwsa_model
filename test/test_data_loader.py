@@ -2,7 +2,8 @@ import unittest
 
 from pandas import DataFrame
 import pandas as pd
-from mwsa import DataLoader
+
+from mwsa.service.data_loader import DataLoader
 
 
 class DataLoaderTest(unittest.TestCase):

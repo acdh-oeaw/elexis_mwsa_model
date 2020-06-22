@@ -14,7 +14,7 @@ feature_extractor = FeatureExtractor() \
     .similarity() \
     .diff_pos_count() \
     .tfidf() \
-    .ont_hot_pos() \
+    .one_hot_pos() \
     .matching_lemma() \
     .count_each_pos() \
     .cosine() \

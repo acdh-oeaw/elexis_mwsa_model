@@ -29,7 +29,7 @@ params = {
     'random_forest__max_features': ['auto'],
     'random_forest__min_samples_leaf': [3, 5],
     'random_forest__min_samples_split': [2],
-    'random_forest__n_estimators': [100,300],
+    'random_forest__n_estimators': [50,300],
     'random_forest__n_jobs': [5]
 }
 

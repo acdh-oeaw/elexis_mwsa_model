@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     feature_extractor = FeatureExtractor() \
         .diff_pos_count() \
-        .ont_hot_pos() \
+        .one_hot_pos() \
         .matching_lemma() \
         .count_each_pos() \
         .avg_count_synsets() \
