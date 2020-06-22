@@ -4,7 +4,8 @@ from sklearn.pipeline import Pipeline
 
 from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector, \
-    DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, CountEachPosTransformer
+    DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, CountEachPosTransformer, \
+    AvgSynsetCountTransformer
 
 
 class MwsaModelTrainer(object):
@@ -16,6 +17,7 @@ class MwsaModelTrainer(object):
                                            ('similarity', SimilarityProcessor()),
                                            ('matching_lemma', MatchingLemmaTransformer()),
                                            ('pos_count', CountEachPosTransformer()),
+                                           ('avg_synset_count', AvgSynsetCountTransformer()),
                                            ('feature_selector', FeatureSelector()),
                                            ('random_forest', RandomForestClassifier())])
         self.pipelines = {

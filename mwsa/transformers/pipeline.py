@@ -5,6 +5,7 @@ import logging
 from sklearn import preprocessing
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
+from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from mwsa.service.util import SupportedLanguages
 import features
@@ -38,9 +39,10 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
         SupportedLanguages.English: 'en_core_web_lg'
     }
 
-    def __init__(self, lang=None):
+    def __init__(self, lang=None, with_wordnet=False):
         self.logger = logging.getLogger(__name__)
         self.lang = lang
+        self.with_wordnet = with_wordnet
 
     def fit(self, X, y=None):
         return self
@@ -48,6 +50,8 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         try:
             nlp = spacy.load(self.spacy_models[self.lang])
+            if self.with_wordnet:
+                nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
         except KeyError:
             raise UnsupportedSpacyModelError("No Spacy Language model exists for language " + str(self.lang))
 
@@ -164,6 +168,37 @@ class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
         return len(self.__intersection(lemma_1_list, lemma_2_list)) / combined_length
 
 
+class AvgSynsetCountTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        X.loc[:, 'synset_count_1'] = X['processed_1'].map(lambda doc: self.__count_avg_synset(doc))
+        X.loc[:, 'synset_count_2'] = X['processed_2'].map(lambda doc: self.__count_avg_synset(doc))
+        X.loc[:, features.SYNSET_COUNT_DIFF] = X['synset_count_1'] - X['synset_count_2']
+
+        return X
+
+    @staticmethod
+    def remove_stopwords(doc, output='text'):
+        # TODO: ADD 'etc' to stopwords list
+        if output == 'token':
+            return [token for token in doc if token.is_stop is not True and token.is_punct is not True]
+
+        return [token.text for token in doc if token.is_stop is not True and token.is_punct is not True]
+
+    def __count_avg_synset(self, doc):
+        doc_sw_removed = self.remove_stopwords(doc, 'token')
+        count = 0
+        for token in doc_sw_removed:
+            count = count + len(token._.wordnet.synsets())
+
+        return count / len(doc)
+
+
 class CountEachPosTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
@@ -171,7 +206,7 @@ class CountEachPosTransformer(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         return self
 
-    def transform(self, X, y=None, **fit_params):
+    def transform(self, X, y=None):
         result = self.__count_pos(X['processed_1'], X['processed_2'])
         for pos in set(result.columns):
             X.loc[:, pos] = result[pos]
@@ -201,6 +236,7 @@ class CountEachPosTransformer(BaseEstimator, TransformerMixin):
         for pos in pos_counter.columns:
             pos_counter[pos] = preprocessing.scale(pos_counter[pos])
         return pos_counter
+
 
 class DiffPosCountTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):

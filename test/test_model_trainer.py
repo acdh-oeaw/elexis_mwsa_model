@@ -8,7 +8,7 @@ from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
     UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
-    CountEachPosTransformer
+    CountEachPosTransformer, AvgSynsetCountTransformer
 import features
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
@@ -95,6 +95,16 @@ class Test_Transformer:
 
         assert 'NUM' in transformed.columns
         assert 'NOUN' in transformed.columns
+
+    def test_avg_synset_count_transformer(self, spacy_processed):
+        spacy = SpacyProcessor(lang=SupportedLanguages.English, with_wordnet=True)
+
+        spacy_processed = spacy.transform(df)
+        avg_synset_count_transformer = AvgSynsetCountTransformer()
+
+        transformed = avg_synset_count_transformer.fit_transform(spacy_processed)
+
+        assert features.SYNSET_COUNT_DIFF in transformed.columns
 
     def test_matching_lemma_transformer(self, spacy_processed):
         matching_lemma_transformer = MatchingLemmaTransformer()
