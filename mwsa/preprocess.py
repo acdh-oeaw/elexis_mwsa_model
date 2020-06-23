@@ -40,3 +40,7 @@ model = grid_search.fit(features, labels)
 model_filename = 'mwsa/output/models/'+SupportedLanguages.English.value+'.pkl'
 with open(model_filename, 'wb+') as file:
     pickle.dump(model, file)
+
+score_filename = 'mwsa/output/metrics/'+SupportedLanguages.English.value+'_cv_score.txt'
+with open(score_filename, 'w+') as fd:
+    fd.write('{:4f}\n'.format(model.best_score_))

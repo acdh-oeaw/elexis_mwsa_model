@@ -16,6 +16,7 @@ stages:
     - mwsa/service/model_trainer.py
     outs:
     - mwsa/output/models/en.pkl
+    - mwsa/output/metrics/en_cv_score.txt
   evaluate:
     cmd: python -m mwsa.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
     deps:
