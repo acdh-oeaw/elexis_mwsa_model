@@ -1,0 +1,17 @@
+data/train/russian.tsv
+data/train/danish.tsv
+data/train/irish.tsv
+data/train/slovene.tsv
+data/train/english_nuig_binary.tsv
+data/train/bulgarian.tsv
+data/train/estonian.tsv
+data/train/german.tsv
+data/train/serbian.tsv
+data/train/basque.tsv
+data/train/italian.tsv
+data/train/dutch.tsv
+data/train/portuguese.tsv
+data/train/english_nuig.tsv
+data/train/english_kd.tsv
+data/train/hungarian.tsv
+data/train/english.tsv

@@ -1,0 +1,29 @@
+stages:
+  load:
+    cmd: python -m mwsa.load_data data/train english_kd.tsv
+    deps:
+    - data/train/english_kd.tsv
+    - mwsa/load_data.py
+    outs:
+    - mwsa/data/features.pkl
+    - mwsa/data/labels.pkl
+  train:
+    cmd: python -m mwsa.preprocess features.pkl labels.pkl
+    deps:
+    - mwsa/data/features.pkl
+    - mwsa/data/labels.pkl
+    - mwsa/preprocess.py
+    - mwsa/service/model_trainer.py
+    outs:
+    - mwsa/output/models/en.pkl
+    - mwsa/output/metrics/en_cv_score.txt
+  evaluate:
+    cmd: python -m mwsa.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
+    deps:
+    - data/reference_data/english_nuig.tsv
+    - data/test/english_nuig.tsv
+    - mwsa/evaluate.py
+    - mwsa/output/models/en.pkl
+    outs:
+    - mwsa/output/metrics/metrics_en.txt
+    - mwsa/output/predictions/en_predictions.txt
