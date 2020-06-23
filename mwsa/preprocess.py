@@ -11,10 +11,11 @@ if len(sys.argv) != 3:
     logger.error('Arguments error. Usage \n')
     logger.error('\t python preprcess.py features_file labels_file')
 
-with open(sys.argv[1], 'rb') as pickle_file:
+data_dir = 'mwsa/data/'
+with open(data_dir+sys.argv[1], 'rb') as pickle_file:
     features = pickle.load(pickle_file)
 
-with open(sys.argv[2], 'rb') as pickle_file:
+with open(data_dir+sys.argv[2], 'rb') as pickle_file:
     labels = pickle.load(pickle_file)
 
 model_trainer = MwsaModelTrainer()
