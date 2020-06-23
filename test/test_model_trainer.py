@@ -11,7 +11,7 @@ from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, Feat
     CountEachPosTransformer, AvgSynsetCountTransformer, DifferenceInLengthTransformer, \
     ToTargetSimilarityDiffTransformer, MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, \
     TokenCountNormalizedDiffTransformer, SemicolonCountTransformer
-import features
+from mwsa import features
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
 df = pd.DataFrame(data=data)

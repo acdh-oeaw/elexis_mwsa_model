@@ -8,7 +8,7 @@ from sklearn.preprocessing import OneHotEncoder
 from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from mwsa.service.util import SupportedLanguages
-import features
+from mwsa import features
 from nltk.corpus import wordnet as wn
 
 
@@ -321,7 +321,7 @@ class SemicolonCountTransformer(BaseEstimator, TransformerMixin):
         X.loc[:, 'semicol_count1_norm'] = 0.0 if self.semicolon_mean_1 == 0.0 else X['processed_1'].map(lambda doc: self.__count_semicolon(doc))
         X.loc[:, 'semicol_count2_norm'] = 0.0 if self.semicolon_mean_2 == 0.0 else X['processed_2'].map(lambda doc: self.__count_semicolon(doc))
 
-        X.loc[:, features.SEMICOLON_DIFF] = X['semicol_count1_norm']-X['semicol_count2_norm']
+        X.loc[:, features.SEMICOLON_DIFF] = X['semicol_count1_norm'] - X['semicol_count2_norm']
 
         return X
 

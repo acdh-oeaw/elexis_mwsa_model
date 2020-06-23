@@ -7,10 +7,10 @@ import os
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
-from classifier_config import ClassifierConfig
-from feature_extractor import FeatureExtractor
-from model_trainer import ModelTrainer
-from wsa_classifier import WordSenseAlignmentClassifier
+from old.classifier_config import ClassifierConfig
+from old.feature_extractor import FeatureExtractor
+from old.model_trainer import ModelTrainer
+from old.wsa_classifier import WordSenseAlignmentClassifier
 
 
 def configure():

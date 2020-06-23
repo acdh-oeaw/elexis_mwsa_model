@@ -4,15 +4,12 @@ import os
 # warnings.filterwarnings('ignore')
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
-from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
-from classifier_config import ClassifierConfig
-from feature_extractor import FeatureExtractor
-from model_trainer import ModelTrainer, BaseClassifier
-from wsa_classifier import WordSenseAlignmentClassifier
+from old.classifier_config import ClassifierConfig
+from old.feature_extractor import FeatureExtractor
+from old.model_trainer import ModelTrainer
+from old.wsa_classifier import WordSenseAlignmentClassifier
 
 
 def configure():

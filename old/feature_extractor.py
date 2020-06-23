@@ -4,7 +4,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import OneHotEncoder
 from nltk.corpus import wordnet as wn
-import features
+from mwsa import features
 import tensorflow as tf
 import tensorflow_hub as hub
 import numpy as np

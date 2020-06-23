@@ -2,10 +2,10 @@ import pickle
 
 import pandas as pd
 
-from classifier_config import ClassifierConfig
-from feature_extractor import FeatureExtractor
-from model_trainer import ModelTrainer
-from wsa_classifier import WordSenseAlignmentClassifier
+from old.classifier_config import ClassifierConfig
+from old.feature_extractor import FeatureExtractor
+from old.model_trainer import ModelTrainer
+from old.wsa_classifier import WordSenseAlignmentClassifier
 
 german_config = ClassifierConfig('en_core_web_lg', "english", 'data/test', balancing_strategy="split_biggest",
                                  testset_ratio=0.0, with_wordnet=True, dataset='english_nuig', logger = 'en_nuig',is_testdata=True)

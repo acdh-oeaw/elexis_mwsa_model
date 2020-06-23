@@ -7,9 +7,9 @@ import pandas as pd
 import spacy
 from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
-from classifier_config import ClassifierConfig
-from feature_extractor import FeatureExtractor
-from model_trainer import ModelTrainer
+from old.classifier_config import ClassifierConfig
+from old.feature_extractor import FeatureExtractor
+from old.model_trainer import ModelTrainer
 
 
 def has_label(df, label):
