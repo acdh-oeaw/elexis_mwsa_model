@@ -1,7 +1,0 @@
-md5: 87bbba02ae357e9f685813cf0aa49a1e
-outs:
-- md5: 35f7a786f4c1b0bf76e0ff866868c22c
-  path: estonian.tsv
-  cache: true
-  metric: false
-  persist: false

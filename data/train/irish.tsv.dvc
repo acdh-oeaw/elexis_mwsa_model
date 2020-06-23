@@ -1,7 +1,0 @@
-md5: 6e4c9ee930d3d2fca153ab838fd4d7be
-outs:
-- md5: 59ea5aa7bcfb0215a79eb9bd80ea9f60
-  path: irish.tsv
-  cache: true
-  metric: false
-  persist: false

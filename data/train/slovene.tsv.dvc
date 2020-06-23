@@ -1,7 +1,0 @@
-md5: 81d58d787263668b6ca5f8d15f48d27d
-outs:
-- md5: 57fd3c1ce7a6bcb127676452260f953c
-  path: slovene.tsv
-  cache: true
-  metric: false
-  persist: false
