@@ -17,10 +17,11 @@ data_loader = DataLoader()
 data = data_loader.load(file_path, file_name)
 features, labels = data_loader.split_feature_label(data)
 
-feature_filename = 'features.pickle'
+output_dir = 'mwsa/data/'
+feature_filename = output_dir + 'features.pickle'
 with open(feature_filename, 'wb+') as file:
     pickle.dump(features, file)
 
-labels_filename = 'labels.pickle'
+labels_filename = output_dir + 'labels.pickle'
 with open(labels_filename, 'wb+') as file:
     pickle.dump(labels, file)

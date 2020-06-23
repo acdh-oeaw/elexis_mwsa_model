@@ -5,13 +5,13 @@ stages:
     - data/train/english_kd.tsv
     - mwsa/load_data.py
     outs:
-    - features.pickle
-    - labels.pickle
+    - mwsa/data/features.pickle
+    - mwsa/data/labels.pickle
   train:
     cmd: python -m mwsa.preprocess features.pickle labels.pickle
     deps:
-    - features.pickle
-    - labels.pickle
+    - mwsa/data/features.pickle
+    - mwsa/data/labels.pickle
     - mwsa/preprocess.py
     - mwsa/service/model_trainer.py
     outs:
