@@ -9,6 +9,7 @@ from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
 from mwsa.service.util import SupportedLanguages
 import features
+from nltk.corpus import wordnet as wn
 
 
 def lemmatizer(doc, spacy_model):
@@ -168,6 +169,51 @@ class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
         return len(self.__intersection(lemma_1_list, lemma_2_list)) / combined_length
 
 
+class ToTargetSimilarityDiffTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        result = X.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_1']),
+                         axis=1)
+        result2 = X.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_2']),
+                          axis=1)
+        X[features.SIMILARITY_DIFF_TO_TARGET] = result - result2
+
+        return X
+
+    @staticmethod
+    def __calculate_max_similarity(target, spacy_doc):
+        similarities = []
+        for token in spacy_doc:
+            if token.is_stop is False:
+                similarities.append(target.similarity(token))
+        if len(similarities) == 0:
+            return 0.0
+        return max(similarities)
+
+
+class DifferenceInLengthTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def __difference_in_length(col1, col2):
+        return abs(len(col1.split(' ')) - len(col2.split(' ')[0]))
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        X.loc[:, features.LEN_DIFF] = X.apply(
+            lambda row: self.__difference_in_length(row['def1'], row['def2']), axis=1)
+
+        return X
+
+
 class AvgSynsetCountTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
@@ -236,6 +282,56 @@ class CountEachPosTransformer(BaseEstimator, TransformerMixin):
         for pos in pos_counter.columns:
             pos_counter[pos] = preprocessing.scale(pos_counter[pos])
         return pos_counter
+
+
+class TargetWordSynsetCountTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self._tag_map = {'adjective': wn.ADJ,
+                         'adverb': wn.ADV,
+                         'conjunction': None,
+                         'interjection': None,
+                         'noun': wn.NOUN,
+                         'number': None,
+                         'preposition': wn.ADV,
+                         'pronoun': None,
+                         'verb': wn.VERB}
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        X.loc[:, features.TARGET_WORD_SYNSET_COUNT] = X.apply(lambda row: self.__targetword_synset_count(row), axis=1)
+        return X
+
+    def __targetword_synset_count(self, row):
+        return len(wn.synsets(row['word'], self._tag_map[row['pos']]))
+
+
+class MaxDependencyTreeDepthTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        X.loc[:, 'max_depth_deptree_1'] = X['processed_1'].map(lambda doc: self.__max_dep_tree_depth(doc))
+        X.loc[:, 'max_depth_deptree_2'] = X['processed_2'].map(lambda doc: self.__max_dep_tree_depth(doc))
+
+        return X
+
+    def __traverse_to_root(self, token, depth):
+        if token.dep_ == 'ROOT':
+            return depth
+        else:
+            return self.__traverse_to_root(token.head, depth + 1)
+
+    def __max_dep_tree_depth(self, doc):
+        max_deptree_depth = []
+        for token in doc:
+            max_deptree_depth.append(self.__traverse_to_root(token, 0))
+
+        return max(max_deptree_depth)
 
 
 class DiffPosCountTransformer(BaseEstimator, TransformerMixin):

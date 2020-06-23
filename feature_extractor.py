@@ -62,8 +62,6 @@ class ToTargetSimilarityDiffExtractor(BaseFeatureExtractor):
         for token in spacy_doc:
             if token.is_stop is False:
                 similarities.append(target.similarity(token))
-            # else:
-            # print(token.text)
         if len(similarities) == 0:
             return 0.0
         return max(similarities)

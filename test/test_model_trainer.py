@@ -8,7 +8,8 @@ from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
     UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
-    CountEachPosTransformer, AvgSynsetCountTransformer
+    CountEachPosTransformer, AvgSynsetCountTransformer, DifferenceInLengthTransformer, \
+    ToTargetSimilarityDiffTransformer, MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer
 import features
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
@@ -130,6 +131,39 @@ class Test_Transformer:
         transformed = similarity_processor.transform(spacy_processed)
 
         assert features.SIMILARITY in transformed.columns
+
+    def test_diff_in_length_transformer(self, spacy_processed):
+        diff_in_length_transformer = DifferenceInLengthTransformer()
+
+        transformed = diff_in_length_transformer.fit_transform(spacy_processed)
+
+        features.LEN_DIFF in transformed.columns
+
+    def test_to_target_similarity_diff_transformer(self, spacy_processed):
+        to_target_similarity_diff_transformer = ToTargetSimilarityDiffTransformer()
+
+        transformed = to_target_similarity_diff_transformer.fit_transform(spacy_processed)
+
+        assert features.SIMILARITY_DIFF_TO_TARGET in transformed.columns
+        for sim_diff in transformed[features.SIMILARITY_DIFF_TO_TARGET]:
+            assert isinstance(sim_diff, float)
+
+    def test_max_dependency_tree_depth_transformer(self, spacy_processed):
+        max_dependency_tree_depth_transformer = MaxDependencyTreeDepthTransformer()
+
+        transformed = max_dependency_tree_depth_transformer.fit_transform(spacy_processed)
+
+        assert features.MAX_DEPTH_TREE_1 in transformed.columns
+        assert features.MAX_DEPTH_TREE_2 in transformed.columns
+        assert transformed[features.MAX_DEPTH_TREE_1].dtype == int
+
+    def test_target_word_synset_count_transformer(self, spacy_processed):
+        target_word_synset_count_transformer = TargetWordSynsetCountTransformer()
+
+        transformed = target_word_synset_count_transformer.fit_transform(spacy_processed)
+
+        assert features.TARGET_WORD_SYNSET_COUNT in transformed.columns
+        assert transformed[features.TARGET_WORD_SYNSET_COUNT].dtype == int
 
     def test_diff_pos_count(self, spacy_processed):
         diff_pos_counter = DiffPosCountTransformer()

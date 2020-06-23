@@ -5,19 +5,23 @@ from sklearn.pipeline import Pipeline
 from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector, \
     DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, CountEachPosTransformer, \
-    AvgSynsetCountTransformer
+    AvgSynsetCountTransformer, DifferenceInLengthTransformer, ToTargetSimilarityDiffTransformer, \
+    MaxDependencyTreeDepthTransformer
 
 
 class MwsaModelTrainer(object):
     def __init__(self):
-        english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor()),
+        english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(with_wordnet=True)),
                                            ('diff_pos_count', DiffPosCountTransformer()),
                                            ('one_hot_pos', OneHotPosTransformer()),
                                            ('first_word_same', FirstWordSameProcessor()),
                                            ('similarity', SimilarityProcessor()),
                                            ('matching_lemma', MatchingLemmaTransformer()),
-                                           ('pos_count', CountEachPosTransformer()),
+                                           #('pos_count', CountEachPosTransformer()),
                                            ('avg_synset_count', AvgSynsetCountTransformer()),
+                                           ('diff_in_length', DifferenceInLengthTransformer()),
+                                           ('max_depth_tree', MaxDependencyTreeDepthTransformer()),
+                                           ('target_similarity_diff', ToTargetSimilarityDiffTransformer()),
                                            ('feature_selector', FeatureSelector()),
                                            ('random_forest', RandomForestClassifier())])
         self.pipelines = {
