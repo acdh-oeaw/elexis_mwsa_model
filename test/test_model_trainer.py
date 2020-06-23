@@ -9,12 +9,14 @@ from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
     UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
     CountEachPosTransformer, AvgSynsetCountTransformer, DifferenceInLengthTransformer, \
-    ToTargetSimilarityDiffTransformer, MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer
+    ToTargetSimilarityDiffTransformer, MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, \
+    TokenCountNormalizedDiffTransformer, SemicolonCountTransformer
 import features
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
 df = pd.DataFrame(data=data)
-
+data_with_semicolon = {'word': ['test'], 'pos': ['noun'], 'def1': ['test ; definition'], 'def2': ['test ; definition 2']}
+df_with_semicolon = pd.DataFrame(data=data_with_semicolon)
 
 class Test_Mwsa_Model_Trainer:
     # TODO Parameterize this test
@@ -88,6 +90,19 @@ class Test_Transformer:
                             'stopwords_removed_2']
 
         return spacy.transform(df)
+
+    @pytest.fixture
+    def spacy_processed_with_semicolon(self):
+        spacy = SpacyProcessor(lang=SupportedLanguages.English)
+        expected_columns = ['processed_1',
+                            'processed_2',
+                            'word_processed',
+                            'lemmatized_1',
+                            'stopwords_removed_1',
+                            'lemmatized_2',
+                            'stopwords_removed_2']
+
+        return spacy.transform(df_with_semicolon)
 
     def test_count_each_pos_transformer(self, spacy_processed):
         count_pos_transformer = CountEachPosTransformer()
@@ -164,6 +179,54 @@ class Test_Transformer:
 
         assert features.TARGET_WORD_SYNSET_COUNT in transformed.columns
         assert transformed[features.TARGET_WORD_SYNSET_COUNT].dtype == int
+
+    def test_fit_token_count_normalized_diff_transfomer(self, spacy_processed):
+        token_count_normalized_diff_transfomer = TokenCountNormalizedDiffTransformer()
+
+        transformer = token_count_normalized_diff_transfomer.fit(spacy_processed)
+
+        assert transformer.token_count_mean_1 > 0.0
+        assert transformer.token_count_mean_2 > 0.0
+
+    def test_transform_token_count_normalized_diff_transfomer(self, spacy_processed):
+        token_count_normalized_diff_transfomer = TokenCountNormalizedDiffTransformer()
+        transformer = token_count_normalized_diff_transfomer.fit(spacy_processed)
+
+        transformed = transformer.transform(spacy_processed)
+
+        assert features.TOKEN_COUNT_NORM_DIFF in transformed.columns
+        assert transformed[features.TOKEN_COUNT_NORM_DIFF].dtype == float
+
+    def test_fit_semicolon_count_transformer(self, spacy_processed):
+        semicolon_count_transformer = SemicolonCountTransformer()
+
+        transformer = semicolon_count_transformer.fit(spacy_processed)
+
+        assert transformer.semicolon_mean_1 is not None
+        assert transformer.semicolon_mean_2 is not None
+
+    def test_transform_semicolon_count_transformer_na(self, spacy_processed):
+        semicolon_count_transformer = SemicolonCountTransformer()
+        transformer = semicolon_count_transformer.fit(spacy_processed)
+
+        transformed = transformer.transform(spacy_processed)
+
+        assert features.SEMICOLON_DIFF in transformed.columns
+        assert transformed[features.SEMICOLON_DIFF].dtype == float
+        for val in transformed[features.SEMICOLON_DIFF]:
+            assert not pd.isna(val)
+
+    def test_transform_semicolon_count_transformer(self, spacy_processed_with_semicolon):
+        semicolon_count_transformer = SemicolonCountTransformer()
+        transformer = semicolon_count_transformer.fit(spacy_processed_with_semicolon)
+
+        transformed = transformer.transform(spacy_processed_with_semicolon)
+
+        assert features.SEMICOLON_DIFF in transformed.columns
+        assert transformed[features.SEMICOLON_DIFF].dtype.kind in 'if'
+        for val in transformed[features.SEMICOLON_DIFF]:
+            assert not pd.isna(val)
+
 
     def test_diff_pos_count(self, spacy_processed):
         diff_pos_counter = DiffPosCountTransformer()

@@ -5,9 +5,10 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
-from mwsa import SupportedLanguages
 
-from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, FeatureSelector, SimilarityProcessor
+from mwsa.service.util import SupportedLanguages
+from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, FeatureSelector, SimilarityProcessor, \
+    SemicolonCountTransformer
 
 
 def load_data(file_path, is_testdata=False):
@@ -46,12 +47,13 @@ params = {
     'random_forest__n_estimators': [300],
     'random_forest__n_jobs': [5]
 }
-scores = ['precision', 'recall', 'f1']
 spacy_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor()),
                                  ('first_word_same', FirstWordSameProcessor()),
                                  ('similarity', SimilarityProcessor()),
+                                 ('semicolon_diff', SemicolonCountTransformer()),
                                  ('feature_selector', FeatureSelector()),
                                  ('random_forest', RandomForestClassifier())])
+scores = ['precision', 'recall', 'f1']
 
 grid_search = GridSearchCV(spacy_pipeline, param_grid=params,
                            scoring='%s_weighted' % 'f1', cv=5,
@@ -63,5 +65,4 @@ grid_search.fit(english, labels)
 filename = 'english_pipeline.pickle'
 with open(filename, 'wb') as file:
     pickle.dump(grid_search, file)
-print(model)
 

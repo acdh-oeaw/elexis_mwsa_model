@@ -94,7 +94,7 @@ class FirstWordSameProcessor(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
-        X[features.FIRST_WORD_SAME] = X.apply(
+        X.loc[:, features.FIRST_WORD_SAME] = X.apply(
             lambda row: self.__first_word_same(row['def1'], row['def2']), axis=1)
         return X
 
@@ -306,6 +306,49 @@ class TargetWordSynsetCountTransformer(BaseEstimator, TransformerMixin):
     def __targetword_synset_count(self, row):
         return len(wn.synsets(row['word'], self._tag_map[row['pos']]))
 
+class SemicolonCountTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.semicolon_mean_1 = None
+        self.semicolon_mean_2 = None
+
+    def fit(self, X, y=None):
+        self.semicolon_mean_1 = X['processed_1'].map(lambda doc: self.__count_semicolon(doc)).mean()
+        self.semicolon_mean_2 = X['processed_2'].map(lambda doc: self.__count_semicolon(doc)).mean()
+
+        return self
+
+    def transform(self, X, y=None):
+        X.loc[:, 'semicol_count1_norm'] = 0.0 if self.semicolon_mean_1 == 0.0 else X['processed_1'].map(lambda doc: self.__count_semicolon(doc))
+        X.loc[:, 'semicol_count2_norm'] = 0.0 if self.semicolon_mean_2 == 0.0 else X['processed_2'].map(lambda doc: self.__count_semicolon(doc))
+
+        X.loc[:, features.SEMICOLON_DIFF] = X['semicol_count1_norm']-X['semicol_count2_norm']
+
+        return X
+
+    def __count_semicolon(self, doc):
+        return len([token for token in doc if token.text is ';'])
+
+
+class TokenCountNormalizedDiffTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.token_count_mean_1 = None
+        self.token_count_mean_2 = None
+
+    def fit(self, X, y=None):
+        self.token_count_mean_1 = X['processed_1'].map(lambda doc: len(doc)).mean()
+        self.token_count_mean_2 = X['processed_2'].map(lambda doc: len(doc)).mean()
+
+        return self
+
+    def transform(self, X, y=None):
+        X['token_count_1'] = X['processed_1'].map(lambda doc: len(doc))
+        X['token_count_2'] = X['processed_2'].map(lambda doc: len(doc))
+
+        X['token_count_1_norm'] = X['token_count_1']/self.token_count_mean_1
+        X['token_count_2_norm'] = X['token_count_2']/self.token_count_mean_2
+        X.loc[:, 'token_count_norm_diff'] = X['token_count_1_norm']-X['token_count_2_norm']
+
+        return X
 
 class MaxDependencyTreeDepthTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):

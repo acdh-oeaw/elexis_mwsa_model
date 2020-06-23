@@ -6,7 +6,7 @@ from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector, \
     DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, CountEachPosTransformer, \
     AvgSynsetCountTransformer, DifferenceInLengthTransformer, ToTargetSimilarityDiffTransformer, \
-    MaxDependencyTreeDepthTransformer
+    MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, SemicolonCountTransformer
 
 
 class MwsaModelTrainer(object):
@@ -21,7 +21,9 @@ class MwsaModelTrainer(object):
                                            ('avg_synset_count', AvgSynsetCountTransformer()),
                                            ('diff_in_length', DifferenceInLengthTransformer()),
                                            ('max_depth_tree', MaxDependencyTreeDepthTransformer()),
+                                           ('target_word_synset_count', TargetWordSynsetCountTransformer()),
                                            ('target_similarity_diff', ToTargetSimilarityDiffTransformer()),
+                                           ('semicolon_diff', SemicolonCountTransformer()),
                                            ('feature_selector', FeatureSelector()),
                                            ('random_forest', RandomForestClassifier())])
         self.pipelines = {
