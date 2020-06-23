@@ -5,6 +5,9 @@ For each language we build distinct pipelines consisting of following components
 For languages supported by Spacy, spacy components are used for typical nlp tasks such as tokenization, 
 dependency parsing, stopwords removal, etc. For other languages, Stanford NLP components are used.
 
+Spacy Models used are listed here.
+https://spacy.io/usage/models
+
 2. Feature Extraction
 
 3. Classifier

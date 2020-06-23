@@ -19,7 +19,7 @@ colorama==0.3.9
 configobj==5.0.6
 cycler==0.10.0
 cymem==2.0.3
-de-core-news-md==2.2.5
+https://github.com/explosion/spacy-models/releases/download/de_core_news_md-2.3.0/de_core_news_md-2.3.0.tar.gz
 decorator==4.4.1
 defusedxml==0.6.0
 dill==0.3.1.1
@@ -27,7 +27,7 @@ distro==1.5.0
 docutils==0.15.2
 dpath==2.0.1
 dvc==1.0.0a10
-en-core-web-lg==2.2.5
+https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.2.5/en_core_web_lg-2.2.5.tar.gz
 entrypoints==0.3
 flatten-json==0.1.7
 flufl.lock==3.2
@@ -84,7 +84,7 @@ nanotime==0.5.2
 nbconvert==5.6.1
 nbformat==5.0.4
 networkx==2.3
-nl-core-news-sm==2.2.5
+https://github.com/explosion/spacy-models/releases/download/nl_core_news_sm-2.3.0/nl_core_news_sm-2.3.0.tar.gz
 nltk==3.3
 notebook==6.0.3
 np==1.0.2
