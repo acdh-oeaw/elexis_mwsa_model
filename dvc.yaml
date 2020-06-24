@@ -49,3 +49,15 @@ stages:
     metrics:
     - mwsa/output/metrics/de_cv_score.txt:
         cache: false
+  evaluate_de:
+    cmd: python -m mwsa.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
+    deps:
+    - data/reference_data/german.tsv
+    - data/test/german.tsv
+    - mwsa/evaluate.py
+    - mwsa/output/models/de.pkl
+    outs:
+    - mwsa/output/predictions/de_predictions.txt
+    metrics:
+    - mwsa/output/metrics/metrics_de.txt:
+        cache: false
