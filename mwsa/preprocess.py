@@ -11,6 +11,8 @@ if len(sys.argv) != 3:
     logger.error('Arguments error. Usage \n')
     logger.error('\t python preprcess.py features_file labels_file')
 
+lang = sys.argv[3]
+
 data_dir = 'mwsa/data/'
 with open(data_dir+sys.argv[1], 'rb') as pickle_file:
     features = pickle.load(pickle_file)
@@ -20,10 +22,10 @@ with open(data_dir+sys.argv[2], 'rb') as pickle_file:
 
 model_trainer = MwsaModelTrainer()
 
-pipeline = model_trainer.build_pipeline(SupportedLanguages.English)
+pipeline = model_trainer.build_pipeline(SupportedLanguages(lang))
 
 params = {
-    'preprocess__lang':[SupportedLanguages.English],
+    'preprocess__lang':[SupportedLanguages(lang)],
     'random_forest__bootstrap': [True],
     'random_forest__class_weight': ['balanced', 'balanced_subsample'],
     'random_forest__max_depth': [30],
@@ -38,10 +40,10 @@ grid_search = model_trainer.configure_grid_serach(pipeline, params)
 
 model = grid_search.fit(features, labels)
 
-model_filename = 'mwsa/output/models/'+SupportedLanguages.English.value+'.pkl'
+model_filename = 'mwsa/output/models/'+lang+'.pkl'
 with open(model_filename, 'wb+') as file:
     pickle.dump(model, file)
 
-score_filename = 'mwsa/output/metrics/'+SupportedLanguages.English.value+'_cv_score.txt'
+score_filename = 'mwsa/output/metrics/'+lang+'_cv_score.txt'
 with open(score_filename, 'w+') as fd:
     fd.write('{:4f}\n'.format(model.best_score_))

@@ -37,7 +37,8 @@ class UnsupportedSpacyModelError(Error):
 
 class SpacyProcessor(BaseEstimator, TransformerMixin):
     spacy_models = {
-        SupportedLanguages.English: 'en_core_web_lg'
+        SupportedLanguages.English: 'en_core_web_lg',
+        SupportedLanguages.German: 'de_core_news_md'
     }
 
     def __init__(self, lang=None, with_wordnet=False):
@@ -111,7 +112,7 @@ class SimilarityProcessor(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
-        X[features.SIMILARITY] = X.apply(
+        X.loc[:, features.SIMILARITY] = X.apply(
             lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
         return X
 

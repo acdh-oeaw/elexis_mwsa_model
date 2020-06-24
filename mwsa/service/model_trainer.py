@@ -2,6 +2,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 
+from mwsa import features
 from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector, \
     DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, CountEachPosTransformer, \
@@ -26,8 +27,18 @@ class MwsaModelTrainer(object):
                                            ('semicolon_diff', SemicolonCountTransformer()),
                                            ('feature_selector', FeatureSelector()),
                                            ('random_forest', RandomForestClassifier())])
+        german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor()),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          (features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
         self.pipelines = {
-            SupportedLanguages.English: english_pipeline
+            SupportedLanguages.English: english_pipeline,
+            SupportedLanguages.German: german_pipeline
         }
 
     def train(self, features, labels, grid_search):
