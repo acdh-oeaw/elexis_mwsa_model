@@ -16,7 +16,8 @@ stages:
     - mwsa/preprocess.py
     - mwsa/service/model_trainer.py
     metrics:
-    - mwsa/output/metrics/en_cv_score.txt
+    - mwsa/output/metrics/en_cv_score.txt:
+        cache: false
     outs:
     - mwsa/output/models/en.pkl
   evaluate:
@@ -26,8 +27,10 @@ stages:
     - data/test/english_nuig.tsv
     - mwsa/evaluate.py
     - mwsa/output/models/en.pkl
+    metrics:
+    - mwsa/output/metrics/metrics_en.txt:
+        cache: false
     outs:
-    - mwsa/output/metrics/metrics_en.txt
     - mwsa/output/predictions/en_predictions.txt
   load_german:
     cmd: python -m mwsa.load_data data/train/ german.tsv
