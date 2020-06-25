@@ -10,7 +10,7 @@ from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, Feat
     UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
     CountEachPosTransformer, AvgSynsetCountTransformer, DifferenceInLengthTransformer, \
     ToTargetSimilarityDiffTransformer, MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, \
-    TokenCountNormalizedDiffTransformer, SemicolonCountTransformer
+    TokenCountNormalizedDiffTransformer, SemicolonCountTransformer, TfidfTransformer
 from mwsa import features
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
@@ -227,6 +227,23 @@ class Test_Transformer:
         for val in transformed[features.SEMICOLON_DIFF]:
             assert not pd.isna(val)
 
+    def test_tfidf_transformer_fit(self, spacy_processed):
+        tfidf_transformer = TfidfTransformer()
+
+        fitted = tfidf_transformer.fit(spacy_processed)
+
+        assert fitted.tfidf_vectorizer is not None
+
+    def test_tfidf_transformer_transform(self, spacy_processed):
+        tfidf_transformer = TfidfTransformer()
+        tfidf_transformer.fit(spacy_processed)
+
+        transformed = tfidf_transformer.transform(spacy_processed)
+
+        assert features.TFIDF_COS in transformed.columns
+        assert transformed[features.TFIDF_COS].dtype.kind in 'if'
+        for val in transformed[features.TFIDF_COS]:
+            assert not pd.isna(val)
 
     def test_diff_pos_count(self, spacy_processed):
         diff_pos_counter = DiffPosCountTransformer()

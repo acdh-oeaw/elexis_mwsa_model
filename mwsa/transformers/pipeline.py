@@ -4,6 +4,8 @@ import logging
 
 from sklearn import preprocessing
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import OneHotEncoder
 from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 
@@ -138,6 +140,45 @@ class OneHotPosTransformer(BaseEstimator, TransformerMixin):
                                          columns=self.encoder.categories_[0])
 
         return pd.concat([X, encoded_dataframe], axis=1)
+
+class TfidfTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.tfidf_vectorizer = None
+
+    def fit(self, X, y=None):
+        col1 = X['stopwords_removed_1']
+        col2 = X['stopwords_removed_2']
+
+        values = self.__join_definitions(col1, col2)
+        self.tfidf_vectorizer = TfidfVectorizer().fit(values)
+
+        return self
+
+    def transform(self, X, y=None):
+        col1 = X['stopwords_removed_1']
+        col2 = X['stopwords_removed_2']
+
+        tfidf_holder = pd.DataFrame()
+        tfidf_holder['col1'] = col1
+        tfidf_holder['col2'] = col2
+
+        values = self.__join_definitions(col1, col2)
+
+        tfidf_matrix = self.tfidf_vectorizer.transform(values)
+        split_index = int(tfidf_matrix.get_shape()[0] / 2)
+        tfidf_array = tfidf_matrix.todense()
+
+        tfidf_holder['tfidf_1'] = [row.tolist()[0] for row in tfidf_array[0:split_index]]
+        tfidf_holder['tfidf_2'] = [row.tolist()[0] for row in tfidf_array[split_index:]]
+
+        X[features.TFIDF_COS] = tfidf_holder.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0, 1], axis=1)
+
+        return X
+
+    @staticmethod
+    def __join_definitions(col1, col2):
+        joined_definitions = pd.concat([col1, col2])
+        return joined_definitions.apply(lambda tokens: ' '.join(tokens)).values.T
 
 
 class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
