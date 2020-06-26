@@ -7,34 +7,37 @@ from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, FirstWordSameProcessor, SimilarityProcessor, FeatureSelector, \
     DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, CountEachPosTransformer, \
     AvgSynsetCountTransformer, DifferenceInLengthTransformer, ToTargetSimilarityDiffTransformer, \
-    MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, SemicolonCountTransformer, TfidfTransformer
+    MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, SemicolonCountTransformer, TfidfTransformer, \
+    CosineTransformer, JaccardTransformer
 
 
 class MwsaModelTrainer(object):
     def __init__(self):
         english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(with_wordnet=True)),
-                                           ('diff_pos_count', DiffPosCountTransformer()),
-                                           ('one_hot_pos', OneHotPosTransformer()),
-                                           ('first_word_same', FirstWordSameProcessor()),
-                                           ('similarity', SimilarityProcessor()),
-                                           ('matching_lemma', MatchingLemmaTransformer()),
+                                           (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                           (features.ONE_HOT_POS, OneHotPosTransformer()),
+                                           (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                           (features.SIMILARITY, SimilarityProcessor()),
+                                           (features.LEMMA_MATCH, MatchingLemmaTransformer()),
                                            #('pos_count', CountEachPosTransformer()),
-                                           #('avg_synset_count', AvgSynsetCountTransformer()),
-                                           #('diff_in_length', DifferenceInLengthTransformer()),
-                                           #('max_depth_tree', MaxDependencyTreeDepthTransformer()),
-                                           #('target_word_synset_count', TargetWordSynsetCountTransformer()),
-                                           #('target_similarity_diff', ToTargetSimilarityDiffTransformer()),
-                                           #('semicolon_diff', SemicolonCountTransformer()),
+                                           (features.SYNSET_COUNT_DIFF, AvgSynsetCountTransformer()),
+                                           (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                           (features.MAX_DEPTH_TREE_DIFF, MaxDependencyTreeDepthTransformer()),
+                                           (features.TARGET_WORD_SYNSET_COUNT, TargetWordSynsetCountTransformer()),
+                                           (features.SIMILARITY_DIFF_TO_TARGET, ToTargetSimilarityDiffTransformer()),
+                                           (features.SEMICOLON_DIFF, SemicolonCountTransformer()),
                                            ('feature_selector', FeatureSelector()),
                                            ('random_forest', RandomForestClassifier())])
         german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor()),
                                           (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
-                                          #(features.SIMILARITY, SimilarityProcessor()),
-                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
-                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
-                                          #(features.LEMMA_MATCH, MatchingLemmaTransformer()),
-                                          #(features.LEN_DIFF, DifferenceInLengthTransformer()),
-                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          (features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          (features.TFIDF_COS, TfidfTransformer()),
+                                          (features.JACCARD, JaccardTransformer()),
+                                          (features.COSINE, CosineTransformer()),
                                           ('feature_selector', FeatureSelector()),
                                           ('random_forest', RandomForestClassifier())])
         self.pipelines = {

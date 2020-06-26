@@ -10,7 +10,8 @@ from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, Feat
     UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
     CountEachPosTransformer, AvgSynsetCountTransformer, DifferenceInLengthTransformer, \
     ToTargetSimilarityDiffTransformer, MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, \
-    TokenCountNormalizedDiffTransformer, SemicolonCountTransformer, TfidfTransformer
+    TokenCountNormalizedDiffTransformer, SemicolonCountTransformer, TfidfTransformer, CosineTransformer, \
+    JaccardTransformer
 from mwsa import features
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
@@ -245,12 +246,36 @@ class Test_Transformer:
         for val in transformed[features.TFIDF_COS]:
             assert not pd.isna(val)
 
+
+    def test_cosine_similarity_transform(self, spacy_processed):
+        cosine_transformaer = CosineTransformer()
+        fitted = cosine_transformaer.fit(spacy_processed)
+
+        transformed = cosine_transformaer.transform(spacy_processed)
+
+        assert features.COSINE in transformed.columns
+        assert transformed[features.COSINE].dtype.kind in 'if'
+        for val in transformed[features.COSINE]:
+            assert val > 0.0
+
+
+    def test_jaccard_transform(self, spacy_processed):
+        jaccard_transformer = JaccardTransformer()
+
+        transformed = jaccard_transformer.transform(spacy_processed)
+
+        assert features.JACCARD in transformed.columns
+        assert transformed[features.JACCARD].dtype.kind in 'if'
+        for val in transformed[features.JACCARD]:
+            assert val > 0.0
+
+
     def test_diff_pos_count(self, spacy_processed):
-        diff_pos_counter = DiffPosCountTransformer()
+            diff_pos_counter = DiffPosCountTransformer()
 
-        transformed = diff_pos_counter.transform(spacy_processed)
+            transformed = diff_pos_counter.transform(spacy_processed)
 
-        assert features.POS_COUNT_DIFF in transformed.columns
+            assert features.POS_COUNT_DIFF in transformed.columns
 
     def test_feature_selector(self, spacy_processed):
         feature_selector = FeatureSelector()

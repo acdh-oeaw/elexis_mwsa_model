@@ -4,7 +4,7 @@ import logging
 
 from sklearn import preprocessing
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import OneHotEncoder
 from spacy_wordnet.wordnet_annotator import WordnetAnnotator
@@ -40,7 +40,7 @@ class UnsupportedSpacyModelError(Error):
 class SpacyProcessor(BaseEstimator, TransformerMixin):
     spacy_models = {
         SupportedLanguages.English: 'en_core_web_lg',
-        SupportedLanguages.German: 'de_core_news_md'
+        SupportedLanguages.German: 'de_core_news_sm'
     }
 
     def __init__(self, lang=None, with_wordnet=False):
@@ -418,6 +418,50 @@ class MaxDependencyTreeDepthTransformer(BaseEstimator, TransformerMixin):
 
         return max(max_deptree_depth)
 
+class JaccardTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        X.loc[:, features.JACCARD] = X.apply(
+            lambda row: self.__get_jaccard_sim(row['def1'], row['def2']), axis=1)
+
+        return X
+    @staticmethod
+    def __get_jaccard_sim(str1, str2):
+        a = set(str1.split())
+        b = set(str2.split())
+        c = a.intersection(b)
+        return float(len(c)) / (len(a) + len(b) - len(c))
+
+
+class CosineTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        X.loc[:, features.COSINE] = X.apply(
+            lambda row: self.__cosine(row['def1'], row['def2']), axis=1)
+        return X
+
+    def __cosine(self, col1, col2):
+        return self.__get_cosine_sim(col1, col2)[0, 1]
+
+    def __get_cosine_sim(self, *strs):
+        vectors = [t for t in self.__get_vectors(*strs)]
+        return cosine_similarity(vectors)
+
+    def __get_vectors(self, *strs):
+        text = [t for t in strs]
+        vectorizer = CountVectorizer(text)
+        vectorizer.fit(text)
+        return vectorizer.transform(text).toarray()
 
 class DiffPosCountTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):
