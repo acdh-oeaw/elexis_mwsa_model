@@ -11,6 +11,15 @@ test:
     - pip install -r requirements.txt
     - pytest -o log_cli=true  test/
 
+dvc:
+  stage: train
+  script:
+    - dvc repro
+  artifacts:
+    paths:
+      - mwsa/data/output/models/de.pkl
+      - mwsa/data/output/models/en.pkl
+    expire_in: 0
 #staging:
 #  stage: deploy
 #  script:
