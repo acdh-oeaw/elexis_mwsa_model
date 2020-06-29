@@ -12,7 +12,7 @@ test:
     - pytest -o log_cli=true  test/
 
 dvc:
-  stage: train
+  stage: test
   script:
     - dvc repro
   artifacts:
