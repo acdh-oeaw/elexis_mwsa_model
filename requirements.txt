@@ -84,7 +84,6 @@ nanotime==0.5.2
 nbconvert==5.6.1
 nbformat==5.0.4
 networkx==2.3
-https://github.com/explosion/spacy-models/releases/download/nl_core_news_sm-2.3.0/nl_core_news_sm-2.3.0.tar.gz
 nltk==3.3
 notebook==6.0.3
 np==1.0.2
