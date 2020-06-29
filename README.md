@@ -30,3 +30,8 @@ DVC stages are managed in dvc.yaml and were added by running dvc commands as bel
 
 <code>dvc run -n evaluate -f evaluate.dvc -d mwsa/evaluate.py -d mwsa/output/models/en.pkl -d data/test/english_nuig.tsv -d data/reference_data/english_nuig.tsv -o mwsa/output/metrics/metrics_en.txt -o mwsa/output/predictions/en_predictions.txt python -m mwsa.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt</code>
 
+# Evaluation Metrics
+Evaluation metrics can be viewed with
+<code>dvc metrics show</code>
+If metrics files were changed, the difference can be seen with
+<code>dvc metrics diff</code>
