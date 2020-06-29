@@ -36,8 +36,8 @@ class MwsaModelTrainer(object):
                                           (features.LEMMA_MATCH, MatchingLemmaTransformer()),
                                           (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                           (features.TFIDF_COS, TfidfTransformer()),
-                                          (features.JACCARD, JaccardTransformer()),
-                                          (features.COSINE, CosineTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
                                           ('feature_selector', FeatureSelector()),
                                           ('random_forest', RandomForestClassifier())])
         self.pipelines = {
