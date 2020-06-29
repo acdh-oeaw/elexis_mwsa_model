@@ -1,16 +1,21 @@
+import pprint
+import sys
 import unittest
 
 from pandas import DataFrame
 import pandas as pd
-
+sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
+sys.path.append('/Users/seungbinyim/Development/repos/elexis/data/train')
 from mwsa.service.data_loader import DataLoader
+pprint.pprint(sys.path)
+sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
 
 
 class DataLoaderTest(unittest.TestCase):
     def test_load_data(self):
         data_loader = DataLoader()
         file_name = 'english_nuig.tsv'
-        directory = '../data/train'
+        directory = 'data/train'
 
         data = data_loader.load(directory, file_name)
 

@@ -1,5 +1,6 @@
 import pprint
 import sys
+sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
 import pandas as pd
 import pytest
 from pandas import DataFrame
@@ -16,7 +17,6 @@ from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, Feat
 from mwsa import features
 
 pprint.pprint(sys.path)
-sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
 
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
 df = pd.DataFrame(data=data)
