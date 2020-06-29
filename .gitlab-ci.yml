@@ -12,6 +12,7 @@ test:
 dvc:
   stage: test
   script:
+    - python
     - import nltk
     - nltk.download('wordnet')
     - pip install dvc==1.0.2
