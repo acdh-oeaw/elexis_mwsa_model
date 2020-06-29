@@ -18,14 +18,6 @@ class DataLoaderTest(unittest.TestCase):
         for col in ['word', 'pos', 'def1', 'def2', 'relation']:
             self.assertIn(col, data.columns)
 
-    def test_not_existing_data_raise_exception(self):
-        data_loader = DataLoader()
-        file_name = 'engdfdlish_nuig'
-        directory = '../data/train'
-
-        with self.assertRaises(FileNotFoundError):
-            data = data_loader.load(directory, file_name)
-
     def test_feature_label_split(self):
         data_loader = DataLoader()
         data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2'], 'relation':['exact']}

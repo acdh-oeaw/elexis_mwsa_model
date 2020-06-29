@@ -1,9 +1,10 @@
+import pprint
+import sys
 import pandas as pd
 import pytest
 from pandas import DataFrame
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
-
 from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
 from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
@@ -14,12 +15,17 @@ from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, Feat
     JaccardTransformer
 from mwsa import features
 
+pprint.pprint(sys.path)
+sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
+
 data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
 df = pd.DataFrame(data=data)
-data_with_semicolon = {'word': ['test'], 'pos': ['noun'], 'def1': ['test ; definition'], 'def2': ['test ; definition 2']}
+data_with_semicolon = {'word': ['test'], 'pos': ['noun'], 'def1': ['test ; definition'],
+                       'def2': ['test ; definition 2']}
 df_with_semicolon = pd.DataFrame(data=data_with_semicolon)
 
-class Test_Mwsa_Model_Trainer:
+
+class TestMwsaModelTrainer:
     # TODO Parameterize this test
     def test_build_pipeline(self):
         model_trainer = MwsaModelTrainer()
@@ -32,7 +38,6 @@ class Test_Mwsa_Model_Trainer:
     def test_configure_grid_search(self):
         trainer = MwsaModelTrainer()
         pipeline = trainer.build_pipeline(SupportedLanguages.English)
-        data = {'word': ['test'], 'pos': ['noun'], 'def1': ['test definition'], 'def2': ['test definition 2']}
         params = {
             'preprocess__lang': [SupportedLanguages.English],
             'random_forest__bootstrap': [True],
@@ -64,44 +69,30 @@ class Test_Mwsa_Model_Trainer:
         trainer = MwsaModelTrainer()
         pipeline = trainer.build_pipeline(SupportedLanguages.English)
         grid_search = trainer.configure_grid_serach(pipeline, params, cv=2)
-        data = {'word': ['test', 'test2', 'test3', 'test4', 'test5'],
-                'pos': ['noun', 'noun', 'noun', 'noun', 'noun'],
-                'def1': ['test definition', 'test def 2', 'test def 3', 'test def 4', 'test def 5'],
-                'def2': ['test definition 2', 'test def 2', 'test def 3', 'test def 4', 'test def 5'],
-                'relation': ['exact', 'none', 'exact', 'related', 'broader']}
-        df = pd.DataFrame(data=data)
-        labels = df['relation']
+        test_data = {'word': ['test', 'test2', 'test3', 'test4', 'test5'],
+                     'pos': ['noun', 'noun', 'noun', 'noun', 'noun'],
+                     'def1': ['test definition', 'test def 2', 'test def 3', 'test def 4', 'test def 5'],
+                     'def2': ['test definition 2', 'test def 2', 'test def 3', 'test def 4', 'test def 5'],
+                     'relation': ['exact', 'none', 'exact', 'related', 'broader']}
+        test_df = pd.DataFrame(data=test_data)
+        labels = test_df['relation']
 
-        model = trainer.train(df, labels, grid_search)
+        model = trainer.train(test_df, labels, grid_search)
 
         assert model
         assert model.best_estimator_
 
 
-class Test_Transformer:
+class TestTransformer:
     @pytest.fixture
     def spacy_processed(self):
         spacy = SpacyProcessor(lang=SupportedLanguages.English)
-        expected_columns = ['processed_1',
-                            'processed_2',
-                            'word_processed',
-                            'lemmatized_1',
-                            'stopwords_removed_1',
-                            'lemmatized_2',
-                            'stopwords_removed_2']
 
         return spacy.transform(df)
 
     @pytest.fixture
     def spacy_processed_with_semicolon(self):
         spacy = SpacyProcessor(lang=SupportedLanguages.English)
-        expected_columns = ['processed_1',
-                            'processed_2',
-                            'word_processed',
-                            'lemmatized_1',
-                            'stopwords_removed_1',
-                            'lemmatized_2',
-                            'stopwords_removed_2']
 
         return spacy.transform(df_with_semicolon)
 
@@ -153,7 +144,7 @@ class Test_Transformer:
 
         transformed = diff_in_length_transformer.fit_transform(spacy_processed)
 
-        features.LEN_DIFF in transformed.columns
+        assert features.LEN_DIFF in transformed.columns
 
     def test_to_target_similarity_diff_transformer(self, spacy_processed):
         to_target_similarity_diff_transformer = ToTargetSimilarityDiffTransformer()
@@ -246,10 +237,9 @@ class Test_Transformer:
         for val in transformed[features.TFIDF_COS]:
             assert not pd.isna(val)
 
-
     def test_cosine_similarity_transform(self, spacy_processed):
         cosine_transformaer = CosineTransformer()
-        fitted = cosine_transformaer.fit(spacy_processed)
+        cosine_transformaer.fit(spacy_processed)
 
         transformed = cosine_transformaer.transform(spacy_processed)
 
@@ -257,7 +247,6 @@ class Test_Transformer:
         assert transformed[features.COSINE].dtype.kind in 'if'
         for val in transformed[features.COSINE]:
             assert val > 0.0
-
 
     def test_jaccard_transform(self, spacy_processed):
         jaccard_transformer = JaccardTransformer()
@@ -269,13 +258,12 @@ class Test_Transformer:
         for val in transformed[features.JACCARD]:
             assert val > 0.0
 
-
     def test_diff_pos_count(self, spacy_processed):
-            diff_pos_counter = DiffPosCountTransformer()
+        diff_pos_counter = DiffPosCountTransformer()
 
-            transformed = diff_pos_counter.transform(spacy_processed)
+        transformed = diff_pos_counter.transform(spacy_processed)
 
-            assert features.POS_COUNT_DIFF in transformed.columns
+        assert features.POS_COUNT_DIFF in transformed.columns
 
     def test_feature_selector(self, spacy_processed):
         feature_selector = FeatureSelector()
@@ -290,7 +278,7 @@ class Test_Transformer:
             assert col not in selected.columns
 
 
-class Test_Spacy:
+class TestSpacy:
     def test_spacy_transformer_IT(self):
         spacy = SpacyProcessor(lang=SupportedLanguages.English)
         expected_columns = ['processed_1',
@@ -310,7 +298,7 @@ class Test_Spacy:
             assert col in transformed
 
     def test_unsupported_spacy_model(self):
-        spacy = SpacyProcessor(SupportedLanguages.German)
+        spacy = SpacyProcessor(SupportedLanguages.Basque)
 
         with pytest.raises(UnsupportedSpacyModelError):
-            transformed = spacy.transform(df)
+            spacy.transform(df)
