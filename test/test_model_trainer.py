@@ -1,6 +1,6 @@
 import pprint
 import sys
-sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
+sys.path.append('../mwsa_model')
 import pandas as pd
 import pytest
 from pandas import DataFrame
