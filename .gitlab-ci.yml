@@ -12,9 +12,9 @@ test:
 dvc:
   stage: test
   script:
-    - python nltk_install.py
     - pip install dvc==1.0.2
     - pip install -r requirements.txt
+    - python nltk_install.py
     - dvc repro
   artifacts:
     paths:
