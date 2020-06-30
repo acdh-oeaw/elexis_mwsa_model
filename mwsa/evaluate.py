@@ -8,6 +8,7 @@ from sklearn.metrics import f1_score
 from mwsa.service.data_loader import DataLoader
 
 logger = logging.getLogger('evaluate')
+logger.setLevel(logging.INFO)
 
 if len(sys.argv) != 5:
     logger.error('Arguments error. Usage \n')

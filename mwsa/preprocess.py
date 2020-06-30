@@ -6,6 +6,8 @@ from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
 
 logger = logging.getLogger('preprocess')
+logger.setLevel(logging.INFO)
+
 
 if len(sys.argv) != 3:
     logger.error('Arguments error. Usage \n')

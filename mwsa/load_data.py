@@ -13,6 +13,7 @@ def load_data(file_path, file_name):
 
 
 logger = logging.getLogger('load_data')
+logger.setLevel(logging.INFO)
 logger.info("Loading data")
 
 if len(sys.argv) != 3:
