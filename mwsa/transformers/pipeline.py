@@ -39,7 +39,7 @@ class UnsupportedSpacyModelError(Error):
 
 class SpacyProcessor(BaseEstimator, TransformerMixin):
     spacy_models = {
-        SupportedLanguages.English: 'en_core_web_lg',
+        SupportedLanguages.English: 'en_core_web_md',
         SupportedLanguages.German: 'de_core_news_sm'
     }
 
