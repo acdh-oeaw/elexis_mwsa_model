@@ -3,8 +3,15 @@ import sys
 import pickle
 from pathlib import Path
 
-from mwsa.service.data_loader import DataLoader
+from pandas.core.common import SettingWithCopyWarning
 
+from mwsa.service.data_loader import DataLoader
+import warnings
+warnings.filterwarnings(
+    action='ignore',
+    category=SettingWithCopyWarning,
+    module=r'.*'
+)
 
 def load_data(file_path, file_name):
     data_loader = DataLoader()
@@ -23,7 +30,10 @@ if len(sys.argv) != 3:
 file_path = sys.argv[1]
 file_name = sys.argv[2]
 
-features, labels = load_data(file_path, file_name)
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    features, labels = load_data(file_path, file_name)
 
 output_dir = 'mwsa/data/'
 Path(output_dir).mkdir(parents=True, exist_ok=True)

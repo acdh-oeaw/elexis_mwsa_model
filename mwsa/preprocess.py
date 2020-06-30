@@ -2,8 +2,17 @@ import logging
 import pickle
 import sys
 
+from pandas.core.common import SettingWithCopyWarning
+
 from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
+import warnings
+
+warnings.filterwarnings(
+    action='ignore',
+    category=SettingWithCopyWarning,
+    module=r'.*'
+)
 
 logger = logging.getLogger('preprocess')
 logger.setLevel(logging.INFO)
@@ -40,7 +49,9 @@ params = {
 
 grid_search = model_trainer.configure_grid_serach(pipeline, params)
 
-model = grid_search.fit(features, labels)
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    model = grid_search.fit(features, labels)
 
 model_filename = 'mwsa/output/models/'+lang+'.pkl'
 with open(model_filename, 'wb+') as file:

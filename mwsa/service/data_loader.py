@@ -1,7 +1,7 @@
 import logging
 
 import pandas as pd
-
+pd.options.mode.chained_assignment = None
 
 class DataLoader(object):
     def __init__(self):

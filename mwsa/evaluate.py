@@ -1,11 +1,18 @@
 import logging
 import pickle
 import sys
+import warnings
 
 import pandas as pd
+from pandas.core.common import SettingWithCopyWarning
 from sklearn.metrics import f1_score
 
 from mwsa.service.data_loader import DataLoader
+warnings.filterwarnings(
+    action='ignore',
+    category=SettingWithCopyWarning,
+    module=r'.*'
+)
 
 logger = logging.getLogger('evaluate')
 logger.setLevel(logging.INFO)
@@ -28,13 +35,15 @@ file = 'mwsa/output/models/' + model
 with open(file, 'rb') as model_file:
     model = pickle.load(model_file)
 
-data_loader = DataLoader()
-testdata = data_loader.load('data/test', test_data_file, testdata=True)
-reference_labels = data_loader.load('data/reference_data', test_data_file)['relation']
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    data_loader = DataLoader()
+    testdata = data_loader.load('data/test', test_data_file, testdata=True)
+    reference_labels = data_loader.load('data/reference_data', test_data_file)['relation']
 
-predicted = model.predict(testdata)
-predicted_series = pd.Series(predicted)
-testdata['relation'] = predicted_series
+    predicted = model.predict(testdata)
+    predicted_series = pd.Series(predicted)
+    testdata['relation'] = predicted_series
 
 f1 = f1_score(reference_labels, testdata['relation'], average='weighted')
 
