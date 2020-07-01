@@ -51,7 +51,7 @@ class MwsaModelTrainer(object):
     def build_pipeline(self, lang):
         return self.pipelines[lang]
 
-    def configure_grid_serach(self, pipeline, params, score='f1', cv=5, n_jobs=-1, verbose=1):
+    def configure_grid_serach(self, pipeline, params, score='f1', cv=5, n_jobs=4, verbose=1):
         return GridSearchCV(pipeline, param_grid=params,
                             scoring='%s_weighted' % 'f1', cv=cv,
                             n_jobs=n_jobs, verbose=verbose)
