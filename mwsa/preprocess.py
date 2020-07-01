@@ -7,6 +7,7 @@ from pandas.core.common import SettingWithCopyWarning
 from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
 import warnings
+from pathlib import Path
 
 warnings.filterwarnings(
     action='ignore',
@@ -57,10 +58,17 @@ with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     model = grid_search.fit(features, labels)
 
+
 model_filename = 'mwsa/output/models/'+lang+'.pkl'
+path = Path(model_filename)
+path.parent.mkdir(parents=True, exist_ok=True)
+
 with open(model_filename, 'wb+') as file:
     pickle.dump(model, file)
 
 score_filename = 'mwsa/output/metrics/'+lang+'_cv_score.txt'
+path = Path(score_filename)
+path.parent.mkdir(parents=True, exist_ok=True)
+
 with open(score_filename, 'w+') as fd:
     fd.write('{:4f}\n'.format(model.best_score_))
