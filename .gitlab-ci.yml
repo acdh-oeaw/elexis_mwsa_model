@@ -13,8 +13,8 @@ dvc:
     - dvc repro
   artifacts:
     paths:
-      - mwsa/data/output/models/de.pkl
-      - mwsa/data/output/models/en.pkl
+      - mwsa/output/models/de.pkl
+      - mwsa/output/models/en.pkl
     expire_in: 4 weeks
 
 test:
