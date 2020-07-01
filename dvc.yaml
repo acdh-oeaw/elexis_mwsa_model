@@ -8,8 +8,7 @@ stages:
     - mwsa/data/features_english_kd.tsv.pkl
     - mwsa/data/labels_english_kd.tsv.pkl
   train:
-    cmd: python -m mwsa.preprocess features_english_kd.tsv.pkl labels_english_kd.tsv.pkl
-      en
+    cmd: python -m mwsa.preprocess features_english_kd.tsv.pkl labels_english_kd.tsv.pkl en
     deps:
     - mwsa/data/features_english_kd.tsv.pkl
     - mwsa/data/labels_english_kd.tsv.pkl

@@ -3,14 +3,8 @@ stages:
   - test
   - deploy
 
-test:
-  stage: test
-  script:
-    - pip install -r requirements.txt
-    - pytest -o log_cli=true  test/
-
 dvc:
-  stage: test
+  stage: build
   script:
     - pip install dvc==1.0.2
     - pip install -r requirements.txt
@@ -21,6 +15,15 @@ dvc:
       - mwsa/data/output/models/de.pkl
       - mwsa/data/output/models/en.pkl
     expire_in: 4 weeks
+
+test:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - python nltk_install.py
+    - pytest -o log_cli=true  test/
+
+
 #staging:
 #  stage: deploy
 #  script:

@@ -17,10 +17,14 @@ warnings.filterwarnings(
 logger = logging.getLogger('preprocess')
 logger.setLevel(logging.INFO)
 
+print(len(sys.argv))
+for arg in sys.argv:
+    print(arg)
 
-if len(sys.argv) != 3:
+
+if len(sys.argv) != 4:
     logger.error('Arguments error. Usage \n')
-    logger.error('\t python preprcess.py features_file labels_file')
+    logger.error('\t python preprcess.py features_file labels_file language')
 
 lang = sys.argv[3]
 
