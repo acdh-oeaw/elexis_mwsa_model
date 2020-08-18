@@ -25,6 +25,17 @@ test:
     - pytest -o log_cli=true  test/
 
 
+deploy:
+  stage: deploy
+  script:
+    - curl https://sdk.cloud.google.com | bash
+    - exec -l $SHELL
+    - echo $GOOGLE_SERVICE_ACCOUNT_FILE > /tmp/$CI_PIPELINE_ID.json
+    - gcloud init
+    - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
+    - gsutil cp mwsa/output/models/* gs://elexis_mwsa_models
+
+
 #staging:
 #  stage: deploy
 #  script:

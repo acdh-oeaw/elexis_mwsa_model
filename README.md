@@ -32,7 +32,7 @@ DVC stages are managed in dvc.yaml and were added by running dvc commands as bel
 
 # Evaluation Metrics
 Evaluation metrics can be viewed with
-
+zu
 * <code>dvc metrics show</code>
 
 If metrics files were changed, the difference can be seen with
