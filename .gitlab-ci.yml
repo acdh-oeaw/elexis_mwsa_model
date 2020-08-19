@@ -30,7 +30,6 @@ deploy:
   stage: deploy
   script:
     - echo $GOOGLE_SERVICE_ACCOUNT_FILE > /tmp/$CI_PIPELINE_ID.json
-    - gcloud init
     - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
     - gsutil cp mwsa/output/models/* gs://elexis_mwsa_models
 
