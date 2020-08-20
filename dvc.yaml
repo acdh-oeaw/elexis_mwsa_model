@@ -19,6 +19,7 @@ stages:
         cache: false
     outs:
     - mwsa/output/models/en.pkl
+    - mwsa/output/models/en.joblib
   evaluate:
     cmd: python -m mwsa.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
     deps:

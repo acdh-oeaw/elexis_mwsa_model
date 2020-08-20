@@ -3,6 +3,7 @@ import pickle
 import sys
 
 from pandas.core.common import SettingWithCopyWarning
+from sklearn.externals import joblib
 
 from mwsa.service.model_trainer import MwsaModelTrainer
 from mwsa.service.util import SupportedLanguages
@@ -65,6 +66,13 @@ path.parent.mkdir(parents=True, exist_ok=True)
 
 with open(model_filename, 'wb+') as file:
     pickle.dump(model, file)
+
+joblib_filename = 'mwsa/output/models/'+lang+'.joblib'
+path = Path(joblib_filename)
+path.parent.mkdir(parents=True, exist_ok=True)
+
+with open(joblib_filename, 'wb+') as file:
+    joblib.dump(model, file)
 
 score_filename = 'mwsa/output/metrics/'+lang+'_cv_score.txt'
 path = Path(score_filename)
