@@ -31,35 +31,35 @@ stages:
         cache: false
     outs:
     - mwsa/output/predictions/en_predictions.txt
-#  load_german:
-#    cmd: python -m mwsa.load_data data/train/ german.tsv
-#    deps:
-#    - data/train/german.tsv
-#    - mwsa/load_data.py
-#    outs:
-#    - mwsa/data/features_german.tsv.pkl
-#    - mwsa/data/labels_german.tsv.pkl
-#  train_de:
-#    cmd: python -m mwsa.preprocess features_german.tsv.pkl labels_german.tsv.pkl de
-#    deps:
-#    - mwsa/data/features_german.tsv.pkl
-#    - mwsa/data/labels_german.tsv.pkl
-#    - mwsa/preprocess.py
-#    - mwsa/service/model_trainer.py
-#    outs:
-#    - mwsa/output/models/de.pkl
-#    metrics:
-#    - mwsa/output/metrics/de_cv_score.txt:
-#        cache: false
-#  evaluate_de:
-#    cmd: python -m mwsa.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
-#    deps:
-#    - data/reference_data/german.tsv
-#    - data/test/german.tsv
-#    - mwsa/evaluate.py
-#    - mwsa/output/models/de.pkl
-#    outs:
-#    - mwsa/output/predictions/de_predictions.txt
-#    metrics:
-#    - mwsa/output/metrics/metrics_de.txt:
-#        cache: false
+  load_german:
+    cmd: python -m mwsa.load_data data/train/ german.tsv
+    deps:
+    - data/train/german.tsv
+    - mwsa/load_data.py
+    outs:
+    - mwsa/data/features_german.tsv.pkl
+    - mwsa/data/labels_german.tsv.pkl
+  train_de:
+    cmd: python -m mwsa.preprocess features_german.tsv.pkl labels_german.tsv.pkl de
+    deps:
+    - mwsa/data/features_german.tsv.pkl
+    - mwsa/data/labels_german.tsv.pkl
+    - mwsa/preprocess.py
+    - mwsa/service/model_trainer.py
+    outs:
+    - mwsa/output/models/de.pkl
+    metrics:
+    - mwsa/output/metrics/de_cv_score.txt:
+        cache: false
+  evaluate_de:
+    cmd: python -m mwsa.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
+    deps:
+    - data/reference_data/german.tsv
+    - data/test/german.tsv
+    - mwsa/evaluate.py
+    - mwsa/output/models/de.pkl
+    outs:
+    - mwsa/output/predictions/de_predictions.txt
+    metrics:
+    - mwsa/output/metrics/metrics_de.txt:
+        cache: false
