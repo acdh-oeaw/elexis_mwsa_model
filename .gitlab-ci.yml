@@ -15,6 +15,7 @@ dvc:
     paths:
       - mwsa/output/models/de.pkl
       - mwsa/output/models/en.pkl
+      - mwsa/output/models/en.joblib
     expire_in: 4 weeks
 
 test:
