@@ -29,7 +29,7 @@ deploy:
   image: google/cloud-sdk
   stage: deploy
   script:
-    - echo $$GOOGLE_SERVICE_ACCOUNT_FILE
+    - echo $GOOGLE_SERVICE_ACCOUNT_FILE
     - echo $GOOGLE_SERVICE_ACCOUNT_FILE > /tmp/$CI_PIPELINE_ID.json
     - ls /tmp
     - cat /tmp/$CI_PIPELINE_ID.json
