@@ -18,7 +18,7 @@ https://spacy.io/usage/models
 
 ### Evaluation
 
-## Managing Pipeline and Reproducibility
+## Managing Pipeline and Reproducibility.
 
 DVC(https://dvc.org/doc/start) is used for defining and version controlling the pipeline.
 
