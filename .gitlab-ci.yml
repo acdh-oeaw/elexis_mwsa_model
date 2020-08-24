@@ -13,9 +13,9 @@ dvc:
     - dvc repro
   artifacts:
     paths:
-      - mwsa/output/models/de.pkl
-      - mwsa/output/models/en.pkl
-      - mwsa/output/models/en.joblib
+      - mwsa_model/output/models/de.pkl
+      - mwsa_model/output/models/en.pkl
+      - mwsa_model/output/models/en.joblib
     expire_in: 4 weeks
 
 test:
@@ -35,7 +35,7 @@ deploy:
     - ls /tmp
     - cat /tmp/$CI_PIPELINE_ID.json
     - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
-    - gsutil cp mwsa/output/models/* gs://elexis_mwsa_models
+    - gsutil cp mwsa_model/output/models/* gs://elexis_mwsa_models
 
 
 #staging:
