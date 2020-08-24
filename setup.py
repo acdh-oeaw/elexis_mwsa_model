@@ -1,10 +1,11 @@
-from distutils.core import setup
+import setuptools
 
-setup(name='mwsa_pipeline',
+setuptools.setup(
+      name='mwsa_model',
       version=1.0,
-      description='Elexis Monolingual Word Sense Disambiguation Pipeline',
       author='Seung-bin Yim, Lenka Bajcetic',
       author_email='seung-bin.yim@oeaw.ac.at',
+      description="Elexis Monolingual Word sense alignment models",
       url='https://github.com/acdh-oeaw/elexis_mwsa_model',
-      py_modules=['mwsa.transformers.pipeline'],
+      packages=['mwsa_model.transformers','mwsa_model.service']
 )

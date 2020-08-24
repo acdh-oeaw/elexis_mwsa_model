@@ -6,15 +6,15 @@ import pytest
 from pandas import DataFrame
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
-from mwsa.service.model_trainer import MwsaModelTrainer
-from mwsa.service.util import SupportedLanguages
-from mwsa.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
+from mwsa_model.service.model_trainer import MwsaModelTrainer
+from mwsa_model.service.util import SupportedLanguages
+from mwsa_model.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
     UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
     CountEachPosTransformer, AvgSynsetCountTransformer, DifferenceInLengthTransformer, \
     ToTargetSimilarityDiffTransformer, MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, \
     TokenCountNormalizedDiffTransformer, SemicolonCountTransformer, TfidfTransformer, CosineTransformer, \
     JaccardTransformer
-from mwsa import features
+from mwsa_model import features
 
 pprint.pprint(sys.path)
 
