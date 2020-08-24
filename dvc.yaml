@@ -1,66 +1,66 @@
 stages:
   load:
-    cmd: python -m mwsa.load_data data/train english_kd.tsv
+    cmd: python -m mwsa_model.load_data data/train english_kd.tsv
     deps:
     - data/train/english_kd.tsv
-    - mwsa/load_data.py
+    - mwsa_model/load_data.py
     outs:
-    - mwsa/data/features_english_kd.tsv.pkl
-    - mwsa/data/labels_english_kd.tsv.pkl
+    - mwsa_model/data/features_english_kd.tsv.pkl
+    - mwsa_model/data/labels_english_kd.tsv.pkl
   train:
-    cmd: python -m mwsa.preprocess features_english_kd.tsv.pkl labels_english_kd.tsv.pkl en
+    cmd: python -m mwsa_model.preprocess features_english_kd.tsv.pkl labels_english_kd.tsv.pkl en
     deps:
-    - mwsa/data/features_english_kd.tsv.pkl
-    - mwsa/data/labels_english_kd.tsv.pkl
-    - mwsa/preprocess.py
-    - mwsa/service/model_trainer.py
+    - mwsa_model/data/features_english_kd.tsv.pkl
+    - mwsa_model/data/labels_english_kd.tsv.pkl
+    - mwsa_model/preprocess.py
+    - mwsa_model/service/model_trainer.py
     metrics:
-    - mwsa/output/metrics/en_cv_score.txt:
+    - mwsa_model/output/metrics/en_cv_score.txt:
         cache: false
     outs:
-    - mwsa/output/models/en.pkl
-    - mwsa/output/models/en.joblib
+    - mwsa_model/output/models/en.pkl
+    - mwsa_model/output/models/en.joblib
   evaluate:
-    cmd: python -m mwsa.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
+    cmd: python -m mwsa_model.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
     deps:
     - data/reference_data/english_nuig.tsv
     - data/test/english_nuig.tsv
-    - mwsa/evaluate.py
-    - mwsa/output/models/en.pkl
+    - mwsa_model/evaluate.py
+    - mwsa_model/output/models/en.pkl
     metrics:
-    - mwsa/output/metrics/metrics_en.txt:
+    - mwsa_model/output/metrics/metrics_en.txt:
         cache: false
     outs:
-    - mwsa/output/predictions/en_predictions.txt
+    - mwsa_model/output/predictions/en_predictions.txt
 #  load_german:
-#    cmd: python -m mwsa.load_data data/train/ german.tsv
+#    cmd: python -m mwsa_model.load_data data/train/ german.tsv
 #    deps:
 #    - data/train/german.tsv
-#    - mwsa/load_data.py
+#    - mwsa_model/load_data.py
 #    outs:
-#    - mwsa/data/features_german.tsv.pkl
-#    - mwsa/data/labels_german.tsv.pkl
+#    - mwsa_model/data/features_german.tsv.pkl
+#    - mwsa_model/data/labels_german.tsv.pkl
 #  train_de:
-#    cmd: python -m mwsa.preprocess features_german.tsv.pkl labels_german.tsv.pkl de
+#    cmd: python -m mwsa_model.preprocess features_german.tsv.pkl labels_german.tsv.pkl de
 #    deps:
-#    - mwsa/data/features_german.tsv.pkl
-#    - mwsa/data/labels_german.tsv.pkl
-#    - mwsa/preprocess.py
-#    - mwsa/service/model_trainer.py
+#    - mwsa_model/data/features_german.tsv.pkl
+#    - mwsa_model/data/labels_german.tsv.pkl
+#    - mwsa_model/preprocess.py
+#    - mwsa_model/service/model_trainer.py
 #    outs:
-#    - mwsa/output/models/de.pkl
+#    - mwsa_model/output/models/de.pkl
 #    metrics:
-#    - mwsa/output/metrics/de_cv_score.txt:
+#    - mwsa_model/output/metrics/de_cv_score.txt:
 #        cache: false
 #  evaluate_de:
-#    cmd: python -m mwsa.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
+#    cmd: python -m mwsa_model.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
 #    deps:
 #    - data/reference_data/german.tsv
 #    - data/test/german.tsv
-#    - mwsa/evaluate.py
-#    - mwsa/output/models/de.pkl
+#    - mwsa_model/evaluate.py
+#    - mwsa_model/output/models/de.pkl
 #    outs:
-#    - mwsa/output/predictions/de_predictions.txt
+#    - mwsa_model/output/predictions/de_predictions.txt
 #    metrics:
-#    - mwsa/output/metrics/metrics_de.txt:
+#    - mwsa_model/output/metrics/metrics_de.txt:
 #        cache: false
