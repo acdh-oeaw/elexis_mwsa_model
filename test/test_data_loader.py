@@ -15,7 +15,7 @@ class DataLoaderTest(unittest.TestCase):
     def test_load_data(self):
         data_loader = DataLoader()
         file_name = 'english_nuig.tsv'
-        directory = '../data/train'
+        directory = 'data/train'
 
         data = data_loader.load(directory, file_name)
 
