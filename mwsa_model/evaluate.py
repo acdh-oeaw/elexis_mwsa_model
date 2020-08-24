@@ -26,12 +26,12 @@ test_data_file = sys.argv[2]
 metrics_file = sys.argv[3]
 prediction_file = sys.argv[4]
 
-output_dir = 'mwsa/output/'
+output_dir = 'mwsa_model/output/'
 model_output_dir = output_dir + 'models/'
 metrics_output_dir = output_dir + 'metrics/'
 predictions_output_dir = output_dir + 'predictions/'
 
-file = 'mwsa/output/models/' + model
+file = 'mwsa_model/output/models/' + model
 with open(file, 'rb') as model_file:
     model = pickle.load(model_file)
 

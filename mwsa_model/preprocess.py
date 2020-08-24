@@ -30,7 +30,7 @@ if len(sys.argv) != 4:
 
 lang = sys.argv[3]
 
-data_dir = 'mwsa/data/'
+data_dir = 'mwsa_model/data/'
 with open(data_dir+sys.argv[1], 'rb') as pickle_file:
     features = pickle.load(pickle_file)
 
