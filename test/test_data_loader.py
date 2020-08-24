@@ -4,11 +4,11 @@ import unittest
 
 from pandas import DataFrame
 import pandas as pd
-#sys.path.append('../mwsa_model')
-#sys.path.append('../data/train')
+sys.path.append('../mwsa_model')
+sys.path.append('../data/train')
 from mwsa_model.service.data_loader import DataLoader
 pprint.pprint(sys.path)
-#sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
+sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
 
 
 class DataLoaderTest(unittest.TestCase):
