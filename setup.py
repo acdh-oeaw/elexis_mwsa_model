@@ -8,5 +8,9 @@ setuptools.setup(
       description="Elexis Monolingual Word sense alignment models",
       url='https://github.com/acdh-oeaw/elexis_mwsa_model',
       packages=['mwsa_model.transformers','mwsa_model.service'],
-      install_requires=['spacy-wordnet==0.0.4']
+      install_requires=[
+            'spacy-wordnet==0.0.4',
+            'https://github.com/explosion/spacy-models/releases/download/en_core_web_md-2.2.5/en_core_web_md-2.2.5.tar.gz',
+            'https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-2.2.5/de_core_news_sm-2.2.5.tar.gz'
+      ]
 )
