@@ -7,5 +7,6 @@ setuptools.setup(
       author_email='seung-bin.yim@oeaw.ac.at',
       description="Elexis Monolingual Word sense alignment models",
       url='https://github.com/acdh-oeaw/elexis_mwsa_model',
-      packages=['mwsa_model.transformers','mwsa_model.service']
+      packages=['mwsa_model.transformers','mwsa_model.service'],
+      install_requires=['spacy-wordnet==0.0.4']
 )
