@@ -15,7 +15,7 @@ class MwsaModelTrainer(object):
     def __init__(self):
         english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(with_wordnet=True)),
                                            (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
-                                           (features.ONE_HOT_POS, OneHotPosTransformer()),
+                                           #(features.ONE_HOT_POS, OneHotPosTransformer()),
                                            (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
                                            (features.SIMILARITY, SimilarityProcessor()),
                                            (features.LEMMA_MATCH, MatchingLemmaTransformer()),
@@ -25,7 +25,7 @@ class MwsaModelTrainer(object):
                                            (features.MAX_DEPTH_TREE_DIFF, MaxDependencyTreeDepthTransformer()),
                                            (features.TARGET_WORD_SYNSET_COUNT, TargetWordSynsetCountTransformer()),
                                            (features.SIMILARITY_DIFF_TO_TARGET, ToTargetSimilarityDiffTransformer()),
-                                           (features.SEMICOLON_DIFF, SemicolonCountTransformer()),
+                                           #(features.SEMICOLON_DIFF, SemicolonCountTransformer()),
                                            ('feature_selector', FeatureSelector()),
                                            ('random_forest', RandomForestClassifier())])
         german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor()),
@@ -53,4 +53,4 @@ class MwsaModelTrainer(object):
 
     def configure_grid_serach(self, pipeline, params, score='f1', cv=5, verbose=1):
         return GridSearchCV(pipeline, param_grid=params,
-                            scoring='%s_weighted' % 'f1', cv=cv, verbose=verbose)
+                            scoring='%s_weighted' % 'f1', cv=cv, verbose=verbose, n_jobs=-1)
