@@ -20,7 +20,7 @@ class MwsaModelTrainer(object):
                                            (features.SIMILARITY, SimilarityProcessor()),
                                            (features.LEMMA_MATCH, MatchingLemmaTransformer()),
                                            #('pos_count', CountEachPosTransformer()),
-                                           (features.SYNSET_COUNT_DIFF, AvgSynsetCountTransformer()),
+                                           #(features.SYNSET_COUNT_DIFF, AvgSynsetCountTransformer()),
                                            (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                            (features.MAX_DEPTH_TREE_DIFF, MaxDependencyTreeDepthTransformer()),
                                            (features.TARGET_WORD_SYNSET_COUNT, TargetWordSynsetCountTransformer()),

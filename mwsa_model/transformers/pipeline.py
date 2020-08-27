@@ -1,6 +1,7 @@
 import pandas as pd
 pd.options.mode.chained_assignment = None
 import spacy
+import time
 import logging
 
 from sklearn import preprocessing
@@ -14,6 +15,9 @@ from mwsa_model.service.util import SupportedLanguages
 from mwsa_model import features
 from nltk.corpus import wordnet as wn
 
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 def lemmatizer(doc, spacy_model):
     doc = [token.lemma_ for token in doc if token.lemma_ != '-PRON-']
@@ -53,6 +57,7 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0 = time.time()
         try:
             nlp = spacy.load(self.spacy_models[self.lang])
             if self.with_wordnet:
@@ -68,6 +73,9 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
         X.loc[:, 'lemmatized_2'] = X['processed_2'].map(lambda doc: lemmatizer(doc, nlp))
         X.loc[:, 'stopwords_removed_2'] = X['lemmatized_2'].map(remove_stopwords)
         self.logger.debug(X)
+
+        logger.debug('SpacyProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
         return X
 
 
@@ -79,12 +87,14 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         for col in X.columns:
             if col in ['word', 'pos', 'def1', 'def2',
                        'processed_1', 'processed_2', 'word_processed',
                        'lemmatized_1', 'stopwords_removed_1', 'lemmatized_2',
                        'stopwords_removed_2', 'relation']:
                 X = X.drop(col, axis=1)
+        logger.debug('FeatureSelector.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -98,8 +108,11 @@ class FirstWordSameProcessor(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         X.loc[:, features.FIRST_WORD_SAME] = X.apply(
             lambda row: self.__first_word_same(row['def1'], row['def2']), axis=1)
+        logger.debug('FirstWordSameProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
         return X
 
     @staticmethod
@@ -115,8 +128,11 @@ class SimilarityProcessor(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         X.loc[:, features.SIMILARITY] = X.apply(
             lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
+        logger.debug('SimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
         return X
 
 
@@ -133,12 +149,14 @@ class OneHotPosTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         pos_numpy = X['pos'].to_numpy().reshape(-1, 1)
         encoded_array = self.encoder.transform(pos_numpy).toarray()
 
         encoded_dataframe = pd.DataFrame(data=encoded_array[0:, 0:],
                                          index=X.index,
                                          columns=self.encoder.categories_[0])
+        logger.debug('OneHotPosTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return pd.concat([X, encoded_dataframe], axis=1)
 
@@ -156,6 +174,7 @@ class TfidfTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         col1 = X['stopwords_removed_1']
         col2 = X['stopwords_removed_2']
 
@@ -173,6 +192,7 @@ class TfidfTransformer(BaseEstimator, TransformerMixin):
         tfidf_holder['tfidf_2'] = [row.tolist()[0] for row in tfidf_array[split_index:]]
 
         X[features.TFIDF_COS] = tfidf_holder.apply(lambda row: cosine_similarity([row['tfidf_1'], row['tfidf_2']])[0, 1], axis=1)
+        logger.debug('TfidfTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -201,6 +221,7 @@ class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
         return lst3
 
     def __matching_lemma_normalized(self, doc1, doc2):
+        t0=time.time()
         lemma_1_list = [token.text for token in doc1 if token.is_stop is not True and token.is_punct is not True]
         lemma_2_list = [token.text for token in doc2 if token.is_stop is not True and token.is_punct is not True]
 
@@ -208,6 +229,8 @@ class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
 
         if combined_length == 0:
             return 0.0
+
+        logger.debug('MatchingLemmaTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return len(self.__intersection(lemma_1_list, lemma_2_list)) / combined_length
 
@@ -220,11 +243,14 @@ class ToTargetSimilarityDiffTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         result = X.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_1']),
                          axis=1)
         result2 = X.apply(lambda row: self.__calculate_max_similarity(row['word_processed'][0], row['processed_2']),
                           axis=1)
         X[features.SIMILARITY_DIFF_TO_TARGET] = result - result2
+
+        logger.debug('ToTargetSimilarityDiffTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -251,8 +277,11 @@ class DifferenceInLengthTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         X.loc[:, features.LEN_DIFF] = X.apply(
             lambda row: self.__difference_in_length(row['def1'], row['def2']), axis=1)
+
+        logger.debug('DifferenceInLengthTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -265,9 +294,12 @@ class AvgSynsetCountTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         X.loc[:, 'synset_count_1'] = X['processed_1'].map(lambda doc: self.__count_avg_synset(doc))
         X.loc[:, 'synset_count_2'] = X['processed_2'].map(lambda doc: self.__count_avg_synset(doc))
         X.loc[:, features.SYNSET_COUNT_DIFF] = X['synset_count_1'] - X['synset_count_2']
+
+        logger.debug('AvgSynsetCountTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -296,9 +328,12 @@ class CountEachPosTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         result = self.__count_pos(X['processed_1'], X['processed_2'])
         for pos in set(result.columns):
             X.loc[:, pos] = result[pos]
+
+        logger.debug('CountEachPosTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -343,7 +378,12 @@ class TargetWordSynsetCountTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
+
         X.loc[:, features.TARGET_WORD_SYNSET_COUNT] = X.apply(lambda row: self.__targetword_synset_count(row), axis=1)
+
+        logger.debug('TargetWordSynsetCountTransformer.transform() took %.3f seconds' % (time.time() - t0))
+
         return X
 
     def __targetword_synset_count(self, row):
@@ -361,10 +401,13 @@ class SemicolonCountTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
         X.loc[:, 'semicol_count1_norm'] = 0.0 if self.semicolon_mean_1 == 0.0 else X['processed_1'].map(lambda doc: self.__count_semicolon(doc))
         X.loc[:, 'semicol_count2_norm'] = 0.0 if self.semicolon_mean_2 == 0.0 else X['processed_2'].map(lambda doc: self.__count_semicolon(doc))
 
         X.loc[:, features.SEMICOLON_DIFF] = X['semicol_count1_norm'] - X['semicol_count2_norm']
+
+        logger.debug('SemicolonCountTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -384,12 +427,16 @@ class TokenCountNormalizedDiffTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
+
         X['token_count_1'] = X['processed_1'].map(lambda doc: len(doc))
         X['token_count_2'] = X['processed_2'].map(lambda doc: len(doc))
 
         X['token_count_1_norm'] = X['token_count_1']/self.token_count_mean_1
         X['token_count_2_norm'] = X['token_count_2']/self.token_count_mean_2
         X.loc[:, 'token_count_norm_diff'] = X['token_count_1_norm']-X['token_count_2_norm']
+
+        logger.debug('TokenCountNormalizedDiffTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -401,8 +448,12 @@ class MaxDependencyTreeDepthTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
+
         X.loc[:, 'max_depth_deptree_1'] = X['processed_1'].map(lambda doc: self.__max_dep_tree_depth(doc))
         X.loc[:, 'max_depth_deptree_2'] = X['processed_2'].map(lambda doc: self.__max_dep_tree_depth(doc))
+
+        logger.debug('MaxDependencyTreeDepthTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -427,8 +478,12 @@ class JaccardTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
+
         X.loc[:, features.JACCARD] = X.apply(
             lambda row: self.__get_jaccard_sim(row['def1'], row['def2']), axis=1)
+
+        logger.debug('JaccardTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
     @staticmethod
@@ -447,8 +502,13 @@ class CosineTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
+
         X.loc[:, features.COSINE] = X.apply(
             lambda row: self.__cosine(row['def1'], row['def2']), axis=1)
+
+        logger.debug('CosineTransformer.transform() took %.3f seconds' % (time.time() - t0))
+
         return X
 
     def __cosine(self, col1, col2):
@@ -472,9 +532,11 @@ class DiffPosCountTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0= time.time()
         X.loc[:, features.POS_COUNT_DIFF] = X.apply(
             lambda row: self.__diff_pos_count(row['processed_1'], row['processed_2']),
             axis=1)
+        logger.debug('DiffPosCountTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
