@@ -19,6 +19,9 @@ logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
+nlp = spacy.load('en_core_web_md')
+nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
+
 def lemmatizer(doc, spacy_model):
     doc = [token.lemma_ for token in doc if token.lemma_ != '-PRON-']
     return spacy_model.make_doc(u' '.join(doc))
@@ -58,16 +61,10 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
 
     def transform(self, X, y=None):
         t0 = time.time()
-        try:
-            nlp = spacy.load(self.spacy_models[self.lang])
-            if self.with_wordnet:
-                nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
-        except KeyError:
-            raise UnsupportedSpacyModelError("No Spacy Language model exists for language " + str(self.lang))
 
-        X.loc[:, 'processed_1'] = X['def1'].map(nlp)
-        X.loc[:, 'processed_2'] = X['def2'].map(nlp)
-        X.loc[:, 'word_processed'] = X['word'].map(nlp)
+        X.loc[:, 'processed_1'] = pd.Series(list(nlp.pipe(iter(X['def1']), batch_size=1000)))
+        X.loc[:, 'processed_2'] = pd.Series(list(nlp.pipe(iter(X['def2']), batch_size=1000)))
+        X.loc[:, 'word_processed'] = pd.Series(list(nlp.pipe(iter(X['word']), batch_size=1000)))
         X.loc[:, 'lemmatized_1'] = X['processed_1'].map(lambda doc: lemmatizer(doc, nlp))
         X.loc[:, 'stopwords_removed_1'] = X['lemmatized_1'].map(remove_stopwords)
         X.loc[:, 'lemmatized_2'] = X['processed_2'].map(lambda doc: lemmatizer(doc, nlp))
@@ -210,8 +207,12 @@ class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
+        t0=time.time()
+
         X[features.LEMMA_MATCH] = X.apply(
             lambda row: self.__matching_lemma_normalized(row['lemmatized_1'], row['lemmatized_2']), axis=1)
+
+        logger.debug('MatchingLemmaTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
 
@@ -221,7 +222,6 @@ class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
         return lst3
 
     def __matching_lemma_normalized(self, doc1, doc2):
-        t0=time.time()
         lemma_1_list = [token.text for token in doc1 if token.is_stop is not True and token.is_punct is not True]
         lemma_2_list = [token.text for token in doc2 if token.is_stop is not True and token.is_punct is not True]
 
@@ -230,7 +230,6 @@ class MatchingLemmaTransformer(BaseEstimator, TransformerMixin):
         if combined_length == 0:
             return 0.0
 
-        logger.debug('MatchingLemmaTransformer.transform() took %.3f seconds' % (time.time() - t0))
 
         return len(self.__intersection(lemma_1_list, lemma_2_list)) / combined_length
 
