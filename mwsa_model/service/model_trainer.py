@@ -13,22 +13,22 @@ from mwsa_model.transformers.pipeline import SpacyProcessor, FirstWordSameProces
 
 class MwsaModelTrainer(object):
     def __init__(self):
-        english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(with_wordnet=True)),
+        english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.English, with_wordnet=False)),
                                            (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
-                                           (features.ONE_HOT_POS, OneHotPosTransformer()),
+                                           #(features.ONE_HOT_POS, OneHotPosTransformer()),
                                            (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
                                            (features.SIMILARITY, SimilarityProcessor()),
                                            (features.LEMMA_MATCH, MatchingLemmaTransformer()),
                                            #('pos_count', CountEachPosTransformer()),
-                                           (features.SYNSET_COUNT_DIFF, AvgSynsetCountTransformer()),
+                                           #(features.SYNSET_COUNT_DIFF, AvgSynsetCountTransformer()),
                                            (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                            (features.MAX_DEPTH_TREE_DIFF, MaxDependencyTreeDepthTransformer()),
-                                           (features.TARGET_WORD_SYNSET_COUNT, TargetWordSynsetCountTransformer()),
+                                           #(features.TARGET_WORD_SYNSET_COUNT, TargetWordSynsetCountTransformer()),
                                            (features.SIMILARITY_DIFF_TO_TARGET, ToTargetSimilarityDiffTransformer()),
-                                           (features.SEMICOLON_DIFF, SemicolonCountTransformer()),
+                                           #(features.SEMICOLON_DIFF, SemicolonCountTransformer()),
                                            ('feature_selector', FeatureSelector()),
                                            ('random_forest', RandomForestClassifier())])
-        german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor()),
+        german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.German)),
                                           (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
                                           (features.SIMILARITY, SimilarityProcessor()),
                                           (features.POS_COUNT_DIFF, DiffPosCountTransformer()),

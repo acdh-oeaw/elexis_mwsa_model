@@ -3,13 +3,16 @@ import sys
 sys.path.append('../mwsa_model')
 import pandas as pd
 import pytest
-from pandas import DataFrame
+import unittest
+import pickle
+
+from pathlib import Path
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 from mwsa_model.service.model_trainer import MwsaModelTrainer
 from mwsa_model.service.util import SupportedLanguages
 from mwsa_model.transformers.pipeline import SpacyProcessor, SimilarityProcessor, FeatureSelector, \
-    UnsupportedSpacyModelError, DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
+    DiffPosCountTransformer, OneHotPosTransformer, MatchingLemmaTransformer, \
     CountEachPosTransformer, AvgSynsetCountTransformer, DifferenceInLengthTransformer, \
     ToTargetSimilarityDiffTransformer, MaxDependencyTreeDepthTransformer, TargetWordSynsetCountTransformer, \
     TokenCountNormalizedDiffTransformer, SemicolonCountTransformer, TfidfTransformer, CosineTransformer, \
@@ -25,7 +28,7 @@ data_with_semicolon = {'word': ['test'], 'pos': ['noun'], 'def1': ['test ; defin
 df_with_semicolon = pd.DataFrame(data=data_with_semicolon)
 
 
-class TestMwsaModelTrainer:
+class TestMwsaModelTrainer(unittest.TestCase):
     # TODO Parameterize this test
     def test_build_pipeline(self):
         model_trainer = MwsaModelTrainer()
@@ -47,7 +50,7 @@ class TestMwsaModelTrainer:
             'random_forest__min_samples_leaf': [3, 5],
             'random_forest__min_samples_split': [2],
             'random_forest__n_estimators': [300],
-            'random_forest__n_jobs': [5]
+            'random_forest__n_jobs': [-1]
         }
 
         model = trainer.configure_grid_serach(pipeline, params)
@@ -64,7 +67,7 @@ class TestMwsaModelTrainer:
             'random_forest__min_samples_leaf': [1],
             'random_forest__min_samples_split': [2],
             'random_forest__n_estimators': [2],
-            'random_forest__n_jobs': [5]
+            'random_forest__n_jobs': [-1]
         }
         trainer = MwsaModelTrainer()
         pipeline = trainer.build_pipeline(SupportedLanguages.English)
@@ -79,11 +82,18 @@ class TestMwsaModelTrainer:
 
         model = trainer.train(test_df, labels, grid_search)
 
+        model_filename = 'en.pkl'
+        path = Path(model_filename)
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(model_filename, 'wb+') as file:
+            pickle.dump(model, file)
+
         assert model
         assert model.best_estimator_
 
 
-class TestTransformer:
+class TestTransformer():
     @pytest.fixture
     def spacy_processed(self):
         spacy = SpacyProcessor(lang=SupportedLanguages.English)
@@ -277,28 +287,3 @@ class TestTransformer:
         for col in columns:
             assert col not in selected.columns
 
-
-class TestSpacy:
-    def test_spacy_transformer_IT(self):
-        spacy = SpacyProcessor(lang=SupportedLanguages.English)
-        expected_columns = ['processed_1',
-                            'processed_2',
-                            'word_processed',
-                            'lemmatized_1',
-                            'stopwords_removed_1',
-                            'lemmatized_2',
-                            'stopwords_removed_2']
-
-        transformed = spacy.transform(df)
-
-        assert isinstance(transformed, DataFrame)
-        assert df.index.size == transformed.index.size
-
-        for col in expected_columns:
-            assert col in transformed
-
-    def test_unsupported_spacy_model(self):
-        spacy = SpacyProcessor(SupportedLanguages.Basque)
-
-        with pytest.raises(UnsupportedSpacyModelError):
-            spacy.transform(df)

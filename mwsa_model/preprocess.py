@@ -50,7 +50,7 @@ params = {
     'random_forest__min_samples_leaf': [3, 5],
     'random_forest__min_samples_split': [2],
     'random_forest__n_estimators': [50,300],
-    'random_forest__n_jobs': [5]
+    'random_forest__n_jobs': [-1]
 }
 
 grid_search = model_trainer.configure_grid_serach(pipeline, params)
