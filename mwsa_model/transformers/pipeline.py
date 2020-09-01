@@ -411,7 +411,7 @@ class SemicolonCountTransformer(BaseEstimator, TransformerMixin):
         return X
 
     def __count_semicolon(self, doc):
-        return len([token for token in doc if token.text is ';'])
+        return len([token for token in doc if token.text == ';'])
 
 
 class TokenCountNormalizedDiffTransformer(BaseEstimator, TransformerMixin):
