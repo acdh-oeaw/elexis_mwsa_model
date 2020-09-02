@@ -30,6 +30,7 @@ deploy:
   image: google/cloud-sdk
   stage: deploy
   script:
+    - export
     - echo $GOOGLE_SERVICE_ACCOUNT_FILE
     - ls /tmp
     - gcloud auth activate-service-account --key-file=$GOOGLE_SERVICE_ACCOUNT_FILE
