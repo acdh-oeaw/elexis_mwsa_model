@@ -30,11 +30,10 @@ deploy:
   image: google/cloud-sdk
   stage: deploy
   script:
+    - export
     - echo $GOOGLE_SERVICE_ACCOUNT_FILE
-    - echo $GOOGLE_SERVICE_ACCOUNT_FILE > /tmp/$CI_PIPELINE_ID.json
     - ls /tmp
-    - cat /tmp/$CI_PIPELINE_ID.json
-    - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
+    - gcloud auth activate-service-account --key-file=$GOOGLE_SERVICE_ACCOUNT_FILE
     - gsutil cp mwsa_model/output/models/* gs://elexis_mwsa_models
 
 

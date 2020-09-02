@@ -82,13 +82,6 @@ class TestMwsaModelTrainer(unittest.TestCase):
 
         model = trainer.train(test_df, labels, grid_search)
 
-        model_filename = 'en.pkl'
-        path = Path(model_filename)
-        path.parent.mkdir(parents=True, exist_ok=True)
-
-        with open(model_filename, 'wb+') as file:
-            pickle.dump(model, file)
-
         assert model
         assert model.best_estimator_
 
