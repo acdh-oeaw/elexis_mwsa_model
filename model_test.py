@@ -1,11 +1,9 @@
 import pickle
 import time
 import pandas as pd
-import logging
 
-pipeline.logger.setLevel(logging.info)
 df = pd.DataFrame(
-    data={'word': ['test'], 'pos': ['noun'], 'def1': ['TEST'],
+    data={'word': ['test'], 'pos': ['noun'], 'def1': ['all my dreams are mad'],
           'def2': ['TEST 2']})
 
 file = 'en.pkl'
