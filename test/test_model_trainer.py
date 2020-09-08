@@ -4,9 +4,7 @@ sys.path.append('../mwsa_model')
 import pandas as pd
 import pytest
 import unittest
-import pickle
 
-from pathlib import Path
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 from mwsa_model.service.model_trainer import MwsaModelTrainer
@@ -28,7 +26,7 @@ data_with_semicolon = {'word': ['test'], 'pos': ['noun'], 'def1': ['test ; defin
 df_with_semicolon = pd.DataFrame(data=data_with_semicolon)
 
 
-class TestMwsaModelTrainer(unittest.TestCase):
+class TestMwsaModelTrainer():
     # TODO Parameterize this test
     def test_build_pipeline(self):
         model_trainer = MwsaModelTrainer()
@@ -57,21 +55,38 @@ class TestMwsaModelTrainer(unittest.TestCase):
         assert model
         assert isinstance(model, GridSearchCV)
 
-    def test_model_train(self):
-        params = {
-            'preprocess__lang': [SupportedLanguages.English],
-            'random_forest__bootstrap': [True],
-            'random_forest__class_weight': ['balanced', 'balanced_subsample'],
-            'random_forest__max_depth': [30],
-            'random_forest__max_features': ['auto'],
-            'random_forest__min_samples_leaf': [1],
-            'random_forest__min_samples_split': [2],
-            'random_forest__n_estimators': [2],
-            'random_forest__n_jobs': [-1]
-        }
+    english_config = {
+        'preprocess__lang': [SupportedLanguages.English],
+        'random_forest__bootstrap': [True],
+        'random_forest__class_weight': ['balanced', 'balanced_subsample'],
+        'random_forest__max_depth': [30],
+        'random_forest__max_features': ['auto'],
+        'random_forest__min_samples_leaf': [3, 5],
+        'random_forest__min_samples_split': [2],
+        'random_forest__n_estimators': [300],
+        'random_forest__n_jobs': [-1]
+    }
+
+    german_config = {
+        'preprocess__lang': [SupportedLanguages.German],
+        'random_forest__bootstrap': [True],
+        'random_forest__class_weight': ['balanced', 'balanced_subsample'],
+        'random_forest__max_depth': [30],
+        'random_forest__max_features': ['auto'],
+        'random_forest__min_samples_leaf': [3, 5],
+        'random_forest__min_samples_split': [2],
+        'random_forest__n_estimators': [300],
+        'random_forest__n_jobs': [-1]
+    }
+
+    params = [english_config, german_config]
+
+    @pytest.mark.parametrize("config", params)
+    def test_model_train(self, config):
+
         trainer = MwsaModelTrainer()
         pipeline = trainer.build_pipeline(SupportedLanguages.English)
-        grid_search = trainer.configure_grid_serach(pipeline, params, cv=2)
+        grid_search = trainer.configure_grid_serach(pipeline, config, cv=2)
         test_data = {'word': ['test', 'test2', 'test3', 'test4', 'test5'],
                      'pos': ['noun', 'noun', 'noun', 'noun', 'noun'],
                      'def1': ['test definition', 'test def 2', 'test def 3', 'test def 4', 'test def 5'],

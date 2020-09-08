@@ -1,5 +1,5 @@
 import logging
-import pickle
+import dill as pickle
 import sys
 
 from pandas.core.common import SettingWithCopyWarning
