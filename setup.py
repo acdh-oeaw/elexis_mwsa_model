@@ -10,7 +10,7 @@ setuptools.setup(
       packages=['mwsa_model.transformers','mwsa_model.service'],
       install_requires=[
             'spacy-wordnet==0.0.4',
-            'en-core-web-md@https://github.com/explosion/spacy-models/releases/download/en_core_web_md-2.2.5/en_core_web_md-2.2.5.tar.gz',
-            'de_core_news_sm@https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-2.2.5/de_core_news_sm-2.2.5.tar.gz'
+            'en-core-web-md@https://github.com/explosion/spacy-models/releases/download/en_core_web_md-2.3.1/en_core_web_md-2.3.1.tar.gz',
+            'de_core_news_sm@https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-2.3.0/de_core_news_sm-2.3.0.tar.gz'
       ]
 )
