@@ -22,11 +22,9 @@ logger.setLevel(logging.DEBUG)
 
 spacy_models = {
     SupportedLanguages.English: 'en_core_web_md',
-    SupportedLanguages.German: 'de_core_news_sm'
+    SupportedLanguages.German: 'de_core_news_md'
 }
 
-#english_model = spacy.load('en_core_web_md')
-#german_model = spacy.load('de_core_news_sm')
 models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages.English]),
           SupportedLanguages.German: spacy.load(spacy_models[SupportedLanguages.German])}
 

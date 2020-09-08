@@ -1,0 +1,11 @@
+train:
+  params:
+    'preprocess__lang':[SupportedLanguages(lang)]
+    'random_forest__bootstrap': [True]
+    'random_forest__class_weight': ['balanced', 'balanced_subsample']
+    'random_forest__max_depth': [15, 30]
+    'random_forest__max_features': ['auto']
+    'random_forest__min_samples_leaf': [3, 5, 10]
+    'random_forest__min_samples_split': [2, 5]
+    'random_forest__n_estimators': [50,300, 500]
+    'random_forest__n_jobs': [-1]
