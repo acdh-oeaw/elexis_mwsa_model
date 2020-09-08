@@ -9,6 +9,7 @@ setuptools.setup(
       url='https://github.com/acdh-oeaw/elexis_mwsa_model',
       packages=['mwsa_model.transformers','mwsa_model.service'],
       install_requires=[
+            'dill==0.3.1.1',
             'spacy-wordnet==0.0.4',
             'en-core-web-md@https://github.com/explosion/spacy-models/releases/download/en_core_web_md-2.3.1/en_core_web_md-2.3.1.tar.gz',
             'de_core_news_md@https://github.com/explosion/spacy-models/releases/download/de_core_news_md-2.3.0/de_core_news_md-2.3.0.tar.gz'
