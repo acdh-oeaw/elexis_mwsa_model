@@ -12,6 +12,19 @@ https://spacy.io/usage/models
 
 ### Feature Extraction
 
+| Feature                   | English  | GERMAN |
+| ------------------------- | ------   | ------ |
+| POS_COUNT_DIFF            |     Y    |   Y    |
+| FIRST_WORD_SAME           |     Y    |   Y    |
+| SIMILARITY                |     Y    |   Y    |
+| LEMMA_MATCH               |     Y    |   Y    |
+| LEN_DIFF                  |     Y    |   Y    |
+| MAX_DEPTH_TREE_DIFF       |     Y    |        |
+| SIMILARITY_DIFF_TO_TARGET |     Y    |   Y    |
+| ONE_HOT_POS               |          |   Y    |   
+| TFIDF_COS                 |          |   Y    |
+
+
 ### Classifier
 
 ### Grid Search
