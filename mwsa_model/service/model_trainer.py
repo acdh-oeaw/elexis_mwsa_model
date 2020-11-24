@@ -31,7 +31,7 @@ class MwsaModelTrainer(object):
         german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.German)),
                                           (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
                                           (features.SIMILARITY, SimilarityProcessor()),
-                                          (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
                                           #(features.ONE_HOT_POS, OneHotPosTransformer()),
                                           (features.LEMMA_MATCH, MatchingLemmaTransformer()),
                                           (features.LEN_DIFF, DifferenceInLengthTransformer()),
@@ -40,9 +40,180 @@ class MwsaModelTrainer(object):
                                           #(features.COSINE, CosineTransformer()),
                                           ('feature_selector', FeatureSelector()),
                                           ('random_forest', RandomForestClassifier())])
+        russian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Russian)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          # (features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          # (features.TFIDF_COS, TfidfTransformer()),
+                                          # (features.JACCARD, JaccardTransformer()),
+                                          # (features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        italian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Italian)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        portuguese_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Portuguese)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        danish_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Danish)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        dutch_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Dutch)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        serbian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Serbian)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        bulgarian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Bulgarian)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        slovene_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Slovene)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        estonian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Estonian)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        basque_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Basque)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        irish_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Irish)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+        hungarian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Hungarian)),
+                                          (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
+                                          (features.SIMILARITY, SimilarityProcessor()),
+                                          #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
+                                          #(features.ONE_HOT_POS, OneHotPosTransformer()),
+                                          (features.LEMMA_MATCH, MatchingLemmaTransformer()),
+                                          (features.LEN_DIFF, DifferenceInLengthTransformer()),
+                                          #(features.TFIDF_COS, TfidfTransformer()),
+                                          #(features.JACCARD, JaccardTransformer()),
+                                          #(features.COSINE, CosineTransformer()),
+                                          ('feature_selector', FeatureSelector()),
+                                          ('random_forest', RandomForestClassifier())])
+
+
+
+
         self.pipelines = {
             SupportedLanguages.English: english_pipeline,
-            SupportedLanguages.German: german_pipeline
+            SupportedLanguages.German: german_pipeline,
+            SupportedLanguages.Russian: russian_pipeline,
+            SupportedLanguages.Italian: italian_pipeline,
+            SupportedLanguages.Portuguese:portuguese_pipeline,
+            SupportedLanguages.Danish: danish_pipeline,
+            SupportedLanguages.Dutch: dutch_pipeline,
+            SupportedLanguages.Serbian:serbian_pipeline,
+            SupportedLanguages.Bulgarian: bulgarian_pipeline,
+            SupportedLanguages.Slovene: slovene_pipeline,
+            SupportedLanguages.Estonian: estonian_pipeline,
+            SupportedLanguages.Basque: basque_pipeline,
+            SupportedLanguages.Irish: irish_pipeline,
+            SupportedLanguages.Hungarian: hungarian_pipeline
         }
 
     def train(self, features, labels, grid_search):
@@ -51,6 +222,6 @@ class MwsaModelTrainer(object):
     def build_pipeline(self, lang):
         return self.pipelines[lang]
 
-    def configure_grid_serach(self, pipeline, params, score='f1', cv=5, verbose=1):
+    def configure_grid_search(self, pipeline, params, score='f1', cv=5, verbose=1):
         return GridSearchCV(pipeline, param_grid=params,
                             scoring='%s_weighted' % 'f1', cv=cv, verbose=verbose, n_jobs=-1)

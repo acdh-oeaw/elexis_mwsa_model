@@ -51,7 +51,7 @@ class TestMwsaModelTrainer():
             'random_forest__n_jobs': [-1]
         }
 
-        model = trainer.configure_grid_serach(pipeline, params)
+        model = trainer.configure_grid_search(pipeline, params)
         assert model
         assert isinstance(model, GridSearchCV)
 
@@ -86,7 +86,7 @@ class TestMwsaModelTrainer():
 
         trainer = MwsaModelTrainer()
         pipeline = trainer.build_pipeline(SupportedLanguages.English)
-        grid_search = trainer.configure_grid_serach(pipeline, config, cv=2)
+        grid_search = trainer.configure_grid_search(pipeline, config, cv=2)
         test_data = {'word': ['test', 'test2', 'test3', 'test4', 'test5'],
                      'pos': ['noun', 'noun', 'noun', 'noun', 'noun'],
                      'def1': ['test definition', 'test def 2', 'test def 3', 'test def 4', 'test def 5'],

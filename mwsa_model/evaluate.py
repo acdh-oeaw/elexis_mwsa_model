@@ -26,20 +26,20 @@ test_data_file = sys.argv[2]
 metrics_file = sys.argv[3]
 prediction_file = sys.argv[4]
 
-output_dir = 'mwsa_model/output/'
+output_dir = 'output/'
 model_output_dir = output_dir + 'models/'
 metrics_output_dir = output_dir + 'metrics/'
 predictions_output_dir = output_dir + 'predictions/'
 
-file = 'mwsa_model/output/models/' + model
+file = 'output/models/' + model
 with open(file, 'rb') as model_file:
     model = pickle.load(model_file)
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     data_loader = DataLoader()
-    testdata = data_loader.load('data/test', test_data_file, testdata=True)
-    reference_labels = data_loader.load('data/reference_data', test_data_file)['relation']
+    testdata = data_loader.load('../data/test', test_data_file, testdata=True)
+    reference_labels = data_loader.load('../data/reference_data', test_data_file)['relation']
 
     predicted = model.predict(testdata)
     predicted_series = pd.Series(predicted)

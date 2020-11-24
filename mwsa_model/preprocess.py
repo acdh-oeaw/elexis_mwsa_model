@@ -8,6 +8,9 @@ from sklearn.externals import joblib
 from mwsa_model.service.model_trainer import MwsaModelTrainer
 from mwsa_model.service.util import SupportedLanguages
 import warnings
+#warnings.filterwarnings("ignore", category=UserWarning)
+
+
 from pathlib import Path
 
 warnings.filterwarnings(
@@ -30,7 +33,7 @@ if len(sys.argv) != 4:
 
 lang = sys.argv[3]
 
-data_dir = 'mwsa_model/data/'
+data_dir = 'data/'
 with open(data_dir+sys.argv[1], 'rb') as pickle_file:
     features = pickle.load(pickle_file)
 
@@ -53,28 +56,40 @@ params = {
     'random_forest__n_jobs': [-1]
 }
 
-grid_search = model_trainer.configure_grid_serach(pipeline, params)
+params_min = {
+        'preprocess__lang': [SupportedLanguages(lang)],
+        'random_forest__bootstrap': [True],
+        'random_forest__class_weight': ['balanced', 'balanced_subsample'],
+        'random_forest__max_depth': [30],
+        'random_forest__max_features': ['auto'],
+        'random_forest__min_samples_leaf': [3, 5],
+        'random_forest__min_samples_split': [2],
+        'random_forest__n_estimators': [300],
+        'random_forest__n_jobs': [-1]
+    }
+
+grid_search = model_trainer.configure_grid_search(pipeline, params_min)
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     model = grid_search.fit(features, labels)
 
 
-model_filename = 'mwsa_model/output/models/'+lang+'.pkl'
+model_filename = 'output/models/'+lang+'.pkl'
 path = Path(model_filename)
 path.parent.mkdir(parents=True, exist_ok=True)
 
 with open(model_filename, 'wb+') as file:
     pickle.dump(model, file)
 
-joblib_filename = 'mwsa_model/output/models/'+lang+'.joblib'
+joblib_filename = 'output/models/'+lang+'.joblib'
 path = Path(joblib_filename)
 path.parent.mkdir(parents=True, exist_ok=True)
 
 with open(joblib_filename, 'wb+') as file:
     joblib.dump(model, file)
 
-score_filename = 'mwsa_model/output/metrics/'+lang+'_cv_score.txt'
+score_filename = 'output/metrics/'+lang+'_cv_score.txt'
 path = Path(score_filename)
 path.parent.mkdir(parents=True, exist_ok=True)
 
