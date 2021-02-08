@@ -49,7 +49,7 @@ googleapis-common-protos==1.51.0
 grandalf==0.6
 grpcio==1.27.2
 h5py==2.10.0
-httplib2==0.18.1
+httplib2==0.19.0
 hub==0.4.1.2
 humanize==2.4.0
 idna==2.8
