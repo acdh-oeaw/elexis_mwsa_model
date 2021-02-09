@@ -32,8 +32,8 @@ deploy:
     - ls /tmp
     - gcloud auth activate-service-account --key-file=$GOOGLE_SERVICE_ACCOUNT_FILE
     - gsutil cp mwsa_model/output/models/* gs://elexis_mwsa_models
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
 
 
 #staging:
