@@ -26,9 +26,9 @@ train:
   - path: mwsa_model/output/metrics/en_cv_score.txt
     md5: 8f74cf3dc2bf6dba08aeed8fdadb6013
   - path: mwsa_model/output/models/en.joblib
-    md5: d6a467c254af6e198d259e280ad1addf
+    md5: 84ec0cc44c1f75bd1656bf09086e4c90
   - path: mwsa_model/output/models/en.pkl
-    md5: abebe4b1c43ad3d59ab0a17f02daf019
+    md5: 747dbd33fe5dd03843f6b7e4989ceadb
 evaluate:
   cmd: python -m mwsa_model.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
   deps:
@@ -39,12 +39,12 @@ evaluate:
   - path: mwsa_model/evaluate.py
     md5: b5a246252916a101481417977dcd555e
   - path: mwsa_model/output/models/en.pkl
-    md5: abebe4b1c43ad3d59ab0a17f02daf019
+    md5: 747dbd33fe5dd03843f6b7e4989ceadb
   outs:
   - path: mwsa_model/output/metrics/metrics_en.txt
-    md5: 9c045aa9fc9c1841d50d67f1cc453d51
+    md5: 89c63155a841b3bcf7cf057a4f5ebb8a
   - path: mwsa_model/output/predictions/en_predictions.txt
-    md5: 65c9000f1e8a1aaa766688c5230ee2d3
+    md5: 2555a7abf285e628437727b3c6798881
 load_german:
   cmd: python -m mwsa_model.load_data data/train/ german.tsv
   deps:
