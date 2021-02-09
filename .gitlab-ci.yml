@@ -4,12 +4,24 @@ stages:
   - train
   - deploy
 
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "prod"
+
 test:
   stage: test
   script:
     - pip install -r requirements.txt
     - python nltk_install.py
     - pytest -o log_cli=true  test/
+  rules:
+    - if: '$TEST_DISABLED'
+      when: never
+    - if: '$CI_COMMIT_TAG || $CI_COMMIT_BRANCH'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 dvc:
   stage: train
   script:
@@ -33,7 +45,7 @@ deploy:
     - gcloud auth activate-service-account --key-file=$GOOGLE_SERVICE_ACCOUNT_FILE
     - gsutil cp mwsa_model/output/models/* gs://elexis_mwsa_models
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "master"'
+    - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
 
 
 #staging:
