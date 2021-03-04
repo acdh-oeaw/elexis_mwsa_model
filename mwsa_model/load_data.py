@@ -35,7 +35,7 @@ with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     features, labels = load_data(file_path, file_name)
 
-output_dir = 'data/'
+output_dir = 'mwsa_model/data/'
 Path(output_dir).mkdir(parents=True, exist_ok=True)
 feature_filename = output_dir + 'features_'+file_name+'.pkl'
 with open(feature_filename, 'wb+') as file:
