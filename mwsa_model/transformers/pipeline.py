@@ -18,6 +18,7 @@ from nltk.corpus import wordnet as wn
 from spacy_stanfordnlp import StanfordNLPLanguage
 import stanfordnlp
 import warnings
+
 warnings.filterwarnings("ignore", category=UserWarning)
 
 from spacy.vocab import Vocab
@@ -42,22 +43,19 @@ models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages
           SupportedLanguages.Dutch: spacy.load(spacy_models[SupportedLanguages.Dutch]),
           SupportedLanguages.Italian: spacy.load(spacy_models[SupportedLanguages.Italian]),
           SupportedLanguages.Portuguese: spacy.load(spacy_models[SupportedLanguages.Portuguese]),
-          #SupportedLanguages.Russian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ru")),
-          #SupportedLanguages.Serbian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sr")),
-          #SupportedLanguages.Bulgarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="bg")),
+          # SupportedLanguages.Russian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ru")),
+          # SupportedLanguages.Serbian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sr")),
+          # SupportedLanguages.Bulgarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="bg")),
           SupportedLanguages.Slovene: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sl"))
-          #SupportedLanguages.Hungarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="hu")),
-          #SupportedLanguages.Estonian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="et")),
-          #SupportedLanguages.Basque: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="eu"))
-          #SupportedLanguages.Irish: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ga")),
-          } 
-
-
-
+          # SupportedLanguages.Hungarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="hu")),
+          # SupportedLanguages.Estonian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="et")),
+          # SupportedLanguages.Basque: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="eu"))
+          # SupportedLanguages.Irish: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ga")),
+          }
 
 nlp_vectors = spacy.load("/Users/lenka/Desktop/fasttext/vectors/slovene_vectors")
 vocab = Vocab()
-for word in nlp_vectors.vocab: #if vector not in vocab
+for word in nlp_vectors.vocab:  # if vector not in vocab
     models[SupportedLanguages.Slovene].vocab.set_vector(word.text, word.vector)
 print('loaded vocabulary\n')
 
@@ -105,11 +103,10 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
         if self.lang == SupportedLanguages.English and self.with_wordnet:
             nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
 
-
         print('transforming with spacy...')
 
-        #print(X['def2'][:1000])
-        print(len(X['def1']),len(X['def2']))
+        # print(X['def2'][:1000])
+        print(len(X['def1']), len(X['def2']))
 
         X.loc[:, 'processed_1'] = pd.Series(list(nlp.pipe(iter(X['def1']), batch_size=1000)))
         print('----------processed 1 ------------')
@@ -124,7 +121,7 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
         X.loc[:, 'lemmatized_2'] = X['processed_2'].map(lambda doc: lemmatizer(doc, nlp))
         X.loc[:, 'stopwords_removed_2'] = X['lemmatized_2'].map(remove_stopwords)
         print('-------------lemma and sw removed 2  ------------')
-        #self.logger.debug(X)
+        # self.logger.debug(X)
 
         logger.debug('SpacyProcessor.transform() took %.3f seconds' % (time.time() - t0))
 

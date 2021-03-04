@@ -1,3 +1,26 @@
 
 /features.pickle
 /labels.pickle
+.DS_Store
+.idea
+.local
+build/
+data/english_nuig
+data/reference_data/.DS_Store
+data/reference_data/english_nuig_reference.tsv
+data/test/english_nuig_test.tsv
+de.pkl
+dist/
+mwsa_model.egg-info/
+mwsa_model.iml
+mwsa_model/.DS_Store
+mwsa_model/__pycache__/
+mwsa_model/data/
+mwsa_model/output/.DS_Store
+mwsa_model/output/models/
+mwsa_model/output/predictions/nl_predictions.txt
+mwsa_model/service/__pycache__/
+mwsa_model/transformers/__pycache__/
+test/__pycache__/
+test/en.pkl
+venv/
