@@ -1,5 +1,5 @@
 stages:
-  load:
+  en:
     cmd: python -m mwsa_model.load_data data/train english_kd.tsv
     deps:
     - data/train/english_kd.tsv
@@ -7,7 +7,7 @@ stages:
     outs:
     - mwsa_model/data/features_english_kd.tsv.pkl
     - mwsa_model/data/labels_english_kd.tsv.pkl
-  train:
+  en_train:
     cmd: python -m mwsa_model.preprocess features_english_kd.tsv.pkl labels_english_kd.tsv.pkl en
     deps:
     - mwsa_model/data/features_english_kd.tsv.pkl
@@ -20,7 +20,7 @@ stages:
     outs:
     - mwsa_model/output/models/en.pkl
     - mwsa_model/output/models/en.joblib
-  evaluate:
+  en_evaluate:
     cmd: python -m mwsa_model.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
     deps:
     - data/reference_data/english_nuig.tsv
@@ -32,7 +32,7 @@ stages:
         cache: false
     outs:
     - mwsa_model/output/predictions/en_predictions.txt
-  load_german:
+  de:
     cmd: python -m mwsa_model.load_data data/train/ german.tsv
     deps:
     - data/train/german.tsv
@@ -40,7 +40,7 @@ stages:
     outs:
     - mwsa_model/data/features_german.tsv.pkl
     - mwsa_model/data/labels_german.tsv.pkl
-  train_de:
+  de_train:
     cmd: python -m mwsa_model.preprocess features_german.tsv.pkl labels_german.tsv.pkl de
     deps:
     - mwsa_model/data/features_german.tsv.pkl
@@ -52,7 +52,7 @@ stages:
     metrics:
     - mwsa_model/output/metrics/de_cv_score.txt:
         cache: false
-  evaluate_de:
+  de_evaluate:
     cmd: python -m mwsa_model.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
     deps:
     - data/reference_data/german.tsv

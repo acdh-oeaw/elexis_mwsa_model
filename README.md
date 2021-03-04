@@ -35,7 +35,13 @@ https://spacy.io/usage/models
 
 DVC(https://dvc.org/doc/start) is used for defining and version controlling the pipeline.
 
-By running  <code>dvc repro</code> all stages will be run and outputs will be generated.
+By running  <code>dvc repro</code> all stages will be run and outputs will be generated
+
+You can run language specific pipeline by setting the $STAGE environment variable to the stage you want to run and executing following code
+
+<code>dvc repro -pf $STAGE</code>
+
+The option p runs the whole pipeline including the specified stage, f option forcefully runs the pipeline even if there are no changes made.
 
 DVC stages are managed in dvc.yaml and were added by running dvc commands as below.
 
