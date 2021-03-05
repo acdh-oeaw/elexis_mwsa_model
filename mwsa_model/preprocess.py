@@ -8,6 +8,9 @@ from sklearn.externals import joblib
 from mwsa_model.service.model_trainer import MwsaModelTrainer
 from mwsa_model.service.util import SupportedLanguages
 import warnings
+#warnings.filterwarnings("ignore", category=UserWarning)
+
+
 from pathlib import Path
 
 warnings.filterwarnings(
@@ -53,7 +56,19 @@ params = {
     'random_forest__n_jobs': [-1]
 }
 
-grid_search = model_trainer.configure_grid_serach(pipeline, params)
+params_min = {
+        'preprocess__lang': [SupportedLanguages(lang)],
+        'random_forest__bootstrap': [True],
+        'random_forest__class_weight': ['balanced', 'balanced_subsample'],
+        'random_forest__max_depth': [30],
+        'random_forest__max_features': ['auto'],
+        'random_forest__min_samples_leaf': [3, 5],
+        'random_forest__min_samples_split': [2],
+        'random_forest__n_estimators': [300],
+        'random_forest__n_jobs': [-1]
+    }
+
+grid_search = model_trainer.configure_grid_search(pipeline, params_min)
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")

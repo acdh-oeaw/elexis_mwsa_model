@@ -28,7 +28,7 @@ dvc:
     - pip install dvc==1.0.2
     - pip install -r requirements.txt
     - python nltk_install.py
-    - dvc repro -p $STAGES
+    - dvc repro -pf $STAGES
   artifacts:
     paths:
       - mwsa_model/output/models/de.pkl

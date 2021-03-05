@@ -15,6 +15,13 @@ from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 from mwsa_model.service.util import SupportedLanguages
 from mwsa_model import features
 from nltk.corpus import wordnet as wn
+from spacy_stanfordnlp import StanfordNLPLanguage
+import stanfordnlp
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning)
+
+from spacy.vocab import Vocab
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -22,14 +29,41 @@ logger.setLevel(logging.DEBUG)
 
 spacy_models = {
     SupportedLanguages.English: 'en_core_web_md',
-    SupportedLanguages.German: 'de_core_news_md'
+    SupportedLanguages.German: 'de_core_news_md',
+    SupportedLanguages.Danish: 'da_core_news_md',
+    SupportedLanguages.Dutch: 'nl_core_news_md',
+    SupportedLanguages.Italian: 'it_core_news_md',
+    SupportedLanguages.Portuguese: 'pt_core_news_md'
+
 }
 
 models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages.English]),
-          SupportedLanguages.German: spacy.load(spacy_models[SupportedLanguages.German])}
+          SupportedLanguages.German: spacy.load(spacy_models[SupportedLanguages.German]),
+          SupportedLanguages.Danish: spacy.load(spacy_models[SupportedLanguages.Danish]),
+          SupportedLanguages.Dutch: spacy.load(spacy_models[SupportedLanguages.Dutch]),
+          SupportedLanguages.Italian: spacy.load(spacy_models[SupportedLanguages.Italian]),
+          SupportedLanguages.Portuguese: spacy.load(spacy_models[SupportedLanguages.Portuguese]),
+          # SupportedLanguages.Russian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ru")),
+          # SupportedLanguages.Serbian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sr")),
+          # SupportedLanguages.Bulgarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="bg")),
+          #SupportedLanguages.Slovene: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sl"))
+          # SupportedLanguages.Hungarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="hu")),
+          # SupportedLanguages.Estonian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="et")),
+          # SupportedLanguages.Basque: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="eu"))
+          # SupportedLanguages.Irish: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ga")),
+          }
+
+#nlp_vectors = spacy.load("/Users/lenka/Desktop/fasttext/vectors/slovene_vectors")
+vocab = Vocab()
+#for word in nlp_vectors.vocab:  # if vector not in vocab
+#    models[SupportedLanguages.Slovene].vocab.set_vector(word.text, word.vector)
+print('loaded vocabulary\n')
 
 
 def lemmatizer(doc, spacy_model):
+    if type(doc) == float:
+        return spacy_model.make_doc("")
+
     doc = [token.lemma_ for token in doc if token.lemma_ != '-PRON-']
     return spacy_model.make_doc(u' '.join(doc))
 
@@ -69,14 +103,25 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
         if self.lang == SupportedLanguages.English and self.with_wordnet:
             nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
 
+        print('transforming with spacy...')
+
+        # print(X['def2'][:1000])
+        print(len(X['def1']), len(X['def2']))
+
         X.loc[:, 'processed_1'] = pd.Series(list(nlp.pipe(iter(X['def1']), batch_size=1000)))
+        print('----------processed 1 ------------')
         X.loc[:, 'processed_2'] = pd.Series(list(nlp.pipe(iter(X['def2']), batch_size=1000)))
+        print('----------processed 2 ------------')
+
         X.loc[:, 'word_processed'] = pd.Series(list(nlp.pipe(iter(X['word']), batch_size=1000)))
+        print('------------word processed ------------')
         X.loc[:, 'lemmatized_1'] = X['processed_1'].map(lambda doc: lemmatizer(doc, nlp))
         X.loc[:, 'stopwords_removed_1'] = X['lemmatized_1'].map(remove_stopwords)
+        print('-------------lemma and sw removed 1  ------------')
         X.loc[:, 'lemmatized_2'] = X['processed_2'].map(lambda doc: lemmatizer(doc, nlp))
         X.loc[:, 'stopwords_removed_2'] = X['lemmatized_2'].map(remove_stopwords)
-        self.logger.debug(X)
+        print('-------------lemma and sw removed 2  ------------')
+        # self.logger.debug(X)
 
         logger.debug('SpacyProcessor.transform() took %.3f seconds' % (time.time() - t0))
 
@@ -134,7 +179,9 @@ class SimilarityProcessor(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         t0 = time.time()
         X.loc[:, features.SIMILARITY] = X.apply(
-            lambda row: row['processed_1'].similarity(row['processed_2']), axis=1)
+            lambda row: row['processed_1'].similarity(row['processed_2'])
+            if type(row['processed_1']) != float else 0, axis=1)  # how often is type(row['processed_1'])==float ?
+
         logger.debug('SimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
 
         return X

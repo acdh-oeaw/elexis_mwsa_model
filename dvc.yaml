@@ -1,17 +1,17 @@
 stages:
   en:
-    cmd: python -m mwsa_model.load_data data/train english_kd.tsv
+    cmd: python -m mwsa_model.load_data data/train english_nuig.tsv
     deps:
-    - data/train/english_kd.tsv
+    - data/train/english_nuig.tsv
     - mwsa_model/load_data.py
     outs:
-    - mwsa_model/data/features_english_kd.tsv.pkl
-    - mwsa_model/data/labels_english_kd.tsv.pkl
+    - mwsa_model/data/features_english_nuig.tsv.pkl
+    - mwsa_model/data/labels_english_nuig.tsv.pkl
   en_train:
-    cmd: python -m mwsa_model.preprocess features_english_kd.tsv.pkl labels_english_kd.tsv.pkl en
+    cmd: python -m mwsa_model.preprocess features_english_nuig.tsv.pkl labels_english_nuig.tsv.pkl en
     deps:
-    - mwsa_model/data/features_english_kd.tsv.pkl
-    - mwsa_model/data/labels_english_kd.tsv.pkl
+    - mwsa_model/data/features_english_nuig.tsv.pkl
+    - mwsa_model/data/labels_english_nuig.tsv.pkl
     - mwsa_model/preprocess.py
     - mwsa_model/service/model_trainer.py
     metrics:
