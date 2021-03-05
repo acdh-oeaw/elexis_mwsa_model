@@ -14,6 +14,7 @@ df_with_semicolon = pd.DataFrame(data=data_with_semicolon)
 
 
 class TestSpacy(unittest.TestCase):
+    @pytest.mark.slow
     def test_spacy_transformer_IT(self):
         spacy = SpacyProcessor(lang=SupportedLanguages.English)
         expected_columns = ['processed_1',

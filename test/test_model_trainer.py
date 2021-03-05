@@ -82,6 +82,7 @@ class TestMwsaModelTrainer():
     params = [english_config, german_config]
 
     @pytest.mark.parametrize("config", params)
+    @pytest.mark.slow
     def test_model_train(self, config):
 
         trainer = MwsaModelTrainer()
