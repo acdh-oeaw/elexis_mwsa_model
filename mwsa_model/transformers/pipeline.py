@@ -46,16 +46,16 @@ models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages
           # SupportedLanguages.Russian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ru")),
           # SupportedLanguages.Serbian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sr")),
           # SupportedLanguages.Bulgarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="bg")),
-          #SupportedLanguages.Slovene: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sl"))
+          # SupportedLanguages.Slovene: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sl"))
           # SupportedLanguages.Hungarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="hu")),
           # SupportedLanguages.Estonian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="et")),
           # SupportedLanguages.Basque: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="eu"))
           # SupportedLanguages.Irish: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ga")),
           }
 
-#nlp_vectors = spacy.load("/Users/lenka/Desktop/fasttext/vectors/slovene_vectors")
+# nlp_vectors = spacy.load("/Users/lenka/Desktop/fasttext/vectors/slovene_vectors")
 vocab = Vocab()
-#for word in nlp_vectors.vocab:  # if vector not in vocab
+# for word in nlp_vectors.vocab:  # if vector not in vocab
 #    models[SupportedLanguages.Slovene].vocab.set_vector(word.text, word.vector)
 logger.info('loaded vocabulary\n')
 
@@ -171,22 +171,23 @@ class FirstWordSameProcessor(BaseEstimator, TransformerMixin):
         return col1.split(' ')[0].lower() == col2.split(' ')[0].lower()
 
 
+def transform(X, y=None):
+    t0 = time.time()
+    X.loc[:, features.SIMILARITY] = X.apply(
+        lambda row: row['processed_1'].similarity(row['processed_2'])
+        if type(row['processed_1']) != float else 0, axis=1)  # how often is type(row['processed_1'])==float ?
+
+    logger.debug('SimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
+    return X
+
+
 class SimilarityProcessor(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
 
     def fit(self, X, y=None):
         return self
-
-    def transform(self, X, y=None):
-        t0 = time.time()
-        X.loc[:, features.SIMILARITY] = X.apply(
-            lambda row: row['processed_1'].similarity(row['processed_2'])
-            if type(row['processed_1']) != float else 0, axis=1)  # how often is type(row['processed_1'])==float ?
-
-        logger.debug('SimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
-
-        return X
 
 
 class OneHotPosTransformer(BaseEstimator, TransformerMixin):

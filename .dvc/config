@@ -1,0 +1,4 @@
+[core]
+    remote = elexis_remote
+['remote "elexis_remote"']
+    url = gs://elexis_mwsa_models
