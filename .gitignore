@@ -11,6 +11,7 @@ data/reference_data/english_nuig_reference.tsv
 data/test/english_nuig_test.tsv
 de.pkl
 dist/
+mwsa_venv
 mwsa_model.egg-info/
 mwsa_model.iml
 mwsa_model/.DS_Store

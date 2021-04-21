@@ -171,15 +171,6 @@ class FirstWordSameProcessor(BaseEstimator, TransformerMixin):
         return col1.split(' ')[0].lower() == col2.split(' ')[0].lower()
 
 
-def transform(X, y=None):
-    t0 = time.time()
-    X.loc[:, features.SIMILARITY] = X.apply(
-        lambda row: row['processed_1'].similarity(row['processed_2'])
-        if type(row['processed_1']) != float else 0, axis=1)  # how often is type(row['processed_1'])==float ?
-
-    logger.debug('SimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
-
-    return X
 
 
 class SimilarityProcessor(BaseEstimator, TransformerMixin):
@@ -188,6 +179,17 @@ class SimilarityProcessor(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):
         return self
+
+    def transform(self, X, y=None):
+        t0 = time.time()
+        X.loc[:, features.SIMILARITY] = X.apply(
+            lambda row: row['processed_1'].similarity(row['processed_2'])
+            if type(row['processed_1']) != float else 0, axis=1)  # how often is type(row['processed_1'])==float ?
+
+        logger.debug('SimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
+        return X
+
 
 
 class OneHotPosTransformer(BaseEstimator, TransformerMixin):
