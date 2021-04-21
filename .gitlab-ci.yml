@@ -39,7 +39,7 @@ deploy:
   image: google/cloud-sdk
   stage: deploy
   script:
-    - pip install dvc==2.0.10
+    - pip install dvc[gs]==2.0.10
     - dvc push
   rules:
     - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
