@@ -25,7 +25,7 @@ test:
 dvc:
   stage: train
   script:
-    - pip install dvc==1.0.2
+    - pip install dvc==2.0.10
     - pip install -r requirements.txt
     - python nltk_install.py
     - dvc repro -pf $STAGES
@@ -39,11 +39,7 @@ deploy:
   image: google/cloud-sdk
   stage: deploy
   script:
-    - export
-    - echo $GOOGLE_SERVICE_ACCOUNT_FILE
-    - ls /tmp
-    - gcloud auth activate-service-account --key-file=$GOOGLE_SERVICE_ACCOUNT_FILE
-    - gsutil cp mwsa_model/output/models/* gs://elexis_mwsa_models
+    - dvc push
   rules:
     - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
 

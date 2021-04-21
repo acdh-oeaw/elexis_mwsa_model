@@ -25,7 +25,7 @@ from spacy.vocab import Vocab
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 spacy_models = {
     SupportedLanguages.English: 'en_core_web_md',
@@ -46,18 +46,18 @@ models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages
           # SupportedLanguages.Russian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ru")),
           # SupportedLanguages.Serbian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sr")),
           # SupportedLanguages.Bulgarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="bg")),
-          #SupportedLanguages.Slovene: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sl"))
+          # SupportedLanguages.Slovene: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sl"))
           # SupportedLanguages.Hungarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="hu")),
           # SupportedLanguages.Estonian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="et")),
           # SupportedLanguages.Basque: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="eu"))
           # SupportedLanguages.Irish: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ga")),
           }
 
-#nlp_vectors = spacy.load("/Users/lenka/Desktop/fasttext/vectors/slovene_vectors")
+# nlp_vectors = spacy.load("/Users/lenka/Desktop/fasttext/vectors/slovene_vectors")
 vocab = Vocab()
-#for word in nlp_vectors.vocab:  # if vector not in vocab
+# for word in nlp_vectors.vocab:  # if vector not in vocab
 #    models[SupportedLanguages.Slovene].vocab.set_vector(word.text, word.vector)
-print('loaded vocabulary\n')
+logger.info('loaded vocabulary\n')
 
 
 def lemmatizer(doc, spacy_model):
@@ -103,25 +103,26 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
         if self.lang == SupportedLanguages.English and self.with_wordnet:
             nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
 
-        print('transforming with spacy...')
+        logger.debug('transforming with spacy...')
 
-        # print(X['def2'][:1000])
-        print(len(X['def1']), len(X['def2']))
+        logger.debug(len(X['def1']), len(X['def2']))
 
         X.loc[:, 'processed_1'] = pd.Series(list(nlp.pipe(iter(X['def1']), batch_size=1000)))
-        print('----------processed 1 ------------')
+        logger.debug('----------processed 1 ------------')
+
         X.loc[:, 'processed_2'] = pd.Series(list(nlp.pipe(iter(X['def2']), batch_size=1000)))
-        print('----------processed 2 ------------')
+        logger.debug('----------processed 2 ------------')
 
         X.loc[:, 'word_processed'] = pd.Series(list(nlp.pipe(iter(X['word']), batch_size=1000)))
-        print('------------word processed ------------')
+        logger.debug('------------word processed ------------')
+
         X.loc[:, 'lemmatized_1'] = X['processed_1'].map(lambda doc: lemmatizer(doc, nlp))
         X.loc[:, 'stopwords_removed_1'] = X['lemmatized_1'].map(remove_stopwords)
-        print('-------------lemma and sw removed 1  ------------')
+        logger.debug('-------------lemma and sw removed 1  ------------')
+
         X.loc[:, 'lemmatized_2'] = X['processed_2'].map(lambda doc: lemmatizer(doc, nlp))
         X.loc[:, 'stopwords_removed_2'] = X['lemmatized_2'].map(remove_stopwords)
-        print('-------------lemma and sw removed 2  ------------')
-        # self.logger.debug(X)
+        logger.debug('-------------lemma and sw removed 2  ------------')
 
         logger.debug('SpacyProcessor.transform() took %.3f seconds' % (time.time() - t0))
 
@@ -143,6 +144,7 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
                        'lemmatized_1', 'stopwords_removed_1', 'lemmatized_2',
                        'stopwords_removed_2', 'relation']:
                 X = X.drop(col, axis=1)
+
         logger.debug('FeatureSelector.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
@@ -169,6 +171,8 @@ class FirstWordSameProcessor(BaseEstimator, TransformerMixin):
         return col1.split(' ')[0].lower() == col2.split(' ')[0].lower()
 
 
+
+
 class SimilarityProcessor(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
@@ -185,6 +189,7 @@ class SimilarityProcessor(BaseEstimator, TransformerMixin):
         logger.debug('SimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
 
         return X
+
 
 
 class OneHotPosTransformer(BaseEstimator, TransformerMixin):
