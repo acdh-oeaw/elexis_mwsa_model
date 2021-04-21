@@ -3,8 +3,7 @@ import dill as pickle
 import sys
 
 from pandas.core.common import SettingWithCopyWarning
-from sklearn.externals import joblib
-
+import joblib
 from mwsa_model.service.model_trainer import MwsaModelTrainer
 from mwsa_model.service.util import SupportedLanguages
 import warnings

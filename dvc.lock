@@ -1,125 +1,127 @@
-en:
-  cmd: python -m mwsa_model.load_data data/train english_nuig.tsv
-  deps:
-  - path: data/train/english_nuig.tsv
-    md5: 0980b9519f2aa83aecbf46f793ed4102
-    size: 1236333
-  - path: mwsa_model/load_data.py
-    md5: e0a7bd8e50320f9314afb9b0cdc09bc6
-    size: 1224
-  outs:
-  - path: mwsa_model/data/features_english_nuig.tsv.pkl
-    md5: 6923fd042bc13202dd807aa693355193
-    size: 399385
-  - path: mwsa_model/data/labels_english_nuig.tsv.pkl
-    md5: 35f0f3755f26972f873f1664f45e88eb
-    size: 17396
-en_train:
-  cmd: python -m mwsa_model.preprocess features_english_nuig.tsv.pkl labels_english_nuig.tsv.pkl
-    en
-  deps:
-  - path: mwsa_model/data/features_english_nuig.tsv.pkl
-    md5: 6923fd042bc13202dd807aa693355193
-    size: 399385
-  - path: mwsa_model/data/labels_english_nuig.tsv.pkl
-    md5: 35f0f3755f26972f873f1664f45e88eb
-    size: 17396
-  - path: mwsa_model/preprocess.py
-    md5: 3059b360c8f31c3db5ab4d43f0863de8
-    size: 2836
-  - path: mwsa_model/service/model_trainer.py
-    md5: 6d5b6b3e302f9c4793e42eaf91446653
-    size: 17780
-  outs:
-  - path: mwsa_model/output/metrics/en_cv_score.txt
-    md5: 8f74cf3dc2bf6dba08aeed8fdadb6013
-    size: 5
-  - path: mwsa_model/output/models/en.joblib
-    md5: c1093ff1ad0066bc72162e3c08bca809
-    size: 38836864
-  - path: mwsa_model/output/models/en.pkl
-    md5: 99043287e8393a04907d8014dccf7f1c
-    size: 38852665
-en_evaluate:
-  cmd: python -m mwsa_model.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
-  deps:
-  - path: data/reference_data/english_nuig.tsv
-    md5: 2fdd80ae3c21d1b4ff19b803edad18d8
-    size: 85664
-  - path: data/test/english_nuig.tsv
-    md5: 0e8cc9d2f29394691c5fd0a6eae07c78
-    size: 82686
-  - path: mwsa_model/evaluate.py
-    md5: b5a246252916a101481417977dcd555e
-    size: 1690
-  - path: mwsa_model/output/models/en.pkl
-    md5: 99043287e8393a04907d8014dccf7f1c
-    size: 38852665
-  outs:
-  - path: mwsa_model/output/metrics/metrics_en.txt
-    md5: a6a2a3b45bc061220f2cd0ecc50cd18b
-    size: 9
-  - path: mwsa_model/output/predictions/en_predictions.txt
-    md5: f4b5a3950280215f8fbbd3f14b41a578
-    size: 85579
-de:
-  cmd: python -m mwsa_model.load_data data/train/ german.tsv
-  deps:
-  - path: data/train/german.tsv
-    md5: dd879482c2f97d2eae4eacd0993f87c0
-    size: 709658
-  - path: mwsa_model/load_data.py
-    md5: e0a7bd8e50320f9314afb9b0cdc09bc6
-    size: 1224
-  outs:
-  - path: mwsa_model/data/features_german.tsv.pkl
-    md5: 3218d7f8592a97cd62e7a348505b9326
-    size: 290272
-  - path: mwsa_model/data/labels_german.tsv.pkl
-    md5: e1cbee1a1164bd71735d2d8578f356d6
-    size: 9538
-de_train:
-  cmd: python -m mwsa_model.preprocess features_german.tsv.pkl labels_german.tsv.pkl
-    de
-  deps:
-  - path: mwsa_model/data/features_german.tsv.pkl
-    md5: 3218d7f8592a97cd62e7a348505b9326
-    size: 290272
-  - path: mwsa_model/data/labels_german.tsv.pkl
-    md5: e1cbee1a1164bd71735d2d8578f356d6
-    size: 9538
-  - path: mwsa_model/preprocess.py
-    md5: 3059b360c8f31c3db5ab4d43f0863de8
-    size: 2836
-  - path: mwsa_model/service/model_trainer.py
-    md5: 6d5b6b3e302f9c4793e42eaf91446653
-    size: 17780
-  outs:
-  - path: mwsa_model/output/metrics/de_cv_score.txt
-    md5: 767e00aee9519244771c19187b904142
-    size: 9
-  - path: mwsa_model/output/models/de.pkl
-    md5: 5ad58dfeb9c5288af4ef90dd8673a9e1
-    size: 25525256
-de_evaluate:
-  cmd: python -m mwsa_model.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
-  deps:
-  - path: data/reference_data/german.tsv
-    md5: 6e19c55a333e88ebf4c12cc81a4e1d5f
-    size: 89944
-  - path: data/test/german.tsv
-    md5: 8ef0cf90e6e707ce7c1b2b869b3fdd2b
-    size: 86761
-  - path: mwsa_model/evaluate.py
-    md5: b5a246252916a101481417977dcd555e
-    size: 1690
-  - path: mwsa_model/output/models/de.pkl
-    md5: 5ad58dfeb9c5288af4ef90dd8673a9e1
-    size: 25525256
-  outs:
-  - path: mwsa_model/output/metrics/metrics_de.txt
-    md5: 85dd733b4971cc99c846fa9d33e5dc51
-    size: 9
-  - path: mwsa_model/output/predictions/de_predictions.txt
-    md5: f90f88cf1d4d57ed6fb09d6df9624a89
-    size: 90025
+schema: '2.0'
+stages:
+  en:
+    cmd: python -m mwsa_model.load_data data/train english_nuig.tsv
+    deps:
+    - path: data/train/english_nuig.tsv
+      md5: 0980b9519f2aa83aecbf46f793ed4102
+      size: 1236333
+    - path: mwsa_model/load_data.py
+      md5: e0a7bd8e50320f9314afb9b0cdc09bc6
+      size: 1224
+    outs:
+    - path: mwsa_model/data/features_english_nuig.tsv.pkl
+      md5: 794b7587484aae63faf803ef13f770bc
+      size: 399441
+    - path: mwsa_model/data/labels_english_nuig.tsv.pkl
+      md5: a00bc01b22d700bb18c8cf127fcc86ad
+      size: 17443
+  en_train:
+    cmd: python -m mwsa_model.preprocess features_english_nuig.tsv.pkl labels_english_nuig.tsv.pkl
+      en
+    deps:
+    - path: mwsa_model/data/features_english_nuig.tsv.pkl
+      md5: 6923fd042bc13202dd807aa693355193
+      size: 399385
+    - path: mwsa_model/data/labels_english_nuig.tsv.pkl
+      md5: 35f0f3755f26972f873f1664f45e88eb
+      size: 17396
+    - path: mwsa_model/preprocess.py
+      md5: 3059b360c8f31c3db5ab4d43f0863de8
+      size: 2836
+    - path: mwsa_model/service/model_trainer.py
+      md5: 6d5b6b3e302f9c4793e42eaf91446653
+      size: 17780
+    outs:
+    - path: mwsa_model/output/metrics/en_cv_score.txt
+      md5: 8f74cf3dc2bf6dba08aeed8fdadb6013
+      size: 5
+    - path: mwsa_model/output/models/en.joblib
+      md5: c1093ff1ad0066bc72162e3c08bca809
+      size: 38836864
+    - path: mwsa_model/output/models/en.pkl
+      md5: 99043287e8393a04907d8014dccf7f1c
+      size: 38852665
+  en_evaluate:
+    cmd: python -m mwsa_model.evaluate en.pkl english_nuig.tsv metrics_en.txt en_predictions.txt
+    deps:
+    - path: data/reference_data/english_nuig.tsv
+      md5: 2fdd80ae3c21d1b4ff19b803edad18d8
+      size: 85664
+    - path: data/test/english_nuig.tsv
+      md5: 0e8cc9d2f29394691c5fd0a6eae07c78
+      size: 82686
+    - path: mwsa_model/evaluate.py
+      md5: b5a246252916a101481417977dcd555e
+      size: 1690
+    - path: mwsa_model/output/models/en.pkl
+      md5: 99043287e8393a04907d8014dccf7f1c
+      size: 38852665
+    outs:
+    - path: mwsa_model/output/metrics/metrics_en.txt
+      md5: a6a2a3b45bc061220f2cd0ecc50cd18b
+      size: 9
+    - path: mwsa_model/output/predictions/en_predictions.txt
+      md5: f4b5a3950280215f8fbbd3f14b41a578
+      size: 85579
+  de:
+    cmd: python -m mwsa_model.load_data data/train/ german.tsv
+    deps:
+    - path: data/train/german.tsv
+      md5: dd879482c2f97d2eae4eacd0993f87c0
+      size: 709658
+    - path: mwsa_model/load_data.py
+      md5: e0a7bd8e50320f9314afb9b0cdc09bc6
+      size: 1224
+    outs:
+    - path: mwsa_model/data/features_german.tsv.pkl
+      md5: 3218d7f8592a97cd62e7a348505b9326
+      size: 290272
+    - path: mwsa_model/data/labels_german.tsv.pkl
+      md5: e1cbee1a1164bd71735d2d8578f356d6
+      size: 9538
+  de_train:
+    cmd: python -m mwsa_model.preprocess features_german.tsv.pkl labels_german.tsv.pkl
+      de
+    deps:
+    - path: mwsa_model/data/features_german.tsv.pkl
+      md5: 3218d7f8592a97cd62e7a348505b9326
+      size: 290272
+    - path: mwsa_model/data/labels_german.tsv.pkl
+      md5: e1cbee1a1164bd71735d2d8578f356d6
+      size: 9538
+    - path: mwsa_model/preprocess.py
+      md5: 3059b360c8f31c3db5ab4d43f0863de8
+      size: 2836
+    - path: mwsa_model/service/model_trainer.py
+      md5: 6d5b6b3e302f9c4793e42eaf91446653
+      size: 17780
+    outs:
+    - path: mwsa_model/output/metrics/de_cv_score.txt
+      md5: 767e00aee9519244771c19187b904142
+      size: 9
+    - path: mwsa_model/output/models/de.pkl
+      md5: 5ad58dfeb9c5288af4ef90dd8673a9e1
+      size: 25525256
+  de_evaluate:
+    cmd: python -m mwsa_model.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
+    deps:
+    - path: data/reference_data/german.tsv
+      md5: 6e19c55a333e88ebf4c12cc81a4e1d5f
+      size: 89944
+    - path: data/test/german.tsv
+      md5: 8ef0cf90e6e707ce7c1b2b869b3fdd2b
+      size: 86761
+    - path: mwsa_model/evaluate.py
+      md5: b5a246252916a101481417977dcd555e
+      size: 1690
+    - path: mwsa_model/output/models/de.pkl
+      md5: 5ad58dfeb9c5288af4ef90dd8673a9e1
+      size: 25525256
+    outs:
+    - path: mwsa_model/output/metrics/metrics_de.txt
+      md5: 85dd733b4971cc99c846fa9d33e5dc51
+      size: 9
+    - path: mwsa_model/output/predictions/de_predictions.txt
+      md5: f90f88cf1d4d57ed6fb09d6df9624a89
+      size: 90025
