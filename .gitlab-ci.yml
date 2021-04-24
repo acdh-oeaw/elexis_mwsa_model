@@ -14,6 +14,7 @@ workflow:
 test:
   stage: test
   script:
+    - pip install --upgrade pip
     - pip install -r requirements.txt
     - python nltk_install.py
     - pytest -o log_cli=true  test/
@@ -25,6 +26,7 @@ test:
 dvc:
   stage: train
   script:
+    - pip install --upgrade pip
     - pip install dvc==2.0.10
     - pip install -r requirements.txt
     - python nltk_install.py
