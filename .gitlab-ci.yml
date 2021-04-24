@@ -2,6 +2,7 @@ image: "python:3.7.7-buster"
 stages:
   - test
   - train
+  - cml_run
   - deploy
 
 workflow:
@@ -36,6 +37,14 @@ dvc:
       - mwsa_model/output/models/en.pkl
       - mwsa_model/output/models/en.joblib
     expire_in: 4 weeks
+cml:
+  stage: cml_run
+  image: dvcorg/cml-py3:latest
+  script:
+    - cat mwsa_model/output/metrics/metrics_en.json >> report.md
+    - cml-publish mwsa_model/output/plots/confusion_matrix.png --md >> report.md
+    - cml-publish mwsa_model/output/plots/feature_importance.png --md >> report.md
+    - cml-send-comment report.md
 deploy:
   image: google/cloud-sdk
   stage: deploy
