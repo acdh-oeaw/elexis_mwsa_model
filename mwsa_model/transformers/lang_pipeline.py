@@ -20,8 +20,7 @@ english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedL
                                    #(features.TARGET_WORD_SYNSET_COUNT, TargetWordSynsetCountTransformer()),
                                    (features.SIMILARITY_DIFF_TO_TARGET, ToTargetSimilarityDiffTransformer()),
                                    #(features.SEMICOLON_DIFF, SemicolonCountTransformer()),
-                                   ('feature_selector', FeatureSelector()),
-                                   ('random_forest', RandomForestClassifier())])
+                                   ('feature_selector', FeatureSelector())])
 german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.German)),
                                   (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
                                   (features.SIMILARITY, SimilarityProcessor()),
