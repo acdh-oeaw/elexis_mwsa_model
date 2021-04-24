@@ -41,6 +41,7 @@ cml:
   stage: cml_run
   image: dvcorg/cml-py3:latest
   script:
+    - export NODE_TLS_REJECT_UNAUTHORIZED=0
     - cat mwsa_model/output/metrics/metrics_en.json >> report.md
     - cml-publish mwsa_model/output/plots/confusion_matrix.png --md >> report.md
     - cml-publish mwsa_model/output/plots/feature_importance.png --md >> report.md

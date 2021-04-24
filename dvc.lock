@@ -40,29 +40,35 @@ stages:
         - balanced
         - balanced_subsample
         random_forest.random_forest__max_depth:
-        - 2
+        - 15
+        - 30
         random_forest.random_forest__max_features:
         - auto
         random_forest.random_forest__min_samples_leaf:
-        - 2
+        - 3
+        - 5
+        - 10
         random_forest.random_forest__min_samples_split:
         - 2
+        - 5
         random_forest.random_forest__n_estimators:
-        - 10
+        - 50
+        - 300
+        - 500
         random_forest.random_forest__n_jobs:
         - -1
         random_forest.random_forest__random_state:
         - 7
     outs:
     - path: mwsa_model/output/metrics/en_cv_score.txt
-      md5: d6a6b94b8801aa8b5aadd84723e5b19a
+      md5: f7562bc9a89cbe34e9d7014f8ec2bd9e
       size: 26
     - path: mwsa_model/output/models/en.joblib
-      md5: 38ce07a75516a9be9dfe0f1008078c1b
-      size: 15651
+      md5: c5a21f848eede3d64cde4f509e8489c5
+      size: 42435546
     - path: mwsa_model/output/models/en.pkl
-      md5: a2569b5e4dc7a6e27fcafb9c866abbd7
-      size: 16037
+      md5: dff36cb7677e8990d043afcc8e598392
+      size: 42450468
   en_evaluate:
     cmd: python -m mwsa_model.evaluate en.pkl english_nuig.tsv metrics_en.json en_predictions.txt
     deps:
@@ -76,18 +82,18 @@ stages:
       md5: 1a2fdd02257ba058fb904c1198dcc7fd
       size: 4056
     - path: mwsa_model/output/models/en.pkl
-      md5: a2569b5e4dc7a6e27fcafb9c866abbd7
-      size: 16037
+      md5: dff36cb7677e8990d043afcc8e598392
+      size: 42450468
     - path: mwsa_model/output/pipeline/pipeline_english_nuig.tsv.pkl
       md5: 8a7ba3b0faeea1e6de035a04af89bd9e
       size: 1126
     outs:
     - path: mwsa_model/output/metrics/metrics_en.json
-      md5: 39d76bd3a33a0155330a48453e5b00c2
+      md5: ff1ceed5dba2622a2aaef008ddf688ba
       size: 89
     - path: mwsa_model/output/predictions/en_predictions.txt
-      md5: ba6d4521852f2fe285de637576c5f28a
-      size: 85765
+      md5: db1ea650e77b617a812d92769dc2b242
+      size: 85578
   de:
     cmd: python -m mwsa_model.load_data data/train/ german.tsv
     deps:
