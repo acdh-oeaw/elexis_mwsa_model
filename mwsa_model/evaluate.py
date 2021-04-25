@@ -63,13 +63,13 @@ with open(model_file_name, 'rb') as model_file:
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     data_loader = DataLoader()
-    testdata = data_loader.load('data/test', dataset, testdata=True)
+    testdata = data_loader.load('mwsa/test', dataset, testdata=True)
 
     model_trainer = MwsaModelTrainer()
 
     preprocessed = pipeline.transform(testdata)
 
-    reference_labels = data_loader.load('data/reference_data', dataset)['relation']
+    reference_labels = data_loader.load('mwsa/reference', dataset)['relation']
 
     predicted = model.predict(preprocessed)
     predicted_series = pd.Series(predicted)

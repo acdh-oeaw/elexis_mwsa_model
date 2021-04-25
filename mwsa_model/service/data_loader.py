@@ -1,26 +1,33 @@
 import logging
 
+import dvc.api
 import pandas as pd
+
 pd.options.mode.chained_assignment = None
 
 class DataLoader(object):
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def load(self, file_path, file_name, testdata=False):
+    def load(self, file_path, file_name, testdata=False, rev=None):
         file = file_path + '/' + file_name
-
         loaded_data = None
-        try:
-            loaded_data = pd.read_csv(file, sep='\t', header=None)
+        with dvc.api.open(
+            file,
+            repo='https://gitlab.com/acdh-oeaw/elexis/mwsa_data_registry.git',
+            mode='r',
+            rev=rev) as fd:
 
-            if testdata:
-                loaded_data.columns = ['word', 'pos', 'def1', 'def2']
-            else:
-                loaded_data.columns = ['word', 'pos', 'def1', 'def2', 'relation']
+            try:
+                loaded_data = pd.read_csv(fd, sep='\t', header=None)
 
-        except FileNotFoundError:
-            self.logger.warning('file '+ str(file) + 'not found')
+                if testdata:
+                    loaded_data.columns = ['word', 'pos', 'def1', 'def2']
+                else:
+                    loaded_data.columns = ['word', 'pos', 'def1', 'def2', 'relation']
+
+            except FileNotFoundError:
+                self.logger.warning('file '+ str(file) + 'not found')
 
         return loaded_data
 

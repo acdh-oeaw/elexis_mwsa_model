@@ -33,7 +33,7 @@ file_name = sys.argv[2]
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
-    features, labels = load_data(file_path, file_name)
+    features, labels = load_data('mwsa/train', 'english_nuig.tsv')
 
 output_dir = 'mwsa_model/data/'
 Path(output_dir).mkdir(parents=True, exist_ok=True)
