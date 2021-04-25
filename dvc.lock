@@ -1,14 +1,15 @@
 schema: '2.0'
 stages:
   en:
-    cmd: python -m mwsa_model.load_data data/train english_nuig.tsv
+    cmd: python -m mwsa_model.load_data en
     deps:
-    - path: data/train/english_nuig.tsv
-      md5: 0980b9519f2aa83aecbf46f793ed4102
-      size: 1236333
     - path: mwsa_model/load_data.py
-      md5: 6c29245d92bcaf2f7dee1c9478343170
-      size: 1234
+      md5: 9792f566e80f362ecf504a556c4a7f7f
+      size: 1472
+    params:
+      en_params.yaml:
+        data.dataset: english_nuig.tsv
+        data.version: v1.0
     outs:
     - path: mwsa_model/data/features_english_nuig.tsv.pkl
       md5: 794b7587484aae63faf803ef13f770bc
@@ -38,62 +39,53 @@ stages:
         - true
         random_forest.random_forest__class_weight:
         - balanced
-        - balanced_subsample
         random_forest.random_forest__max_depth:
-        - 15
-        - 30
+        - 20
         random_forest.random_forest__max_features:
         - auto
         random_forest.random_forest__min_samples_leaf:
         - 3
-        - 5
-        - 10
         random_forest.random_forest__min_samples_split:
         - 2
-        - 5
         random_forest.random_forest__n_estimators:
-        - 50
-        - 300
-        - 500
+        - 2
         random_forest.random_forest__n_jobs:
         - -1
         random_forest.random_forest__random_state:
         - 7
     outs:
     - path: mwsa_model/output/metrics/en_cv_score.txt
-      md5: f7562bc9a89cbe34e9d7014f8ec2bd9e
+      md5: 518f22bd9e42dfa98a237a7daf2be5dd
       size: 26
     - path: mwsa_model/output/models/en.joblib
-      md5: c5a21f848eede3d64cde4f509e8489c5
-      size: 42435546
+      md5: f1210414fa02ac34d55b05883fb023aa
+      size: 279451
     - path: mwsa_model/output/models/en.pkl
-      md5: dff36cb7677e8990d043afcc8e598392
-      size: 42450468
+      md5: cb21571cb8370cf877c5a2a61285f65a
+      size: 279485
   en_evaluate:
-    cmd: python -m mwsa_model.evaluate en.pkl english_nuig.tsv metrics_en.json en_predictions.txt
+    cmd: python -m mwsa_model.evaluate en.pkl metrics_en.json en_predictions.txt en
     deps:
-    - path: data/reference_data/english_nuig.tsv
-      md5: 2fdd80ae3c21d1b4ff19b803edad18d8
-      size: 85664
-    - path: data/test/english_nuig.tsv
-      md5: 0e8cc9d2f29394691c5fd0a6eae07c78
-      size: 82686
     - path: mwsa_model/evaluate.py
-      md5: 1a2fdd02257ba058fb904c1198dcc7fd
-      size: 4056
+      md5: bb545e0f3da0da2bf8e0b844304cc1c3
+      size: 4201
     - path: mwsa_model/output/models/en.pkl
-      md5: dff36cb7677e8990d043afcc8e598392
-      size: 42450468
+      md5: cb21571cb8370cf877c5a2a61285f65a
+      size: 279485
     - path: mwsa_model/output/pipeline/pipeline_english_nuig.tsv.pkl
       md5: 8a7ba3b0faeea1e6de035a04af89bd9e
       size: 1126
+    params:
+      en_params.yaml:
+        data.dataset: english_nuig.tsv
+        data.version: v1.0
     outs:
     - path: mwsa_model/output/metrics/metrics_en.json
-      md5: ff1ceed5dba2622a2aaef008ddf688ba
-      size: 89
+      md5: be6abd8c16ffbf83fb2366f81fd20b28
+      size: 77
     - path: mwsa_model/output/predictions/en_predictions.txt
-      md5: db1ea650e77b617a812d92769dc2b242
-      size: 85578
+      md5: c239eb8b1a028f050d78f6900d718c57
+      size: 85687
   de:
     cmd: python -m mwsa_model.load_data data/train/ german.tsv
     deps:

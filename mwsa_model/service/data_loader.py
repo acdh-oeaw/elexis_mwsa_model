@@ -9,14 +9,14 @@ class DataLoader(object):
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def load(self, file_path, file_name, testdata=False, rev=None):
+    def load(self, file_path, file_name, testdata=False, version=None):
         file = file_path + '/' + file_name
         loaded_data = None
         with dvc.api.open(
             file,
             repo='https://gitlab.com/acdh-oeaw/elexis/mwsa_data_registry.git',
             mode='r',
-            rev=rev) as fd:
+            rev=version) as fd:
 
             try:
                 loaded_data = pd.read_csv(fd, sep='\t', header=None)
