@@ -1,16 +1,21 @@
 import logging
+from pathlib import Path
+
 import dill as pickle
 import sys
+import warnings
 
 from pandas.core.common import SettingWithCopyWarning
-import joblib
+from sklearn.pipeline import Pipeline
+
 from mwsa_model.service.model_trainer import MwsaModelTrainer
 from mwsa_model.service.util import SupportedLanguages
-import warnings
-#warnings.filterwarnings("ignore", category=UserWarning)
 
+OUTPUT_DIR = 'mwsa_model/output/'
+PIPELINE_DIR = OUTPUT_DIR+'pipeline/'
+DATA_DIR = 'mwsa_model/data/'
 
-from pathlib import Path
+Path(PIPELINE_DIR).mkdir(parents=True, exist_ok=True)
 
 warnings.filterwarnings(
     action='ignore',
@@ -21,76 +26,31 @@ warnings.filterwarnings(
 logger = logging.getLogger('preprocess')
 logger.setLevel(logging.INFO)
 
-print(len(sys.argv))
 for arg in sys.argv:
-    print(arg)
+    logger.debug(arg)
 
 
-if len(sys.argv) != 4:
+if len(sys.argv) != 3:
     logger.error('Arguments error. Usage \n')
     logger.error('\t python preprcess.py features_file labels_file language')
 
-lang = sys.argv[3]
 
-data_dir = 'mwsa_model/data/'
-with open(data_dir+sys.argv[1], 'rb') as pickle_file:
+dataset = sys.argv[1]
+lang = sys.argv[2]
+
+with open(DATA_DIR+'features_'+dataset+'.pkl', 'rb') as pickle_file:
     features = pickle.load(pickle_file)
-
-with open(data_dir+sys.argv[2], 'rb') as pickle_file:
-    labels = pickle.load(pickle_file)
 
 model_trainer = MwsaModelTrainer()
 
-pipeline = model_trainer.build_pipeline(SupportedLanguages(lang))
+pipeline: Pipeline = model_trainer.build_pipeline(SupportedLanguages(lang))
+pipeline.set_params(preprocess__lang=SupportedLanguages(lang))
+preprocessed = pipeline.transform(features)
 
-params = {
-    'preprocess__lang':[SupportedLanguages(lang)],
-    'random_forest__bootstrap': [True],
-    'random_forest__class_weight': ['balanced', 'balanced_subsample'],
-    'random_forest__max_depth': [15, 30],
-    'random_forest__max_features': ['auto'],
-    'random_forest__min_samples_leaf': [3, 5, 10],
-    'random_forest__min_samples_split': [2, 5],
-    'random_forest__n_estimators': [50,300, 500],
-    'random_forest__n_jobs': [-1]
-}
-
-params_min = {
-        'preprocess__lang': [SupportedLanguages(lang)],
-        'random_forest__bootstrap': [True],
-        'random_forest__class_weight': ['balanced', 'balanced_subsample'],
-        'random_forest__max_depth': [30],
-        'random_forest__max_features': ['auto'],
-        'random_forest__min_samples_leaf': [3, 5],
-        'random_forest__min_samples_split': [2],
-        'random_forest__n_estimators': [300],
-        'random_forest__n_jobs': [-1]
-    }
-
-grid_search = model_trainer.configure_grid_search(pipeline, params_min)
-
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    model = grid_search.fit(features, labels)
+with open(PIPELINE_DIR+'pipeline_'+dataset+'.pkl', 'wb+') as file:
+    pickle.dump(pipeline, file)
+with open(OUTPUT_DIR+'preprocessed_'+dataset+'.pkl', 'wb+') as file:
+    pickle.dump(preprocessed, file)
 
 
-model_filename = 'mwsa_model/output/models/'+lang+'.pkl'
-path = Path(model_filename)
-path.parent.mkdir(parents=True, exist_ok=True)
 
-with open(model_filename, 'wb+') as file:
-    pickle.dump(model, file)
-
-joblib_filename = 'mwsa_model/output/models/'+lang+'.joblib'
-path = Path(joblib_filename)
-path.parent.mkdir(parents=True, exist_ok=True)
-
-with open(joblib_filename, 'wb+') as file:
-    joblib.dump(model, file)
-
-score_filename = 'mwsa_model/output/metrics/'+lang+'_cv_score.txt'
-path = Path(score_filename)
-path.parent.mkdir(parents=True, exist_ok=True)
-
-with open(score_filename, 'w+') as fd:
-    fd.write('{:4f}\n'.format(model.best_score_))

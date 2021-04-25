@@ -31,7 +31,7 @@ class MwsaModelTrainer(object):
     def train(self, features, labels, grid_search):
         return grid_search.fit(features, labels)
 
-    def build_pipeline(self, lang):
+    def build_pipeline(self, lang) -> Pipeline:
         return self.pipelines[lang]
 
     def configure_grid_search(self, pipeline, params, score='f1', cv=5, verbose=1):

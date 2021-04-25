@@ -2,6 +2,7 @@ image: "python:3.7.7-buster"
 stages:
   - test
   - train
+  - cml_run
   - deploy
 
 workflow:
@@ -14,6 +15,7 @@ workflow:
 test:
   stage: test
   script:
+    - pip install --upgrade pip
     - pip install -r requirements.txt
     - python nltk_install.py
     - pytest -o log_cli=true  test/
@@ -25,7 +27,7 @@ test:
 dvc:
   stage: train
   script:
-    - pip install dvc==2.0.10
+    - pip install --upgrade pip
     - pip install -r requirements.txt
     - python nltk_install.py
     - dvc repro -pf $STAGES
@@ -35,6 +37,15 @@ dvc:
       - mwsa_model/output/models/en.pkl
       - mwsa_model/output/models/en.joblib
     expire_in: 4 weeks
+cml:
+  stage: cml_run
+  image: dvcorg/cml-py3:latest
+  script:
+    - export NODE_TLS_REJECT_UNAUTHORIZED=0
+    - cat mwsa_model/output/metrics/metrics_en.json >> report.md
+    - cml-publish mwsa_model/output/plots/confusion_matrix.png --md >> report.md
+    - cml-publish mwsa_model/output/plots/feature_importance.png --md >> report.md
+    - cml-send-comment report.md
 deploy:
   image: google/cloud-sdk
   stage: deploy

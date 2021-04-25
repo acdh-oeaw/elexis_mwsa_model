@@ -1,6 +1,7 @@
-train:
-  params:
-    'preprocess__lang':[SupportedLanguages(lang)]
+lang:
+    preprocess__lang: 'en'
+random_forest:
+    'random_forest__random_state': [7]
     'random_forest__bootstrap': [True]
     'random_forest__class_weight': ['balanced', 'balanced_subsample']
     'random_forest__max_depth': [15, 30]
