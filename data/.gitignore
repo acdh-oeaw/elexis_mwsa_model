@@ -14,4 +14,7 @@ data/train/portuguese.tsv
 data/train/english_nuig.tsv
 data/train/english_kd.tsv
 data/train/hungarian.tsv
+train
+test
+reference_data
 data/train/english.tsv
