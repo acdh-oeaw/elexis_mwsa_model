@@ -4,8 +4,8 @@ stages:
     cmd: python -m mwsa_model.load_data en
     deps:
     - path: mwsa_model/load_data.py
-      md5: 99f6205b750c2e8d24c1618016333a6f
-      size: 1479
+      md5: 5b8c8555c062707fc9cd3af441a8d6ee
+      size: 1488
     params:
       en_params.yaml:
         data.dataset: english_nuig.tsv

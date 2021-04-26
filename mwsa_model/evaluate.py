@@ -51,6 +51,7 @@ with open(config_file, 'r') as fd:
     params = yaml.safe_load(fd)
 
 dataset = params['data']['dataset']
+version = params['data']['version']
 
 output_dir = 'mwsa_model/output/'
 model_output_dir = output_dir + 'models/'
@@ -70,13 +71,13 @@ with open(model_file_name, 'rb') as model_file:
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     data_loader = DataLoader()
-    testdata = data_loader.load('mwsa/test', dataset, testdata=True)
+    testdata = data_loader.load('mwsa/test', dataset, testdata=True, version=version)
 
     model_trainer = MwsaModelTrainer()
 
     preprocessed = pipeline.transform(testdata)
 
-    reference_labels = data_loader.load('mwsa/reference', dataset)['relation']
+    reference_labels = data_loader.load('mwsa/reference', dataset, version=version)['relation']
 
     predicted = model.predict(preprocessed)
     predicted_series = pd.Series(predicted)
