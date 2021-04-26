@@ -16,7 +16,7 @@ class DataLoader(object):
         self.logger.info('version:' + version)
         with dvc.api.open(
             file,
-            repo='https://gitlab.com/acdh-oeaw/elexis/mwsa_data_registry.git',
+            repo='https://'+os.environ['DEPLOY_USERNAME']+':'+os.environ['DEPLOY_TOKEN']+'@'+gitlab.com/acdh-oeaw/elexis/mwsa_data_registry.git',
             mode='r',
             rev=version) as fd:
 

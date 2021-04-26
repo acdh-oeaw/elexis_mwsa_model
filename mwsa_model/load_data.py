@@ -3,7 +3,7 @@ import sys
 import pickle
 import warnings
 from pathlib import Path
-
+import os
 import yaml
 from pandas.core.common import SettingWithCopyWarning
 from mwsa_model.service.data_loader import DataLoader
@@ -26,7 +26,7 @@ logger.setLevel(logging.INFO)
 
 logger.info("Loading data")
 
-if len(sys.argv) != 3:
+if len(sys.argv) != 2:
     logger.error('Arguments error. Usage \n')
     logger.error('\t python data_loader.py file_path file_name')
 
