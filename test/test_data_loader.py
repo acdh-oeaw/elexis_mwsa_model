@@ -13,10 +13,11 @@ sys.path.append('/Users/seungbinyim/Development/repos/elexis/mwsa_model')
 
 
 class DataLoaderTest(unittest.TestCase):
+    @pytest.mark.slow
     def test_load_data(self):
         data_loader = DataLoader()
         file_name = 'english_nuig.tsv'
-        directory = 'data/train'
+        directory = 'mwsa/train'
 
         data = data_loader.load(directory, file_name)
 

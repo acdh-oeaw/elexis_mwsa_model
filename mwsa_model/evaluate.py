@@ -7,6 +7,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
+import yaml
 from pandas.core.common import SettingWithCopyWarning
 from sklearn.metrics import f1_score, precision_score, recall_score, confusion_matrix, plot_confusion_matrix
 import seaborn as sns
@@ -41,9 +42,16 @@ if len(sys.argv) != 5:
     logger.error('\t python evaluate.py language model_name test_data_filename metrics_filename prediction_filename')
 
 model = sys.argv[1]
-dataset = sys.argv[2]
-metrics_file = sys.argv[3]
-prediction_file = sys.argv[4]
+metrics_file = sys.argv[2]
+prediction_file = sys.argv[3]
+lang = sys.argv[4]
+
+config_file = lang + '_params.yaml'
+with open(config_file, 'r') as fd:
+    params = yaml.safe_load(fd)
+
+dataset = params['data']['dataset']
+version = params['data']['version']
 
 output_dir = 'mwsa_model/output/'
 model_output_dir = output_dir + 'models/'
@@ -63,13 +71,13 @@ with open(model_file_name, 'rb') as model_file:
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     data_loader = DataLoader()
-    testdata = data_loader.load('data/test', dataset, testdata=True)
+    testdata = data_loader.load('mwsa/test', dataset, testdata=True, version=version)
 
     model_trainer = MwsaModelTrainer()
 
     preprocessed = pipeline.transform(testdata)
 
-    reference_labels = data_loader.load('data/reference_data', dataset)['relation']
+    reference_labels = data_loader.load('mwsa/reference', dataset, version=version)['relation']
 
     predicted = model.predict(preprocessed)
     predicted_series = pd.Series(predicted)

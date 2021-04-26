@@ -5,7 +5,7 @@ unusual	adjective	being definitely out of the ordinary and unexpected; slightly 
 tramper	noun	someone who walks with a heavy noisy gait or who stamps on the ground	one who tramps; a stroller; a vagrant or vagabond; a tramp.	none
 tramper	noun	a foot traveler; someone who goes on an extended walk (for pleasure)	one who tramps; a stroller; a vagrant or vagabond; a tramp.	none
 procrastinate	verb	postpone or delay needlessly	to delay; to be dilatory.	exact
-procrastinate	verb	postpone or delay needlessly	to put off till to-morrow, or from day to day; to defer; to postpone; to delay; .	exact
+procrastinate	verb	postpone or delay needlessly	to put off till to-morrow, or from day to day; to defer; to postpone; to delay; .	none
 procrastinate	verb	postpone doing what one should be doing	to delay; to be dilatory.	none
 procrastinate	verb	postpone doing what one should be doing	to put off till to-morrow, or from day to day; to defer; to postpone; to delay; .	exact
 reject	verb	refuse to accept	to cast from one; to throw away; to discard.	none
@@ -29,7 +29,7 @@ reject	verb	deem wrong or inappropriate	to refuse to grant; .	none
 reject	verb	refuse to accept or acknowledge	to cast from one; to throw away; to discard.	none
 reject	verb	refuse to accept or acknowledge	to refuse to receive or to acknowledge; to decline haughtily or harshly; to repudiate.	exact
 reject	verb	refuse to accept or acknowledge	to refuse to grant; .	exact
-grumble	verb	to utter or emit low dull rumbling sounds	to express or utter with grumbling.	narrower
+grumble	verb	to utter or emit low dull rumbling sounds	to express or utter with grumbling.	exact
 grumble	verb	to utter or emit low dull rumbling sounds	to murmur or mutter with discontent; to make ill-natured complaints in a low voice and a surly manner.	none
 grumble	verb	to utter or emit low dull rumbling sounds	to growl; to snarl in deep tones; .	none
 grumble	verb	to utter or emit low dull rumbling sounds	to rumble; to make a low, harsh, and heavy sound; to mutter; .	exact
@@ -114,7 +114,7 @@ mean	adjective	approximating the statistical norm or average or expected value	d
 mean	adjective	approximating the statistical norm or average or expected value	occupying a middle position; middle; being about midway between extremes.	none
 mean	adjective	approximating the statistical norm or average or expected value	intermediate in excellence of any kind.	none
 mean	adjective	approximating the statistical norm or average or expected value	wanting dignity of mind; low-minded; base; destitute of honor; spiritless; .	none
-mean	adjective	approximating the statistical norm or average or expected value	average; having an intermediate value between two extremes, or between the several successive values of a variable quantity during one cycle of variation;	narrower
+mean	adjective	approximating the statistical norm or average or expected value	average; having an intermediate value between two extremes, or between the several successive values of a variable quantity during one cycle of variation;	exact
 mean	adjective	approximating the statistical norm or average or expected value	of little value or account; worthy of little or no regard; contemptible; despicable.	none
 mean	adjective	approximating the statistical norm or average or expected value	of poor quality; .	none
 mean	adjective	approximating the statistical norm or average or expected value	penurious; stingy; close-fisted; illiberal; .	none
@@ -123,7 +123,7 @@ mean	adjective	of no value or worth	occupying a middle position; middle; being a
 mean	adjective	of no value or worth	intermediate in excellence of any kind.	none
 mean	adjective	of no value or worth	wanting dignity of mind; low-minded; base; destitute of honor; spiritless; .	none
 mean	adjective	of no value or worth	average; having an intermediate value between two extremes, or between the several successive values of a variable quantity during one cycle of variation;	none
-mean	adjective	of no value or worth	of little value or account; worthy of little or no regard; contemptible; despicable.	none
+mean	adjective	of no value or worth	of little value or account; worthy of little or no regard; contemptible; despicable.	narrower
 mean	adjective	of no value or worth	of poor quality; .	none
 mean	adjective	of no value or worth	penurious; stingy; close-fisted; illiberal; .	none
 mean	adjective	having or showing an ignoble lack of honor or morality	destitute of distinction or eminence; common; low; vulgar; humble.	none
@@ -180,11 +180,11 @@ sheath	noun	a protective covering (as for a knife or sword)	a case for the recep
 sheath	noun	an enveloping structure or covering enclosing an animal or plant organ or part	a case for the reception of a sword, hunting knife, or other long and slender instrument; a scabbard.	none
 sheath	noun	a dress suitable for formal occasions	a case for the reception of a sword, hunting knife, or other long and slender instrument; a scabbard.	none
 tithe	verb	levy a tithe on (produce or a crop)	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	exact
-tithe	verb	levy a tithe on (produce or a crop)	tp pay tithes.	none
+tithe	verb	levy a tithe on (produce or a crop)	tp pay tithes.	exact
 tithe	verb	pay one tenth of; pay tithes on, especially to the church	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	exact
 tithe	verb	pay one tenth of; pay tithes on, especially to the church	tp pay tithes.	exact
 tithe	verb	exact a tithe from	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	none
-tithe	verb	exact a tithe from	tp pay tithes.	none
+tithe	verb	exact a tithe from	tp pay tithes.	exact
 tithe	verb	pay a tenth of one's income, especially to the church	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	exact
 tithe	verb	pay a tenth of one's income, especially to the church	tp pay tithes.	none
 jackknife	noun	a large knife with one or more folding blades	a large, strong clasp knife for the pocket; a pocket knife.	exact
@@ -235,7 +235,7 @@ gum	verb	become sticky	to deepen and enlarge the spaces between the teeth of (a 
 gum	verb	become sticky	to exude or form gum; to become gummy.	none
 gum	verb	become sticky	to smear with gum; to close with gum; to unite or stiffen by gum or a gumlike substance; to make sticky with a gumlike substance.	none
 gum	verb	become sticky	to chew with the gums, rather than with the teeth.	none
-gum	verb	grind with the gums; chew without teeth and with great difficulty	to deepen and enlarge the spaces between the teeth of (a worn saw).	exact
+gum	verb	grind with the gums; chew without teeth and with great difficulty	to deepen and enlarge the spaces between the teeth of (a worn saw).	none
 gum	verb	grind with the gums; chew without teeth and with great difficulty	to exude or form gum; to become gummy.	narrower
 gum	verb	grind with the gums; chew without teeth and with great difficulty	to smear with gum; to close with gum; to unite or stiffen by gum or a gumlike substance; to make sticky with a gumlike substance.	none
 gum	verb	grind with the gums; chew without teeth and with great difficulty	to chew with the gums, rather than with the teeth.	exact
@@ -268,11 +268,11 @@ lapse	verb	go back to bad behavior	to let slip; to permit to devolve on another;
 lapse	verb	go back to bad behavior	to pass slowly and smoothly downward, backward, or away; to slip downward, backward, or away; to glide; -- mostly restricted to figurative uses.	none
 lapse	verb	go back to bad behavior	to slide or slip in moral conduct; to fail in duty; to fall from virtue; to deviate from rectitude; to commit a fault by inadvertence or mistake.	none
 lapse	verb	go back to bad behavior	to surprise in a fault or error; hence, to surprise or catch, as an offender.	none
-lapse	verb	pass by	to let slip; to permit to devolve on another; to allow to pass.	none
+lapse	verb	pass by	to let slip; to permit to devolve on another; to allow to pass.	exact
 lapse	verb	pass by	to pass slowly and smoothly downward, backward, or away; to slip downward, backward, or away; to glide; -- mostly restricted to figurative uses.	none
 lapse	verb	pass by	to slide or slip in moral conduct; to fail in duty; to fall from virtue; to deviate from rectitude; to commit a fault by inadvertence or mistake.	none
 lapse	verb	pass by	to surprise in a fault or error; hence, to surprise or catch, as an offender.	none
-lapse	verb	pass into a specified state or condition	to let slip; to permit to devolve on another; to allow to pass.	none
+lapse	verb	pass into a specified state or condition	to let slip; to permit to devolve on another; to allow to pass.	narrower
 lapse	verb	pass into a specified state or condition	to pass slowly and smoothly downward, backward, or away; to slip downward, backward, or away; to glide; -- mostly restricted to figurative uses.	none
 lapse	verb	pass into a specified state or condition	to slide or slip in moral conduct; to fail in duty; to fall from virtue; to deviate from rectitude; to commit a fault by inadvertence or mistake.	none
 lapse	verb	pass into a specified state or condition	to surprise in a fault or error; hence, to surprise or catch, as an offender.	none
@@ -283,7 +283,7 @@ conglobation	noun	an occurrence combining miscellaneous things into a (more or l
 papyrus	noun	paper made from the papyrus plant by cutting it in strips and pressing it flat; used by ancient Egyptians and Greeks and Romans	a tall rushlike plant () of the sedge family, formerly growing in egypt, and now found in abyssinia, syria, sicily, etc. the stem is triangular and about an inch thick.	none
 papyrus	noun	paper made from the papyrus plant by cutting it in strips and pressing it flat; used by ancient Egyptians and Greeks and Romans	the material upon which the ancient egyptians wrote. it was formed by cutting the stem of the plant into thin longitudinal slices, which were gummed together and pressed.	exact
 papyrus	noun	paper made from the papyrus plant by cutting it in strips and pressing it flat; used by ancient Egyptians and Greeks and Romans	a manuscript written on papyrus; esp., , written scrolls made of papyrus; .	none
-papyrus	noun	tall sedge of the Nile valley yielding fiber that served many purposes in historic times	a tall rushlike plant () of the sedge family, formerly growing in egypt, and now found in abyssinia, syria, sicily, etc. the stem is triangular and about an inch thick.	narrower
+papyrus	noun	tall sedge of the Nile valley yielding fiber that served many purposes in historic times	a tall rushlike plant () of the sedge family, formerly growing in egypt, and now found in abyssinia, syria, sicily, etc. the stem is triangular and about an inch thick.	none
 papyrus	noun	tall sedge of the Nile valley yielding fiber that served many purposes in historic times	the material upon which the ancient egyptians wrote. it was formed by cutting the stem of the plant into thin longitudinal slices, which were gummed together and pressed.	none
 papyrus	noun	tall sedge of the Nile valley yielding fiber that served many purposes in historic times	a manuscript written on papyrus; esp., , written scrolls made of papyrus; .	none
 papyrus	noun	a document written on papyrus	a tall rushlike plant () of the sedge family, formerly growing in egypt, and now found in abyssinia, syria, sicily, etc. the stem is triangular and about an inch thick.	none
@@ -351,7 +351,7 @@ tool	verb	drive	to travel in a vehicle; to ride or drive.	exact
 tool	verb	drive	to shape, form, or finish with a tool.	none
 tool	verb	drive	to drive, as a coach.	exact
 tool	verb	furnish with tools	to travel in a vehicle; to ride or drive.	none
-tool	verb	furnish with tools	to shape, form, or finish with a tool.	none
+tool	verb	furnish with tools	to shape, form, or finish with a tool.	exact
 tool	verb	furnish with tools	to drive, as a coach.	none
 tool	verb	ride in a car with no particular goal and just for the pleasure of it	to travel in a vehicle; to ride or drive.	exact
 tool	verb	ride in a car with no particular goal and just for the pleasure of it	to shape, form, or finish with a tool.	none
@@ -430,7 +430,7 @@ bellied	adjective	curving outward	having (such) a belly; puffed out; -- used in 
 bellied	adjective	having a belly; often used in combination	having (such) a belly; puffed out; -- used in composition; .	exact
 besieger	noun	an enemy who lays siege to your position	one who besieges; -- opposed to .	none
 besieger	noun	an energetic petitioner	one who besieges; -- opposed to .	none
-twayblade	noun	an orchid of the genus Liparis having a pair of leaves	any one of several orchidaceous plants which have only two leaves, as the species of  and of .	exact
+twayblade	noun	an orchid of the genus Liparis having a pair of leaves	any one of several orchidaceous plants which have only two leaves, as the species of  and of .	narrower
 twayblade	noun	orchid having a pair of ovate leaves and a long slender raceme of green flowers sometimes tinged red-brown; Europe to central Asia	any one of several orchidaceous plants which have only two leaves, as the species of  and of .	none
 ten	noun	the cardinal number that is the sum of nine and one; the base of the decimal system	the number greater by one than nine; the sum of five and five; ten units of objects.	exact
 ten	noun	the cardinal number that is the sum of nine and one; the base of the decimal system	a symbol representing ten units, as 10, , or .	none
@@ -507,7 +507,7 @@ register	verb	be aware of	to correspond in relative position;  ,  when the corre
 register	verb	be aware of	to enroll; to enter in a list.	none
 register	verb	be aware of	to enter the name of the owner of (a share of stock, a bond, or other security) in a register, or record book. a registered security is transferable only on the written assignment of the owner of record and on surrender of his bond, stock certificate, or the like.	none
 register	verb	enter into someone's consciousness	to enroll one's name in a register.	none
-register	verb	enter into someone's consciousness	to enter in a register; to record formally and distinctly, as for future use or service.	exact
+register	verb	enter into someone's consciousness	to enter in a register; to record formally and distinctly, as for future use or service.	narrower
 register	verb	enter into someone's consciousness	to correspond in relative position;  ,  when the corresponding parts fall in the same line, or when line falls exactly upon line in reverse pages, or (as in chromatic printing) where the various colors of the design are printed consecutively, and perfect adjustment of parts is necessary.	none
 register	verb	enter into someone's consciousness	to enroll; to enter in a list.	exact
 register	verb	enter into someone's consciousness	to enter the name of the owner of (a share of stock, a bond, or other security) in a register, or record book. a registered security is transferable only on the written assignment of the owner of record and on surrender of his bond, stock certificate, or the like.	none
@@ -526,7 +526,7 @@ register	verb	show in one's face	to enter in a register; to record formally and 
 register	verb	show in one's face	to correspond in relative position;  ,  when the corresponding parts fall in the same line, or when line falls exactly upon line in reverse pages, or (as in chromatic printing) where the various colors of the design are printed consecutively, and perfect adjustment of parts is necessary.	none
 register	verb	show in one's face	to enroll; to enter in a list.	none
 register	verb	show in one's face	to enter the name of the owner of (a share of stock, a bond, or other security) in a register, or record book. a registered security is transferable only on the written assignment of the owner of record and on surrender of his bond, stock certificate, or the like.	none
-register	verb	manipulate the registers of an organ	to enroll one's name in a register.	exact
+register	verb	manipulate the registers of an organ	to enroll one's name in a register.	none
 register	verb	manipulate the registers of an organ	to enter in a register; to record formally and distinctly, as for future use or service.	none
 register	verb	manipulate the registers of an organ	to correspond in relative position;  ,  when the corresponding parts fall in the same line, or when line falls exactly upon line in reverse pages, or (as in chromatic printing) where the various colors of the design are printed consecutively, and perfect adjustment of parts is necessary.	none
 register	verb	manipulate the registers of an organ	to enroll; to enter in a list.	none

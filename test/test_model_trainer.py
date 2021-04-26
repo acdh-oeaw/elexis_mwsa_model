@@ -3,7 +3,6 @@ import sys
 sys.path.append('../mwsa_model')
 import pandas as pd
 import pytest
-import unittest
 
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV

@@ -1,9 +1,12 @@
 stages:
   en:
-    cmd: python -m mwsa_model.load_data data/train english_nuig.tsv
+    cmd: python -m mwsa_model.load_data en
     deps:
-    - data/train/english_nuig.tsv
     - mwsa_model/load_data.py
+    params:
+      - en_params.yaml:
+          - data.version
+          - data.dataset
     outs:
     - mwsa_model/data/features_english_nuig.tsv.pkl
     - mwsa_model/data/labels_english_nuig.tsv.pkl
@@ -42,13 +45,15 @@ stages:
     - mwsa_model/output/models/en.pkl
     - mwsa_model/output/models/en.joblib
   en_evaluate:
-    cmd: python -m mwsa_model.evaluate en.pkl english_nuig.tsv metrics_en.json en_predictions.txt
+    cmd: python -m mwsa_model.evaluate en.pkl metrics_en.json en_predictions.txt en
     deps:
     - mwsa_model/output/pipeline/pipeline_english_nuig.tsv.pkl
-    - data/reference_data/english_nuig.tsv
-    - data/test/english_nuig.tsv
     - mwsa_model/evaluate.py
     - mwsa_model/output/models/en.pkl
+    params:
+      - en_params.yaml:
+          - data.version
+          - data.dataset
     metrics:
     - mwsa_model/output/metrics/metrics_en.json:
         cache: false
