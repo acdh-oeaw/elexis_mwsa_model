@@ -1,5 +1,5 @@
 dill==0.3.3
-dvc==2.0.18
+dvc[gs]==2.0.18
 https://github.com/explosion/spacy-models/releases/download/de_core_news_md-2.3.0/de_core_news_md-2.3.0.tar.gz
 https://github.com/explosion/spacy-models/releases/download/en_core_web_md-2.3.1/en_core_web_md-2.3.1.tar.gz
 https://github.com/explosion/spacy-models/releases/download/da_core_news_md-2.3.0/da_core_news_md-2.3.0.tar.gz
