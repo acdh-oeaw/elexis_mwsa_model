@@ -34,7 +34,6 @@ with open(FEATURE_FILE, 'rb') as pickle_file:
 with open(LABELS_FILE, 'rb') as pickle_file:
     labels = pickle.load(pickle_file)
 
-print(params)
 params_min = {
     'random_state': params['random_forest']['random_forest__random_state'],
     'bootstrap': params['random_forest']['random_forest__bootstrap'],

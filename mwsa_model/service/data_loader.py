@@ -12,6 +12,8 @@ class DataLoader(object):
     def load(self, file_path, file_name, testdata=False, version=None):
         file = file_path + '/' + file_name
         loaded_data = None
+        self.logger.info('file name: ' + file)
+        self.logger.info('version:' + version)
         with dvc.api.open(
             file,
             repo='https://gitlab.com/acdh-oeaw/elexis/mwsa_data_registry.git',

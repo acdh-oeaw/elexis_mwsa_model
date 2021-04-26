@@ -1,23 +1,23 @@
 word	pos	def1	def2	relation
 unusual	adjective	not commonly encountered	not usual; uncommon; rare;	none
-unusual	adjective	not usual or common or ordinary	not usual; uncommon; rare;	none
+unusual	adjective	not usual or common or ordinary	not usual; uncommon; rare;	narrower
 unusual	adjective	being definitely out of the ordinary and unexpected; slightly odd or even a bit weird	not usual; uncommon; rare;	none
 tramper	noun	someone who walks with a heavy noisy gait or who stamps on the ground	one who tramps; a stroller; a vagrant or vagabond; a tramp.	none
 tramper	noun	a foot traveler; someone who goes on an extended walk (for pleasure)	one who tramps; a stroller; a vagrant or vagabond; a tramp.	none
 procrastinate	verb	postpone or delay needlessly	to delay; to be dilatory.	exact
-procrastinate	verb	postpone or delay needlessly	to put off till to-morrow, or from day to day; to defer; to postpone; to delay; .	broader
+procrastinate	verb	postpone or delay needlessly	to put off till to-morrow, or from day to day; to defer; to postpone; to delay; .	narrower
 procrastinate	verb	postpone doing what one should be doing	to delay; to be dilatory.	none
 procrastinate	verb	postpone doing what one should be doing	to put off till to-morrow, or from day to day; to defer; to postpone; to delay; .	none
 reject	verb	refuse to accept	to cast from one; to throw away; to discard.	none
-reject	verb	refuse to accept	to refuse to receive or to acknowledge; to decline haughtily or harshly; to repudiate.	exact
-reject	verb	refuse to accept	to refuse to grant; .	exact
+reject	verb	refuse to accept	to refuse to receive or to acknowledge; to decline haughtily or harshly; to repudiate.	narrower
+reject	verb	refuse to accept	to refuse to grant; .	none
 reject	verb	resist immunologically the introduction of some foreign tissue or organ	to cast from one; to throw away; to discard.	none
 reject	verb	resist immunologically the introduction of some foreign tissue or organ	to refuse to receive or to acknowledge; to decline haughtily or harshly; to repudiate.	none
 reject	verb	resist immunologically the introduction of some foreign tissue or organ	to refuse to grant; .	none
 reject	verb	refuse entrance or membership	to cast from one; to throw away; to discard.	none
-reject	verb	refuse entrance or membership	to refuse to receive or to acknowledge; to decline haughtily or harshly; to repudiate.	exact
+reject	verb	refuse entrance or membership	to refuse to receive or to acknowledge; to decline haughtily or harshly; to repudiate.	narrower
 reject	verb	refuse entrance or membership	to refuse to grant; .	narrower
-reject	verb	reject with contempt	to cast from one; to throw away; to discard.	exact
+reject	verb	reject with contempt	to cast from one; to throw away; to discard.	none
 reject	verb	reject with contempt	to refuse to receive or to acknowledge; to decline haughtily or harshly; to repudiate.	none
 reject	verb	reject with contempt	to refuse to grant; .	none
 reject	verb	dismiss from consideration or a contest	to cast from one; to throw away; to discard.	none
@@ -32,7 +32,7 @@ reject	verb	refuse to accept or acknowledge	to refuse to grant; .	exact
 grumble	verb	to utter or emit low dull rumbling sounds	to express or utter with grumbling.	none
 grumble	verb	to utter or emit low dull rumbling sounds	to murmur or mutter with discontent; to make ill-natured complaints in a low voice and a surly manner.	exact
 grumble	verb	to utter or emit low dull rumbling sounds	to growl; to snarl in deep tones; .	none
-grumble	verb	to utter or emit low dull rumbling sounds	to rumble; to make a low, harsh, and heavy sound; to mutter; .	narrower
+grumble	verb	to utter or emit low dull rumbling sounds	to rumble; to make a low, harsh, and heavy sound; to mutter; .	exact
 grumble	verb	show one's unhappiness or critical attitude	to express or utter with grumbling.	none
 grumble	verb	show one's unhappiness or critical attitude	to murmur or mutter with discontent; to make ill-natured complaints in a low voice and a surly manner.	none
 grumble	verb	show one's unhappiness or critical attitude	to growl; to snarl in deep tones; .	none
@@ -42,33 +42,33 @@ grumble	verb	make complaining remarks or noises under one's breath	to murmur or 
 grumble	verb	make complaining remarks or noises under one's breath	to growl; to snarl in deep tones; .	none
 grumble	verb	make complaining remarks or noises under one's breath	to rumble; to make a low, harsh, and heavy sound; to mutter; .	none
 grumble	verb	make a low noise	to express or utter with grumbling.	none
-grumble	verb	make a low noise	to murmur or mutter with discontent; to make ill-natured complaints in a low voice and a surly manner.	related
+grumble	verb	make a low noise	to murmur or mutter with discontent; to make ill-natured complaints in a low voice and a surly manner.	none
 grumble	verb	make a low noise	to growl; to snarl in deep tones; .	none
 grumble	verb	make a low noise	to rumble; to make a low, harsh, and heavy sound; to mutter; .	none
 thickly	adverb	with thickness; in a thick manner	in a thick manner; deeply; closely.	exact
-thickly	adverb	with a thick consistency	in a thick manner; deeply; closely.	exact
+thickly	adverb	with a thick consistency	in a thick manner; deeply; closely.	none
 thickly	adverb	in a concentrated manner	in a thick manner; deeply; closely.	narrower
-thickly	adverb	spoken with poor articulation as if with a thick tongue	in a thick manner; deeply; closely.	none
-thickly	adverb	in quick succession	in a thick manner; deeply; closely.	exact
+thickly	adverb	spoken with poor articulation as if with a thick tongue	in a thick manner; deeply; closely.	exact
+thickly	adverb	in quick succession	in a thick manner; deeply; closely.	narrower
 intemperate	adjective	(of weather or climate) not mild; subject to extremes	indulging any appetite or passion to excess; immoderate in enjoyment or exertion.	none
 intemperate	adjective	(of weather or climate) not mild; subject to extremes	addicted to an excessive or habitual use of alcoholic liquors.	none
 intemperate	adjective	(of weather or climate) not mild; subject to extremes	excessive; ungovernable; inordinate; violent; immoderate; .	related
 intemperate	adjective	given to excessive indulgence of bodily appetites especially for intoxicating liquors	indulging any appetite or passion to excess; immoderate in enjoyment or exertion.	narrower
-intemperate	adjective	given to excessive indulgence of bodily appetites especially for intoxicating liquors	addicted to an excessive or habitual use of alcoholic liquors.	narrower
+intemperate	adjective	given to excessive indulgence of bodily appetites especially for intoxicating liquors	addicted to an excessive or habitual use of alcoholic liquors.	exact
 intemperate	adjective	given to excessive indulgence of bodily appetites especially for intoxicating liquors	excessive; ungovernable; inordinate; violent; immoderate; .	none
 intemperate	adjective	excessive in behavior	indulging any appetite or passion to excess; immoderate in enjoyment or exertion.	none
-intemperate	adjective	excessive in behavior	addicted to an excessive or habitual use of alcoholic liquors.	exact
+intemperate	adjective	excessive in behavior	addicted to an excessive or habitual use of alcoholic liquors.	narrower
 intemperate	adjective	excessive in behavior	excessive; ungovernable; inordinate; violent; immoderate; .	none
-antitype	noun	an opposite or contrasting type	that of which the type is the pattern or representation; that which is represented by the type or symbol.	exact
-antitype	noun	a person or thing represented or foreshadowed by a type or symbol; especially a figure in the Old Testament having a counterpart in the New Testament	that of which the type is the pattern or representation; that which is represented by the type or symbol.	none
+antitype	noun	an opposite or contrasting type	that of which the type is the pattern or representation; that which is represented by the type or symbol.	narrower
+antitype	noun	a person or thing represented or foreshadowed by a type or symbol; especially a figure in the Old Testament having a counterpart in the New Testament	that of which the type is the pattern or representation; that which is represented by the type or symbol.	exact
 sane	adjective	marked by sound judgment	being in a healthy condition; not deranged; acting rationally; -- said of the mind.	none
 sane	adjective	marked by sound judgment	mentally sound; possessing a rational mind; having the mental faculties in such condition as to be able to anticipate and judge of the effect of one's actions in an ordinary maner; -- said of persons.	broader
-sane	adjective	mentally healthy; free from mental disorder	being in a healthy condition; not deranged; acting rationally; -- said of the mind.	exact
-sane	adjective	mentally healthy; free from mental disorder	mentally sound; possessing a rational mind; having the mental faculties in such condition as to be able to anticipate and judge of the effect of one's actions in an ordinary maner; -- said of persons.	broader
-washbowl	noun	a bathroom sink that is permanently installed and connected to a water supply and drainpipe; where you can wash your hands and face	a basin, or bowl, to hold water for washing one's hands, face, etc.	broader
+sane	adjective	mentally healthy; free from mental disorder	being in a healthy condition; not deranged; acting rationally; -- said of the mind.	narrower
+sane	adjective	mentally healthy; free from mental disorder	mentally sound; possessing a rational mind; having the mental faculties in such condition as to be able to anticipate and judge of the effect of one's actions in an ordinary maner; -- said of persons.	exact
+washbowl	noun	a bathroom sink that is permanently installed and connected to a water supply and drainpipe; where you can wash your hands and face	a basin, or bowl, to hold water for washing one's hands, face, etc.	exact
 washbowl	noun	a basin for washing the hands (`wash-hand basin' is a British expression)	a basin, or bowl, to hold water for washing one's hands, face, etc.	exact
 wickedness	noun	the quality of being wicked	the quality or state of being wicked; departure from the rules of the divine or the moral law; evil disposition or practices; immorality; depravity; sinfulness.	exact
-wickedness	noun	the quality of being wicked	a wicked thing or act; crime; sin; iniquity.	none
+wickedness	noun	the quality of being wicked	a wicked thing or act; crime; sin; iniquity.	narrower
 wickedness	noun	estrangement from god	the quality or state of being wicked; departure from the rules of the divine or the moral law; evil disposition or practices; immorality; depravity; sinfulness.	none
 wickedness	noun	estrangement from god	a wicked thing or act; crime; sin; iniquity.	none
 wickedness	noun	the quality of being disgusting to the senses or emotions	the quality or state of being wicked; departure from the rules of the divine or the moral law; evil disposition or practices; immorality; depravity; sinfulness.	none
@@ -79,13 +79,13 @@ wickedness	noun	absence of moral or spiritual values	the quality or state of bei
 wickedness	noun	absence of moral or spiritual values	a wicked thing or act; crime; sin; iniquity.	none
 welterweight	noun	a professional boxer who weighs between 141 and 147 pounds	a weight of 28 pounds (one of 40 pounds is called a ) sometimes imposed in addition to weight for age, chiefly in steeplechases and hurdle races.	none
 welterweight	noun	a professional boxer who weighs between 141 and 147 pounds	a boxer or wrestler whose weight is intermediate between that of a lightweight and that of a middleweight.	none
-welterweight	noun	a weight of 28 pounds; sometimes imposed as a handicap in a horse race (such as a steeplechase)	a weight of 28 pounds (one of 40 pounds is called a ) sometimes imposed in addition to weight for age, chiefly in steeplechases and hurdle races.	narrower
-welterweight	noun	a weight of 28 pounds; sometimes imposed as a handicap in a horse race (such as a steeplechase)	a boxer or wrestler whose weight is intermediate between that of a lightweight and that of a middleweight.	narrower
-welterweight	noun	an amateur boxer who weighs no more than 148 pounds	a weight of 28 pounds (one of 40 pounds is called a ) sometimes imposed in addition to weight for age, chiefly in steeplechases and hurdle races.	none
+welterweight	noun	a weight of 28 pounds; sometimes imposed as a handicap in a horse race (such as a steeplechase)	a weight of 28 pounds (one of 40 pounds is called a ) sometimes imposed in addition to weight for age, chiefly in steeplechases and hurdle races.	none
+welterweight	noun	a weight of 28 pounds; sometimes imposed as a handicap in a horse race (such as a steeplechase)	a boxer or wrestler whose weight is intermediate between that of a lightweight and that of a middleweight.	broader
+welterweight	noun	an amateur boxer who weighs no more than 148 pounds	a weight of 28 pounds (one of 40 pounds is called a ) sometimes imposed in addition to weight for age, chiefly in steeplechases and hurdle races.	exact
 welterweight	noun	an amateur boxer who weighs no more than 148 pounds	a boxer or wrestler whose weight is intermediate between that of a lightweight and that of a middleweight.	none
-welterweight	noun	a wrestler who weighs 154-172 pounds	a weight of 28 pounds (one of 40 pounds is called a ) sometimes imposed in addition to weight for age, chiefly in steeplechases and hurdle races.	related
+welterweight	noun	a wrestler who weighs 154-172 pounds	a weight of 28 pounds (one of 40 pounds is called a ) sometimes imposed in addition to weight for age, chiefly in steeplechases and hurdle races.	none
 welterweight	noun	a wrestler who weighs 154-172 pounds	a boxer or wrestler whose weight is intermediate between that of a lightweight and that of a middleweight.	narrower
-clash	verb	crash together with violent impact	to strike noisily against or together.	exact
+clash	verb	crash together with violent impact	to strike noisily against or together.	none
 clash	verb	crash together with violent impact	to make a noise by striking against something; to dash noisily together.	none
 clash	verb	crash together with violent impact	to meet in opposition; to act in a contrary direction; to come onto collision; to interfere.	none
 clash	verb	disagree violently	to strike noisily against or together.	narrower
@@ -93,13 +93,13 @@ clash	verb	disagree violently	to make a noise by striking against something; to 
 clash	verb	disagree violently	to meet in opposition; to act in a contrary direction; to come onto collision; to interfere.	none
 clash	verb	be incompatible; be or come into conflict	to strike noisily against or together.	none
 clash	verb	be incompatible; be or come into conflict	to make a noise by striking against something; to dash noisily together.	none
-clash	verb	be incompatible; be or come into conflict	to meet in opposition; to act in a contrary direction; to come onto collision; to interfere.	broader
+clash	verb	be incompatible; be or come into conflict	to meet in opposition; to act in a contrary direction; to come onto collision; to interfere.	narrower
 mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	destitute of distinction or eminence; common; low; vulgar; humble.	none
 mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	occupying a middle position; middle; being about midway between extremes.	none
-mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	intermediate in excellence of any kind.	exact
+mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	intermediate in excellence of any kind.	none
 mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	wanting dignity of mind; low-minded; base; destitute of honor; spiritless; .	none
 mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	average; having an intermediate value between two extremes, or between the several successive values of a variable quantity during one cycle of variation;	none
-mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	of little value or account; worthy of little or no regard; contemptible; despicable.	none
+mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	of little value or account; worthy of little or no regard; contemptible; despicable.	narrower
 mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	of poor quality; .	none
 mean	adjective	(used of persons or behavior) characterized by or indicative of lack of generosity	penurious; stingy; close-fisted; illiberal; .	none
 mean	adjective	excellent	destitute of distinction or eminence; common; low; vulgar; humble.	none
@@ -122,16 +122,16 @@ mean	adjective	of no value or worth	destitute of distinction or eminence; common
 mean	adjective	of no value or worth	occupying a middle position; middle; being about midway between extremes.	none
 mean	adjective	of no value or worth	intermediate in excellence of any kind.	none
 mean	adjective	of no value or worth	wanting dignity of mind; low-minded; base; destitute of honor; spiritless; .	none
-mean	adjective	of no value or worth	average; having an intermediate value between two extremes, or between the several successive values of a variable quantity during one cycle of variation;	related
-mean	adjective	of no value or worth	of little value or account; worthy of little or no regard; contemptible; despicable.	narrower
+mean	adjective	of no value or worth	average; having an intermediate value between two extremes, or between the several successive values of a variable quantity during one cycle of variation;	exact
+mean	adjective	of no value or worth	of little value or account; worthy of little or no regard; contemptible; despicable.	exact
 mean	adjective	of no value or worth	of poor quality; .	none
 mean	adjective	of no value or worth	penurious; stingy; close-fisted; illiberal; .	none
 mean	adjective	having or showing an ignoble lack of honor or morality	destitute of distinction or eminence; common; low; vulgar; humble.	exact
-mean	adjective	having or showing an ignoble lack of honor or morality	occupying a middle position; middle; being about midway between extremes.	none
+mean	adjective	having or showing an ignoble lack of honor or morality	occupying a middle position; middle; being about midway between extremes.	exact
 mean	adjective	having or showing an ignoble lack of honor or morality	intermediate in excellence of any kind.	none
 mean	adjective	having or showing an ignoble lack of honor or morality	wanting dignity of mind; low-minded; base; destitute of honor; spiritless; .	none
 mean	adjective	having or showing an ignoble lack of honor or morality	average; having an intermediate value between two extremes, or between the several successive values of a variable quantity during one cycle of variation;	none
-mean	adjective	having or showing an ignoble lack of honor or morality	of little value or account; worthy of little or no regard; contemptible; despicable.	none
+mean	adjective	having or showing an ignoble lack of honor or morality	of little value or account; worthy of little or no regard; contemptible; despicable.	narrower
 mean	adjective	having or showing an ignoble lack of honor or morality	of poor quality; .	none
 mean	adjective	having or showing an ignoble lack of honor or morality	penurious; stingy; close-fisted; illiberal; .	none
 mean	adjective	(used of sums of money) so small in amount as to deserve contempt	destitute of distinction or eminence; common; low; vulgar; humble.	none
@@ -164,7 +164,7 @@ char	noun	any of several small trout-like fish of the genus Salvelinus	a car; a 
 char	noun	any of several small trout-like fish of the genus Salvelinus	work done by the day; a single job, or task; a chore.	none
 char	noun	a charred substance	a car; a chariot.	none
 char	noun	a charred substance	work done by the day; a single job, or task; a chore.	none
-comose	adjective	bearing a coma; crowned with an assemblage of branches or leaves or bracts	bearing a tuft of soft hairs or down, as the seeds of milkweed.	none
+comose	adjective	bearing a coma; crowned with an assemblage of branches or leaves or bracts	bearing a tuft of soft hairs or down, as the seeds of milkweed.	exact
 comose	adjective	of certain seeds (such as cotton) having a tuft or tufts of hair	bearing a tuft of soft hairs or down, as the seeds of milkweed.	exact
 millionth	noun	one part in a million equal parts	the quotient of a unit divided by one million; one of a million equal parts.	exact
 millionth	noun	position 1,000,000 in a countable series of things	the quotient of a unit divided by one million; one of a million equal parts.	none
@@ -175,44 +175,44 @@ commission	verb	put into commission; equip for service; of ships	to send out wit
 commission	verb	place an order for	to give a commission to; to furnish with a commission; to empower or authorize; .	none
 commission	verb	place an order for	to send out with a charge or commission.	none
 commission	verb	charge with a task	to give a commission to; to furnish with a commission; to empower or authorize; .	none
-commission	verb	charge with a task	to send out with a charge or commission.	none
+commission	verb	charge with a task	to send out with a charge or commission.	exact
 sheath	noun	a protective covering (as for a knife or sword)	a case for the reception of a sword, hunting knife, or other long and slender instrument; a scabbard.	exact
 sheath	noun	an enveloping structure or covering enclosing an animal or plant organ or part	a case for the reception of a sword, hunting knife, or other long and slender instrument; a scabbard.	none
 sheath	noun	a dress suitable for formal occasions	a case for the reception of a sword, hunting knife, or other long and slender instrument; a scabbard.	none
-tithe	verb	levy a tithe on (produce or a crop)	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	exact
-tithe	verb	levy a tithe on (produce or a crop)	tp pay tithes.	none
+tithe	verb	levy a tithe on (produce or a crop)	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	narrower
+tithe	verb	levy a tithe on (produce or a crop)	tp pay tithes.	exact
 tithe	verb	pay one tenth of; pay tithes on, especially to the church	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	exact
 tithe	verb	pay one tenth of; pay tithes on, especially to the church	tp pay tithes.	exact
 tithe	verb	exact a tithe from	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	exact
 tithe	verb	exact a tithe from	tp pay tithes.	none
 tithe	verb	pay a tenth of one's income, especially to the church	to levy a tenth part on; to tax to the amount of a tenth; to pay tithes on.	exact
-tithe	verb	pay a tenth of one's income, especially to the church	tp pay tithes.	none
-jackknife	noun	a large knife with one or more folding blades	a large, strong clasp knife for the pocket; a pocket knife.	none
+tithe	verb	pay a tenth of one's income, especially to the church	tp pay tithes.	related
+jackknife	noun	a large knife with one or more folding blades	a large, strong clasp knife for the pocket; a pocket knife.	exact
 jackknife	noun	a dive in which the diver bends to touch the ankles before straightening out	a large, strong clasp knife for the pocket; a pocket knife.	none
 quill	noun	the hollow spine of a feather	one of the large feathers of a bird's wing, or one of the rectrices of the tail; also, the stock of such a feather.	none
 quill	noun	the hollow spine of a feather	a pen for writing made by sharpening and splitting the point or nib of the stock of a feather; .	exact
-quill	noun	the hollow spine of a feather	a roll of dried bark; .	none
-quill	noun	any of the larger wing or tail feathers of a bird	one of the large feathers of a bird's wing, or one of the rectrices of the tail; also, the stock of such a feather.	narrower
+quill	noun	the hollow spine of a feather	a roll of dried bark; .	exact
+quill	noun	any of the larger wing or tail feathers of a bird	one of the large feathers of a bird's wing, or one of the rectrices of the tail; also, the stock of such a feather.	exact
 quill	noun	any of the larger wing or tail feathers of a bird	a pen for writing made by sharpening and splitting the point or nib of the stock of a feather; .	none
 quill	noun	any of the larger wing or tail feathers of a bird	a roll of dried bark; .	none
-quill	noun	pen made from a bird's feather	one of the large feathers of a bird's wing, or one of the rectrices of the tail; also, the stock of such a feather.	exact
-quill	noun	pen made from a bird's feather	a pen for writing made by sharpening and splitting the point or nib of the stock of a feather; .	none
+quill	noun	pen made from a bird's feather	one of the large feathers of a bird's wing, or one of the rectrices of the tail; also, the stock of such a feather.	narrower
+quill	noun	pen made from a bird's feather	a pen for writing made by sharpening and splitting the point or nib of the stock of a feather; .	narrower
 quill	noun	pen made from a bird's feather	a roll of dried bark; .	none
 quill	noun	a stiff hollow protective spine on a porcupine or hedgehog	one of the large feathers of a bird's wing, or one of the rectrices of the tail; also, the stock of such a feather.	none
 quill	noun	a stiff hollow protective spine on a porcupine or hedgehog	a pen for writing made by sharpening and splitting the point or nib of the stock of a feather; .	none
 quill	noun	a stiff hollow protective spine on a porcupine or hedgehog	a roll of dried bark; .	none
 dragoon	verb	compel by coercion, threats, or crude means	to harass or reduce to subjection by dragoons; to persecute by abandoning a place to the rage of soldiers.	none
-dragoon	verb	compel by coercion, threats, or crude means	to compel submission by violent measures; to harass; to persecute.	none
+dragoon	verb	compel by coercion, threats, or crude means	to compel submission by violent measures; to harass; to persecute.	broader
 dragoon	verb	subjugate by imposing troops	to harass or reduce to subjection by dragoons; to persecute by abandoning a place to the rage of soldiers.	none
 dragoon	verb	subjugate by imposing troops	to compel submission by violent measures; to harass; to persecute.	none
 acetate	noun	a salt or ester of acetic acid	a salt formed by the union of acetic acid with a base or positive radical; .	exact
 acetate	noun	a fabric made from fibers of cellulose acetate	a salt formed by the union of acetic acid with a base or positive radical; .	none
 sterility	noun	(of non-living objects) the state of being free of pathogenic organisms	the quality or condition of being sterile.	none
-sterility	noun	(of non-living objects) the state of being free of pathogenic organisms	quality of being sterile; infecundity; also, the state of being free from germs or spores.	related
+sterility	noun	(of non-living objects) the state of being free of pathogenic organisms	quality of being sterile; infecundity; also, the state of being free from germs or spores.	exact
 sterility	noun	the state of being unable to produce offspring; in a woman it is an inability to conceive; in a man it is an inability to impregnate	the quality or condition of being sterile.	none
 sterility	noun	the state of being unable to produce offspring; in a woman it is an inability to conceive; in a man it is an inability to impregnate	quality of being sterile; infecundity; also, the state of being free from germs or spores.	none
 flora	noun	all the plant life in a particular region or period	the goddess of flowers and spring.	none
-flora	noun	all the plant life in a particular region or period	the complete system of vegetable species growing without cultivation in a given locality, region, or period; a list or description of, or treatise on, such plants.	none
+flora	noun	all the plant life in a particular region or period	the complete system of vegetable species growing without cultivation in a given locality, region, or period; a list or description of, or treatise on, such plants.	exact
 flora	noun	(botany) a living organism lacking the power of locomotion	the goddess of flowers and spring.	none
 flora	noun	(botany) a living organism lacking the power of locomotion	the complete system of vegetable species growing without cultivation in a given locality, region, or period; a list or description of, or treatise on, such plants.	none
 buffoon	noun	a rude or vulgar fool	a man who makes a practice of amusing others by low tricks, antic gestures, etc.; a droll; a mimic; a harlequin; a clown; a merry-andrew.	none
@@ -226,18 +226,18 @@ cavity	noun	space that is surrounded by something	a hollow place; a hollow; .	no
 cavity	noun	a sizeable hole (usually in the ground)	hollowness.	none
 cavity	noun	a sizeable hole (usually in the ground)	a hollow place; a hollow; .	none
 cavity	noun	(anatomy) a natural hollow or sinus within the body	hollowness.	none
-cavity	noun	(anatomy) a natural hollow or sinus within the body	a hollow place; a hollow; .	none
+cavity	noun	(anatomy) a natural hollow or sinus within the body	a hollow place; a hollow; .	exact
 gum	verb	cover, fill, fix or smear with or as if with gum	to deepen and enlarge the spaces between the teeth of (a worn saw).	none
-gum	verb	cover, fill, fix or smear with or as if with gum	to exude or form gum; to become gummy.	none
+gum	verb	cover, fill, fix or smear with or as if with gum	to exude or form gum; to become gummy.	exact
 gum	verb	cover, fill, fix or smear with or as if with gum	to smear with gum; to close with gum; to unite or stiffen by gum or a gumlike substance; to make sticky with a gumlike substance.	exact
 gum	verb	cover, fill, fix or smear with or as if with gum	to chew with the gums, rather than with the teeth.	none
 gum	verb	become sticky	to deepen and enlarge the spaces between the teeth of (a worn saw).	none
 gum	verb	become sticky	to exude or form gum; to become gummy.	none
 gum	verb	become sticky	to smear with gum; to close with gum; to unite or stiffen by gum or a gumlike substance; to make sticky with a gumlike substance.	none
 gum	verb	become sticky	to chew with the gums, rather than with the teeth.	none
-gum	verb	grind with the gums; chew without teeth and with great difficulty	to deepen and enlarge the spaces between the teeth of (a worn saw).	none
+gum	verb	grind with the gums; chew without teeth and with great difficulty	to deepen and enlarge the spaces between the teeth of (a worn saw).	exact
 gum	verb	grind with the gums; chew without teeth and with great difficulty	to exude or form gum; to become gummy.	none
-gum	verb	grind with the gums; chew without teeth and with great difficulty	to smear with gum; to close with gum; to unite or stiffen by gum or a gumlike substance; to make sticky with a gumlike substance.	narrower
+gum	verb	grind with the gums; chew without teeth and with great difficulty	to smear with gum; to close with gum; to unite or stiffen by gum or a gumlike substance; to make sticky with a gumlike substance.	exact
 gum	verb	grind with the gums; chew without teeth and with great difficulty	to chew with the gums, rather than with the teeth.	exact
 gum	verb	exude or form gum	to deepen and enlarge the spaces between the teeth of (a worn saw).	none
 gum	verb	exude or form gum	to exude or form gum; to become gummy.	exact
@@ -260,7 +260,7 @@ lapse	verb	end, at least for a long time	to let slip; to permit to devolve on an
 lapse	verb	end, at least for a long time	to pass slowly and smoothly downward, backward, or away; to slip downward, backward, or away; to glide; -- mostly restricted to figurative uses.	none
 lapse	verb	end, at least for a long time	to slide or slip in moral conduct; to fail in duty; to fall from virtue; to deviate from rectitude; to commit a fault by inadvertence or mistake.	none
 lapse	verb	end, at least for a long time	to surprise in a fault or error; hence, to surprise or catch, as an offender.	none
-lapse	verb	let slip	to let slip; to permit to devolve on another; to allow to pass.	narrower
+lapse	verb	let slip	to let slip; to permit to devolve on another; to allow to pass.	none
 lapse	verb	let slip	to pass slowly and smoothly downward, backward, or away; to slip downward, backward, or away; to glide; -- mostly restricted to figurative uses.	none
 lapse	verb	let slip	to slide or slip in moral conduct; to fail in duty; to fall from virtue; to deviate from rectitude; to commit a fault by inadvertence or mistake.	none
 lapse	verb	let slip	to surprise in a fault or error; hence, to surprise or catch, as an offender.	none
@@ -268,27 +268,27 @@ lapse	verb	go back to bad behavior	to let slip; to permit to devolve on another;
 lapse	verb	go back to bad behavior	to pass slowly and smoothly downward, backward, or away; to slip downward, backward, or away; to glide; -- mostly restricted to figurative uses.	none
 lapse	verb	go back to bad behavior	to slide or slip in moral conduct; to fail in duty; to fall from virtue; to deviate from rectitude; to commit a fault by inadvertence or mistake.	exact
 lapse	verb	go back to bad behavior	to surprise in a fault or error; hence, to surprise or catch, as an offender.	none
-lapse	verb	pass by	to let slip; to permit to devolve on another; to allow to pass.	narrower
+lapse	verb	pass by	to let slip; to permit to devolve on another; to allow to pass.	exact
 lapse	verb	pass by	to pass slowly and smoothly downward, backward, or away; to slip downward, backward, or away; to glide; -- mostly restricted to figurative uses.	none
 lapse	verb	pass by	to slide or slip in moral conduct; to fail in duty; to fall from virtue; to deviate from rectitude; to commit a fault by inadvertence or mistake.	none
 lapse	verb	pass by	to surprise in a fault or error; hence, to surprise or catch, as an offender.	none
-lapse	verb	pass into a specified state or condition	to let slip; to permit to devolve on another; to allow to pass.	narrower
+lapse	verb	pass into a specified state or condition	to let slip; to permit to devolve on another; to allow to pass.	none
 lapse	verb	pass into a specified state or condition	to pass slowly and smoothly downward, backward, or away; to slip downward, backward, or away; to glide; -- mostly restricted to figurative uses.	none
 lapse	verb	pass into a specified state or condition	to slide or slip in moral conduct; to fail in duty; to fall from virtue; to deviate from rectitude; to commit a fault by inadvertence or mistake.	none
 lapse	verb	pass into a specified state or condition	to surprise in a fault or error; hence, to surprise or catch, as an offender.	none
-conglobation	noun	a rounded spherical form	the act or process of forming into a ball.	narrower
+conglobation	noun	a rounded spherical form	the act or process of forming into a ball.	exact
 conglobation	noun	a rounded spherical form	a round body.	none
 conglobation	noun	an occurrence combining miscellaneous things into a (more or less) rounded mass	the act or process of forming into a ball.	none
 conglobation	noun	an occurrence combining miscellaneous things into a (more or less) rounded mass	a round body.	exact
 papyrus	noun	paper made from the papyrus plant by cutting it in strips and pressing it flat; used by ancient Egyptians and Greeks and Romans	a tall rushlike plant () of the sedge family, formerly growing in egypt, and now found in abyssinia, syria, sicily, etc. the stem is triangular and about an inch thick.	none
-papyrus	noun	paper made from the papyrus plant by cutting it in strips and pressing it flat; used by ancient Egyptians and Greeks and Romans	the material upon which the ancient egyptians wrote. it was formed by cutting the stem of the plant into thin longitudinal slices, which were gummed together and pressed.	narrower
+papyrus	noun	paper made from the papyrus plant by cutting it in strips and pressing it flat; used by ancient Egyptians and Greeks and Romans	the material upon which the ancient egyptians wrote. it was formed by cutting the stem of the plant into thin longitudinal slices, which were gummed together and pressed.	exact
 papyrus	noun	paper made from the papyrus plant by cutting it in strips and pressing it flat; used by ancient Egyptians and Greeks and Romans	a manuscript written on papyrus; esp., , written scrolls made of papyrus; .	none
 papyrus	noun	tall sedge of the Nile valley yielding fiber that served many purposes in historic times	a tall rushlike plant () of the sedge family, formerly growing in egypt, and now found in abyssinia, syria, sicily, etc. the stem is triangular and about an inch thick.	none
 papyrus	noun	tall sedge of the Nile valley yielding fiber that served many purposes in historic times	the material upon which the ancient egyptians wrote. it was formed by cutting the stem of the plant into thin longitudinal slices, which were gummed together and pressed.	none
 papyrus	noun	tall sedge of the Nile valley yielding fiber that served many purposes in historic times	a manuscript written on papyrus; esp., , written scrolls made of papyrus; .	none
 papyrus	noun	a document written on papyrus	a tall rushlike plant () of the sedge family, formerly growing in egypt, and now found in abyssinia, syria, sicily, etc. the stem is triangular and about an inch thick.	none
 papyrus	noun	a document written on papyrus	the material upon which the ancient egyptians wrote. it was formed by cutting the stem of the plant into thin longitudinal slices, which were gummed together and pressed.	exact
-papyrus	noun	a document written on papyrus	a manuscript written on papyrus; esp., , written scrolls made of papyrus; .	none
+papyrus	noun	a document written on papyrus	a manuscript written on papyrus; esp., , written scrolls made of papyrus; .	exact
 unite	verb	be or become joined or united or linked	to become one; to be cemented or consolidated; to combine, as by adhesion or mixture; to coalesce; to grow together.	none
 unite	verb	be or become joined or united or linked	to put together so as to make one; to join, as two or more constituents, to form a whole; to combine; to connect; to join; to cause to adhere;	none
 unite	verb	be or become joined or united or linked	hence, to join by a legal or moral bond, as families by marriage, nations by treaty, men by opinions; to join in interest, affection, fellowship, or the like; to cause to agree; to harmonize; to associate; to attach.	none
@@ -304,38 +304,38 @@ unite	verb	bring together for a common purpose or action or ideology or in a sha
 unite	verb	join or combine	to become one; to be cemented or consolidated; to combine, as by adhesion or mixture; to coalesce; to grow together.	narrower
 unite	verb	join or combine	to put together so as to make one; to join, as two or more constituents, to form a whole; to combine; to connect; to join; to cause to adhere;	exact
 unite	verb	join or combine	hence, to join by a legal or moral bond, as families by marriage, nations by treaty, men by opinions; to join in interest, affection, fellowship, or the like; to cause to agree; to harmonize; to associate; to attach.	none
-unite	verb	join or combine	to join in an act; to concur; to act in concert; .	narrower
+unite	verb	join or combine	to join in an act; to concur; to act in concert; .	exact
 unite	verb	act in concert or unite in a common purpose or belief	to become one; to be cemented or consolidated; to combine, as by adhesion or mixture; to coalesce; to grow together.	none
 unite	verb	act in concert or unite in a common purpose or belief	to put together so as to make one; to join, as two or more constituents, to form a whole; to combine; to connect; to join; to cause to adhere;	none
 unite	verb	act in concert or unite in a common purpose or belief	hence, to join by a legal or moral bond, as families by marriage, nations by treaty, men by opinions; to join in interest, affection, fellowship, or the like; to cause to agree; to harmonize; to associate; to attach.	none
-unite	verb	act in concert or unite in a common purpose or belief	to join in an act; to concur; to act in concert; .	none
+unite	verb	act in concert or unite in a common purpose or belief	to join in an act; to concur; to act in concert; .	exact
 unite	verb	have or possess in combination	to become one; to be cemented or consolidated; to combine, as by adhesion or mixture; to coalesce; to grow together.	none
 unite	verb	have or possess in combination	to put together so as to make one; to join, as two or more constituents, to form a whole; to combine; to connect; to join; to cause to adhere;	none
 unite	verb	have or possess in combination	hence, to join by a legal or moral bond, as families by marriage, nations by treaty, men by opinions; to join in interest, affection, fellowship, or the like; to cause to agree; to harmonize; to associate; to attach.	none
 unite	verb	have or possess in combination	to join in an act; to concur; to act in concert; .	none
-hearth	noun	an open recess in a wall at the base of a chimney where a fire can be built	the pavement or floor of brick, stone, or metal in a chimney, on which a fire is made; the floor of a fireplace; also, a corresponding part of a stove.	exact
+hearth	noun	an open recess in a wall at the base of a chimney where a fire can be built	the pavement or floor of brick, stone, or metal in a chimney, on which a fire is made; the floor of a fireplace; also, a corresponding part of a stove.	none
 hearth	noun	an open recess in a wall at the base of a chimney where a fire can be built	the house itself, as the abode of comfort to its inmates and of hospitality to strangers; fireside.	none
 hearth	noun	an open recess in a wall at the base of a chimney where a fire can be built	the floor of a furnace, on which the material to be heated lies, or the lowest part of a melting furnace, into which the melted material settles; .	none
-hearth	noun	an area near a fireplace (usually paved and extending out into a room)	the pavement or floor of brick, stone, or metal in a chimney, on which a fire is made; the floor of a fireplace; also, a corresponding part of a stove.	none
+hearth	noun	an area near a fireplace (usually paved and extending out into a room)	the pavement or floor of brick, stone, or metal in a chimney, on which a fire is made; the floor of a fireplace; also, a corresponding part of a stove.	exact
 hearth	noun	an area near a fireplace (usually paved and extending out into a room)	the house itself, as the abode of comfort to its inmates and of hospitality to strangers; fireside.	none
 hearth	noun	an area near a fireplace (usually paved and extending out into a room)	the floor of a furnace, on which the material to be heated lies, or the lowest part of a melting furnace, into which the melted material settles; .	none
-hearth	noun	home symbolized as a part of the fireplace	the pavement or floor of brick, stone, or metal in a chimney, on which a fire is made; the floor of a fireplace; also, a corresponding part of a stove.	exact
+hearth	noun	home symbolized as a part of the fireplace	the pavement or floor of brick, stone, or metal in a chimney, on which a fire is made; the floor of a fireplace; also, a corresponding part of a stove.	none
 hearth	noun	home symbolized as a part of the fireplace	the house itself, as the abode of comfort to its inmates and of hospitality to strangers; fireside.	none
 hearth	noun	home symbolized as a part of the fireplace	the floor of a furnace, on which the material to be heated lies, or the lowest part of a melting furnace, into which the melted material settles; .	none
 individual	noun	a single organism	a single person, animal, or thing of any kind; a thing or being incapable of separation or division, without losing its identity; especially, a human being; a person.	exact
-individual	noun	a human being	a single person, animal, or thing of any kind; a thing or being incapable of separation or division, without losing its identity; especially, a human being; a person.	none
+individual	noun	a human being	a single person, animal, or thing of any kind; a thing or being incapable of separation or division, without losing its identity; especially, a human being; a person.	exact
 mescal	noun	a small spineless globe-shaped cactus; source of mescal buttons	a distilled liquor prepared in mexico from a species of agave.	none
-mescal	noun	a colorless Mexican liquor distilled from fermented juices of certain desert plants of the genus Agavaceae (especially the century plant)	a distilled liquor prepared in mexico from a species of agave.	exact
+mescal	noun	a colorless Mexican liquor distilled from fermented juices of certain desert plants of the genus Agavaceae (especially the century plant)	a distilled liquor prepared in mexico from a species of agave.	broader
 brainwave	noun	the clear (and often sudden) understanding of a complex situation	rapid fluctuations of voltage between parts of the brain.	none
 brainwave	noun	the clear (and often sudden) understanding of a complex situation	the clear (and often sudden) understanding of a complex situation.	exact
 brainwave	noun	(neurophysiology) rapid fluctuations of voltage between parts of the cerebral cortex that are detectable with an electroencephalograph	rapid fluctuations of voltage between parts of the brain.	exact
 brainwave	noun	(neurophysiology) rapid fluctuations of voltage between parts of the cerebral cortex that are detectable with an electroencephalograph	the clear (and often sudden) understanding of a complex situation.	none
-keystone	noun	the central building block at the top of an arch or vault	the central or topmost stone of an arch. this in some styles is made different in size from the other voussoirs, or projects, or is decorated with carving. see  of .	exact
+keystone	noun	the central building block at the top of an arch or vault	the central or topmost stone of an arch. this in some styles is made different in size from the other voussoirs, or projects, or is decorated with carving. see  of .	none
 keystone	noun	a central cohesive source of support and stability	the central or topmost stone of an arch. this in some styles is made different in size from the other voussoirs, or projects, or is decorated with carving. see  of .	none
-canter	verb	ride at a canter	to cause, as a horse, to go at a canter; to ride (a horse) at a canter.	exact
+canter	verb	ride at a canter	to cause, as a horse, to go at a canter; to ride (a horse) at a canter.	narrower
 canter	verb	ride at a canter	to move in a canter.	exact
 canter	verb	go at a canter, of horses	to cause, as a horse, to go at a canter; to ride (a horse) at a canter.	exact
-canter	verb	go at a canter, of horses	to move in a canter.	broader
+canter	verb	go at a canter, of horses	to move in a canter.	none
 canter	verb	ride at a cantering pace	to cause, as a horse, to go at a canter; to ride (a horse) at a canter.	exact
 canter	verb	ride at a cantering pace	to move in a canter.	exact
 mead	noun	United States anthropologist noted for her claims about adolescence and sexual behavior in Polynesian cultures (1901-1978)	a meadow.	none
@@ -349,15 +349,15 @@ mead	noun	made of fermented honey and water	a fermented drink made of water and 
 mead	noun	made of fermented honey and water	a drink composed of sirup of sarsaparilla or other flavoring extract, and water.  it is sometimes charged with carbonic acid gas.	none
 tool	verb	drive	to travel in a vehicle; to ride or drive.	none
 tool	verb	drive	to shape, form, or finish with a tool.	none
-tool	verb	drive	to drive, as a coach.	exact
-tool	verb	furnish with tools	to travel in a vehicle; to ride or drive.	none
+tool	verb	drive	to drive, as a coach.	none
+tool	verb	furnish with tools	to travel in a vehicle; to ride or drive.	narrower
 tool	verb	furnish with tools	to shape, form, or finish with a tool.	none
 tool	verb	furnish with tools	to drive, as a coach.	none
-tool	verb	ride in a car with no particular goal and just for the pleasure of it	to travel in a vehicle; to ride or drive.	none
+tool	verb	ride in a car with no particular goal and just for the pleasure of it	to travel in a vehicle; to ride or drive.	exact
 tool	verb	ride in a car with no particular goal and just for the pleasure of it	to shape, form, or finish with a tool.	none
 tool	verb	ride in a car with no particular goal and just for the pleasure of it	to drive, as a coach.	none
 tool	verb	work with a tool	to travel in a vehicle; to ride or drive.	none
-tool	verb	work with a tool	to shape, form, or finish with a tool.	exact
+tool	verb	work with a tool	to shape, form, or finish with a tool.	narrower
 tool	verb	work with a tool	to drive, as a coach.	none
 siphon	verb	convey, draw off, or empty by or as if by a siphon	to convey, or draw off, by means of a siphon, as a liquid from one vessel to another at a lower level.	exact
 siphon	verb	move a liquid from one container into another by means of a siphon or a siphoning action	to convey, or draw off, by means of a siphon, as a liquid from one vessel to another at a lower level.	exact
@@ -367,17 +367,17 @@ cornice	noun	a decorative framework to conceal curtain fixtures at the top of a 
 name	verb	mention and identify by name	to give a distinctive name or appellation to; to entitle; to denominate; to style; to call.	none
 name	verb	mention and identify by name	to mention by name; to utter or publish the name of; to refer to by distinctive title; to mention.	none
 name	verb	mention and identify by name	to designate by name or specifically for any purpose; to nominate; to specify; to appoint; .	none
-name	verb	mention and identify by name	to designate (a member) by name, as the speaker does by way of reprimand.	none
-name	verb	give or make a list of; name individually; give the names of	to give a distinctive name or appellation to; to entitle; to denominate; to style; to call.	exact
+name	verb	mention and identify by name	to designate (a member) by name, as the speaker does by way of reprimand.	related
+name	verb	give or make a list of; name individually; give the names of	to give a distinctive name or appellation to; to entitle; to denominate; to style; to call.	narrower
 name	verb	give or make a list of; name individually; give the names of	to mention by name; to utter or publish the name of; to refer to by distinctive title; to mention.	none
-name	verb	give or make a list of; name individually; give the names of	to designate by name or specifically for any purpose; to nominate; to specify; to appoint; .	none
-name	verb	give or make a list of; name individually; give the names of	to designate (a member) by name, as the speaker does by way of reprimand.	narrower
+name	verb	give or make a list of; name individually; give the names of	to designate by name or specifically for any purpose; to nominate; to specify; to appoint; .	narrower
+name	verb	give or make a list of; name individually; give the names of	to designate (a member) by name, as the speaker does by way of reprimand.	none
 name	verb	assign a specified (usually proper) proper name to	to give a distinctive name or appellation to; to entitle; to denominate; to style; to call.	none
 name	verb	assign a specified (usually proper) proper name to	to mention by name; to utter or publish the name of; to refer to by distinctive title; to mention.	none
 name	verb	assign a specified (usually proper) proper name to	to designate by name or specifically for any purpose; to nominate; to specify; to appoint; .	none
 name	verb	assign a specified (usually proper) proper name to	to designate (a member) by name, as the speaker does by way of reprimand.	none
 name	verb	give the name or identifying characteristics of; refer to by name or some other identifying characteristic property	to give a distinctive name or appellation to; to entitle; to denominate; to style; to call.	none
-name	verb	give the name or identifying characteristics of; refer to by name or some other identifying characteristic property	to mention by name; to utter or publish the name of; to refer to by distinctive title; to mention.	exact
+name	verb	give the name or identifying characteristics of; refer to by name or some other identifying characteristic property	to mention by name; to utter or publish the name of; to refer to by distinctive title; to mention.	none
 name	verb	give the name or identifying characteristics of; refer to by name or some other identifying characteristic property	to designate by name or specifically for any purpose; to nominate; to specify; to appoint; .	none
 name	verb	give the name or identifying characteristics of; refer to by name or some other identifying characteristic property	to designate (a member) by name, as the speaker does by way of reprimand.	none
 name	verb	charge with a function; charge to be	to give a distinctive name or appellation to; to entitle; to denominate; to style; to call.	none
@@ -401,7 +401,7 @@ name	verb	identify as in botany or biology, for example	to mention by name; to u
 name	verb	identify as in botany or biology, for example	to designate by name or specifically for any purpose; to nominate; to specify; to appoint; .	none
 name	verb	identify as in botany or biology, for example	to designate (a member) by name, as the speaker does by way of reprimand.	none
 salmagundi	noun	cooked meats and eggs and vegetables usually arranged in rows around the plate and dressed with a salad dressing	a mixture of chopped meat and pickled herring, with oil, vinegar, pepper, and onions.	narrower
-salmagundi	noun	cooked meats and eggs and vegetables usually arranged in rows around the plate and dressed with a salad dressing	hence, a mixture of various ingredients; an olio or medley; a potpourri; a miscellany.	none
+salmagundi	noun	cooked meats and eggs and vegetables usually arranged in rows around the plate and dressed with a salad dressing	hence, a mixture of various ingredients; an olio or medley; a potpourri; a miscellany.	narrower
 salmagundi	noun	a collection containing a variety of sorts of things	a mixture of chopped meat and pickled herring, with oil, vinegar, pepper, and onions.	none
 salmagundi	noun	a collection containing a variety of sorts of things	hence, a mixture of various ingredients; an olio or medley; a potpourri; a miscellany.	none
 abutment	noun	point of contact between two objects or parts	state of abutting.	none
@@ -418,7 +418,7 @@ appeal	verb	take a court case to a higher court for review	to apply for the remo
 appeal	verb	take a court case to a higher court for review	to call upon another to decide a question controverted, to corroborate a statement, to vindicate one's rights, etc.; . hence: to call on one for aid; to make earnest request.	none
 appeal	verb	take a court case to a higher court for review	to summon; to challenge.	none
 appeal	verb	take a court case to a higher court for review	to invoke.	none
-appeal	verb	challenge (a decision)	to apply for the removal of a cause from an inferior to a superior judge or court for the purpose of re&euml;xamination of for decision.	none
+appeal	verb	challenge (a decision)	to apply for the removal of a cause from an inferior to a superior judge or court for the purpose of re&euml;xamination of for decision.	exact
 appeal	verb	challenge (a decision)	to call upon another to decide a question controverted, to corroborate a statement, to vindicate one's rights, etc.; . hence: to call on one for aid; to make earnest request.	none
 appeal	verb	challenge (a decision)	to summon; to challenge.	exact
 appeal	verb	challenge (a decision)	to invoke.	none
@@ -428,11 +428,11 @@ appeal	verb	cite as an authority; resort to	to summon; to challenge.	none
 appeal	verb	cite as an authority; resort to	to invoke.	none
 bellied	adjective	curving outward	having (such) a belly; puffed out; -- used in composition; .	none
 bellied	adjective	having a belly; often used in combination	having (such) a belly; puffed out; -- used in composition; .	exact
-besieger	noun	an enemy who lays siege to your position	one who besieges; -- opposed to .	none
+besieger	noun	an enemy who lays siege to your position	one who besieges; -- opposed to .	narrower
 besieger	noun	an energetic petitioner	one who besieges; -- opposed to .	none
-twayblade	noun	an orchid of the genus Liparis having a pair of leaves	any one of several orchidaceous plants which have only two leaves, as the species of  and of .	none
-twayblade	noun	orchid having a pair of ovate leaves and a long slender raceme of green flowers sometimes tinged red-brown; Europe to central Asia	any one of several orchidaceous plants which have only two leaves, as the species of  and of .	none
-ten	noun	the cardinal number that is the sum of nine and one; the base of the decimal system	the number greater by one than nine; the sum of five and five; ten units of objects.	none
+twayblade	noun	an orchid of the genus Liparis having a pair of leaves	any one of several orchidaceous plants which have only two leaves, as the species of  and of .	narrower
+twayblade	noun	orchid having a pair of ovate leaves and a long slender raceme of green flowers sometimes tinged red-brown; Europe to central Asia	any one of several orchidaceous plants which have only two leaves, as the species of  and of .	narrower
+ten	noun	the cardinal number that is the sum of nine and one; the base of the decimal system	the number greater by one than nine; the sum of five and five; ten units of objects.	exact
 ten	noun	the cardinal number that is the sum of nine and one; the base of the decimal system	a symbol representing ten units, as 10, , or .	none
 ten	noun	one of four playing cards in a deck with ten pips on the face	the number greater by one than nine; the sum of five and five; ten units of objects.	none
 ten	noun	one of four playing cards in a deck with ten pips on the face	a symbol representing ten units, as 10, , or .	none
@@ -441,21 +441,21 @@ pi	noun	an antiviral drug used against HIV; interrupts HIV replication by bindin
 pi	noun	an antiviral drug used against HIV; interrupts HIV replication by binding and blocking HIV protease; often used in combination with other drugs	the letter &pi;, &pi;, as used to denote the number or quotient approximately expressing the ratio of the circumference of a circle to its diameter; also, the quotient or the ratio itself. the value of the quotient , to twenty decimal places, is 3.14159265358979323846 (see note). the number  is an irrational number, i.e. it cannot be expressed as the quotient of two integers.  it is also a , i.e. it cannot be expressed as a root of an algebraic equation with a finite number of terms; and from this fact follows the impossibility of the quadrature of the circle by purely algebraic processes, or by the aid of a ruler and compass.	none
 pi	noun	the ratio of the circumference to the diameter of a circle; approximately equal to 3.14159265358979323846...	a mass of type confusedly mixed or unsorted.	none
 pi	noun	the ratio of the circumference to the diameter of a circle; approximately equal to 3.14159265358979323846...	a greek letter (&pi;, &pi;) corresponding to the roman letter .	none
-pi	noun	the ratio of the circumference to the diameter of a circle; approximately equal to 3.14159265358979323846...	the letter &pi;, &pi;, as used to denote the number or quotient approximately expressing the ratio of the circumference of a circle to its diameter; also, the quotient or the ratio itself. the value of the quotient , to twenty decimal places, is 3.14159265358979323846 (see note). the number  is an irrational number, i.e. it cannot be expressed as the quotient of two integers.  it is also a , i.e. it cannot be expressed as a root of an algebraic equation with a finite number of terms; and from this fact follows the impossibility of the quadrature of the circle by purely algebraic processes, or by the aid of a ruler and compass.	exact
+pi	noun	the ratio of the circumference to the diameter of a circle; approximately equal to 3.14159265358979323846...	the letter &pi;, &pi;, as used to denote the number or quotient approximately expressing the ratio of the circumference of a circle to its diameter; also, the quotient or the ratio itself. the value of the quotient , to twenty decimal places, is 3.14159265358979323846 (see note). the number  is an irrational number, i.e. it cannot be expressed as the quotient of two integers.  it is also a , i.e. it cannot be expressed as a root of an algebraic equation with a finite number of terms; and from this fact follows the impossibility of the quadrature of the circle by purely algebraic processes, or by the aid of a ruler and compass.	none
 pi	noun	the scientist in charge of an experiment or research project	a mass of type confusedly mixed or unsorted.	none
 pi	noun	the scientist in charge of an experiment or research project	a greek letter (&pi;, &pi;) corresponding to the roman letter .	none
 pi	noun	the scientist in charge of an experiment or research project	the letter &pi;, &pi;, as used to denote the number or quotient approximately expressing the ratio of the circumference of a circle to its diameter; also, the quotient or the ratio itself. the value of the quotient , to twenty decimal places, is 3.14159265358979323846 (see note). the number  is an irrational number, i.e. it cannot be expressed as the quotient of two integers.  it is also a , i.e. it cannot be expressed as a root of an algebraic equation with a finite number of terms; and from this fact follows the impossibility of the quadrature of the circle by purely algebraic processes, or by the aid of a ruler and compass.	none
 pi	noun	the 16th letter of the Greek alphabet	a mass of type confusedly mixed or unsorted.	none
 pi	noun	the 16th letter of the Greek alphabet	a greek letter (&pi;, &pi;) corresponding to the roman letter .	none
-pi	noun	the 16th letter of the Greek alphabet	the letter &pi;, &pi;, as used to denote the number or quotient approximately expressing the ratio of the circumference of a circle to its diameter; also, the quotient or the ratio itself. the value of the quotient , to twenty decimal places, is 3.14159265358979323846 (see note). the number  is an irrational number, i.e. it cannot be expressed as the quotient of two integers.  it is also a , i.e. it cannot be expressed as a root of an algebraic equation with a finite number of terms; and from this fact follows the impossibility of the quadrature of the circle by purely algebraic processes, or by the aid of a ruler and compass.	broader
+pi	noun	the 16th letter of the Greek alphabet	the letter &pi;, &pi;, as used to denote the number or quotient approximately expressing the ratio of the circumference of a circle to its diameter; also, the quotient or the ratio itself. the value of the quotient , to twenty decimal places, is 3.14159265358979323846 (see note). the number  is an irrational number, i.e. it cannot be expressed as the quotient of two integers.  it is also a , i.e. it cannot be expressed as a root of an algebraic equation with a finite number of terms; and from this fact follows the impossibility of the quadrature of the circle by purely algebraic processes, or by the aid of a ruler and compass.	none
 pi	noun	someone who can be employed as a detective to collect information	a mass of type confusedly mixed or unsorted.	none
 pi	noun	someone who can be employed as a detective to collect information	a greek letter (&pi;, &pi;) corresponding to the roman letter .	none
 pi	noun	someone who can be employed as a detective to collect information	the letter &pi;, &pi;, as used to denote the number or quotient approximately expressing the ratio of the circumference of a circle to its diameter; also, the quotient or the ratio itself. the value of the quotient , to twenty decimal places, is 3.14159265358979323846 (see note). the number  is an irrational number, i.e. it cannot be expressed as the quotient of two integers.  it is also a , i.e. it cannot be expressed as a root of an algebraic equation with a finite number of terms; and from this fact follows the impossibility of the quadrature of the circle by purely algebraic processes, or by the aid of a ruler and compass.	none
-catechu	noun	extract of the heartwood of Acacia catechu used for dyeing and tanning and preserving fishnets and sails; formerly used medicinally	a dry, brown, astringent extract, obtained by decoction and evaporation from the , and several other plants growing in india. it contains a large portion of tannin or tannic acid, and is used in medicine and in the arts. it is also known by the names , , , etc.	none
+catechu	noun	extract of the heartwood of Acacia catechu used for dyeing and tanning and preserving fishnets and sails; formerly used medicinally	a dry, brown, astringent extract, obtained by decoction and evaporation from the , and several other plants growing in india. it contains a large portion of tannin or tannic acid, and is used in medicine and in the arts. it is also known by the names , , , etc.	broader
 catechu	noun	East Indian spiny tree having twice-pinnate leaves and yellow flowers followed by flat pods; source of black catechu	a dry, brown, astringent extract, obtained by decoction and evaporation from the , and several other plants growing in india. it contains a large portion of tannin or tannic acid, and is used in medicine and in the arts. it is also known by the names , , , etc.	none
 spineless	adjective	lacking a backbone or spinal column	having no spine, or vertebral column.	exact
 spineless	adjective	lacking a backbone or spinal column	having no thorns or barbs.	none
-spineless	adjective	lacking a backbone or spinal column	lacking in strength of character; cowardly, in a physical or moral sense.	narrower
+spineless	adjective	lacking a backbone or spinal column	lacking in strength of character; cowardly, in a physical or moral sense.	none
 spineless	adjective	lacking spiny processes	having no spine, or vertebral column.	none
 spineless	adjective	lacking spiny processes	having no thorns or barbs.	none
 spineless	adjective	lacking spiny processes	lacking in strength of character; cowardly, in a physical or moral sense.	exact
@@ -465,7 +465,7 @@ spineless	adjective	lacking thorns	lacking in strength of character; cowardly, i
 spineless	adjective	weak in willpower, courage or vitality	having no spine, or vertebral column.	none
 spineless	adjective	weak in willpower, courage or vitality	having no thorns or barbs.	none
 spineless	adjective	weak in willpower, courage or vitality	lacking in strength of character; cowardly, in a physical or moral sense.	none
-devilry	noun	wicked and cruel behavior	conduct suitable to the devil; extreme wickedness; deviltry.	related
+devilry	noun	wicked and cruel behavior	conduct suitable to the devil; extreme wickedness; deviltry.	narrower
 devilry	noun	wicked and cruel behavior	the whole body of evil spirits.	none
 devilry	noun	reckless or malicious behavior that causes discomfort or annoyance in others	conduct suitable to the devil; extreme wickedness; deviltry.	none
 devilry	noun	reckless or malicious behavior that causes discomfort or annoyance in others	the whole body of evil spirits.	none
@@ -473,8 +473,8 @@ cress	noun	pungent leaves of any of numerous cruciferous herbs	a plant of variou
 cress	noun	any of various plants of the family Cruciferae with edible leaves that have a pungent taste	a plant of various species, chiefly cruciferous. the leaves have a moderately pungent taste, and are used as a salad and antiscorbutic.	exact
 entree	noun	the right to enter	a coming in, or entrance; hence, freedom of access; permission or right to enter; .	exact
 entree	noun	the right to enter	in french usage, a dish served at the beginning of dinner to give zest to the appetite; in english usage, a side dish, served with a joint, or between the courses, as a cutlet, scalloped oysters, etc.	none
-entree	noun	the right to enter	the dish which comprises the main course of a meal, especially in a restaurant; .	exact
-entree	noun	something that provides access (to get in or get out)	a coming in, or entrance; hence, freedom of access; permission or right to enter; .	exact
+entree	noun	the right to enter	the dish which comprises the main course of a meal, especially in a restaurant; .	narrower
+entree	noun	something that provides access (to get in or get out)	a coming in, or entrance; hence, freedom of access; permission or right to enter; .	none
 entree	noun	something that provides access (to get in or get out)	in french usage, a dish served at the beginning of dinner to give zest to the appetite; in english usage, a side dish, served with a joint, or between the courses, as a cutlet, scalloped oysters, etc.	none
 entree	noun	something that provides access (to get in or get out)	the dish which comprises the main course of a meal, especially in a restaurant; .	none
 entree	noun	the principal dish of a meal	a coming in, or entrance; hence, freedom of access; permission or right to enter; .	none
@@ -487,10 +487,10 @@ fuss	verb	worry unnecessarily or excessively	to be overbusy or unduly anxious ab
 fuss	verb	care for like a mother	to be overbusy or unduly anxious about trifles; to make a bustle or ado.	none
 hypothesis	noun	a message expressing an opinion based on incomplete evidence	a supposition; a proposition or principle which is supposed or taken for granted, in order to draw a conclusion or inference for proof of the point in question; something not proved, but assumed for the purpose of argument, or to account for a fact or an occurrence; .	none
 hypothesis	noun	a message expressing an opinion based on incomplete evidence	a tentative theory or supposition provisionally adopted to explain certain facts, and to guide in the investigation of others; hence, frequently called a .	none
-hypothesis	noun	a tentative insight into the natural world; a concept that is not yet verified but that if true would explain certain facts or phenomena	a supposition; a proposition or principle which is supposed or taken for granted, in order to draw a conclusion or inference for proof of the point in question; something not proved, but assumed for the purpose of argument, or to account for a fact or an occurrence; .	none
+hypothesis	noun	a tentative insight into the natural world; a concept that is not yet verified but that if true would explain certain facts or phenomena	a supposition; a proposition or principle which is supposed or taken for granted, in order to draw a conclusion or inference for proof of the point in question; something not proved, but assumed for the purpose of argument, or to account for a fact or an occurrence; .	exact
 hypothesis	noun	a tentative insight into the natural world; a concept that is not yet verified but that if true would explain certain facts or phenomena	a tentative theory or supposition provisionally adopted to explain certain facts, and to guide in the investigation of others; hence, frequently called a .	exact
 hypothesis	noun	a proposal intended to explain certain facts or observations	a supposition; a proposition or principle which is supposed or taken for granted, in order to draw a conclusion or inference for proof of the point in question; something not proved, but assumed for the purpose of argument, or to account for a fact or an occurrence; .	none
-hypothesis	noun	a proposal intended to explain certain facts or observations	a tentative theory or supposition provisionally adopted to explain certain facts, and to guide in the investigation of others; hence, frequently called a .	none
+hypothesis	noun	a proposal intended to explain certain facts or observations	a tentative theory or supposition provisionally adopted to explain certain facts, and to guide in the investigation of others; hence, frequently called a .	exact
 register	verb	indicate a certain reading; of gauges and instruments	to enroll one's name in a register.	none
 register	verb	indicate a certain reading; of gauges and instruments	to enter in a register; to record formally and distinctly, as for future use or service.	none
 register	verb	indicate a certain reading; of gauges and instruments	to correspond in relative position;  ,  when the corresponding parts fall in the same line, or when line falls exactly upon line in reverse pages, or (as in chromatic printing) where the various colors of the design are printed consecutively, and perfect adjustment of parts is necessary.	none
@@ -512,7 +512,7 @@ register	verb	enter into someone's consciousness	to correspond in relative posit
 register	verb	enter into someone's consciousness	to enroll; to enter in a list.	exact
 register	verb	enter into someone's consciousness	to enter the name of the owner of (a share of stock, a bond, or other security) in a register, or record book. a registered security is transferable only on the written assignment of the owner of record and on surrender of his bond, stock certificate, or the like.	exact
 register	verb	record in writing; enter into a book of names or events or transactions	to enroll one's name in a register.	none
-register	verb	record in writing; enter into a book of names or events or transactions	to enter in a register; to record formally and distinctly, as for future use or service.	narrower
+register	verb	record in writing; enter into a book of names or events or transactions	to enter in a register; to record formally and distinctly, as for future use or service.	none
 register	verb	record in writing; enter into a book of names or events or transactions	to correspond in relative position;  ,  when the corresponding parts fall in the same line, or when line falls exactly upon line in reverse pages, or (as in chromatic printing) where the various colors of the design are printed consecutively, and perfect adjustment of parts is necessary.	none
 register	verb	record in writing; enter into a book of names or events or transactions	to enroll; to enter in a list.	none
 register	verb	record in writing; enter into a book of names or events or transactions	to enter the name of the owner of (a share of stock, a bond, or other security) in a register, or record book. a registered security is transferable only on the written assignment of the owner of record and on surrender of his bond, stock certificate, or the like.	narrower

@@ -39,7 +39,7 @@ with open(config_file, 'r') as fd:
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
-    features, labels = load_data('mwsa/train', 'english_nuig.tsv', version=params['data']['version'])
+    features, labels = load_data('mwsa/train', params['data']['dataset'], version=params['data']['version'])
 
 output_dir = 'mwsa_model/data/'
 Path(output_dir).mkdir(parents=True, exist_ok=True)
