@@ -45,7 +45,6 @@ train-export:
   script:
     - pip install --upgrade pip
     - pip install -r requirements.txt
-    - python nltk_install.py
     - dvc repro -pf $STAGES
     - dvc push
   rules:
