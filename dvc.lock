@@ -46,23 +46,23 @@ stages:
         random_forest.random_forest__min_samples_leaf:
         - 3
         random_forest.random_forest__min_samples_split:
-        - 5
-        random_forest.random_forest__n_estimators:
         - 2
+        random_forest.random_forest__n_estimators:
+        - 100
         random_forest.random_forest__n_jobs:
         - -1
         random_forest.random_forest__random_state:
         - 7
     outs:
     - path: mwsa_model/output/metrics/en_cv_score.txt
-      md5: b6d81645d2ffaec67d8d0d08187d43f6
+      md5: 8495a30bf24a55757be8751402e9c296
       size: 26
     - path: mwsa_model/output/models/en.joblib
-      md5: f542b3ffe77b1bdd221acc64c8230b0b
-      size: 279643
+      md5: 9e8dbaa90c8959410c95c62c33ee3f8a
+      size: 14184295
     - path: mwsa_model/output/models/en.pkl
-      md5: 14eb5aa99c5ced9d54f98c7491915004
-      size: 279677
+      md5: 7b91f528d7aaae300efeae9e94ea464b
+      size: 14189181
   en_evaluate:
     cmd: python -m mwsa_model.evaluate en.pkl metrics_en.json en_predictions.txt en
     deps:
@@ -70,8 +70,8 @@ stages:
       md5: a01528c3bc4b61a9a2e84641460c96cc
       size: 4271
     - path: mwsa_model/output/models/en.pkl
-      md5: 14eb5aa99c5ced9d54f98c7491915004
-      size: 279677
+      md5: 7b91f528d7aaae300efeae9e94ea464b
+      size: 14189181
     - path: mwsa_model/output/pipeline/pipeline_english_nuig.tsv.pkl
       md5: 8a7ba3b0faeea1e6de035a04af89bd9e
       size: 1126
@@ -81,11 +81,11 @@ stages:
         data.version: v1.0
     outs:
     - path: mwsa_model/output/metrics/metrics_en.json
-      md5: f2c487739731e75a4d5fd01e6de7148e
+      md5: 53e3b0aef8b7244ff2a2d81270dcf9fc
       size: 89
     - path: mwsa_model/output/predictions/en_predictions.txt
-      md5: 3f73390e4b13e22e721a22bfed6cacc1
-      size: 85722
+      md5: 49c44a046b3bd9170c11220e921285e8
+      size: 85583
   de:
     cmd: python -m mwsa_model.load_data data/train/ german.tsv
     deps:

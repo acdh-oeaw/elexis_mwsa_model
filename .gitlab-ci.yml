@@ -24,20 +24,31 @@ test:
       when: never
     - if: '$CI_COMMIT_TAG || $CI_COMMIT_BRANCH'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-dvc:
+train:
   stage: train
   script:
     - pip install --upgrade pip
     - pip install -r requirements.txt
     - python nltk_install.py
     - dvc repro -pf $STAGES
-    - git status
   artifacts:
     paths:
       - mwsa_model/output/models/de.pkl
       - mwsa_model/output/models/en.pkl
       - mwsa_model/output/models/en.joblib
     expire_in: 4 weeks
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+train-export:
+  image: google/cloud-sdk
+  stage: train
+  script:
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - dvc repro
+    - dvc push
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
 cml:
   stage: cml_run
   image: dvcorg/cml-py3:latest
@@ -47,14 +58,8 @@ cml:
     - cml-publish mwsa_model/output/plots/confusion_matrix.png --md >> report.md
     - cml-publish mwsa_model/output/plots/feature_importance.png --md >> report.md
     - cml-send-comment report.md
-deploy:
-  image: google/cloud-sdk
-  stage: deploy
-  script:
-    - pip install dvc[gs]==2.0.10
-    - dvc push
   rules:
-    - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 
 #staging:
