@@ -31,6 +31,7 @@ dvc:
     - pip install -r requirements.txt
     - python nltk_install.py
     - dvc repro -pf $STAGES
+    - git status
   artifacts:
     paths:
       - mwsa_model/output/models/de.pkl
