@@ -40,7 +40,6 @@ train:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 train-export:
-  image: google/cloud-sdk
   stage: train
   script:
     - pip install --upgrade pip
