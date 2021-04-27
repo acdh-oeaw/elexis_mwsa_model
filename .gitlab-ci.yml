@@ -47,7 +47,7 @@ train-export:
     - dvc repro -pf $STAGES
     - dvc status -r elexis_remote
     - dvc diff --targets mwsa_model/output/models/en.pkl --show-hash
-    - dvc push
+    - dvc push -v
   rules:
     - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
 cml:
