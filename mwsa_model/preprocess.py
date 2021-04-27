@@ -35,6 +35,7 @@ if len(sys.argv) != 3:
     logger.error('\t python preprcess.py features_file labels_file language')
 
 
+logger.info("Changed")
 dataset = sys.argv[1]
 lang = sys.argv[2]
 
