@@ -44,6 +44,7 @@ train-export:
   script:
     - pip install --upgrade pip
     - pip install -r requirements.txt
+    - dvc pull
     - dvc repro -p $STAGES
     - dvc status -r elexis_remote
     - dvc diff --targets mwsa_model/output/models/en.pkl --show-hash
