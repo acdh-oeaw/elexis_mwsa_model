@@ -68,7 +68,7 @@ path.parent.mkdir(parents=True, exist_ok=True)
 
 with open(joblib_filename, 'wb+') as file:
     joblib.dump(model, file)
-
+print('test2')
 score_filename = METRICS_OUTPUT_DIR + lang + '_cv_score.txt'
 path = Path(score_filename)
 path.parent.mkdir(parents=True, exist_ok=True)
