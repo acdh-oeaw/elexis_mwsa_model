@@ -104,7 +104,7 @@ confusion_matrix = confusion_matrix(reference_labels, predicted_series, labels=m
 cm_plot = plot_confusion_matrix(model.best_estimator_, preprocessed, reference_labels,
                                 display_labels=model.classes_,
                                 cmap=plt.cm.Blues)
-plt.savefig(plot_dir+"confusion_matrix.png", dpi=120)
+plt.savefig(plot_dir+"confusion_matrix_"+lang+".png", dpi=120)
 plt.close()
 
 ##########################
@@ -130,5 +130,5 @@ ax.set_ylabel('Feature', fontsize=axis_fs)  # ylabel
 ax.set_title('Random forest\nfeature importance', fontsize=title_fs)
 
 plt.tight_layout()
-plt.savefig(plot_dir+"feature_importance.png", dpi=120)
+plt.savefig(plot_dir+"feature_importance_"+lang+".png", dpi=120)
 plt.close()

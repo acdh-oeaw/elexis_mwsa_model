@@ -92,3 +92,123 @@ stages:
 #    metrics:
 #    - mwsa_model/output/metrics/metrics_de.txt:
 #        cache: false
+  sl_load:
+    cmd: python -m mwsa_model.load_data sl
+    deps:
+      - mwsa_model/load_data.py
+    params:
+      - sl_params.yaml:
+          - data.version
+          - data.dataset
+    outs:
+      - mwsa_model/data/features_slovene.tsv.pkl
+      - mwsa_model/data/labels_slovene.tsv.pkl
+  sl_preprocess:
+    cmd: python -m mwsa_model.preprocess slovene.tsv sl
+    deps:
+      - mwsa_model/data/features_slovene.tsv.pkl
+      - mwsa_model/preprocess.py
+      - mwsa_model/service/model_trainer.py
+    outs:
+      - mwsa_model/output/preprocessed_slovene.tsv.pkl
+      - mwsa_model/output/pipeline/pipeline_slovene.tsv.pkl
+  sl_train:
+    cmd: python -m mwsa_model.train slovene.tsv sl
+    deps:
+      - mwsa_model/output/preprocessed_slovene.tsv.pkl
+      - mwsa_model/data/labels_slovene.tsv.pkl
+      - mwsa_model/train.py
+      - mwsa_model/service/model_trainer.py
+    params:
+      - sl_params.yaml:
+          - lang.preprocess__lang
+          - random_forest.random_forest__random_state
+          - random_forest.random_forest__bootstrap
+          - random_forest.random_forest__class_weight
+          - random_forest.random_forest__max_depth
+          - random_forest.random_forest__max_features
+          - random_forest.random_forest__min_samples_leaf
+          - random_forest.random_forest__min_samples_split
+          - random_forest.random_forest__n_estimators
+          - random_forest.random_forest__n_jobs
+    metrics:
+      - mwsa_model/output/metrics/sl_cv_score.txt:
+          cache: false
+    outs:
+      - mwsa_model/output/models/sl.pkl
+  sl_evaluate:
+    cmd: python -m mwsa_model.evaluate sl.pkl metrics_sl.json sl_predictions.txt sl
+    deps:
+      - mwsa_model/output/pipeline/pipeline_slovene.tsv.pkl
+      - mwsa_model/evaluate.py
+      - mwsa_model/output/models/sl.pkl
+    params:
+      - sl_params.yaml:
+          - data.version
+          - data.dataset
+    metrics:
+      - mwsa_model/output/metrics/metrics_sl.json:
+          cache: false
+    outs:
+      - mwsa_model/output/predictions/sl_predictions.txt:
+          cache: false
+  sr_load:
+    cmd: python -m mwsa_model.load_data sr
+    deps:
+      - mwsa_model/load_data.py
+    params:
+      - sr_params.yaml:
+          - data.version
+          - data.dataset
+    outs:
+      - mwsa_model/data/features_serbian.tsv.pkl
+      - mwsa_model/data/labels_serbian.tsv.pkl
+  sr_preprocess:
+    cmd: python -m mwsa_model.preprocess serbian.tsv sr
+    deps:
+      - mwsa_model/data/features_serbian.tsv.pkl
+      - mwsa_model/preprocess.py
+      - mwsa_model/service/model_trainer.py
+    outs:
+      - mwsa_model/output/preprocessed_serbian.tsv.pkl
+      - mwsa_model/output/pipeline/pipeline_serbian.tsv.pkl
+  sr_train:
+    cmd: python -m mwsa_model.train serbian.tsv sr
+    deps:
+      - mwsa_model/output/preprocessed_serbian.tsv.pkl
+      - mwsa_model/data/labels_serbian.tsv.pkl
+      - mwsa_model/train.py
+      - mwsa_model/service/model_trainer.py
+    params:
+      - sr_params.yaml:
+          - lang.preprocess__lang
+          - random_forest.random_forest__random_state
+          - random_forest.random_forest__bootstrap
+          - random_forest.random_forest__class_weight
+          - random_forest.random_forest__max_depth
+          - random_forest.random_forest__max_features
+          - random_forest.random_forest__min_samples_leaf
+          - random_forest.random_forest__min_samples_split
+          - random_forest.random_forest__n_estimators
+          - random_forest.random_forest__n_jobs
+    metrics:
+      - mwsa_model/output/metrics/sr_cv_score.txt:
+          cache: false
+    outs:
+      - mwsa_model/output/models/sr.pkl
+  sr_evaluate:
+    cmd: python -m mwsa_model.evaluate sr.pkl metrics_en.json sr_predictions.txt sr
+    deps:
+      - mwsa_model/output/pipeline/pipeline_serbian.tsv.pkl
+      - mwsa_model/evaluate.py
+      - mwsa_model/output/models/sr.pkl
+    params:
+      - en_params.yaml:
+          - data.version
+          - data.dataset
+    metrics:
+      - mwsa_model/output/metrics/metrics_sr.json:
+          cache: false
+    outs:
+      - mwsa_model/output/predictions/sr_predictions.txt:
+          cache: false

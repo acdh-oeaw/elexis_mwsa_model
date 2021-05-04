@@ -167,3 +167,131 @@ stages:
     - path: mwsa_model/output/preprocessed_english_nuig.tsv.pkl
       md5: 6418523fa8364c45b6e80c763fde6c14
       size: 476790
+  sr_load:
+    cmd: python -m mwsa_model.load_data sr
+    deps:
+    - path: mwsa_model/load_data.py
+      md5: 5b8c8555c062707fc9cd3af441a8d6ee
+      size: 1488
+    params:
+      sr_params.yaml:
+        data.dataset: serbian.tsv
+        data.version: v1.0
+    outs:
+    - path: mwsa_model/data/features_serbian.tsv.pkl
+      md5: 63b85f2071222b81c7308fb91d6cd215
+      size: 347202
+    - path: mwsa_model/data/labels_serbian.tsv.pkl
+      md5: cdeba460ffe46daa36039365bdf52127
+      size: 12353
+  sl_load:
+    cmd: python -m mwsa_model.load_data sl
+    deps:
+    - path: mwsa_model/load_data.py
+      md5: 5b8c8555c062707fc9cd3af441a8d6ee
+      size: 1488
+    params:
+      sl_params.yaml:
+        data.dataset: slovene.tsv
+        data.version: v1.0
+    outs:
+    - path: mwsa_model/data/features_slovene.tsv.pkl
+      md5: 8b64fa4235e6128846b396ca9dfeba25
+      size: 217589
+    - path: mwsa_model/data/labels_slovene.tsv.pkl
+      md5: eb4f9e3486bbfea3b6cfe1d5d897bd38
+      size: 14199
+  sl_preprocess:
+    cmd: python -m mwsa_model.preprocess slovene.tsv sl
+    deps:
+    - path: mwsa_model/data/features_slovene.tsv.pkl
+      md5: 8b64fa4235e6128846b396ca9dfeba25
+      size: 217589
+    - path: mwsa_model/preprocess.py
+      md5: 2411300a8d92c27c762fb349ed340bd4
+      size: 1468
+    - path: mwsa_model/service/model_trainer.py
+      md5: bb4c61d89acc83506940d61c1d8a5ef8
+      size: 1871
+    outs:
+    - path: mwsa_model/output/pipeline/pipeline_slovene.tsv.pkl
+      md5: f4103ff05667dc16e66919747d6aee73
+      size: 833
+    - path: mwsa_model/output/preprocessed_slovene.tsv.pkl
+      md5: f4896d254252a010a1262b75c4208d81
+      size: 169306
+  sl_train:
+    cmd: python -m mwsa_model.train slovene.tsv sl
+    deps:
+    - path: mwsa_model/data/labels_slovene.tsv.pkl
+      md5: eb4f9e3486bbfea3b6cfe1d5d897bd38
+      size: 14199
+    - path: mwsa_model/output/preprocessed_slovene.tsv.pkl
+      md5: f4896d254252a010a1262b75c4208d81
+      size: 169306
+    - path: mwsa_model/service/model_trainer.py
+      md5: bb4c61d89acc83506940d61c1d8a5ef8
+      size: 1871
+    - path: mwsa_model/train.py
+      md5: 279c14ae43267d2f439a3f1cb371a51f
+      size: 2516
+    params:
+      sl_params.yaml:
+        lang.preprocess__lang: sl
+        random_forest.random_forest__bootstrap:
+        - true
+        random_forest.random_forest__class_weight:
+        - balanced
+        - balanced_subsample
+        random_forest.random_forest__max_depth:
+        - 10
+        - 30
+        - 50
+        random_forest.random_forest__max_features:
+        - auto
+        random_forest.random_forest__min_samples_leaf:
+        - 2
+        - 5
+        - 10
+        random_forest.random_forest__min_samples_split:
+        - 2
+        - 5
+        - 10
+        random_forest.random_forest__n_estimators:
+        - 50
+        - 100
+        - 200
+        random_forest.random_forest__n_jobs:
+        - -1
+        random_forest.random_forest__random_state:
+        - 7
+    outs:
+    - path: mwsa_model/output/metrics/sl_cv_score.txt
+      md5: a82c7638a199f37fca3f4815d063fb0e
+      size: 26
+    - path: mwsa_model/output/models/sl.pkl
+      md5: 242be87aa8af11e5566052d83dc3c0bf
+      size: 861135
+  sl_evaluate:
+    cmd: python -m mwsa_model.evaluate sl.pkl metrics_sl.json sl_predictions.txt sl
+    deps:
+    - path: mwsa_model/evaluate.py
+      md5: a01528c3bc4b61a9a2e84641460c96cc
+      size: 4271
+    - path: mwsa_model/output/models/sl.pkl
+      md5: 242be87aa8af11e5566052d83dc3c0bf
+      size: 861135
+    - path: mwsa_model/output/pipeline/pipeline_slovene.tsv.pkl
+      md5: f4103ff05667dc16e66919747d6aee73
+      size: 833
+    params:
+      sl_params.yaml:
+        data.dataset: slovene.tsv
+        data.version: v1.0
+    outs:
+    - path: mwsa_model/output/metrics/metrics_sl.json
+      md5: 3b974f412e78c936bba9e905b7380d33
+      size: 89
+    - path: mwsa_model/output/predictions/sl_predictions.txt
+      md5: 72782a272d5b351bdf298e435f0d792e
+      size: 62362

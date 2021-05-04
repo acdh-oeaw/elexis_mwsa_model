@@ -108,8 +108,7 @@ serbian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedL
                                    #(features.TFIDF_COS, TfidfTransformer()),
                                    #(features.JACCARD, JaccardTransformer()),
                                    #(features.COSINE, CosineTransformer()),
-                                   ('feature_selector', FeatureSelector()),
-                                   ('random_forest', RandomForestClassifier())])
+                                   ('feature_selector', FeatureSelector())])
 
 bulgarian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Bulgarian)),
                                      (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -134,8 +133,7 @@ slovene_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedL
                                    #(features.TFIDF_COS, TfidfTransformer()),
                                    #(features.JACCARD, JaccardTransformer()),
                                    #(features.COSINE, CosineTransformer()),
-                                   ('feature_selector', FeatureSelector()),
-                                   ('random_forest', RandomForestClassifier())])
+                                   ('feature_selector', FeatureSelector())])
 
 estonian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Estonian)),
                                     (features.FIRST_WORD_SAME, FirstWordSameProcessor()),

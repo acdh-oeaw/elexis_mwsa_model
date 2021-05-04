@@ -1,0 +1,712 @@
+word	pos	def1	def2	relation
+abeceda	noun	nabor črk v ustaljenem zaporedju v latinični pisavi	abeceda |ustaljeno zaporedje črk|	exact
+abeceda	noun	nabor črk v ustaljenem zaporedju v latinični pisavi	abeceda |ustaljeno zaporedje črk|	exact
+abeceda	noun	nabor črk v ustaljenem zaporedju v kaki pisavi sploh	abeceda |ustaljeno zaporedje črk|	related
+abeceda	noun	nabor črk v ustaljenem zaporedju v kaki pisavi sploh	abeceda |ustaljeno zaporedje črk|	related
+abeceda	noun	začetno, osnovno znanje določenega področja	abeceda |ustaljeno zaporedje črk|	related
+abeceda	noun	začetno, osnovno znanje določenega področja	abeceda |ustaljeno zaporedje črk|	related
+abecednik	noun	knjiga, priročnik za spoznavanje črk, abecede, zlasti za predšolske otroke	abecednik |prvo berilo|	narrower
+abecednik	noun	učbenik za začetno učenje branja in pisanja	abecednik |prvo berilo|	related
+abecednik	noun	priročnik za začetno, osnovno spoznavanje določenega področja	abecednik |prvo berilo|	related
+abecednik	noun	abecedni seznam imen, pojmov	abecednik |prvo berilo|	none
+babica	noun	mati očeta ali matere v razmerju do njunih otrok	babica, stara mama, stara mati	narrower
+babica	noun	mati očeta ali matere v razmerju do njunih otrok	babica |ženska, ki pomaga pri porodu|	none
+babica	noun	mati očeta ali matere v razmerju do njunih otrok	babica |zgornji del klepalnika|	none
+babica	noun	mati očeta ali matere v razmerju do njunih otrok	babica |del zaponke, kamor se zatakne kaveljček|	none
+babica	noun	mati očeta ali matere v razmerju do njunih otrok	koruzni storž, ki ima redko in nedozorelo zrnje	related
+babica	noun	mati očeta ali matere v razmerju do njunih otrok	koničast kamen, ki štrli iz zemlje	narrower
+babica	noun	starejša ženska	babica, stara mama, stara mati	exact
+babica	noun	starejša ženska	babica |ženska, ki pomaga pri porodu|	related
+babica	noun	starejša ženska	babica |zgornji del klepalnika|	related
+babica	noun	starejša ženska	babica |del zaponke, kamor se zatakne kaveljček|	related
+babica	noun	starejša ženska	koruzni storž, ki ima redko in nedozorelo zrnje	none
+babica	noun	starejša ženska	koničast kamen, ki štrli iz zemlje	none
+babica	noun	skrbna, sočutna ženska	babica, stara mama, stara mati	related
+babica	noun	skrbna, sočutna ženska	babica |ženska, ki pomaga pri porodu|	none
+babica	noun	skrbna, sočutna ženska	babica |zgornji del klepalnika|	none
+babica	noun	skrbna, sočutna ženska	babica |del zaponke, kamor se zatakne kaveljček|	none
+babica	noun	skrbna, sočutna ženska	koruzni storž, ki ima redko in nedozorelo zrnje	related
+babica	noun	skrbna, sočutna ženska	koničast kamen, ki štrli iz zemlje	none
+babica	noun	ženska, ki na nekem področju deluje dlje od drugih ali je od njih starejša	babica, stara mama, stara mati	exact
+babica	noun	ženska, ki na nekem področju deluje dlje od drugih ali je od njih starejša	babica |ženska, ki pomaga pri porodu|	none
+babica	noun	ženska, ki na nekem področju deluje dlje od drugih ali je od njih starejša	babica |zgornji del klepalnika|	none
+babica	noun	ženska, ki na nekem področju deluje dlje od drugih ali je od njih starejša	babica |del zaponke, kamor se zatakne kaveljček|	none
+babica	noun	ženska, ki na nekem področju deluje dlje od drugih ali je od njih starejša	koruzni storž, ki ima redko in nedozorelo zrnje	none
+babica	noun	ženska, ki na nekem področju deluje dlje od drugih ali je od njih starejša	koničast kamen, ki štrli iz zemlje	none
+babica	noun	izkušena, modra ženska, ki na določenem področju, zlasti v kulinariki, gospodinjstvu, soustvarja, sooblikuje tradicijo	babica, stara mama, stara mati	none
+babica	noun	izkušena, modra ženska, ki na določenem področju, zlasti v kulinariki, gospodinjstvu, soustvarja, sooblikuje tradicijo	babica |ženska, ki pomaga pri porodu|	none
+babica	noun	izkušena, modra ženska, ki na določenem področju, zlasti v kulinariki, gospodinjstvu, soustvarja, sooblikuje tradicijo	babica |zgornji del klepalnika|	none
+babica	noun	izkušena, modra ženska, ki na določenem področju, zlasti v kulinariki, gospodinjstvu, soustvarja, sooblikuje tradicijo	babica |del zaponke, kamor se zatakne kaveljček|	none
+babica	noun	izkušena, modra ženska, ki na določenem področju, zlasti v kulinariki, gospodinjstvu, soustvarja, sooblikuje tradicijo	koruzni storž, ki ima redko in nedozorelo zrnje	none
+babica	noun	izkušena, modra ženska, ki na določenem področju, zlasti v kulinariki, gospodinjstvu, soustvarja, sooblikuje tradicijo	koničast kamen, ki štrli iz zemlje	none
+babica	noun	ženska, ki se poklicno ukvarja z vodenjem porodov	babica, stara mama, stara mati	narrower
+babica	noun	ženska, ki se poklicno ukvarja z vodenjem porodov	babica |ženska, ki pomaga pri porodu|	related
+babica	noun	ženska, ki se poklicno ukvarja z vodenjem porodov	babica |zgornji del klepalnika|	related
+babica	noun	ženska, ki se poklicno ukvarja z vodenjem porodov	babica |del zaponke, kamor se zatakne kaveljček|	related
+babica	noun	ženska, ki se poklicno ukvarja z vodenjem porodov	koruzni storž, ki ima redko in nedozorelo zrnje	narrower
+babica	noun	ženska, ki se poklicno ukvarja z vodenjem porodov	koničast kamen, ki štrli iz zemlje	related
+babica	noun	manjša morska riba brez lusk, z močnimi čeljustmi in plosko glavo	babica, stara mama, stara mati	related
+babica	noun	manjša morska riba brez lusk, z močnimi čeljustmi in plosko glavo	babica |ženska, ki pomaga pri porodu|	none
+babica	noun	manjša morska riba brez lusk, z močnimi čeljustmi in plosko glavo	babica |zgornji del klepalnika|	none
+babica	noun	manjša morska riba brez lusk, z močnimi čeljustmi in plosko glavo	babica |del zaponke, kamor se zatakne kaveljček|	none
+babica	noun	manjša morska riba brez lusk, z močnimi čeljustmi in plosko glavo	koruzni storž, ki ima redko in nedozorelo zrnje	related
+babica	noun	manjša morska riba brez lusk, z močnimi čeljustmi in plosko glavo	koničast kamen, ki štrli iz zemlje	none
+briti	verb	odstranjevati dlake z rezanjem tik ob koži	|rezati dlake tik ob koži|	exact
+briti	verb	odstranjevati dlake z rezanjem tik ob koži	|ostro pihati|	narrower
+briti	verb	pihati tako, da se čuti hud, močan mraz	|rezati dlake tik ob koži|	narrower
+briti	verb	pihati tako, da se čuti hud, močan mraz	|ostro pihati|	related
+bučnica	noun	bučno seme, navadno užitno	bučnica |bučno seme|	none
+bučnica	noun	kulturna rastlina s plazečim se steblom, zvezdastimi cvetovi in trebušastimi plodovi	bučnica |bučno seme|	related
+čivkati	verb	oglašati se s kratkimi, visokimi glasovi, značilnimi za ptico	čivkati |oglašati se s kratkimi, visokimi glasovi|	related
+čivkati	verb	oglašati se s kratkimi, visokimi glasovi, značilnimi za ptico	čivkati |oglašati se s kratkimi, visokimi glasovi|	related
+čivkati	verb	oglašati se s kratkimi, visokimi glasovi, značilnimi za ptico	čivkati |oglašati se s kratkimi, visokimi glasovi|	related
+čivkati	verb	oglašati se s temu podobnimi zvoki	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	oglašati se s temu podobnimi zvoki	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	oglašati se s temu podobnimi zvoki	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	peti, govoriti s temu podobnim glasom	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	peti, govoriti s temu podobnim glasom	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	peti, govoriti s temu podobnim glasom	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	vztrajno, vsiljivo govoriti, pripovedovati, ponavljati kaj	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	vztrajno, vsiljivo govoriti, pripovedovati, ponavljati kaj	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	vztrajno, vsiljivo govoriti, pripovedovati, ponavljati kaj	čivkati |oglašati se s kratkimi, visokimi glasovi|	narrower
+čivkati	verb	z zadržkom, navadno na zahtevo govoriti, pripovedovati kaj za koga neugodnega	čivkati |oglašati se s kratkimi, visokimi glasovi|	related
+čivkati	verb	z zadržkom, navadno na zahtevo govoriti, pripovedovati kaj za koga neugodnega	čivkati |oglašati se s kratkimi, visokimi glasovi|	related
+čivkati	verb	z zadržkom, navadno na zahtevo govoriti, pripovedovati kaj za koga neugodnega	čivkati |oglašati se s kratkimi, visokimi glasovi|	related
+čivkati	verb	objavljati krajše zapise, komentarje, mnenja, zlasti na družbenem omrežju Twitter	čivkati |oglašati se s kratkimi, visokimi glasovi|	none
+čivkati	verb	objavljati krajše zapise, komentarje, mnenja, zlasti na družbenem omrežju Twitter	čivkati |oglašati se s kratkimi, visokimi glasovi|	none
+čivkati	verb	objavljati krajše zapise, komentarje, mnenja, zlasti na družbenem omrežju Twitter	čivkati |oglašati se s kratkimi, visokimi glasovi|	none
+dinarček	noun	denar	dinarček |manjšalnica od dinar|	none
+dinarček	noun	denar	dinarček |manjšalnica od dinar|	none
+dinarček	noun	denar	ljubček, fant	none
+dinarček	noun	bankovec, kovanec	dinarček |manjšalnica od dinar|	none
+dinarček	noun	bankovec, kovanec	dinarček |manjšalnica od dinar|	none
+dinarček	noun	bankovec, kovanec	ljubček, fant	none
+dinarček	noun	bankovec, kovanec	dinarček |manjšalnica od dinar|	none
+dinarček	noun	bankovec, kovanec	dinarček |manjšalnica od dinar|	none
+dinarček	noun	bankovec, kovanec	ljubček, fant	none
+hruška	noun	sadno drevo z razpokanim lubjem sivkasto rjave barve in spodaj odebeljenimi plodovi	hruška |sadno drevo ali njegov pečkati sad stožčaste oblike|	narrower
+hruška	noun	sadno drevo z razpokanim lubjem sivkasto rjave barve in spodaj odebeljenimi plodovi	hruška |sadno drevo ali njegov pečkati sad stožčaste oblike|	narrower
+hruška	noun	plod tega drevesa, zlasti kot hrana, jed	hruška |sadno drevo ali njegov pečkati sad stožčaste oblike|	narrower
+hruška	noun	plod tega drevesa, zlasti kot hrana, jed	hruška |sadno drevo ali njegov pečkati sad stožčaste oblike|	narrower
+hruška	noun	mešalec za beton kot del tovornjaka ali tak tovornjak sam	hruška |sadno drevo ali njegov pečkati sad stožčaste oblike|	related
+hruška	noun	mešalec za beton kot del tovornjaka ali tak tovornjak sam	hruška |sadno drevo ali njegov pečkati sad stožčaste oblike|	related
+lakirati	verb	nanašati lak na površino česa	lakirati |prekrivati z lakom|	none
+lakirati	verb	nanašati lak na površino česa	lakirati |prekrivati z lakom|	none
+lakirati	verb	nanašati lak na nohte	lakirati |prekrivati z lakom|	related
+lakirati	verb	nanašati lak na nohte	lakirati |prekrivati z lakom|	related
+lakirati	verb	prikazovati kaj tako, da bi bilo videti bolj sprejemljivo, kot je v resnici	lakirati |prekrivati z lakom|	none
+lakirati	verb	prikazovati kaj tako, da bi bilo videti bolj sprejemljivo, kot je v resnici	lakirati |prekrivati z lakom|	none
+obad	noun	večja, muhi podobna žuželka, ki sesa kri, zlasti sesalcev	obad |velika, muhi podobna žuželka, ki sesa kri|	exact
+prehladiti se	verb	zboleti za prehladom	prehladiti se |z ohladitvijo povzročiti vnetje sluznice, navadno na dihalih|	none
+prehladiti se	verb	ustvariti pogoje, v katerih kdo lahko zboli za prehladom	prehladiti se |z ohladitvijo povzročiti vnetje sluznice, navadno na dihalih|	narrower
+prehladiti se	verb	ustvariti pogoje, v katerih se sluznica lahko vname	prehladiti se |z ohladitvijo povzročiti vnetje sluznice, navadno na dihalih|	narrower
+prehladiti se	verb	ne vzhajati zaradi prenizke temperature, nihanja temperature	prehladiti se |z ohladitvijo povzročiti vnetje sluznice, navadno na dihalih|	none
+sršen	noun	večja, osi podobna žuželka z rjavimi in rumenimi progami po glavi in oprsju	sršen |velika, čebeli podobna žuželka z rjavo rdečimi progami po glavi in oprsju|	exact
+talentiran	adjective	ki ima prirojeno sposobnost, da kaj dela zelo dobro, nadpovprečno	talentiran |posebno nadarjen za kaj|	related
+tavžentroža	noun	zdravilna rastlina s trikotnimi, nasproti rastočimi listi in rožnatimi zvezdastimi cvetovi ali del te rastline	|zdravilna rastlina z drobnimi rožnatimi cveti|	exact
+tavžentroža	noun	zdravilna rastlina s trikotnimi, nasproti rastočimi listi in rožnatimi zvezdastimi cvetovi ali del te rastline	|posušeni deli te rastline|	narrower
+tavžentroža	noun	zdravilni pripravek iz te rastline ali žganje, v katerem je namočena ta rastlina	|zdravilna rastlina z drobnimi rožnatimi cveti|	narrower
+tavžentroža	noun	zdravilni pripravek iz te rastline ali žganje, v katerem je namočena ta rastlina	|posušeni deli te rastline|	related
+babjak	noun	moški, ki pogosto menja spolne partnerice ali se mu to pripisuje	babjak, ženskar	related
+dalmatinec	noun	srednje velik kratkodlak pes bele barve s črnimi pikami in vitkim telesom	dalmatinec |vino iz Dalmacije|	related
+dalmatinec	noun	srednje velik kratkodlak pes bele barve s črnimi pikami in vitkim telesom	krošnjar |kdor v krošnji prenaša in prodaja drobne predmete|	related
+plitek	adjective	ki ima od površine proti notranjosti, zlasti v navpični smeri, razmeroma majhno razsežnost	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	exact
+plitek	adjective	ki ima od površine proti notranjosti, zlasti v navpični smeri, razmeroma majhno razsežnost	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	exact
+plitek	adjective	ki ne sega globoko, zajema le manjše področje pod površino	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	none
+plitek	adjective	ki ne sega globoko, zajema le manjše področje pod površino	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	none
+plitek	adjective	ki ima manjšo kapaciteto	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki ima manjšo kapaciteto	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki zajema le manjši del potencialne celote	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki zajema le manjši del potencialne celote	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki je v zvezi s fazami spanja, ko človek prehaja iz budnega stanja v spanec in se srčni utrip upočasni, telesna temperatura zniža	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki je v zvezi s fazami spanja, ko človek prehaja iz budnega stanja v spanec in se srčni utrip upočasni, telesna temperatura zniža	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki ni sposoben, ne želi poglobljeno razmišljati, čustvovati	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	narrower
+plitek	adjective	ki ni sposoben, ne želi poglobljeno razmišljati, čustvovati	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	narrower
+plitek	adjective	ki kaže, izraža tako nepoglobljeno razmišljanje, čustvovanje	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki kaže, izraža tako nepoglobljeno razmišljanje, čustvovanje	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki se ne pojavlja v visoki, zadostni stopnji	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	narrower
+plitek	adjective	ki se ne pojavlja v visoki, zadostni stopnji	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	narrower
+plitek	adjective	ki je vsebinsko prazen, nezadosten	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+plitek	adjective	ki je vsebinsko prazen, nezadosten	plitek, plitev |ki ima v navpični smeri navzdol razmeroma majhno razsežnost|	related
+ponev	noun	nižja, navadno okrogla posoda z ročajem za cvrenje in pečenje	ponev |nizka okrogla posoda za pečenje, cvrenje, navadno z dolgim ročajem|	exact
+ponev	noun	jed, pripravljena, postrežena v taki posodi	ponev |nizka okrogla posoda za pečenje, cvrenje, navadno z dolgim ročajem|	narrower
+razoglav	adjective	ki je brez pokrivala	razoglav |ki je brez pokrivala|	related
+boben 	noun	glasbilo	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	exact
+boben 	noun	glasbilo	zvok bobna	none
+boben 	noun	glasbilo	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+boben 	noun	v glasbeni skupini	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	none
+boben 	noun	v glasbeni skupini	zvok bobna	narrower
+boben 	noun	v glasbeni skupini	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+boben 	noun	naprava ali predmet	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	none
+boben 	noun	naprava ali predmet	zvok bobna	narrower
+boben 	noun	naprava ali predmet	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+boben 	noun	za žrebanje	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	none
+boben 	noun	za žrebanje	zvok bobna	related
+boben 	noun	za žrebanje	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+boben 	noun	pri strojih	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	none
+boben 	noun	pri strojih	zvok bobna	related
+boben 	noun	pri strojih	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+boben 	noun	za navijanje	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	none
+boben 	noun	za navijanje	zvok bobna	related
+boben 	noun	za navijanje	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+boben 	noun	na televiziji	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	none
+boben 	noun	na televiziji	zvok bobna	related
+boben 	noun	na televiziji	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+boben 	noun	pri tiskalniku	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	none
+boben 	noun	pri tiskalniku	zvok bobna	related
+boben 	noun	pri tiskalniku	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+boben 	noun	pri revolverju, pištoli	glasbilo oz. tolkalo; v obliki votlega valja, ki ima na obeh straneh napeto opno	none
+boben 	noun	pri revolverju, pištoli	zvok bobna	narrower
+boben 	noun	pri revolverju, pištoli	izbočena, valjasta oblika; votla, s ploskimi stranicami	none
+igra 	noun	šport	razvedrilo ali zabava	none
+igra 	noun	šport	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	šport	na pravilih temelječe tekmovanje, ki odloči zmagovalca	narrower
+igra 	noun	šport	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	šport	neresno, nepomembno vedenje	none
+igra 	noun	šport	vnaprej določen načrt delovanja v skupinskih športih	exact
+igra 	noun	šport	uporaba ali raba	none
+igra 	noun	šport	oprema potrebna za igranje določene igre	none
+igra 	noun	šport	gledališka uprizoritev dramskega teksta	none
+igra 	noun	šport	(igra) izid v določenem trenutku ali izid potreben za zmago	none
+igra 	noun	šport	stanje, v katerem je možno delovati	none
+igra 	noun	šport	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	vrsta športa	razvedrilo ali zabava	none
+igra 	noun	vrsta športa	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	vrsta športa	na pravilih temelječe tekmovanje, ki odloči zmagovalca	related
+igra 	noun	vrsta športa	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	vrsta športa	neresno, nepomembno vedenje	none
+igra 	noun	vrsta športa	vnaprej določen načrt delovanja v skupinskih športih	exact
+igra 	noun	vrsta športa	uporaba ali raba	none
+igra 	noun	vrsta športa	oprema potrebna za igranje določene igre	related
+igra 	noun	vrsta športa	gledališka uprizoritev dramskega teksta	none
+igra 	noun	vrsta športa	(igra) izid v določenem trenutku ali izid potreben za zmago	related
+igra 	noun	vrsta športa	stanje, v katerem je možno delovati	none
+igra 	noun	vrsta športa	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	pri golfu	razvedrilo ali zabava	none
+igra 	noun	pri golfu	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	pri golfu	na pravilih temelječe tekmovanje, ki odloči zmagovalca	related
+igra 	noun	pri golfu	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	pri golfu	neresno, nepomembno vedenje	none
+igra 	noun	pri golfu	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	pri golfu	uporaba ali raba	none
+igra 	noun	pri golfu	oprema potrebna za igranje določene igre	related
+igra 	noun	pri golfu	gledališka uprizoritev dramskega teksta	none
+igra 	noun	pri golfu	(igra) izid v določenem trenutku ali izid potreben za zmago	related
+igra 	noun	pri golfu	stanje, v katerem je možno delovati	none
+igra 	noun	pri golfu	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	pri tenisu	razvedrilo ali zabava	none
+igra 	noun	pri tenisu	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	pri tenisu	na pravilih temelječe tekmovanje, ki odloči zmagovalca	related
+igra 	noun	pri tenisu	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	pri tenisu	neresno, nepomembno vedenje	none
+igra 	noun	pri tenisu	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	pri tenisu	uporaba ali raba	none
+igra 	noun	pri tenisu	oprema potrebna za igranje določene igre	related
+igra 	noun	pri tenisu	gledališka uprizoritev dramskega teksta	none
+igra 	noun	pri tenisu	(igra) izid v določenem trenutku ali izid potreben za zmago	related
+igra 	noun	pri tenisu	stanje, v katerem je možno delovati	none
+igra 	noun	pri tenisu	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	exact
+igra 	noun	tekmovanje; srečanje	razvedrilo ali zabava	none
+igra 	noun	tekmovanje; srečanje	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	tekmovanje; srečanje	na pravilih temelječe tekmovanje, ki odloči zmagovalca	exact
+igra 	noun	tekmovanje; srečanje	posamična športna prireditev  oz. drugo tekmovanje	exact
+igra 	noun	tekmovanje; srečanje	neresno, nepomembno vedenje	none
+igra 	noun	tekmovanje; srečanje	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	tekmovanje; srečanje	uporaba ali raba	none
+igra 	noun	tekmovanje; srečanje	oprema potrebna za igranje določene igre	related
+igra 	noun	tekmovanje; srečanje	gledališka uprizoritev dramskega teksta	none
+igra 	noun	tekmovanje; srečanje	(igra) izid v določenem trenutku ali izid potreben za zmago	related
+igra 	noun	tekmovanje; srečanje	stanje, v katerem je možno delovati	none
+igra 	noun	tekmovanje; srečanje	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	del tekmovanja	razvedrilo ali zabava	none
+igra 	noun	del tekmovanja	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	del tekmovanja	na pravilih temelječe tekmovanje, ki odloči zmagovalca	exact
+igra 	noun	del tekmovanja	posamična športna prireditev  oz. drugo tekmovanje	exact
+igra 	noun	del tekmovanja	neresno, nepomembno vedenje	none
+igra 	noun	del tekmovanja	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	del tekmovanja	uporaba ali raba	none
+igra 	noun	del tekmovanja	oprema potrebna za igranje določene igre	related
+igra 	noun	del tekmovanja	gledališka uprizoritev dramskega teksta	none
+igra 	noun	del tekmovanja	(igra) izid v določenem trenutku ali izid potreben za zmago	related
+igra 	noun	del tekmovanja	stanje, v katerem je možno delovati	none
+igra 	noun	del tekmovanja	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	prireditev	razvedrilo ali zabava	none
+igra 	noun	prireditev	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	prireditev	na pravilih temelječe tekmovanje, ki odloči zmagovalca	narrower
+igra 	noun	prireditev	posamična športna prireditev  oz. drugo tekmovanje	exact
+igra 	noun	prireditev	neresno, nepomembno vedenje	none
+igra 	noun	prireditev	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	prireditev	uporaba ali raba	none
+igra 	noun	prireditev	oprema potrebna za igranje določene igre	none
+igra 	noun	prireditev	gledališka uprizoritev dramskega teksta	none
+igra 	noun	prireditev	(igra) izid v določenem trenutku ali izid potreben za zmago	none
+igra 	noun	prireditev	stanje, v katerem je možno delovati	none
+igra 	noun	prireditev	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	film; predstava	razvedrilo ali zabava	none
+igra 	noun	film; predstava	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	film; predstava	na pravilih temelječe tekmovanje, ki odloči zmagovalca	related
+igra 	noun	film; predstava	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	film; predstava	neresno, nepomembno vedenje	none
+igra 	noun	film; predstava	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	film; predstava	uporaba ali raba	none
+igra 	noun	film; predstava	oprema potrebna za igranje določene igre	related
+igra 	noun	film; predstava	gledališka uprizoritev dramskega teksta	none
+igra 	noun	film; predstava	(igra) izid v določenem trenutku ali izid potreben za zmago	related
+igra 	noun	film; predstava	stanje, v katerem je možno delovati	none
+igra 	noun	film; predstava	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	veščina	razvedrilo ali zabava	none
+igra 	noun	veščina	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	veščina	na pravilih temelječe tekmovanje, ki odloči zmagovalca	narrower
+igra 	noun	veščina	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	veščina	neresno, nepomembno vedenje	none
+igra 	noun	veščina	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	veščina	uporaba ali raba	none
+igra 	noun	veščina	oprema potrebna za igranje določene igre	none
+igra 	noun	veščina	gledališka uprizoritev dramskega teksta	none
+igra 	noun	veščina	(igra) izid v določenem trenutku ali izid potreben za zmago	none
+igra 	noun	veščina	stanje, v katerem je možno delovati	none
+igra 	noun	veščina	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	zabava	razvedrilo ali zabava	exact
+igra 	noun	zabava	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	zabava	na pravilih temelječe tekmovanje, ki odloči zmagovalca	narrower
+igra 	noun	zabava	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	zabava	neresno, nepomembno vedenje	none
+igra 	noun	zabava	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	zabava	uporaba ali raba	none
+igra 	noun	zabava	oprema potrebna za igranje določene igre	none
+igra 	noun	zabava	gledališka uprizoritev dramskega teksta	none
+igra 	noun	zabava	(igra) izid v določenem trenutku ali izid potreben za zmago	none
+igra 	noun	zabava	stanje, v katerem je možno delovati	none
+igra 	noun	zabava	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	računalniška igra	razvedrilo ali zabava	none
+igra 	noun	računalniška igra	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	računalniška igra	na pravilih temelječe tekmovanje, ki odloči zmagovalca	related
+igra 	noun	računalniška igra	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	računalniška igra	neresno, nepomembno vedenje	none
+igra 	noun	računalniška igra	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	računalniška igra	uporaba ali raba	none
+igra 	noun	računalniška igra	oprema potrebna za igranje določene igre	narrower
+igra 	noun	računalniška igra	gledališka uprizoritev dramskega teksta	none
+igra 	noun	računalniška igra	(igra) izid v določenem trenutku ali izid potreben za zmago	exact
+igra 	noun	računalniška igra	stanje, v katerem je možno delovati	none
+igra 	noun	računalniška igra	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	partija	razvedrilo ali zabava	none
+igra 	noun	partija	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	partija	na pravilih temelječe tekmovanje, ki odloči zmagovalca	narrower
+igra 	noun	partija	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	partija	neresno, nepomembno vedenje	none
+igra 	noun	partija	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	partija	uporaba ali raba	none
+igra 	noun	partija	oprema potrebna za igranje določene igre	none
+igra 	noun	partija	gledališka uprizoritev dramskega teksta	none
+igra 	noun	partija	(igra) izid v določenem trenutku ali izid potreben za zmago	none
+igra 	noun	partija	stanje, v katerem je možno delovati	none
+igra 	noun	partija	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	prireditev	razvedrilo ali zabava	none
+igra 	noun	prireditev	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	prireditev	na pravilih temelječe tekmovanje, ki odloči zmagovalca	narrower
+igra 	noun	prireditev	posamična športna prireditev  oz. drugo tekmovanje	exact
+igra 	noun	prireditev	neresno, nepomembno vedenje	none
+igra 	noun	prireditev	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	prireditev	uporaba ali raba	none
+igra 	noun	prireditev	oprema potrebna za igranje določene igre	none
+igra 	noun	prireditev	gledališka uprizoritev dramskega teksta	none
+igra 	noun	prireditev	(igra) izid v določenem trenutku ali izid potreben za zmago	none
+igra 	noun	prireditev	stanje, v katerem je možno delovati	none
+igra 	noun	prireditev	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	o otrocih	razvedrilo ali zabava	none
+igra 	noun	o otrocih	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	o otrocih	na pravilih temelječe tekmovanje, ki odloči zmagovalca	related
+igra 	noun	o otrocih	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	o otrocih	neresno, nepomembno vedenje	none
+igra 	noun	o otrocih	vnaprej določen načrt delovanja v skupinskih športih	none
+igra 	noun	o otrocih	uporaba ali raba	none
+igra 	noun	o otrocih	oprema potrebna za igranje določene igre	related
+igra 	noun	o otrocih	gledališka uprizoritev dramskega teksta	none
+igra 	noun	o otrocih	(igra) izid v določenem trenutku ali izid potreben za zmago	related
+igra 	noun	o otrocih	stanje, v katerem je možno delovati	none
+igra 	noun	o otrocih	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+igra 	noun	dogajanje; splet dogodkov	razvedrilo ali zabava	none
+igra 	noun	dogajanje; splet dogodkov	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	related
+igra 	noun	dogajanje; splet dogodkov	na pravilih temelječe tekmovanje, ki odloči zmagovalca	narrower
+igra 	noun	dogajanje; splet dogodkov	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	dogajanje; splet dogodkov	neresno, nepomembno vedenje	none
+igra 	noun	dogajanje; splet dogodkov	vnaprej določen načrt delovanja v skupinskih športih	related
+igra 	noun	dogajanje; splet dogodkov	uporaba ali raba	related
+igra 	noun	dogajanje; splet dogodkov	oprema potrebna za igranje določene igre	none
+igra 	noun	dogajanje; splet dogodkov	gledališka uprizoritev dramskega teksta	none
+igra 	noun	dogajanje; splet dogodkov	(igra) izid v določenem trenutku ali izid potreben za zmago	none
+igra 	noun	dogajanje; splet dogodkov	stanje, v katerem je možno delovati	related
+igra 	noun	dogajanje; splet dogodkov	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	related
+igra 	noun	nemoralno delovanje	razvedrilo ali zabava	none
+igra 	noun	nemoralno delovanje	otroška dejavnost, ki ji, bolj kot ustaljena pravila, botruje domišljija	none
+igra 	noun	nemoralno delovanje	na pravilih temelječe tekmovanje, ki odloči zmagovalca	related
+igra 	noun	nemoralno delovanje	posamična športna prireditev  oz. drugo tekmovanje	none
+igra 	noun	nemoralno delovanje	neresno, nepomembno vedenje	none
+igra 	noun	nemoralno delovanje	vnaprej določen načrt delovanja v skupinskih športih	exact
+igra 	noun	nemoralno delovanje	uporaba ali raba	none
+igra 	noun	nemoralno delovanje	oprema potrebna za igranje določene igre	related
+igra 	noun	nemoralno delovanje	gledališka uprizoritev dramskega teksta	none
+igra 	noun	nemoralno delovanje	(igra) izid v določenem trenutku ali izid potreben za zmago	related
+igra 	noun	nemoralno delovanje	stanje, v katerem je možno delovati	none
+igra 	noun	nemoralno delovanje	(tenis) delitev tekme, pri kateri ima servis eden izmed igralcev	none
+izkušen 	adjective	ki je veliko doživel in se naučil	ki ima izkušnje; ki ima znanje ali spretnosti, pridobljene z opazovanjem ali sodelovanjem	none
+izkušen 	adjective	ki je veliko doživel in se naučil	ki je z veliko vaje postal spreten	none
+izkušen 	adjective	ki je veliko doživel in se naučil	ki ima ali izkazuje znanje in spretnost in sposobnost	none
+izkušen 	adjective	izurjen in spreten	ki ima izkušnje; ki ima znanje ali spretnosti, pridobljene z opazovanjem ali sodelovanjem	narrower
+izkušen 	adjective	izurjen in spreten	ki je z veliko vaje postal spreten	exact
+izkušen 	adjective	izurjen in spreten	ki ima ali izkazuje znanje in spretnost in sposobnost	narrower
+izkušen 	adjective	v poklicu, dejavnosti	ki ima izkušnje; ki ima znanje ali spretnosti, pridobljene z opazovanjem ali sodelovanjem	narrower
+izkušen 	adjective	v poklicu, dejavnosti	ki je z veliko vaje postal spreten	narrower
+izkušen 	adjective	v poklicu, dejavnosti	ki ima ali izkazuje znanje in spretnost in sposobnost	narrower
+izkušen 	adjective	v športu	ki ima izkušnje; ki ima znanje ali spretnosti, pridobljene z opazovanjem ali sodelovanjem	related
+izkušen 	adjective	v športu	ki je z veliko vaje postal spreten	related
+izkušen 	adjective	v športu	ki ima ali izkazuje znanje in spretnost in sposobnost	related
+izkušen 	adjective	v ljubezni	ki ima izkušnje; ki ima znanje ali spretnosti, pridobljene z opazovanjem ali sodelovanjem	related
+izkušen 	adjective	v ljubezni	ki je z veliko vaje postal spreten	related
+izkušen 	adjective	v ljubezni	ki ima ali izkazuje znanje in spretnost in sposobnost	related
+kisel 	adjective	takega okusa kot limona	ki ima lastnosti kisline	related
+kisel 	adjective	takega okusa kot limona	ki ima vonj po fermentaciji ali postanem	related
+kisel 	adjective	takega okusa kot limona	(za jedi) vložen v tekočino za vlaganje	narrower
+kisel 	adjective	takega okusa kot limona	čemeren, razdražljiv	related
+kisel 	adjective	takega okusa kot limona	ostrega, jedkega okusa	exact
+kisel 	adjective	takega okusa kot limona	z vonjem ali okusom po kisu	exact
+kisel 	adjective	takega okusa kot limona	kiselkastega okusa	broader
+kisel 	adjective	takega okusa kot limona	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	exact
+kisel 	adjective	o jedeh in živilih	ki ima lastnosti kisline	related
+kisel 	adjective	o jedeh in živilih	ki ima vonj po fermentaciji ali postanem	related
+kisel 	adjective	o jedeh in živilih	(za jedi) vložen v tekočino za vlaganje	narrower
+kisel 	adjective	o jedeh in živilih	čemeren, razdražljiv	related
+kisel 	adjective	o jedeh in živilih	ostrega, jedkega okusa	related
+kisel 	adjective	o jedeh in živilih	z vonjem ali okusom po kisu	none
+kisel 	adjective	o jedeh in živilih	kiselkastega okusa	none
+kisel 	adjective	o jedeh in živilih	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	related
+kisel 	adjective	o človeku	ki ima lastnosti kisline	related
+kisel 	adjective	o človeku	ki ima vonj po fermentaciji ali postanem	related
+kisel 	adjective	o človeku	(za jedi) vložen v tekočino za vlaganje	narrower
+kisel 	adjective	o človeku	čemeren, razdražljiv	none
+kisel 	adjective	o človeku	ostrega, jedkega okusa	none
+kisel 	adjective	o človeku	z vonjem ali okusom po kisu	narrower
+kisel 	adjective	o človeku	kiselkastega okusa	none
+kisel 	adjective	o človeku	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	related
+kisel 	adjective	o vonju	ki ima lastnosti kisline	related
+kisel 	adjective	o vonju	ki ima vonj po fermentaciji ali postanem	exact
+kisel 	adjective	o vonju	(za jedi) vložen v tekočino za vlaganje	narrower
+kisel 	adjective	o vonju	čemeren, razdražljiv	none
+kisel 	adjective	o vonju	ostrega, jedkega okusa	none
+kisel 	adjective	o vonju	z vonjem ali okusom po kisu	exact
+kisel 	adjective	o vonju	kiselkastega okusa	none
+kisel 	adjective	o vonju	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	related
+kisel 	adjective	v kemiji	ki ima lastnosti kisline	related
+kisel 	adjective	v kemiji	ki ima vonj po fermentaciji ali postanem	related
+kisel 	adjective	v kemiji	(za jedi) vložen v tekočino za vlaganje	narrower
+kisel 	adjective	v kemiji	čemeren, razdražljiv	none
+kisel 	adjective	v kemiji	ostrega, jedkega okusa	none
+kisel 	adjective	v kemiji	z vonjem ali okusom po kisu	narrower
+kisel 	adjective	v kemiji	kiselkastega okusa	none
+kisel 	adjective	v kemiji	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	related
+kisel 	adjective	neprijeten	ki ima lastnosti kisline	narrower
+kisel 	adjective	neprijeten	ki ima vonj po fermentaciji ali postanem	narrower
+kisel 	adjective	neprijeten	(za jedi) vložen v tekočino za vlaganje	related
+kisel 	adjective	neprijeten	čemeren, razdražljiv	none
+kisel 	adjective	neprijeten	ostrega, jedkega okusa	none
+kisel 	adjective	neprijeten	z vonjem ali okusom po kisu	related
+kisel 	adjective	neprijeten	kiselkastega okusa	none
+kisel 	adjective	neprijeten	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	none
+kisel 	adjective	o občutkih; nerazpoložen	ki ima lastnosti kisline	narrower
+kisel 	adjective	o občutkih; nerazpoložen	ki ima vonj po fermentaciji ali postanem	narrower
+kisel 	adjective	o občutkih; nerazpoložen	(za jedi) vložen v tekočino za vlaganje	related
+kisel 	adjective	o občutkih; nerazpoložen	čemeren, razdražljiv	none
+kisel 	adjective	o občutkih; nerazpoložen	ostrega, jedkega okusa	none
+kisel 	adjective	o občutkih; nerazpoložen	z vonjem ali okusom po kisu	related
+kisel 	adjective	o občutkih; nerazpoložen	kiselkastega okusa	none
+kisel 	adjective	o občutkih; nerazpoložen	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	narrower
+kisel 	adjective	o situaciji	ki ima lastnosti kisline	related
+kisel 	adjective	o situaciji	ki ima vonj po fermentaciji ali postanem	related
+kisel 	adjective	o situaciji	(za jedi) vložen v tekočino za vlaganje	narrower
+kisel 	adjective	o situaciji	čemeren, razdražljiv	none
+kisel 	adjective	o situaciji	ostrega, jedkega okusa	none
+kisel 	adjective	o situaciji	z vonjem ali okusom po kisu	narrower
+kisel 	adjective	o situaciji	kiselkastega okusa	none
+kisel 	adjective	o situaciji	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	related
+kisel 	adjective	o vremenu	ki ima lastnosti kisline	related
+kisel 	adjective	o vremenu	ki ima vonj po fermentaciji ali postanem	related
+kisel 	adjective	o vremenu	(za jedi) vložen v tekočino za vlaganje	narrower
+kisel 	adjective	o vremenu	čemeren, razdražljiv	none
+kisel 	adjective	o vremenu	ostrega, jedkega okusa	none
+kisel 	adjective	o vremenu	z vonjem ali okusom po kisu	narrower
+kisel 	adjective	o vremenu	kiselkastega okusa	none
+kisel 	adjective	o vremenu	eden od štirih osnovnih okusov; z okusom po kisu ali limonah	related
+mečkati 	verb	delati gube	na gladki površini narediti gube ali pregibe; vtisniti, preganiti ali nagubati	exact
+mečkati 	verb	delati gube	poškodovati spodaj ležeče mehko tkivo ali kost	none
+mečkati 	verb	delati gube	nasilno stisniti, zmaličiti naravno obliko ali stanje	none
+mečkati 	verb	delati gube	postavati	none
+mečkati 	verb	gubati se	na gladki površini narediti gube ali pregibe; vtisniti, preganiti ali nagubati	related
+mečkati 	verb	gubati se	poškodovati spodaj ležeče mehko tkivo ali kost	none
+mečkati 	verb	gubati se	nasilno stisniti, zmaličiti naravno obliko ali stanje	none
+mečkati 	verb	gubati se	postavati	none
+mečkati 	verb	božati in objemati	na gladki površini narediti gube ali pregibe; vtisniti, preganiti ali nagubati	narrower
+mečkati 	verb	božati in objemati	poškodovati spodaj ležeče mehko tkivo ali kost	none
+mečkati 	verb	božati in objemati	nasilno stisniti, zmaličiti naravno obliko ali stanje	related
+mečkati 	verb	božati in objemati	postavati	none
+mečkati 	verb	gnesti in stiskati	na gladki površini narediti gube ali pregibe; vtisniti, preganiti ali nagubati	narrower
+mečkati 	verb	gnesti in stiskati	poškodovati spodaj ležeče mehko tkivo ali kost	none
+mečkati 	verb	gnesti in stiskati	nasilno stisniti, zmaličiti naravno obliko ali stanje	related
+mečkati 	verb	gnesti in stiskati	postavati	none
+mečkati 	verb	obotavljati se	na gladki površini narediti gube ali pregibe; vtisniti, preganiti ali nagubati	related
+mečkati 	verb	obotavljati se	poškodovati spodaj ležeče mehko tkivo ali kost	none
+mečkati 	verb	obotavljati se	nasilno stisniti, zmaličiti naravno obliko ali stanje	none
+mečkati 	verb	obotavljati se	postavati	none
+ozek 	adjective	o širini	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o širini	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o širini	omejen v velikosti ali dometu	related
+ozek 	adjective	o širini	omejen v velikosti ali dometu	related
+ozek 	adjective	o širini	ki ni širok	related
+ozek 	adjective	o širini	tesen	none
+ozek 	adjective	o širini	zelo omejen v obsegu	related
+ozek 	adjective	o oblačilih	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o oblačilih	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o oblačilih	omejen v velikosti ali dometu	related
+ozek 	adjective	o oblačilih	omejen v velikosti ali dometu	related
+ozek 	adjective	o oblačilih	ki ni širok	related
+ozek 	adjective	o oblačilih	tesen	none
+ozek 	adjective	o oblačilih	zelo omejen v obsegu	related
+ozek 	adjective	o obsegu	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o obsegu	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o obsegu	omejen v velikosti ali dometu	related
+ozek 	adjective	o obsegu	omejen v velikosti ali dometu	related
+ozek 	adjective	o obsegu	ki ni širok	related
+ozek 	adjective	o obsegu	tesen	none
+ozek 	adjective	o obsegu	zelo omejen v obsegu	exact
+ozek 	adjective	o obsegu	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o obsegu	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o obsegu	omejen v velikosti ali dometu	related
+ozek 	adjective	o obsegu	omejen v velikosti ali dometu	related
+ozek 	adjective	o obsegu	ki ni širok	related
+ozek 	adjective	o obsegu	tesen	none
+ozek 	adjective	o obsegu	zelo omejen v obsegu	exact
+ozek 	adjective	o prostoru	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o prostoru	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o prostoru	omejen v velikosti ali dometu	related
+ozek 	adjective	o prostoru	omejen v velikosti ali dometu	related
+ozek 	adjective	o prostoru	ki ni širok	related
+ozek 	adjective	o prostoru	tesen	none
+ozek 	adjective	o prostoru	zelo omejen v obsegu	related
+ozek 	adjective	o ljudeh	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o ljudeh	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o ljudeh	omejen v velikosti ali dometu	related
+ozek 	adjective	o ljudeh	omejen v velikosti ali dometu	related
+ozek 	adjective	o ljudeh	ki ni širok	related
+ozek 	adjective	o ljudeh	tesen	none
+ozek 	adjective	o ljudeh	zelo omejen v obsegu	related
+ozek 	adjective	o izbranosti	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o izbranosti	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o izbranosti	omejen v velikosti ali dometu	related
+ozek 	adjective	o izbranosti	omejen v velikosti ali dometu	related
+ozek 	adjective	o izbranosti	ki ni širok	related
+ozek 	adjective	o izbranosti	tesen	none
+ozek 	adjective	o izbranosti	zelo omejen v obsegu	related
+ozek 	adjective	o področju delovanja	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o področju delovanja	skrbno natančna in podrobna analiza	none
+ozek 	adjective	o področju delovanja	omejen v velikosti ali dometu	none
+ozek 	adjective	o področju delovanja	omejen v velikosti ali dometu	none
+ozek 	adjective	o področju delovanja	ki ni širok	narrower
+ozek 	adjective	o področju delovanja	tesen	related
+ozek 	adjective	o področju delovanja	zelo omejen v obsegu	narrower
+ozek 	adjective	o človekovem dojemanju in interesih; enostranski	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o človekovem dojemanju in interesih; enostranski	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o človekovem dojemanju in interesih; enostranski	omejen v velikosti ali dometu	related
+ozek 	adjective	o človekovem dojemanju in interesih; enostranski	omejen v velikosti ali dometu	related
+ozek 	adjective	o človekovem dojemanju in interesih; enostranski	ki ni širok	related
+ozek 	adjective	o človekovem dojemanju in interesih; enostranski	tesen	narrower
+ozek 	adjective	o človekovem dojemanju in interesih; enostranski	zelo omejen v obsegu	related
+ozek 	adjective	o glasovih	netoleranten ali nefleksibilen ali brez širokega pogleda	none
+ozek 	adjective	o glasovih	skrbno natančna in podrobna analiza	related
+ozek 	adjective	o glasovih	omejen v velikosti ali dometu	related
+ozek 	adjective	o glasovih	omejen v velikosti ali dometu	related
+ozek 	adjective	o glasovih	ki ni širok	related
+ozek 	adjective	o glasovih	tesen	none
+ozek 	adjective	o glasovih	zelo omejen v obsegu	related
+pošteno 	adverb	v veliki meri, precej	s častjo	none
+pošteno 	adverb	v veliki meri, precej	z zvestobo; zvesto	none
+pošteno 	adverb	moralno ustrezno	s častjo	narrower
+pošteno 	adverb	moralno ustrezno	z zvestobo; zvesto	narrower
+prevajati 	verb	spremeniti v drug jezik	prenesti iz enega medija v drugega	related
+prevajati 	verb	spremeniti v drug jezik	ponovno izraziti (besede) v drugem jeziku	exact
+prevajati 	verb	spremeniti v drug jezik	napačno prevesti	none
+prevajati 	verb	pretvoriti v drugačno obliko	prenesti iz enega medija v drugega	related
+prevajati 	verb	pretvoriti v drugačno obliko	ponovno izraziti (besede) v drugem jeziku	none
+prevajati 	verb	pretvoriti v drugačno obliko	napačno prevesti	none
+prevajati 	verb	računalništvo	prenesti iz enega medija v drugega	none
+prevajati 	verb	računalništvo	ponovno izraziti (besede) v drugem jeziku	none
+prevajati 	verb	računalništvo	napačno prevesti	none
+prevajati 	verb	omogočati prehajanje energije skozi snov	prenesti iz enega medija v drugega	none
+prevajati 	verb	omogočati prehajanje energije skozi snov	ponovno izraziti (besede) v drugem jeziku	related
+prevajati 	verb	omogočati prehajanje energije skozi snov	napačno prevesti	related
+prevajati 	verb	prenašati dražljaje po telesu	prenesti iz enega medija v drugega	related
+prevajati 	verb	prenašati dražljaje po telesu	ponovno izraziti (besede) v drugem jeziku	none
+prevajati 	verb	prenašati dražljaje po telesu	napačno prevesti	none
+relativno 	adverb	dokaj; razmeroma	sorazmerno; v primerjavi z nečim drugim	none
+relativno 	adverb	ne absolutno	sorazmerno; v primerjavi z nečim drugim	none
+zavarovati 	verb	skleniti pogodbo	nekaj skrbno ali gotovo narediti; prepričati se	none
+zavarovati 	verb	skleniti pogodbo	zagotoviti finančno podporo	none
+zavarovati 	verb	skleniti pogodbo	zagotoviti	none
+zavarovati 	verb	skleniti pogodbo	zaščititi z zavarovanjem	none
+zavarovati 	verb	skleniti pogodbo	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	none
+zavarovati 	verb	skleniti pogodbo	imeti v dometu naperjenega strelnega orožja	none
+zavarovati 	verb	skleniti pogodbo	z uvedbo tarif dajati prednost domači industriji	narrower
+zavarovati 	verb	skleniti pogodbo	zaščititi	none
+zavarovati 	verb	skleniti pogodbo	ščititi ali varovati (položaj v igri)	none
+zavarovati 	verb	skleniti pogodbo	biti zadolžen za odbijanje nasprotnika v tekmovanju	related
+zavarovati 	verb	skleniti pogodbo	pribiti deske	none
+zavarovati 	verb	skleniti pogodbo	tesno pritrditi	none
+zavarovati 	verb	skleniti pogodbo	zapolniti ali zapreti, kot s čepom	none
+zavarovati 	verb	skleniti pogodbo	pridobiti z veliko truda	none
+zavarovati 	verb	skleniti pogodbo	vplačati zavarovanje	none
+zavarovati 	verb	skleniti pogodbo	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	none
+zavarovati 	verb	skleniti pogodbo	jamčiti za plačilo	none
+zavarovati 	verb	skleniti pogodbo	ukrepati na način, ki varuje pred bodočimi težavami	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	nekaj skrbno ali gotovo narediti; prepričati se	narrower
+zavarovati 	verb	o plačevanju denarja zavarovalnici	zagotoviti finančno podporo	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	zagotoviti	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	zaščititi z zavarovanjem	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	imeti v dometu naperjenega strelnega orožja	narrower
+zavarovati 	verb	o plačevanju denarja zavarovalnici	z uvedbo tarif dajati prednost domači industriji	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	zaščititi	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	ščititi ali varovati (položaj v igri)	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	biti zadolžen za odbijanje nasprotnika v tekmovanju	related
+zavarovati 	verb	o plačevanju denarja zavarovalnici	pribiti deske	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	tesno pritrditi	narrower
+zavarovati 	verb	o plačevanju denarja zavarovalnici	zapolniti ali zapreti, kot s čepom	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	pridobiti z veliko truda	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	vplačati zavarovanje	related
+zavarovati 	verb	o plačevanju denarja zavarovalnici	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	jamčiti za plačilo	none
+zavarovati 	verb	o plačevanju denarja zavarovalnici	ukrepati na način, ki varuje pred bodočimi težavami	related
+zavarovati 	verb	zagotoviti denarno pomoč	nekaj skrbno ali gotovo narediti; prepričati se	related
+zavarovati 	verb	zagotoviti denarno pomoč	zagotoviti finančno podporo	broader
+zavarovati 	verb	zagotoviti denarno pomoč	zagotoviti	exact
+zavarovati 	verb	zagotoviti denarno pomoč	zaščititi z zavarovanjem	none
+zavarovati 	verb	zagotoviti denarno pomoč	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	none
+zavarovati 	verb	zagotoviti denarno pomoč	imeti v dometu naperjenega strelnega orožja	related
+zavarovati 	verb	zagotoviti denarno pomoč	z uvedbo tarif dajati prednost domači industriji	related
+zavarovati 	verb	zagotoviti denarno pomoč	zaščititi	none
+zavarovati 	verb	zagotoviti denarno pomoč	ščititi ali varovati (položaj v igri)	related
+zavarovati 	verb	zagotoviti denarno pomoč	biti zadolžen za odbijanje nasprotnika v tekmovanju	narrower
+zavarovati 	verb	zagotoviti denarno pomoč	pribiti deske	related
+zavarovati 	verb	zagotoviti denarno pomoč	tesno pritrditi	related
+zavarovati 	verb	zagotoviti denarno pomoč	zapolniti ali zapreti, kot s čepom	none
+zavarovati 	verb	zagotoviti denarno pomoč	pridobiti z veliko truda	none
+zavarovati 	verb	zagotoviti denarno pomoč	vplačati zavarovanje	none
+zavarovati 	verb	zagotoviti denarno pomoč	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	none
+zavarovati 	verb	zagotoviti denarno pomoč	jamčiti za plačilo	related
+zavarovati 	verb	zagotoviti denarno pomoč	ukrepati na način, ki varuje pred bodočimi težavami	none
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	nekaj skrbno ali gotovo narediti; prepričati se	narrower
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	zagotoviti finančno podporo	related
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	zagotoviti	related
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	zaščititi z zavarovanjem	none
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	none
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	imeti v dometu naperjenega strelnega orožja	narrower
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	z uvedbo tarif dajati prednost domači industriji	none
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	zaščititi	none
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	ščititi ali varovati (položaj v igri)	narrower
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	biti zadolžen za odbijanje nasprotnika v tekmovanju	related
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	pribiti deske	narrower
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	tesno pritrditi	narrower
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	zapolniti ali zapreti, kot s čepom	none
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	pridobiti z veliko truda	none
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	vplačati zavarovanje	related
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	none
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	jamčiti za plačilo	narrower
+zavarovati 	verb	zagotovitvi, da bo posojen denar vrnjen	ukrepati na način, ki varuje pred bodočimi težavami	related
+zavarovati 	verb	zaščititi	nekaj skrbno ali gotovo narediti; prepričati se	related
+zavarovati 	verb	zaščititi	zagotoviti finančno podporo	none
+zavarovati 	verb	zaščititi	zagotoviti	none
+zavarovati 	verb	zaščititi	zaščititi z zavarovanjem	exact
+zavarovati 	verb	zaščititi	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	exact
+zavarovati 	verb	zaščititi	imeti v dometu naperjenega strelnega orožja	related
+zavarovati 	verb	zaščititi	z uvedbo tarif dajati prednost domači industriji	related
+zavarovati 	verb	zaščititi	zaščititi	exact
+zavarovati 	verb	zaščititi	ščititi ali varovati (položaj v igri)	none
+zavarovati 	verb	zaščititi	biti zadolžen za odbijanje nasprotnika v tekmovanju	none
+zavarovati 	verb	zaščititi	pribiti deske	none
+zavarovati 	verb	zaščititi	tesno pritrditi	related
+zavarovati 	verb	zaščititi	zapolniti ali zapreti, kot s čepom	none
+zavarovati 	verb	zaščititi	pridobiti z veliko truda	none
+zavarovati 	verb	zaščititi	vplačati zavarovanje	none
+zavarovati 	verb	zaščititi	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	exact
+zavarovati 	verb	zaščititi	jamčiti za plačilo	none
+zavarovati 	verb	zaščititi	ukrepati na način, ki varuje pred bodočimi težavami	none
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	nekaj skrbno ali gotovo narediti; prepričati se	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	zagotoviti finančno podporo	none
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	zagotoviti	none
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	zaščititi z zavarovanjem	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	exact
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	imeti v dometu naperjenega strelnega orožja	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	z uvedbo tarif dajati prednost domači industriji	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	zaščititi	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	ščititi ali varovati (položaj v igri)	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	biti zadolžen za odbijanje nasprotnika v tekmovanju	narrower
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	pribiti deske	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	tesno pritrditi	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	zapolniti ali zapreti, kot s čepom	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	pridobiti z veliko truda	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	vplačati zavarovanje	none
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	jamčiti za plačilo	related
+zavarovati 	verb	preprečiti škodo z dejanji; ukrepati	ukrepati na način, ki varuje pred bodočimi težavami	exact
+zavarovati 	verb	narediti varno območje	nekaj skrbno ali gotovo narediti; prepričati se	exact
+zavarovati 	verb	narediti varno območje	zagotoviti finančno podporo	none
+zavarovati 	verb	narediti varno območje	zagotoviti	none
+zavarovati 	verb	narediti varno območje	zaščititi z zavarovanjem	none
+zavarovati 	verb	narediti varno območje	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	none
+zavarovati 	verb	narediti varno območje	imeti v dometu naperjenega strelnega orožja	related
+zavarovati 	verb	narediti varno območje	z uvedbo tarif dajati prednost domači industriji	related
+zavarovati 	verb	narediti varno območje	zaščititi	none
+zavarovati 	verb	narediti varno območje	ščititi ali varovati (položaj v igri)	related
+zavarovati 	verb	narediti varno območje	biti zadolžen za odbijanje nasprotnika v tekmovanju	narrower
+zavarovati 	verb	narediti varno območje	pribiti deske	related
+zavarovati 	verb	narediti varno območje	tesno pritrditi	related
+zavarovati 	verb	narediti varno območje	zapolniti ali zapreti, kot s čepom	none
+zavarovati 	verb	narediti varno območje	pridobiti z veliko truda	none
+zavarovati 	verb	narediti varno območje	vplačati zavarovanje	none
+zavarovati 	verb	narediti varno območje	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	none
+zavarovati 	verb	narediti varno območje	jamčiti za plačilo	related
+zavarovati 	verb	narediti varno območje	ukrepati na način, ki varuje pred bodočimi težavami	none
+zavarovati 	verb	o pravicah in interesih ljudi	nekaj skrbno ali gotovo narediti; prepričati se	related
+zavarovati 	verb	o pravicah in interesih ljudi	zagotoviti finančno podporo	none
+zavarovati 	verb	o pravicah in interesih ljudi	zagotoviti	none
+zavarovati 	verb	o pravicah in interesih ljudi	zaščititi z zavarovanjem	related
+zavarovati 	verb	o pravicah in interesih ljudi	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	related
+zavarovati 	verb	o pravicah in interesih ljudi	imeti v dometu naperjenega strelnega orožja	related
+zavarovati 	verb	o pravicah in interesih ljudi	z uvedbo tarif dajati prednost domači industriji	related
+zavarovati 	verb	o pravicah in interesih ljudi	zaščititi	related
+zavarovati 	verb	o pravicah in interesih ljudi	ščititi ali varovati (položaj v igri)	related
+zavarovati 	verb	o pravicah in interesih ljudi	biti zadolžen za odbijanje nasprotnika v tekmovanju	narrower
+zavarovati 	verb	o pravicah in interesih ljudi	pribiti deske	related
+zavarovati 	verb	o pravicah in interesih ljudi	tesno pritrditi	related
+zavarovati 	verb	o pravicah in interesih ljudi	zapolniti ali zapreti, kot s čepom	related
+zavarovati 	verb	o pravicah in interesih ljudi	pridobiti z veliko truda	related
+zavarovati 	verb	o pravicah in interesih ljudi	vplačati zavarovanje	none
+zavarovati 	verb	o pravicah in interesih ljudi	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	related
+zavarovati 	verb	o pravicah in interesih ljudi	jamčiti za plačilo	related
+zavarovati 	verb	o pravicah in interesih ljudi	ukrepati na način, ki varuje pred bodočimi težavami	none
+zavarovati 	verb	z zakonom prepovedati spremembe	nekaj skrbno ali gotovo narediti; prepričati se	narrower
+zavarovati 	verb	z zakonom prepovedati spremembe	zagotoviti finančno podporo	none
+zavarovati 	verb	z zakonom prepovedati spremembe	zagotoviti	none
+zavarovati 	verb	z zakonom prepovedati spremembe	zaščititi z zavarovanjem	none
+zavarovati 	verb	z zakonom prepovedati spremembe	zaščititi pred nevarnostjo, poškodbo, uničenjem ali škodo	none
+zavarovati 	verb	z zakonom prepovedati spremembe	imeti v dometu naperjenega strelnega orožja	narrower
+zavarovati 	verb	z zakonom prepovedati spremembe	z uvedbo tarif dajati prednost domači industriji	none
+zavarovati 	verb	z zakonom prepovedati spremembe	zaščititi	none
+zavarovati 	verb	z zakonom prepovedati spremembe	ščititi ali varovati (položaj v igri)	none
+zavarovati 	verb	z zakonom prepovedati spremembe	biti zadolžen za odbijanje nasprotnika v tekmovanju	related
+zavarovati 	verb	z zakonom prepovedati spremembe	pribiti deske	none
+zavarovati 	verb	z zakonom prepovedati spremembe	tesno pritrditi	narrower
+zavarovati 	verb	z zakonom prepovedati spremembe	zapolniti ali zapreti, kot s čepom	none
+zavarovati 	verb	z zakonom prepovedati spremembe	pridobiti z veliko truda	none
+zavarovati 	verb	z zakonom prepovedati spremembe	vplačati zavarovanje	related
+zavarovati 	verb	z zakonom prepovedati spremembe	zaščititi pred morebitno izgubo, poškodbo ali obveznostmi; biti porok za	none
+zavarovati 	verb	z zakonom prepovedati spremembe	jamčiti za plačilo	none
+zavarovati 	verb	z zakonom prepovedati spremembe	ukrepati na način, ki varuje pred bodočimi težavami	related

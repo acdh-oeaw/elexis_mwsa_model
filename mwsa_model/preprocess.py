@@ -5,6 +5,7 @@ import dill as pickle
 import sys
 import warnings
 
+import stanza
 from pandas.core.common import SettingWithCopyWarning
 from sklearn.pipeline import Pipeline
 
@@ -38,6 +39,8 @@ if len(sys.argv) != 3:
 logger.info("Changed")
 dataset = sys.argv[1]
 lang = sys.argv[2]
+
+stanza.download(lang)
 
 with open(DATA_DIR+'features_'+dataset+'.pkl', 'rb') as pickle_file:
     features = pickle.load(pickle_file)
