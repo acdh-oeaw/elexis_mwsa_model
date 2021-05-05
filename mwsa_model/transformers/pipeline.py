@@ -15,8 +15,8 @@ from spacy_wordnet.wordnet_annotator import WordnetAnnotator
 from mwsa_model.service.util import SupportedLanguages
 from mwsa_model import features
 from nltk.corpus import wordnet as wn
-from spacy_stanfordnlp import StanfordNLPLanguage
-import stanfordnlp
+from spacy_stanza import StanzaLanguage
+import stanza
 import warnings
 
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -44,19 +44,19 @@ models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages
           SupportedLanguages.Italian: spacy.load(spacy_models[SupportedLanguages.Italian]),
           SupportedLanguages.Portuguese: spacy.load(spacy_models[SupportedLanguages.Portuguese]),
           # SupportedLanguages.Russian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ru")),
-          # SupportedLanguages.Serbian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sr")),
+          #SupportedLanguages.Serbian: StanzaLanguage(stanza.Pipeline(lang="sr", dir='/Users/seungbinyim/Development/repos/elexis/vectors/stanza') ),
           # SupportedLanguages.Bulgarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="bg")),
-          # SupportedLanguages.Slovene: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="sl"))
+          SupportedLanguages.Slovene: StanzaLanguage(stanza.Pipeline(lang="sl"))
           # SupportedLanguages.Hungarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="hu")),
           # SupportedLanguages.Estonian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="et")),
           # SupportedLanguages.Basque: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="eu"))
           # SupportedLanguages.Irish: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ga")),
           }
 
-# nlp_vectors = spacy.load("/Users/lenka/Desktop/fasttext/vectors/slovene_vectors")
+nlp_vectors = spacy.load("/Users/seungbinyim/Development/repos/elexis/vectors/slovene_vectors")
 vocab = Vocab()
-# for word in nlp_vectors.vocab:  # if vector not in vocab
-#    models[SupportedLanguages.Slovene].vocab.set_vector(word.text, word.vector)
+for word in nlp_vectors.vocab:  # if vector not in vocab
+    models[SupportedLanguages.Slovene].vocab.set_vector(word.text, word.vector)
 logger.info('loaded vocabulary\n')
 
 
