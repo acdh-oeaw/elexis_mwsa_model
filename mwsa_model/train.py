@@ -24,7 +24,7 @@ FEATURE_FILE = OUTPUT_DIR + FEATURE_FILE_NAME
 LABELS_FILE_NAME = 'labels_'+dataset+'.pkl'
 LABELS_FILE = DATA_DIR + LABELS_FILE_NAME
 # TODO: move this to configfile
-
+print('test')
 with open(config_file, 'r') as fd:
     params = yaml.safe_load(fd)
 

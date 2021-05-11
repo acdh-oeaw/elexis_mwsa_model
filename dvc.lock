@@ -104,50 +104,73 @@ stages:
       md5: e1cbee1a1164bd71735d2d8578f356d6
       size: 9538
   de_train:
-    cmd: python -m mwsa_model.preprocess features_german.tsv.pkl labels_german.tsv.pkl
-      de
+    cmd: python -m mwsa_model.train german.tsv de
     deps:
-    - path: mwsa_model/data/features_german.tsv.pkl
-      md5: 3218d7f8592a97cd62e7a348505b9326
-      size: 290272
     - path: mwsa_model/data/labels_german.tsv.pkl
-      md5: e1cbee1a1164bd71735d2d8578f356d6
-      size: 9538
-    - path: mwsa_model/preprocess.py
-      md5: 3059b360c8f31c3db5ab4d43f0863de8
-      size: 2836
+      md5: 02ba83cd3a751d1c0092e633afa8a301
+      size: 9583
+    - path: mwsa_model/output/preprocessed_german.tsv.pkl
+      md5: 8bb0593a373f11aba6dd24d73fed8b87
+      size: 111656
     - path: mwsa_model/service/model_trainer.py
-      md5: 6d5b6b3e302f9c4793e42eaf91446653
-      size: 17780
+      md5: bb4c61d89acc83506940d61c1d8a5ef8
+      size: 1871
+    - path: mwsa_model/train.py
+      md5: 26c0e6bd89e88b66089c096eb64ffc35
+      size: 2529
+    params:
+      de_params.yaml:
+        lang.preprocess__lang: de
+        random_forest.random_forest__bootstrap:
+        - true
+        random_forest.random_forest__class_weight:
+        - balanced
+        random_forest.random_forest__max_depth:
+        - 10
+        - 30
+        - 50
+        random_forest.random_forest__max_features:
+        - auto
+        random_forest.random_forest__min_samples_leaf:
+        - 3
+        random_forest.random_forest__min_samples_split:
+        - 2
+        random_forest.random_forest__n_estimators:
+        - 100
+        random_forest.random_forest__n_jobs:
+        - -1
+        random_forest.random_forest__random_state:
+        - 7
     outs:
     - path: mwsa_model/output/metrics/de_cv_score.txt
-      md5: 767e00aee9519244771c19187b904142
-      size: 9
+      md5: 6adecbd2abb7746b410965d02b14284c
+      size: 26
     - path: mwsa_model/output/models/de.pkl
-      md5: 5ad58dfeb9c5288af4ef90dd8673a9e1
-      size: 25525256
+      md5: e5f9169fcc5488ed085608fab1b96676
+      size: 3364777
   de_evaluate:
-    cmd: python -m mwsa_model.evaluate de.pkl german.tsv metrics_de.txt de_predictions.txt
+    cmd: python -m mwsa_model.evaluate de.pkl metrics_de.json de_predictions.txt de
     deps:
-    - path: data/reference_data/german.tsv
-      md5: 6e19c55a333e88ebf4c12cc81a4e1d5f
-      size: 89944
-    - path: data/test/german.tsv
-      md5: 8ef0cf90e6e707ce7c1b2b869b3fdd2b
-      size: 86761
     - path: mwsa_model/evaluate.py
-      md5: b5a246252916a101481417977dcd555e
-      size: 1690
+      md5: 4a65670c9cdd1bd8c63ac57c47a1f7e3
+      size: 4289
     - path: mwsa_model/output/models/de.pkl
-      md5: 5ad58dfeb9c5288af4ef90dd8673a9e1
-      size: 25525256
+      md5: e5f9169fcc5488ed085608fab1b96676
+      size: 3364777
+    - path: mwsa_model/output/pipeline/pipeline_german.tsv.pkl
+      md5: 89a14f85e53378ad0874e1b0d3ca1576
+      size: 833
+    params:
+      de_params.yaml:
+        data.dataset: german.tsv
+        data.version: v1.0
     outs:
-    - path: mwsa_model/output/metrics/metrics_de.txt
-      md5: 85dd733b4971cc99c846fa9d33e5dc51
-      size: 9
+    - path: mwsa_model/output/metrics/metrics_de.json
+      md5: 97524ff9af52ddb863f7e0f8fe3f08c1
+      size: 88
     - path: mwsa_model/output/predictions/de_predictions.txt
-      md5: f90f88cf1d4d57ed6fb09d6df9624a89
-      size: 90025
+      md5: 492652c15dc46fccc66342dac719b935
+      size: 90033
   en_preprocess:
     cmd: python -m mwsa_model.preprocess english_nuig.tsv en
     deps:
@@ -295,3 +318,39 @@ stages:
     - path: mwsa_model/output/predictions/sl_predictions.txt
       md5: 72782a272d5b351bdf298e435f0d792e
       size: 62362
+  de_load:
+    cmd: python -m mwsa_model.load_data de
+    deps:
+    - path: mwsa_model/load_data.py
+      md5: 5b8c8555c062707fc9cd3af441a8d6ee
+      size: 1488
+    params:
+      de_params.yaml:
+        data.dataset: german.tsv
+        data.version: v1.0
+    outs:
+    - path: mwsa_model/data/features_german.tsv.pkl
+      md5: 1bdd37dde0c849f16e93270899dda887
+      size: 290326
+    - path: mwsa_model/data/labels_german.tsv.pkl
+      md5: 02ba83cd3a751d1c0092e633afa8a301
+      size: 9583
+  de_preprocess:
+    cmd: python -m mwsa_model.preprocess german.tsv de
+    deps:
+    - path: mwsa_model/data/features_german.tsv.pkl
+      md5: 1bdd37dde0c849f16e93270899dda887
+      size: 290326
+    - path: mwsa_model/preprocess.py
+      md5: 2411300a8d92c27c762fb349ed340bd4
+      size: 1468
+    - path: mwsa_model/service/model_trainer.py
+      md5: bb4c61d89acc83506940d61c1d8a5ef8
+      size: 1871
+    outs:
+    - path: mwsa_model/output/pipeline/pipeline_german.tsv.pkl
+      md5: 89a14f85e53378ad0874e1b0d3ca1576
+      size: 833
+    - path: mwsa_model/output/preprocessed_german.tsv.pkl
+      md5: 8bb0593a373f11aba6dd24d73fed8b87
+      size: 111656

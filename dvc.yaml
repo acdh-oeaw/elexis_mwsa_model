@@ -212,3 +212,63 @@ stages:
     outs:
       - mwsa_model/output/predictions/sr_predictions.txt:
           cache: false
+  de_load:
+    cmd: python -m mwsa_model.load_data de
+    deps:
+    - mwsa_model/load_data.py
+    params:
+      - de_params.yaml:
+          - data.version
+          - data.dataset
+    outs:
+    - mwsa_model/data/features_german.tsv.pkl
+    - mwsa_model/data/labels_german.tsv.pkl
+  de_preprocess:
+    cmd: python -m mwsa_model.preprocess german.tsv de
+    deps:
+    - mwsa_model/data/features_german.tsv.pkl
+    - mwsa_model/preprocess.py
+    - mwsa_model/service/model_trainer.py
+    outs:
+    - mwsa_model/output/preprocessed_german.tsv.pkl
+    - mwsa_model/output/pipeline/pipeline_german.tsv.pkl
+  de_train:
+    cmd: python -m mwsa_model.train german.tsv de
+    deps:
+    - mwsa_model/output/preprocessed_german.tsv.pkl
+    - mwsa_model/data/labels_german.tsv.pkl
+    - mwsa_model/train.py
+    - mwsa_model/service/model_trainer.py
+    params:
+      - de_params.yaml:
+          - lang.preprocess__lang
+          - random_forest.random_forest__random_state
+          - random_forest.random_forest__bootstrap
+          - random_forest.random_forest__class_weight
+          - random_forest.random_forest__max_depth
+          - random_forest.random_forest__max_features
+          - random_forest.random_forest__min_samples_leaf
+          - random_forest.random_forest__min_samples_split
+          - random_forest.random_forest__n_estimators
+          - random_forest.random_forest__n_jobs
+    outs:
+    - mwsa_model/output/models/de.pkl
+    metrics:
+    - mwsa_model/output/metrics/de_cv_score.txt:
+        cache: false
+  de_evaluate:
+    cmd: python -m mwsa_model.evaluate de.pkl metrics_de.json de_predictions.txt de
+    deps:
+    - mwsa_model/output/pipeline/pipeline_german.tsv.pkl
+    - mwsa_model/evaluate.py
+    - mwsa_model/output/models/de.pkl
+    params:
+      - de_params.yaml:
+          - data.version
+          - data.dataset
+    outs:
+    - mwsa_model/output/predictions/de_predictions.txt:
+        cache: false
+    metrics:
+    - mwsa_model/output/metrics/metrics_de.json:
+        cache: false
