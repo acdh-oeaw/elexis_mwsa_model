@@ -1,5 +1,8 @@
 import pprint
 import sys
+
+import stanza
+
 sys.path.append('../mwsa_model')
 import pandas as pd
 import pytest
@@ -24,6 +27,7 @@ data_with_semicolon = {'word': ['test'], 'pos': ['noun'], 'def1': ['test ; defin
                        'def2': ['test ; definition 2']}
 df_with_semicolon = pd.DataFrame(data=data_with_semicolon)
 
+stanza.download('sl')
 
 class TestMwsaModelTrainer():
     # TODO Parameterize this test

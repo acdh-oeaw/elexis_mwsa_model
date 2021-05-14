@@ -53,10 +53,6 @@ models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages
           # SupportedLanguages.Irish: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ga")),
           }
 
-nlp_vectors = spacy.load("/Users/seungbinyim/Development/repos/elexis/vectors/slovene_vectors")
-vocab = Vocab()
-for word in nlp_vectors.vocab:  # if vector not in vocab
-    models[SupportedLanguages.Slovene].vocab.set_vector(word.text, word.vector)
 logger.info('loaded vocabulary\n')
 
 
