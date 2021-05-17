@@ -30,8 +30,8 @@ stages:
       md5: bb4c61d89acc83506940d61c1d8a5ef8
       size: 1871
     - path: mwsa_model/train.py
-      md5: 279c14ae43267d2f439a3f1cb371a51f
-      size: 2516
+      md5: 26c0e6bd89e88b66089c096eb64ffc35
+      size: 2529
     params:
       en_params.yaml:
         lang.preprocess__lang: en
@@ -59,19 +59,19 @@ stages:
       md5: 8495a30bf24a55757be8751402e9c296
       size: 26
     - path: mwsa_model/output/models/en.joblib
-      md5: 6fbda24d6aefdbb559400c074f77b4b3
+      md5: 796ebda2b590ea49277fc99acfa4660f
       size: 14184499
     - path: mwsa_model/output/models/en.pkl
-      md5: 3438f10fdb12f8d69109ff40b5be53ea
+      md5: 745d52397bfa2ad138e78cb0300a7411
       size: 14189385
   en_evaluate:
     cmd: python -m mwsa_model.evaluate en.pkl metrics_en.json en_predictions.txt en
     deps:
     - path: mwsa_model/evaluate.py
-      md5: a01528c3bc4b61a9a2e84641460c96cc
-      size: 4271
+      md5: 4a65670c9cdd1bd8c63ac57c47a1f7e3
+      size: 4289
     - path: mwsa_model/output/models/en.pkl
-      md5: 3438f10fdb12f8d69109ff40b5be53ea
+      md5: 745d52397bfa2ad138e78cb0300a7411
       size: 14189385
     - path: mwsa_model/output/pipeline/pipeline_english_nuig.tsv.pkl
       md5: 8a7ba3b0faeea1e6de035a04af89bd9e
@@ -178,8 +178,8 @@ stages:
       md5: 794b7587484aae63faf803ef13f770bc
       size: 399441
     - path: mwsa_model/preprocess.py
-      md5: b4a803a13acf3182be4efe2cd105297f
-      size: 1431
+      md5: 2411300a8d92c27c762fb349ed340bd4
+      size: 1468
     - path: mwsa_model/service/model_trainer.py
       md5: bb4c61d89acc83506940d61c1d8a5ef8
       size: 1871
@@ -256,8 +256,8 @@ stages:
       md5: bb4c61d89acc83506940d61c1d8a5ef8
       size: 1871
     - path: mwsa_model/train.py
-      md5: 279c14ae43267d2f439a3f1cb371a51f
-      size: 2516
+      md5: 26c0e6bd89e88b66089c096eb64ffc35
+      size: 2529
     params:
       sl_params.yaml:
         lang.preprocess__lang: sl
@@ -293,16 +293,16 @@ stages:
       md5: a82c7638a199f37fca3f4815d063fb0e
       size: 26
     - path: mwsa_model/output/models/sl.pkl
-      md5: 242be87aa8af11e5566052d83dc3c0bf
+      md5: f46062224d9bcfdabcabc318f4a44335
       size: 861135
   sl_evaluate:
     cmd: python -m mwsa_model.evaluate sl.pkl metrics_sl.json sl_predictions.txt sl
     deps:
     - path: mwsa_model/evaluate.py
-      md5: a01528c3bc4b61a9a2e84641460c96cc
-      size: 4271
+      md5: 4a65670c9cdd1bd8c63ac57c47a1f7e3
+      size: 4289
     - path: mwsa_model/output/models/sl.pkl
-      md5: 242be87aa8af11e5566052d83dc3c0bf
+      md5: f46062224d9bcfdabcabc318f4a44335
       size: 861135
     - path: mwsa_model/output/pipeline/pipeline_slovene.tsv.pkl
       md5: f4103ff05667dc16e66919747d6aee73
@@ -354,3 +354,74 @@ stages:
     - path: mwsa_model/output/preprocessed_german.tsv.pkl
       md5: 8bb0593a373f11aba6dd24d73fed8b87
       size: 111656
+  sr_preprocess:
+    cmd: python -m mwsa_model.preprocess serbian.tsv sr
+    deps:
+    - path: mwsa_model/data/features_serbian.tsv.pkl
+      md5: 63b85f2071222b81c7308fb91d6cd215
+      size: 347202
+    - path: mwsa_model/preprocess.py
+      md5: 2411300a8d92c27c762fb349ed340bd4
+      size: 1468
+    - path: mwsa_model/service/model_trainer.py
+      md5: bb4c61d89acc83506940d61c1d8a5ef8
+      size: 1871
+    outs:
+    - path: mwsa_model/output/pipeline/pipeline_serbian.tsv.pkl
+      md5: 12f72b233df242d2a844b429feacc68e
+      size: 833
+    - path: mwsa_model/output/preprocessed_serbian.tsv.pkl
+      md5: 29c3e29c37e55f3783d0f6a0c9259c4f
+      size: 146256
+  sr_train:
+    cmd: python -m mwsa_model.train serbian.tsv sr
+    deps:
+    - path: mwsa_model/data/labels_serbian.tsv.pkl
+      md5: cdeba460ffe46daa36039365bdf52127
+      size: 12353
+    - path: mwsa_model/output/preprocessed_serbian.tsv.pkl
+      md5: 29c3e29c37e55f3783d0f6a0c9259c4f
+      size: 146256
+    - path: mwsa_model/service/model_trainer.py
+      md5: bb4c61d89acc83506940d61c1d8a5ef8
+      size: 1871
+    - path: mwsa_model/train.py
+      md5: 26c0e6bd89e88b66089c096eb64ffc35
+      size: 2529
+    params:
+      sr_params.yaml:
+        lang.preprocess__lang: sr
+        random_forest.random_forest__bootstrap:
+        - true
+        random_forest.random_forest__class_weight:
+        - balanced
+        - balanced_subsample
+        random_forest.random_forest__max_depth:
+        - 10
+        - 30
+        - 50
+        random_forest.random_forest__max_features:
+        - auto
+        random_forest.random_forest__min_samples_leaf:
+        - 2
+        - 5
+        - 10
+        random_forest.random_forest__min_samples_split:
+        - 2
+        - 5
+        - 10
+        random_forest.random_forest__n_estimators:
+        - 50
+        - 100
+        - 200
+        random_forest.random_forest__n_jobs:
+        - -1
+        random_forest.random_forest__random_state:
+        - 7
+    outs:
+    - path: mwsa_model/output/metrics/sr_cv_score.txt
+      md5: 410bae562a9d7ec5a492e21a1408c684
+      size: 26
+    - path: mwsa_model/output/models/sr.pkl
+      md5: eadd813c3141a92f8b15ba01c5ae5eff
+      size: 446981

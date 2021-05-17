@@ -44,7 +44,7 @@ models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages
           SupportedLanguages.Italian: spacy.load(spacy_models[SupportedLanguages.Italian]),
           SupportedLanguages.Portuguese: spacy.load(spacy_models[SupportedLanguages.Portuguese]),
           # SupportedLanguages.Russian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ru")),
-          #SupportedLanguages.Serbian: StanzaLanguage(stanza.Pipeline(lang="sr", dir='/Users/seungbinyim/Development/repos/elexis/vectors/stanza') ),
+          SupportedLanguages.Serbian: StanzaLanguage(stanza.Pipeline(lang="sr")),
           # SupportedLanguages.Bulgarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="bg")),
           SupportedLanguages.Slovene: StanzaLanguage(stanza.Pipeline(lang="sl"))
           # SupportedLanguages.Hungarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="hu")),

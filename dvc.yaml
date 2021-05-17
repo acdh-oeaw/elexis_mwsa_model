@@ -197,7 +197,7 @@ stages:
     outs:
       - mwsa_model/output/models/sr.pkl
   sr_evaluate:
-    cmd: python -m mwsa_model.evaluate sr.pkl metrics_en.json sr_predictions.txt sr
+    cmd: python -m mwsa_model.evaluate sr.pkl metrics_sr.json sr_predictions.txt sr
     deps:
       - mwsa_model/output/pipeline/pipeline_serbian.tsv.pkl
       - mwsa_model/evaluate.py
