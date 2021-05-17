@@ -44,6 +44,7 @@ train-export:
   script:
     - pip install --upgrade pip
     - pip install -r requirements.txt
+    - python nltk_install.py
     - dvc pull
     - dvc repro -p $STAGES
     - dvc status -r elexis_remote
