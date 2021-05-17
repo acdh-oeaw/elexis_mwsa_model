@@ -31,8 +31,7 @@ german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLa
                                   #(features.TFIDF_COS, TfidfTransformer()),
                                   #(features.JACCARD, JaccardTransformer()),
                                   #(features.COSINE, CosineTransformer()),
-                                  ('feature_selector', FeatureSelector()),
-                                  ('random_forest', RandomForestClassifier())])
+                                  ('feature_selector', FeatureSelector())])
 russian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Russian)),
                                    (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
                                    (features.SIMILARITY, SimilarityProcessor()),

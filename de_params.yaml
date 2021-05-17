@@ -1,0 +1,15 @@
+lang:
+    preprocess__lang: 'de'
+data:
+    version: 'v1.0'
+    dataset: 'german.tsv'
+random_forest:
+    'random_forest__random_state': [7]
+    'random_forest__bootstrap': [True]
+    'random_forest__class_weight': ['balanced']
+    'random_forest__max_depth': [10, 30, 50]
+    'random_forest__max_features': ['auto']
+    'random_forest__min_samples_leaf': [3]
+    'random_forest__min_samples_split': [2]
+    'random_forest__n_estimators': [100]
+    'random_forest__n_jobs': [-1]

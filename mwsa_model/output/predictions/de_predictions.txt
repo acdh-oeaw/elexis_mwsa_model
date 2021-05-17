@@ -10,27 +10,27 @@ Administrator	noun	Verwalter eines Computersystems oder Computernetzes mit beson
 Administrator	noun	jemand mit bestimmten Funktionen in der katholischen und evangelischen Kirche	Jemand, der ein Geschäft verwaltet.	none
 Administrator	noun	jemand mit bestimmten Funktionen in der katholischen und evangelischen Kirche	Ein vom Papst zum Vorsteher einer apostolischen Administration der Römisch Katholischen Kirche ernannter Prälat.	broader
 Albaner	noun	Staatsbürger von Albanien	Person mit albanischer Staatsangehörigkeit.	none
-Albaner	noun	Staatsbürger von Albanien	Mann mit albanischer Staatsangehörigkeit.	broader
+Albaner	noun	Staatsbürger von Albanien	Mann mit albanischer Staatsangehörigkeit.	none
 Albaner	noun	jemand, der der ethnischen Gruppe angehört, die Albanisch spricht	Person mit albanischer Staatsangehörigkeit.	none
 Albaner	noun	jemand, der der ethnischen Gruppe angehört, die Albanisch spricht	Mann mit albanischer Staatsangehörigkeit.	none
 Base	noun	eine alkalisch reagierende chemische Verbindung, deren pH-Wert über 7 liegt; nimmt leicht Protonen (H) auf	Jede chemische Substanz, ionisch oder molekular, die dazu fähig ist, ein Proton (Wasserstoffion) von einer anderen Substanz an- oder aufzunehmen die andere Substanz fungiert beim Abgeben des Protons als Säure.	none
 Base	noun	eine alkalisch reagierende chemische Verbindung, deren pH-Wert über 7 liegt; nimmt leicht Protonen (H) auf	Eine Frau mit einem oder mehreren Geschwistern, die eines oder mehrere Kinder haben eine Schwester von jemandes Vater oder Mutter	narrower
 Base	noun	eine alkalisch reagierende chemische Verbindung, deren pH-Wert über 7 liegt; nimmt leicht Protonen (H) auf	Die Tochter des Onkels oder der Tante einer Person.	none
 Base	noun	Tochter eines Onkels oder einer Tante	Jede chemische Substanz, ionisch oder molekular, die dazu fähig ist, ein Proton (Wasserstoffion) von einer anderen Substanz an- oder aufzunehmen die andere Substanz fungiert beim Abgeben des Protons als Säure.	none
-Base	noun	Tochter eines Onkels oder einer Tante	Eine Frau mit einem oder mehreren Geschwistern, die eines oder mehrere Kinder haben eine Schwester von jemandes Vater oder Mutter	none
+Base	noun	Tochter eines Onkels oder einer Tante	Eine Frau mit einem oder mehreren Geschwistern, die eines oder mehrere Kinder haben eine Schwester von jemandes Vater oder Mutter	broader
 Base	noun	Tochter eines Onkels oder einer Tante	Die Tochter des Onkels oder der Tante einer Person.	exact
 Base	noun	Schwester des Vaters	Jede chemische Substanz, ionisch oder molekular, die dazu fähig ist, ein Proton (Wasserstoffion) von einer anderen Substanz an- oder aufzunehmen die andere Substanz fungiert beim Abgeben des Protons als Säure.	none
 Base	noun	Schwester des Vaters	Eine Frau mit einem oder mehreren Geschwistern, die eines oder mehrere Kinder haben eine Schwester von jemandes Vater oder Mutter	exact
-Base	noun	Schwester des Vaters	Die Tochter des Onkels oder der Tante einer Person.	broader
-Bastard	noun	uneheliches Kind, besonders eines gesellschaftlich hoch gestellten Vaters und einer Mutter aus niedrigerem Stand	Eine ausgesprochen unbeliebte Person, die sich garstig, widerwärtig, hinterhältig, usw. benimmt.	none
-Bastard	noun	uneheliches Kind, besonders eines gesellschaftlich hoch gestellten Vaters und einer Mutter aus niedrigerem Stand	Nicht aus einer rechtmäßig geschlossenen Ehe hervorgegangen.	none
-Bastard	noun	verabscheuter Mensch	Eine ausgesprochen unbeliebte Person, die sich garstig, widerwärtig, hinterhältig, usw. benimmt.	narrower
+Base	noun	Schwester des Vaters	Die Tochter des Onkels oder der Tante einer Person.	related
+Bastard	noun	uneheliches Kind, besonders eines gesellschaftlich hoch gestellten Vaters und einer Mutter aus niedrigerem Stand	Eine ausgesprochen unbeliebte Person, die sich garstig, widerwärtig, hinterhältig, usw. benimmt.	narrower
+Bastard	noun	uneheliches Kind, besonders eines gesellschaftlich hoch gestellten Vaters und einer Mutter aus niedrigerem Stand	Nicht aus einer rechtmäßig geschlossenen Ehe hervorgegangen.	related
+Bastard	noun	verabscheuter Mensch	Eine ausgesprochen unbeliebte Person, die sich garstig, widerwärtig, hinterhältig, usw. benimmt.	none
 Bastard	noun	verabscheuter Mensch	Nicht aus einer rechtmäßig geschlossenen Ehe hervorgegangen.	none
 Bastard	noun	durch Rassenkreuzung|Rassen- oder Artenkreuzung entstandenes Tier oder entstandene Pflanze	Eine ausgesprochen unbeliebte Person, die sich garstig, widerwärtig, hinterhältig, usw. benimmt.	none
 Bastard	noun	durch Rassenkreuzung|Rassen- oder Artenkreuzung entstandenes Tier oder entstandene Pflanze	Nicht aus einer rechtmäßig geschlossenen Ehe hervorgegangen.	none
 Bastard	noun	Hund ohne Stammbaum, Promenadenmischung	Eine ausgesprochen unbeliebte Person, die sich garstig, widerwärtig, hinterhältig, usw. benimmt.	related
 Bastard	noun	Hund ohne Stammbaum, Promenadenmischung	Nicht aus einer rechtmäßig geschlossenen Ehe hervorgegangen.	none
-Begräbnis	noun	Vorgang, einen Verstorbenen in ein Grab zu legen	Zeremonie, bei der eine verstorbene Person begraben oder eingeäschert wird.	exact
+Begräbnis	noun	Vorgang, einen Verstorbenen in ein Grab zu legen	Zeremonie, bei der eine verstorbene Person begraben oder eingeäschert wird.	none
 Begräbnis	noun	Vorgang, einen Verstorbenen in ein Grab zu legen	Das rituelle Legen einer Leiche in das Grab.	narrower
 Begräbnis	noun	für eine Leiche bestimmter Platz	Zeremonie, bei der eine verstorbene Person begraben oder eingeäschert wird.	none
 Begräbnis	noun	für eine Leiche bestimmter Platz	Das rituelle Legen einer Leiche in das Grab.	narrower
@@ -56,7 +56,7 @@ Blatt	noun	beschnittenes Stück Papier (hauptsächlich im Druckwesen)	Das Haupto
 Blatt	noun	beschnittenes Stück Papier (hauptsächlich im Druckwesen)	Ein rechteckiges Stück Papier.	exact
 Blatt	noun	beschnittenes Stück Papier (hauptsächlich im Druckwesen): auch allgemeiner Folie oder bspw. (Hautlappen|Haut-/Kiemenlappen|Kiemen-)Lappen, Teig und (dünnes oder flaches) Metall <<subdef marker for testing>>	Das Hauptorgan der Photosythese und der Transpiration bei höheren Pflanzen, gewöhnlich bestehend aus einer dünnen grünen Fläche, welche direkt oder aus einem Stängel wächst.	none
 Blatt	noun	beschnittenes Stück Papier (hauptsächlich im Druckwesen): auch allgemeiner Folie oder bspw. (Hautlappen|Haut-/Kiemenlappen|Kiemen-)Lappen, Teig und (dünnes oder flaches) Metall <<subdef marker for testing>>	Ein rechteckiges Stück Papier.	narrower
-Blatt	noun	Endstück eines (Steuerruder|Steuer-)Ruders oder Paddels, hauptsächlich bei Wasserfahrzeugen	Das Hauptorgan der Photosythese und der Transpiration bei höheren Pflanzen, gewöhnlich bestehend aus einer dünnen grünen Fläche, welche direkt oder aus einem Stängel wächst.	narrower
+Blatt	noun	Endstück eines (Steuerruder|Steuer-)Ruders oder Paddels, hauptsächlich bei Wasserfahrzeugen	Das Hauptorgan der Photosythese und der Transpiration bei höheren Pflanzen, gewöhnlich bestehend aus einer dünnen grünen Fläche, welche direkt oder aus einem Stängel wächst.	none
 Blatt	noun	Endstück eines (Steuerruder|Steuer-)Ruders oder Paddels, hauptsächlich bei Wasserfahrzeugen	Ein rechteckiges Stück Papier.	none
 Blatt	noun	die Karten, die man beim Kartenspiel auf, in der Hand hält	Das Hauptorgan der Photosythese und der Transpiration bei höheren Pflanzen, gewöhnlich bestehend aus einer dünnen grünen Fläche, welche direkt oder aus einem Stängel wächst.	none
 Blatt	noun	die Karten, die man beim Kartenspiel auf, in der Hand hält	Ein rechteckiges Stück Papier.	none
@@ -75,7 +75,7 @@ Blatt	noun	Schulterblatt eines Tieres	Ein rechteckiges Stück Papier.	none
 Blatt	noun	flächiges Werkzeug oder Hilfsmittel	Das Hauptorgan der Photosythese und der Transpiration bei höheren Pflanzen, gewöhnlich bestehend aus einer dünnen grünen Fläche, welche direkt oder aus einem Stängel wächst.	none
 Blatt	noun	flächiges Werkzeug oder Hilfsmittel	Ein rechteckiges Stück Papier.	none
 Block	noun	großes Stück fest verbundenen Materials, ungefähr quaderförmig	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	none
-Block	noun	großes Stück fest verbundenen Materials, ungefähr quaderförmig	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	narrower
+Block	noun	großes Stück fest verbundenen Materials, ungefähr quaderförmig	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	none
 Block	noun	großes Stück fest verbundenen Materials, ungefähr quaderförmig	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	exact
 Block	noun	ein Stapel Papierblatt|Papierblätter, welche miteinander verklebt oder verdrahtet sind und nach Bedarf abreißen|abgerissen werden können.	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	none
 Block	noun	ein Stapel Papierblatt|Papierblätter, welche miteinander verklebt oder verdrahtet sind und nach Bedarf abreißen|abgerissen werden können.	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	narrower
@@ -84,9 +84,9 @@ Block	noun	einheitlich auftretender Zusammenschluss von Parteien oder Staaten	Ei
 Block	noun	einheitlich auftretender Zusammenschluss von Parteien oder Staaten	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	none
 Block	noun	einheitlich auftretender Zusammenschluss von Parteien oder Staaten	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	none
 Block	noun	Häuserkomplex, der nicht von Straßen durchschneiden|durchschnitten wird	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	none
-Block	noun	Häuserkomplex, der nicht von Straßen durchschneiden|durchschnitten wird	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	none
+Block	noun	Häuserkomplex, der nicht von Straßen durchschneiden|durchschnitten wird	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	narrower
 Block	noun	Häuserkomplex, der nicht von Straßen durchschneiden|durchschnitten wird	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	none
-Block	noun	eine Rolle, über die ein Tauwerk umleiten|umgeleitet wird	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	none
+Block	noun	eine Rolle, über die ein Tauwerk umleiten|umgeleitet wird	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	exact
 Block	noun	eine Rolle, über die ein Tauwerk umleiten|umgeleitet wird	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	none
 Block	noun	eine Rolle, über die ein Tauwerk umleiten|umgeleitet wird	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	none
 Block	noun	Abwehr eines Balles	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	none
@@ -94,7 +94,7 @@ Block	noun	Abwehr eines Balles	Ein Gebäude oder eine Gruppe von Gebäuden, die 
 Block	noun	Abwehr eines Balles	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	none
 Block	noun	hölzernes Instrument, mit dem mehrere Gliedmaßen gleichzeitig befestigen|befestigt werden können	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	none
 Block	noun	hölzernes Instrument, mit dem mehrere Gliedmaßen gleichzeitig befestigen|befestigt werden können	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	none
-Block	noun	hölzernes Instrument, mit dem mehrere Gliedmaßen gleichzeitig befestigen|befestigt werden können	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	narrower
+Block	noun	hölzernes Instrument, mit dem mehrere Gliedmaßen gleichzeitig befestigen|befestigt werden können	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	none
 Block	noun	Briefmarke|Briefmarke(n) mit umgebendem, meist verziertem Rand	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	none
 Block	noun	Briefmarke|Briefmarke(n) mit umgebendem, meist verziertem Rand	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	none
 Block	noun	Briefmarke|Briefmarke(n) mit umgebendem, meist verziertem Rand	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	none
@@ -103,12 +103,12 @@ Block	noun	kurz für Blockstruktur	Ein Gebäude oder eine Gruppe von Gebäuden, 
 Block	noun	kurz für Blockstruktur	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	none
 Block	noun	zusammenhängender Teil eines Kraftwerks	Eine Ausbildungseinheit, beispielsweise wie eine Gruppe von Kursen.	none
 Block	noun	zusammenhängender Teil eines Kraftwerks	Ein Gebäude oder eine Gruppe von Gebäuden, die auf allen Seiten von relativ breiten Straßen in etwa in einem Quadrat oder Rechteck umgeben sind.	none
-Block	noun	zusammenhängender Teil eines Kraftwerks	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	broader
-Bogen	noun	gekrümmte, in der Regel mathematisch beschreibbare Linie, Kurve	Stab, der über die Saiten eines Streichinstruments gestrichen wird, wodurch die Saiten in Schwingung versetzt werden und einen Klang produzieren.	related
+Block	noun	zusammenhängender Teil eines Kraftwerks	Ein kompaktes Stück eines Materials, gewöhnlich fest, vor allem, wenn es weiter ver- und bearbeitet werden soll.	none
+Bogen	noun	gekrümmte, in der Regel mathematisch beschreibbare Linie, Kurve	Stab, der über die Saiten eines Streichinstruments gestrichen wird, wodurch die Saiten in Schwingung versetzt werden und einen Klang produzieren.	broader
 Bogen	noun	gekrümmte, in der Regel mathematisch beschreibbare Linie, Kurve	Eine Waffe aus einem gebogenen Stück Holz oder anderem biegsamen Material, dessen Enden mit einer Schnur verbunden werden und mit dem man Pfeile schießt.	none
-Bogen	noun	Bauteil über Öffnungen und Raum|Räumen zum Tragen darüberliegender Bauteile	Stab, der über die Saiten eines Streichinstruments gestrichen wird, wodurch die Saiten in Schwingung versetzt werden und einen Klang produzieren.	none
+Bogen	noun	Bauteil über Öffnungen und Raum|Räumen zum Tragen darüberliegender Bauteile	Stab, der über die Saiten eines Streichinstruments gestrichen wird, wodurch die Saiten in Schwingung versetzt werden und einen Klang produzieren.	narrower
 Bogen	noun	Bauteil über Öffnungen und Raum|Räumen zum Tragen darüberliegender Bauteile	Eine Waffe aus einem gebogenen Stück Holz oder anderem biegsamen Material, dessen Enden mit einer Schnur verbunden werden und mit dem man Pfeile schießt.	none
-Bogen	noun	aus Holz gefertigte und mit einer Sehne versehene Schusswaffe zum Abschießen von Pfeilen	Stab, der über die Saiten eines Streichinstruments gestrichen wird, wodurch die Saiten in Schwingung versetzt werden und einen Klang produzieren.	exact
+Bogen	noun	aus Holz gefertigte und mit einer Sehne versehene Schusswaffe zum Abschießen von Pfeilen	Stab, der über die Saiten eines Streichinstruments gestrichen wird, wodurch die Saiten in Schwingung versetzt werden und einen Klang produzieren.	none
 Bogen	noun	aus Holz gefertigte und mit einer Sehne versehene Schusswaffe zum Abschießen von Pfeilen	Eine Waffe aus einem gebogenen Stück Holz oder anderem biegsamen Material, dessen Enden mit einer Schnur verbunden werden und mit dem man Pfeile schießt.	broader
 Bogen	noun	ein großes Blatt Papier, insbesondere, wenn es gefaltet () ist	Stab, der über die Saiten eines Streichinstruments gestrichen wird, wodurch die Saiten in Schwingung versetzt werden und einen Klang produzieren.	none
 Bogen	noun	ein großes Blatt Papier, insbesondere, wenn es gefaltet () ist	Eine Waffe aus einem gebogenen Stück Holz oder anderem biegsamen Material, dessen Enden mit einer Schnur verbunden werden und mit dem man Pfeile schießt.	none
@@ -121,19 +121,19 @@ Bogen	noun	Holzgerüst des Sattels	Eine Waffe aus einem gebogenen Stück Holz od
 Einser	noun	die Schulnote sehr gut	Beste Schulnotenstufe in Deutschland.	none
 Einser	noun	die Schulnote sehr gut	Beste Schulnotenstufe in Österreich.	none
 Einser	noun	die Zahl eins	Beste Schulnotenstufe in Deutschland.	none
-Einser	noun	die Zahl eins	Beste Schulnotenstufe in Österreich.	exact
+Einser	noun	die Zahl eins	Beste Schulnotenstufe in Österreich.	none
 Einser	noun	die mittleren Schneidezahn|Schneidezähne	Beste Schulnotenstufe in Deutschland.	none
 Einser	noun	die mittleren Schneidezahn|Schneidezähne	Beste Schulnotenstufe in Österreich.	none
 Einser	noun	die Augenzahl 1 auf einem Spielwürfel	Beste Schulnotenstufe in Deutschland.	none
 Einser	noun	die Augenzahl 1 auf einem Spielwürfel	Beste Schulnotenstufe in Österreich.	none
 Entkalkung	noun	Vorgang des entfernen|Entfernens von Kalk	Das Entfernen von Kalk.	narrower
-Entkalkung	noun	Vorgang des entfernen|Entfernens von Kalk	Der Verlust von Kalzium in Knochen, Zähnen oder Böden.	exact
+Entkalkung	noun	Vorgang des entfernen|Entfernens von Kalk	Der Verlust von Kalzium in Knochen, Zähnen oder Böden.	none
 Entkalkung	noun	der Verlust von Kalk	Das Entfernen von Kalk.	exact
 Entkalkung	noun	der Verlust von Kalk	Der Verlust von Kalzium in Knochen, Zähnen oder Böden.	exact
 Erscheinung	noun	ein Umstand, der mit den menschlichen Sinnen wahrgenommen wird	Der äußere oder sichtbare Aspekt einer Person oder Sache.	none
 Erscheinung	noun	ein Umstand, der mit den menschlichen Sinnen wahrgenommen wird	Ein gesehenes Ding ein Phänomen.	none
-Erscheinung	noun	ein Umstand, der mit den menschlichen Sinnen wahrgenommen wird	Ein Akt des unerwarteten Erscheinens oder sichtbar Werdens.	exact
-Erscheinung	noun	ein Umstand, der mit den menschlichen Sinnen wahrgenommen wird	Das Erscheinen einer geisterhaften Figur.	narrower
+Erscheinung	noun	ein Umstand, der mit den menschlichen Sinnen wahrgenommen wird	Ein Akt des unerwarteten Erscheinens oder sichtbar Werdens.	none
+Erscheinung	noun	ein Umstand, der mit den menschlichen Sinnen wahrgenommen wird	Das Erscheinen einer geisterhaften Figur.	none
 Erscheinung	noun	eine plötzliche Veränderung; Manifestation	Der äußere oder sichtbare Aspekt einer Person oder Sache.	none
 Erscheinung	noun	eine plötzliche Veränderung; Manifestation	Ein gesehenes Ding ein Phänomen.	none
 Erscheinung	noun	eine plötzliche Veränderung; Manifestation	Ein Akt des unerwarteten Erscheinens oder sichtbar Werdens.	none
@@ -147,13 +147,13 @@ Erscheinung	noun	scheinbares Auftreten von etwas unwirklich|Unwirklichem	Ein ges
 Erscheinung	noun	scheinbares Auftreten von etwas unwirklich|Unwirklichem	Ein Akt des unerwarteten Erscheinens oder sichtbar Werdens.	none
 Erscheinung	noun	scheinbares Auftreten von etwas unwirklich|Unwirklichem	Das Erscheinen einer geisterhaften Figur.	none
 Führer	noun	leitende Person in einer Organisation, Vereinigung oder Bewegung	Eine Person, die führt, regiert, oder in der Verantwortung steht.	narrower
-Führer	noun	leitende Person in einer Organisation, Vereinigung oder Bewegung	Jemand, der das Verhalten einer Gruppe maßgeblich beeinflusst oder dominiert.	none
+Führer	noun	leitende Person in einer Organisation, Vereinigung oder Bewegung	Jemand, der das Verhalten einer Gruppe maßgeblich beeinflusst oder dominiert.	related
 Führer	noun	Person, die Touristen Sehenswürdigkeiten zeigt und erklärt	Eine Person, die führt, regiert, oder in der Verantwortung steht.	broader
 Führer	noun	Person, die Touristen Sehenswürdigkeiten zeigt und erklärt	Jemand, der das Verhalten einer Gruppe maßgeblich beeinflusst oder dominiert.	related
 Führer	noun	wAdolf Hitler|Adolf Hitler, der ab 1934 „Führer und Reichskanzler“ war	Eine Person, die führt, regiert, oder in der Verantwortung steht.	none
 Führer	noun	wAdolf Hitler|Adolf Hitler, der ab 1934 „Führer und Reichskanzler“ war	Jemand, der das Verhalten einer Gruppe maßgeblich beeinflusst oder dominiert.	none
-Führer	noun	die Kurzform von Fahrzeugführer, dem	Eine Person, die führt, regiert, oder in der Verantwortung steht.	narrower
-Führer	noun	die Kurzform von Fahrzeugführer, dem	Jemand, der das Verhalten einer Gruppe maßgeblich beeinflusst oder dominiert.	none
+Führer	noun	die Kurzform von Fahrzeugführer, dem	Eine Person, die führt, regiert, oder in der Verantwortung steht.	related
+Führer	noun	die Kurzform von Fahrzeugführer, dem	Jemand, der das Verhalten einer Gruppe maßgeblich beeinflusst oder dominiert.	broader
 Führer	noun	Buch, welches für Besucher eines Museums, einer Stadt, eines Landes und so weiter Hinweise und Erläuterungen enthält	Eine Person, die führt, regiert, oder in der Verantwortung steht.	none
 Führer	noun	Buch, welches für Besucher eines Museums, einer Stadt, eines Landes und so weiter Hinweise und Erläuterungen enthält	Jemand, der das Verhalten einer Gruppe maßgeblich beeinflusst oder dominiert.	broader
 Freundin	noun	ein sehr nahestehender, weiblicher Mensch, für den man freundschaftlich|freund- und kameradschaftliche Gefühle entwickelt hat	Person, mit der man eine Liebesbeziehung hat.	none
@@ -161,15 +161,15 @@ Freundin	noun	ein sehr nahestehender, weiblicher Mensch, für den man freundscha
 Freundin	noun	Kurzform für feste Freundin; Geliebte	Person, mit der man eine Liebesbeziehung hat.	none
 Freundin	noun	Kurzform für feste Freundin; Geliebte	Person weiblichen Geschlechts, mit der jemand eine Liebesbeziehung hat.	none
 Frieden	noun	vertraglich gesichertes Miteinander verschiedener Staaten, das durch Abwesenheit von Gewalt (und speziell von Krieg) gekennzeichnet ist	Ein Zustand von Stille und Harmonie, z.B. ein Staat ohne Störungen des öffentlichen Lebens.	narrower
-Frieden	noun	vertraglich gesichertes Miteinander verschiedener Staaten, das durch Abwesenheit von Gewalt (und speziell von Krieg) gekennzeichnet ist	Ein Zustand ohne Krieg, insbesondere Krieg zwischen verschiedenen Ländern.	narrower
+Frieden	noun	vertraglich gesichertes Miteinander verschiedener Staaten, das durch Abwesenheit von Gewalt (und speziell von Krieg) gekennzeichnet ist	Ein Zustand ohne Krieg, insbesondere Krieg zwischen verschiedenen Ländern.	exact
 Frieden	noun	Friedensschluss, Friedensvertrag	Ein Zustand von Stille und Harmonie, z.B. ein Staat ohne Störungen des öffentlichen Lebens.	none
 Frieden	noun	Friedensschluss, Friedensvertrag	Ein Zustand ohne Krieg, insbesondere Krieg zwischen verschiedenen Ländern.	none
 Frieden	noun	Zustand harmonischen Miteinanders	Ein Zustand von Stille und Harmonie, z.B. ein Staat ohne Störungen des öffentlichen Lebens.	broader
-Frieden	noun	Zustand harmonischen Miteinanders	Ein Zustand ohne Krieg, insbesondere Krieg zwischen verschiedenen Ländern.	broader
-Frieden	noun	Ruhe, beruhigende Stille	Ein Zustand von Stille und Harmonie, z.B. ein Staat ohne Störungen des öffentlichen Lebens.	broader
+Frieden	noun	Zustand harmonischen Miteinanders	Ein Zustand ohne Krieg, insbesondere Krieg zwischen verschiedenen Ländern.	exact
+Frieden	noun	Ruhe, beruhigende Stille	Ein Zustand von Stille und Harmonie, z.B. ein Staat ohne Störungen des öffentlichen Lebens.	exact
 Frieden	noun	Ruhe, beruhigende Stille	Ein Zustand ohne Krieg, insbesondere Krieg zwischen verschiedenen Ländern.	none
-Frieden	noun	religiöse Erfüllung, Segen	Ein Zustand von Stille und Harmonie, z.B. ein Staat ohne Störungen des öffentlichen Lebens.	none
-Frieden	noun	religiöse Erfüllung, Segen	Ein Zustand ohne Krieg, insbesondere Krieg zwischen verschiedenen Ländern.	broader
+Frieden	noun	religiöse Erfüllung, Segen	Ein Zustand von Stille und Harmonie, z.B. ein Staat ohne Störungen des öffentlichen Lebens.	related
+Frieden	noun	religiöse Erfüllung, Segen	Ein Zustand ohne Krieg, insbesondere Krieg zwischen verschiedenen Ländern.	related
 Fuchs	noun	Vertreter einer Gruppe von bestimmten kurzbeinigen Arten der Familie der Hunde (Canidae)	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	narrower
 Fuchs	noun	Vertreter einer Gruppe von bestimmten kurzbeinigen Arten der Familie der Hunde (Canidae)	Tier aus der Gattung Vulpes.	none
 Fuchs	noun	männlicher Fuchs	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	none
@@ -185,7 +185,7 @@ Fuchs	noun	Tagfalter („Kleiner Fuchs“, „Großer Fuchs“)	Tier aus der Gat
 Fuchs	noun	ein kluger Mensch („schlauer Fuchs“)	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	narrower
 Fuchs	noun	ein kluger Mensch („schlauer Fuchs“)	Tier aus der Gattung Vulpes.	none
 Fuchs	noun	ein angehendes Mitglied einer Studentenverbindung	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	none
-Fuchs	noun	ein angehendes Mitglied einer Studentenverbindung	Tier aus der Gattung Vulpes.	narrower
+Fuchs	noun	ein angehendes Mitglied einer Studentenverbindung	Tier aus der Gattung Vulpes.	none
 Fuchs	noun	eine Goldmünze	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	none
 Fuchs	noun	eine Goldmünze	Tier aus der Gattung Vulpes.	none
 Fuchs	noun	eine Form des Sonnenbrandes an Blättern	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	none
@@ -202,7 +202,7 @@ Fuchs	noun	ein Rekrut in der Grundausbildung	(''Vulpes vulpes'') Relativ kleines
 Fuchs	noun	ein Rekrut in der Grundausbildung	Tier aus der Gattung Vulpes.	none
 Fuchs	noun	Farbe mit einem zusätzlichen Rotton	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	none
 Fuchs	noun	Farbe mit einem zusätzlichen Rotton	Tier aus der Gattung Vulpes.	none
-Fuchs	noun	die Spielkarte Karo Ass beim Kartenspiel Doppelkopf	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	broader
+Fuchs	noun	die Spielkarte Karo Ass beim Kartenspiel Doppelkopf	(''Vulpes vulpes'') Relativ kleines hundeartiges Raubtier (Canidae).	none
 Fuchs	noun	die Spielkarte Karo Ass beim Kartenspiel Doppelkopf	Tier aus der Gattung Vulpes.	none
 Gefühl	noun	das subjektive Erleben von Erregung und hirnchemischer Aktivität	Das Erleben von affektiven und emotionalen Zuständen.	broader
 Gefühl	noun	das subjektive Erleben von Erregung und hirnchemischer Aktivität	Ein Eindruck, dass etwas der Fall sein könnte.	none
@@ -219,7 +219,7 @@ Gefühl	noun	Einschätzung, die nicht auf Überlegung beruht	Eine natürliche We
 Gefühl	noun	Intuition, die Fähigkeit, bestimmte Dinge ohne viel Nachdenken richtig einzuschätzen	Das Erleben von affektiven und emotionalen Zuständen.	none
 Gefühl	noun	Intuition, die Fähigkeit, bestimmte Dinge ohne viel Nachdenken richtig einzuschätzen	Ein Eindruck, dass etwas der Fall sein könnte.	none
 Gefühl	noun	Intuition, die Fähigkeit, bestimmte Dinge ohne viel Nachdenken richtig einzuschätzen	Ein allgemeines Gewahrsein.	none
-Gefühl	noun	Intuition, die Fähigkeit, bestimmte Dinge ohne viel Nachdenken richtig einzuschätzen	Eine natürliche Wertschätzung oder Fähigkeit.	broader
+Gefühl	noun	Intuition, die Fähigkeit, bestimmte Dinge ohne viel Nachdenken richtig einzuschätzen	Eine natürliche Wertschätzung oder Fähigkeit.	narrower
 Gefühl	noun	Sinneswahrnehmung des Tast-, Temperatur-, Druck-, Schmerz- oder Gleichgewichtssinnes (des so genannten fünften Sinnes) oder die Fähigkeit dazu	Das Erleben von affektiven und emotionalen Zuständen.	none
 Gefühl	noun	Sinneswahrnehmung des Tast-, Temperatur-, Druck-, Schmerz- oder Gleichgewichtssinnes (des so genannten fünften Sinnes) oder die Fähigkeit dazu	Ein Eindruck, dass etwas der Fall sein könnte.	none
 Gefühl	noun	Sinneswahrnehmung des Tast-, Temperatur-, Druck-, Schmerz- oder Gleichgewichtssinnes (des so genannten fünften Sinnes) oder die Fähigkeit dazu	Ein allgemeines Gewahrsein.	none
@@ -240,16 +240,16 @@ Giraffe	noun	hochmütige Person	Ein afrikanisches paarhufiges Säugetier, die gr
 Giraffe	noun	hochmütige Person	Ausgedehntes, lichtschwaches nördliches Sternbild	none
 Giraffe	noun	Damenfrisur, bei der das Hinterhaar in einer oder mehreren großen Schleifen auf dem Scheitel aufgesteckt wurde	Ein afrikanisches paarhufiges Säugetier, die größte aller am Land lebenden Tierarten	none
 Giraffe	noun	Damenfrisur, bei der das Hinterhaar in einer oder mehreren großen Schleifen auf dem Scheitel aufgesteckt wurde	Ausgedehntes, lichtschwaches nördliches Sternbild	none
-Giraffe	noun	Person mit hervorstehenden Zähnen	Ein afrikanisches paarhufiges Säugetier, die größte aller am Land lebenden Tierarten	broader
+Giraffe	noun	Person mit hervorstehenden Zähnen	Ein afrikanisches paarhufiges Säugetier, die größte aller am Land lebenden Tierarten	none
 Giraffe	noun	Person mit hervorstehenden Zähnen	Ausgedehntes, lichtschwaches nördliches Sternbild	none
 Heim	noun	Daheim, Wohnung, Zuhause	Eine Umgebung, die Zuneigung und Sicherheit bietet.	related
 Heim	noun	Daheim, Wohnung, Zuhause	Institution, in der verwaiste Kinder leben und erzogen werden.	none
 Heim	noun	gewohnte Umgebung, Heimatland, Heimatort	Eine Umgebung, die Zuneigung und Sicherheit bietet.	exact
-Heim	noun	gewohnte Umgebung, Heimatland, Heimatort	Institution, in der verwaiste Kinder leben und erzogen werden.	broader
+Heim	noun	gewohnte Umgebung, Heimatland, Heimatort	Institution, in der verwaiste Kinder leben und erzogen werden.	none
 Heim	noun	Unterkunft für einen bestimmten Personenkreis, zum Beispiel Senioren oder Kinder	Eine Umgebung, die Zuneigung und Sicherheit bietet.	none
 Heim	noun	Unterkunft für einen bestimmten Personenkreis, zum Beispiel Senioren oder Kinder	Institution, in der verwaiste Kinder leben und erzogen werden.	narrower
 Heim	noun	Stätte für Erholungssuchende	Eine Umgebung, die Zuneigung und Sicherheit bietet.	none
-Heim	noun	Stätte für Erholungssuchende	Institution, in der verwaiste Kinder leben und erzogen werden.	exact
+Heim	noun	Stätte für Erholungssuchende	Institution, in der verwaiste Kinder leben und erzogen werden.	none
 Heim	noun	Stätte für Treffen und Veranstaltungen einer Gemeinschaft	Eine Umgebung, die Zuneigung und Sicherheit bietet.	none
 Heim	noun	Stätte für Treffen und Veranstaltungen einer Gemeinschaft	Institution, in der verwaiste Kinder leben und erzogen werden.	none
 Huhn	noun	das Haushuhn	Domestizierter Vogel aus der Ordnung der Galliformes, der oft zum späteren Schlachten gehalten wird (Gallus gallus domesticus).	none
@@ -260,7 +260,7 @@ Huhn	noun	Fleisch von	Domestizierter Vogel aus der Ordnung der Galliformes, der 
 Huhn	noun	Fleisch von	Das Fleisch des Haushuhns (Gallus gallus domesticus).	exact
 Huhn	noun	kurz für verschiedene Hühnervogel|Hühnervögel (Ordnung Galliformes) mit  im Namen	Domestizierter Vogel aus der Ordnung der Galliformes, der oft zum späteren Schlachten gehalten wird (Gallus gallus domesticus).	exact
 Huhn	noun	kurz für verschiedene Hühnervogel|Hühnervögel (Ordnung Galliformes) mit  im Namen	Das Fleisch des Haushuhns (Gallus gallus domesticus).	none
-Huhn	noun	für die Familie Phasianidae, zu der das Haushuhn gehört	Domestizierter Vogel aus der Ordnung der Galliformes, der oft zum späteren Schlachten gehalten wird (Gallus gallus domesticus).	exact
+Huhn	noun	für die Familie Phasianidae, zu der das Haushuhn gehört	Domestizierter Vogel aus der Ordnung der Galliformes, der oft zum späteren Schlachten gehalten wird (Gallus gallus domesticus).	none
 Huhn	noun	für die Familie Phasianidae, zu der das Haushuhn gehört	Das Fleisch des Haushuhns (Gallus gallus domesticus).	none
 Instrument	noun	feines, kompliziertes Werkzeug; Gerät für wissenschaftliche Messungen oder Untersuchungen	Eine mechanische Vorrichtung, die dafür vorgesehen ist, eine Aufgabe durchzuführen.	none
 Instrument	noun	feines, kompliziertes Werkzeug; Gerät für wissenschaftliche Messungen oder Untersuchungen	Ein Gerät, das zum Zweck der Erzeugung von Musik konstruiert oder modifiziert wurde.	broader
@@ -269,10 +269,10 @@ Instrument	noun	Gerät zum Musizieren	Ein Gerät, das zum Zweck der Erzeugung vo
 Instrument	noun	Mittel zum Zweck	Eine mechanische Vorrichtung, die dafür vorgesehen ist, eine Aufgabe durchzuführen.	none
 Instrument	noun	Mittel zum Zweck	Ein Gerät, das zum Zweck der Erzeugung von Musik konstruiert oder modifiziert wurde.	exact
 Instrument	noun	Zeugnisbrief	Eine mechanische Vorrichtung, die dafür vorgesehen ist, eine Aufgabe durchzuführen.	none
-Instrument	noun	Zeugnisbrief	Ein Gerät, das zum Zweck der Erzeugung von Musik konstruiert oder modifiziert wurde.	related
+Instrument	noun	Zeugnisbrief	Ein Gerät, das zum Zweck der Erzeugung von Musik konstruiert oder modifiziert wurde.	none
 Jungfrau	noun	eine weibliche Person, die noch nie Geschlechtsverkehr hatte	Eine unverheiratete Frau.	none
 Jungfrau	noun	eine weibliche Person, die noch nie Geschlechtsverkehr hatte	Frau, die noch keinen Geschlechtsverkehr gehabt hat.	broader
-Jungfrau	noun	eine weibliche Person, die noch nie Geschlechtsverkehr hatte	Ein Sternbild auf der Ekliptik, das zwischen dem Löwen und der Waage liegt.	none
+Jungfrau	noun	eine weibliche Person, die noch nie Geschlechtsverkehr hatte	Ein Sternbild auf der Ekliptik, das zwischen dem Löwen und der Waage liegt.	related
 Jungfrau	noun	eine weibliche Person, die noch nie Geschlechtsverkehr hatte	Eines der zwölf Tierkreiszeichen, dessen Sonnendurchgang in der Regel zwischen dem 24. August und dem 23. September liegt.	none
 Jungfrau	noun	männliche Person, die noch nie Geschlechtsverkehr hatte	Eine unverheiratete Frau.	none
 Jungfrau	noun	männliche Person, die noch nie Geschlechtsverkehr hatte	Frau, die noch keinen Geschlechtsverkehr gehabt hat.	broader
@@ -282,7 +282,7 @@ Jungfrau	noun	ein in diesem Sternzeichen Geborener	Eine unverheiratete Frau.	non
 Jungfrau	noun	ein in diesem Sternzeichen Geborener	Frau, die noch keinen Geschlechtsverkehr gehabt hat.	none
 Jungfrau	noun	ein in diesem Sternzeichen Geborener	Ein Sternbild auf der Ekliptik, das zwischen dem Löwen und der Waage liegt.	none
 Jungfrau	noun	ein in diesem Sternzeichen Geborener	Eines der zwölf Tierkreiszeichen, dessen Sonnendurchgang in der Regel zwischen dem 24. August und dem 23. September liegt.	none
-Jungfrau	noun	eine fehlerfrei gesetzte Seite, die keine Korrekturzeichen enthält	Eine unverheiratete Frau.	none
+Jungfrau	noun	eine fehlerfrei gesetzte Seite, die keine Korrekturzeichen enthält	Eine unverheiratete Frau.	related
 Jungfrau	noun	eine fehlerfrei gesetzte Seite, die keine Korrekturzeichen enthält	Frau, die noch keinen Geschlechtsverkehr gehabt hat.	none
 Jungfrau	noun	eine fehlerfrei gesetzte Seite, die keine Korrekturzeichen enthält	Ein Sternbild auf der Ekliptik, das zwischen dem Löwen und der Waage liegt.	none
 Jungfrau	noun	eine fehlerfrei gesetzte Seite, die keine Korrekturzeichen enthält	Eines der zwölf Tierkreiszeichen, dessen Sonnendurchgang in der Regel zwischen dem 24. August und dem 23. September liegt.	none
@@ -299,7 +299,7 @@ Jungfrau	noun	eine Figur aus dem Dreigestirn des Kölner Karnevals	Frau, die noc
 Jungfrau	noun	eine Figur aus dem Dreigestirn des Kölner Karnevals	Ein Sternbild auf der Ekliptik, das zwischen dem Löwen und der Waage liegt.	none
 Jungfrau	noun	eine Figur aus dem Dreigestirn des Kölner Karnevals	Eines der zwölf Tierkreiszeichen, dessen Sonnendurchgang in der Regel zwischen dem 24. August und dem 23. September liegt.	none
 Jungfrau	noun	die Jungfrau Maria, die Heilige Jungfrau	Eine unverheiratete Frau.	none
-Jungfrau	noun	die Jungfrau Maria, die Heilige Jungfrau	Frau, die noch keinen Geschlechtsverkehr gehabt hat.	none
+Jungfrau	noun	die Jungfrau Maria, die Heilige Jungfrau	Frau, die noch keinen Geschlechtsverkehr gehabt hat.	related
 Jungfrau	noun	die Jungfrau Maria, die Heilige Jungfrau	Ein Sternbild auf der Ekliptik, das zwischen dem Löwen und der Waage liegt.	none
 Jungfrau	noun	die Jungfrau Maria, die Heilige Jungfrau	Eines der zwölf Tierkreiszeichen, dessen Sonnendurchgang in der Regel zwischen dem 24. August und dem 23. September liegt.	related
 Jungfrau	noun	Ehrenjungfrau, Brautjungfrau	Eine unverheiratete Frau.	none
@@ -320,8 +320,8 @@ Jungfrau	noun	die englische Königin Elisabeth I.	Ein Sternbild auf der Ekliptik
 Jungfrau	noun	die englische Königin Elisabeth I.	Eines der zwölf Tierkreiszeichen, dessen Sonnendurchgang in der Regel zwischen dem 24. August und dem 23. September liegt.	none
 Jungfrau	noun	ein Berg, Alpengipfel, in der Schweiz	Eine unverheiratete Frau.	none
 Jungfrau	noun	ein Berg, Alpengipfel, in der Schweiz	Frau, die noch keinen Geschlechtsverkehr gehabt hat.	none
-Jungfrau	noun	ein Berg, Alpengipfel, in der Schweiz	Ein Sternbild auf der Ekliptik, das zwischen dem Löwen und der Waage liegt.	none
-Jungfrau	noun	ein Berg, Alpengipfel, in der Schweiz	Eines der zwölf Tierkreiszeichen, dessen Sonnendurchgang in der Regel zwischen dem 24. August und dem 23. September liegt.	none
+Jungfrau	noun	ein Berg, Alpengipfel, in der Schweiz	Ein Sternbild auf der Ekliptik, das zwischen dem Löwen und der Waage liegt.	broader
+Jungfrau	noun	ein Berg, Alpengipfel, in der Schweiz	Eines der zwölf Tierkreiszeichen, dessen Sonnendurchgang in der Regel zwischen dem 24. August und dem 23. September liegt.	narrower
 Kölsch	noun	obergärige Biersorte	Die Sprache der Bewohner der Stadt Köln in Deutschland und einiger Orte in der unmittelbaren Umgebung.	none
 Kölsch	noun	obergärige Biersorte	Ein Bier, das exklusiv in der deutschen Stadt Köln und deren Umgebung gebraut wird.	none
 Kölsch	noun	Begriff für die Kölner Mundart (auch Kölnisch genannt)	Die Sprache der Bewohner der Stadt Köln in Deutschland und einiger Orte in der unmittelbaren Umgebung.	none
@@ -337,12 +337,12 @@ Kaufkraft	noun	der Wert einer Währung, ausgedrückt als Gütermenge, die einem 
 Kochkunst	noun	die Kunst, das Handwerk der Speisenzubereitung	Ein Zusammenstellung von Kochtraditionen und -techniken, oft im Zusammenhang mit einer bestimmten Kultur.	none
 Kochkunst	noun	die Kunst, das Handwerk der Speisenzubereitung	Die Kunst, wohlschmeckendes Essen zuzubereiten, das auch das Auge erfreut.	broader
 Kochkunst	noun	die Fähigkeit einer Person, schmackhafte und optisch ansprechende Speisen zuzubereiten	Ein Zusammenstellung von Kochtraditionen und -techniken, oft im Zusammenhang mit einer bestimmten Kultur.	none
-Kochkunst	noun	die Fähigkeit einer Person, schmackhafte und optisch ansprechende Speisen zuzubereiten	Die Kunst, wohlschmeckendes Essen zuzubereiten, das auch das Auge erfreut.	exact
+Kochkunst	noun	die Fähigkeit einer Person, schmackhafte und optisch ansprechende Speisen zuzubereiten	Die Kunst, wohlschmeckendes Essen zuzubereiten, das auch das Auge erfreut.	related
 Kontrahent	noun	jemand, der gegen jemanden antritt; ein Gegner in einer Wettkampfsituation|Wettkampf- oder Konfliktsituation	Jemand, der mit einer oder mehreren anderen Personen konkurriert.	exact
 Kontrahent	noun	jemand, der gegen jemanden antritt; ein Gegner in einer Wettkampfsituation|Wettkampf- oder Konfliktsituation	Ein Mann, der mit einer oder mehreren anderen Personen konkurriert.	related
 Kontrahent	noun	Vertragspartner	Jemand, der mit einer oder mehreren anderen Personen konkurriert.	none
 Kontrahent	noun	Vertragspartner	Ein Mann, der mit einer oder mehreren anderen Personen konkurriert.	none
-Leistung	noun	gezielte Handlung, die zu einem bestimmten Ergebnis beziehungsweise der Lösung einer Aufgabe führt	Physik: Verhältnis von verrichteter Arbeit zu der dafür benötigten Zeit	none
+Leistung	noun	gezielte Handlung, die zu einem bestimmten Ergebnis beziehungsweise der Lösung einer Aufgabe führt	Physik: Verhältnis von verrichteter Arbeit zu der dafür benötigten Zeit	broader
 Leistung	noun	gezielte Handlung, die zu einem bestimmten Ergebnis beziehungsweise der Lösung einer Aufgabe führt	Eine Zahlung, die aufgrund einer Versicherung oder einer öffentlichen Dienstleistung gemacht wird.	none
 Leistung	noun	verrichtete Arbeit pro Zeit	Physik: Verhältnis von verrichteter Arbeit zu der dafür benötigten Zeit	exact
 Leistung	noun	verrichtete Arbeit pro Zeit	Eine Zahlung, die aufgrund einer Versicherung oder einer öffentlichen Dienstleistung gemacht wird.	none
@@ -352,15 +352,15 @@ Leistung	noun	die bewusste und zweckgerichtete Mehrung fremden Vermögens	Physik
 Leistung	noun	die bewusste und zweckgerichtete Mehrung fremden Vermögens	Eine Zahlung, die aufgrund einer Versicherung oder einer öffentlichen Dienstleistung gemacht wird.	broader
 Leistung	noun	Ergebnis der betrieblichen Faktorkombination	Physik: Verhältnis von verrichteter Arbeit zu der dafür benötigten Zeit	none
 Leistung	noun	Ergebnis der betrieblichen Faktorkombination	Eine Zahlung, die aufgrund einer Versicherung oder einer öffentlichen Dienstleistung gemacht wird.	none
-Leistung	noun	Zahlung, zum Beispiel eine Versicherungsleistung	Physik: Verhältnis von verrichteter Arbeit zu der dafür benötigten Zeit	broader
-Leistung	noun	Zahlung, zum Beispiel eine Versicherungsleistung	Eine Zahlung, die aufgrund einer Versicherung oder einer öffentlichen Dienstleistung gemacht wird.	narrower
+Leistung	noun	Zahlung, zum Beispiel eine Versicherungsleistung	Physik: Verhältnis von verrichteter Arbeit zu der dafür benötigten Zeit	none
+Leistung	noun	Zahlung, zum Beispiel eine Versicherungsleistung	Eine Zahlung, die aufgrund einer Versicherung oder einer öffentlichen Dienstleistung gemacht wird.	exact
 Leistung	noun	eine Arbeitsleistung, zum Beispiel Mehrdienstleistung (österreichischer Ausdruck für Mehrarbeit von Beamten)	Physik: Verhältnis von verrichteter Arbeit zu der dafür benötigten Zeit	none
 Leistung	noun	eine Arbeitsleistung, zum Beispiel Mehrdienstleistung (österreichischer Ausdruck für Mehrarbeit von Beamten)	Eine Zahlung, die aufgrund einer Versicherung oder einer öffentlichen Dienstleistung gemacht wird.	none
 Mispel	noun	die Pflanzengattung Mespilus (deutsch Mispeln)	Kleiner Baum mit essbaren Früchten.	none
 Mispel	noun	die Pflanzengattung Mespilus (deutsch Mispeln)	Essbare Frucht des Mispelbaums.	none
 Mispel	noun	aus Vorderasien stammender, bis zu fünf Meter hoher Baum mit großen, weißen Blüten und orangen Früchten	Kleiner Baum mit essbaren Früchten.	broader
 Mispel	noun	aus Vorderasien stammender, bis zu fünf Meter hoher Baum mit großen, weißen Blüten und orangen Früchten	Essbare Frucht des Mispelbaums.	broader
-Mispel	noun	apfelförmige Frucht von 1 mit säuerlichem, aromatischem Geschmack, die erst im überreifen Zustand essbar ist	Kleiner Baum mit essbaren Früchten.	none
+Mispel	noun	apfelförmige Frucht von 1 mit säuerlichem, aromatischem Geschmack, die erst im überreifen Zustand essbar ist	Kleiner Baum mit essbaren Früchten.	broader
 Mispel	noun	apfelförmige Frucht von 1 mit säuerlichem, aromatischem Geschmack, die erst im überreifen Zustand essbar ist	Essbare Frucht des Mispelbaums.	broader
 Morgen	noun	Tageszeit zwischen Nacht und Vormittag	Der Zeitabschnitt, der vom Beginn eines Tages bis zum Mittag (12:00 Uhr) dauert.	none
 Morgen	noun	Tageszeit zwischen Nacht und Vormittag	Ein „Morgen“ war die Fläche, die an einem Vormittag gepflügt werden konnte. Das war meistens weniger als ein Hektar. Die genaue Größe unterschied sich von Region zu Region.	none
@@ -371,7 +371,7 @@ Morgen	noun	veraltend für den Osten, da die Sonne bei Sonnenaufgang im Osten st
 Morgen	noun	veraltend für den Osten, da die Sonne bei Sonnenaufgang im Osten steht	Gruß, der morgens zur Begrüßung oder zum Abschied verwendet wird.	none
 Morgen	noun	veraltend für den Osten, da die Sonne bei Sonnenaufgang im Osten steht	Metaphorischer Ausdruck für die Zukunft	none
 Morgen	noun	historisches Flächenmaß, variierte je nach Zeitabschnitt und Landstrich in seiner Größe	Der Zeitabschnitt, der vom Beginn eines Tages bis zum Mittag (12:00 Uhr) dauert.	narrower
-Morgen	noun	historisches Flächenmaß, variierte je nach Zeitabschnitt und Landstrich in seiner Größe	Ein „Morgen“ war die Fläche, die an einem Vormittag gepflügt werden konnte. Das war meistens weniger als ein Hektar. Die genaue Größe unterschied sich von Region zu Region.	narrower
+Morgen	noun	historisches Flächenmaß, variierte je nach Zeitabschnitt und Landstrich in seiner Größe	Ein „Morgen“ war die Fläche, die an einem Vormittag gepflügt werden konnte. Das war meistens weniger als ein Hektar. Die genaue Größe unterschied sich von Region zu Region.	broader
 Morgen	noun	historisches Flächenmaß, variierte je nach Zeitabschnitt und Landstrich in seiner Größe	Gruß, der morgens zur Begrüßung oder zum Abschied verwendet wird.	none
 Morgen	noun	historisches Flächenmaß, variierte je nach Zeitabschnitt und Landstrich in seiner Größe	Metaphorischer Ausdruck für die Zukunft	none
 Morgen	noun	die morgendlich|morgendliche Begrüßung „guten Morgen|Guten Morgen!“	Der Zeitabschnitt, der vom Beginn eines Tages bis zum Mittag (12:00 Uhr) dauert.	none
@@ -383,25 +383,25 @@ Null	noun	die ganze (und je nach Definition natürliche) Zahl, die Kardinalzahl 
 Null	noun	die Ziffer Null (0 – in Fremdsprachen auch ٠, 零, 〇)	Die Kardinalzahl, die ausdrückt, dass ein Wert keinen Betrag aufweist bzw. nicht vorhanden ist.	related
 Null	noun	die Ziffer Null (0 – in Fremdsprachen auch ٠, 零, 〇)	Die Ziffer „0“	exact
 Null	noun	„Nullpunkt“	Die Kardinalzahl, die ausdrückt, dass ein Wert keinen Betrag aufweist bzw. nicht vorhanden ist.	none
-Null	noun	„Nullpunkt“	Die Ziffer „0“	none
+Null	noun	„Nullpunkt“	Die Ziffer „0“	broader
 Null	noun	eine inkompetente Person	Die Kardinalzahl, die ausdrückt, dass ein Wert keinen Betrag aufweist bzw. nicht vorhanden ist.	none
 Null	noun	eine inkompetente Person	Die Ziffer „0“	none
-Opfer	noun	meist rituelle Gabe an einen Gott	Jemand, der durch eine andere Person oder durch ein Ereignis zu Schaden kam.	none
+Opfer	noun	meist rituelle Gabe an einen Gott	Jemand, der durch eine andere Person oder durch ein Ereignis zu Schaden kam.	related
 Opfer	noun	meist rituelle Gabe an einen Gott	Ein Lebewesen, Mensch oder Tier, welches, gewöhnlich in einem religösen Ritus, getötet als eine Gabe dargeboten wird.	related
 Opfer	noun	meist rituelle Gabe an einen Gott	Etwas, das aufgegeben oder verloren wurde, um ein Ziel zu erreichen	none
-Opfer	noun	meist rituelle Gabe an einen Gott	Eine Person, die das Ziel eines Angriffs (insbesondere ein Opfer von Spott oder Ausbeutung) durch eine feindselige Person oder einen Einfluss.	broader
+Opfer	noun	meist rituelle Gabe an einen Gott	Eine Person, die das Ziel eines Angriffs (insbesondere ein Opfer von Spott oder Ausbeutung) durch eine feindselige Person oder einen Einfluss.	none
 Opfer	noun	etwas, das man abgibt oder spendet, so dass man selbst darauf verzichten muss	Jemand, der durch eine andere Person oder durch ein Ereignis zu Schaden kam.	none
 Opfer	noun	etwas, das man abgibt oder spendet, so dass man selbst darauf verzichten muss	Ein Lebewesen, Mensch oder Tier, welches, gewöhnlich in einem religösen Ritus, getötet als eine Gabe dargeboten wird.	none
 Opfer	noun	etwas, das man abgibt oder spendet, so dass man selbst darauf verzichten muss	Etwas, das aufgegeben oder verloren wurde, um ein Ziel zu erreichen	none
 Opfer	noun	etwas, das man abgibt oder spendet, so dass man selbst darauf verzichten muss	Eine Person, die das Ziel eines Angriffs (insbesondere ein Opfer von Spott oder Ausbeutung) durch eine feindselige Person oder einen Einfluss.	none
 Opfer	noun	jemand, der durch etwas Schaden erlitten hat	Jemand, der durch eine andere Person oder durch ein Ereignis zu Schaden kam.	exact
 Opfer	noun	jemand, der durch etwas Schaden erlitten hat	Ein Lebewesen, Mensch oder Tier, welches, gewöhnlich in einem religösen Ritus, getötet als eine Gabe dargeboten wird.	none
-Opfer	noun	jemand, der durch etwas Schaden erlitten hat	Etwas, das aufgegeben oder verloren wurde, um ein Ziel zu erreichen	exact
+Opfer	noun	jemand, der durch etwas Schaden erlitten hat	Etwas, das aufgegeben oder verloren wurde, um ein Ziel zu erreichen	none
 Opfer	noun	jemand, der durch etwas Schaden erlitten hat	Eine Person, die das Ziel eines Angriffs (insbesondere ein Opfer von Spott oder Ausbeutung) durch eine feindselige Person oder einen Einfluss.	none
 Opfer	noun	die freiwillige Hergabe eines Bauern oder einer Figur in der Erwartung, dadurch einen andersartigen (eventuell größeren) Vorteil zu erreichen (Kompensation erlangen)	Jemand, der durch eine andere Person oder durch ein Ereignis zu Schaden kam.	none
 Opfer	noun	die freiwillige Hergabe eines Bauern oder einer Figur in der Erwartung, dadurch einen andersartigen (eventuell größeren) Vorteil zu erreichen (Kompensation erlangen)	Ein Lebewesen, Mensch oder Tier, welches, gewöhnlich in einem religösen Ritus, getötet als eine Gabe dargeboten wird.	none
 Opfer	noun	die freiwillige Hergabe eines Bauern oder einer Figur in der Erwartung, dadurch einen andersartigen (eventuell größeren) Vorteil zu erreichen (Kompensation erlangen)	Etwas, das aufgegeben oder verloren wurde, um ein Ziel zu erreichen	broader
-Opfer	noun	die freiwillige Hergabe eines Bauern oder einer Figur in der Erwartung, dadurch einen andersartigen (eventuell größeren) Vorteil zu erreichen (Kompensation erlangen)	Eine Person, die das Ziel eines Angriffs (insbesondere ein Opfer von Spott oder Ausbeutung) durch eine feindselige Person oder einen Einfluss.	none
+Opfer	noun	die freiwillige Hergabe eines Bauern oder einer Figur in der Erwartung, dadurch einen andersartigen (eventuell größeren) Vorteil zu erreichen (Kompensation erlangen)	Eine Person, die das Ziel eines Angriffs (insbesondere ein Opfer von Spott oder Ausbeutung) durch eine feindselige Person oder einen Einfluss.	narrower
 Opfer	noun	angelehnt an 3, jemand der schwach, dumm oder unterlegen ist	Jemand, der durch eine andere Person oder durch ein Ereignis zu Schaden kam.	none
 Opfer	noun	angelehnt an 3, jemand der schwach, dumm oder unterlegen ist	Ein Lebewesen, Mensch oder Tier, welches, gewöhnlich in einem religösen Ritus, getötet als eine Gabe dargeboten wird.	none
 Opfer	noun	angelehnt an 3, jemand der schwach, dumm oder unterlegen ist	Etwas, das aufgegeben oder verloren wurde, um ein Ziel zu erreichen	none
@@ -411,7 +411,7 @@ Pfeife	noun	Gerät zum Erzeugen von Ton|Tönen, bei dem Luft in der Regel über 
 Pfeife	noun	die Hupe von Schiffen und Lokomotiven	Eine kleine Röhre aus Metall oder Plastik, die einen lauten und hohen Ton produziert wenn hineingeblasen wird. Sie wird verwendet, um ein Signal zu geben oder Aufmerksamkeit auf sich zu lenken.	none
 Pfeife	noun	die Hupe von Schiffen und Lokomotiven	Aus einem Mundstück, einem länglichen Pfeifenrohr und dem Pfeifenkopf bestehendes Gerät, das zum Rauchen von Tabak benutzt wird.	none
 Pfeife	noun	Pikkoloflöte	Eine kleine Röhre aus Metall oder Plastik, die einen lauten und hohen Ton produziert wenn hineingeblasen wird. Sie wird verwendet, um ein Signal zu geben oder Aufmerksamkeit auf sich zu lenken.	none
-Pfeife	noun	Pikkoloflöte	Aus einem Mundstück, einem länglichen Pfeifenrohr und dem Pfeifenkopf bestehendes Gerät, das zum Rauchen von Tabak benutzt wird.	related
+Pfeife	noun	Pikkoloflöte	Aus einem Mundstück, einem länglichen Pfeifenrohr und dem Pfeifenkopf bestehendes Gerät, das zum Rauchen von Tabak benutzt wird.	none
 Pfeife	noun	Gerät zum rauchen|Rauchen	Eine kleine Röhre aus Metall oder Plastik, die einen lauten und hohen Ton produziert wenn hineingeblasen wird. Sie wird verwendet, um ein Signal zu geben oder Aufmerksamkeit auf sich zu lenken.	none
 Pfeife	noun	Gerät zum rauchen|Rauchen	Aus einem Mundstück, einem länglichen Pfeifenrohr und dem Pfeifenkopf bestehendes Gerät, das zum Rauchen von Tabak benutzt wird.	broader
 Pfeife	noun	Blasrohr des Glasbläsers	Eine kleine Röhre aus Metall oder Plastik, die einen lauten und hohen Ton produziert wenn hineingeblasen wird. Sie wird verwendet, um ein Signal zu geben oder Aufmerksamkeit auf sich zu lenken.	none
@@ -438,23 +438,23 @@ Polyp	noun	eine meist gutartige Geschwulst	Wucherung oder Tumor, der sich haupts
 Polyp	noun	eine meist gutartige Geschwulst	Meerestier mit konisch geformtem, gallertartigem Körper und Tentakeln genannten beweglichen Fäden um die Mundöffnung.	none
 Polyp	noun	Polizist	Wucherung oder Tumor, der sich hauptsächlich in von Schleimhäuten bedeckten Hohlräumen bildet.	none
 Polyp	noun	Polizist	Meerestier mit konisch geformtem, gallertartigem Körper und Tentakeln genannten beweglichen Fäden um die Mundöffnung.	none
-Profil	noun	Seitenansicht einer Gestalt	Form, Ansicht oder Schatten einer Person von der Seite	none
+Profil	noun	Seitenansicht einer Gestalt	Form, Ansicht oder Schatten einer Person von der Seite	broader
 Profil	noun	Seitenansicht einer Gestalt	Analyse, zu welchem Grad etwas verschiedene Merkmale aufweist	none
 Profil	noun	Längsschnitt, Querschnitt oder Umriss	Form, Ansicht oder Schatten einer Person von der Seite	narrower
 Profil	noun	Längsschnitt, Querschnitt oder Umriss	Analyse, zu welchem Grad etwas verschiedene Merkmale aufweist	none
 Profil	noun	charakteristisches Erscheinungsbild	Form, Ansicht oder Schatten einer Person von der Seite	none
 Profil	noun	charakteristisches Erscheinungsbild	Analyse, zu welchem Grad etwas verschiedene Merkmale aufweist	none
-Profil	noun	Gesamtheit ausgeprägter Eigenschaften	Form, Ansicht oder Schatten einer Person von der Seite	none
+Profil	noun	Gesamtheit ausgeprägter Eigenschaften	Form, Ansicht oder Schatten einer Person von der Seite	narrower
 Profil	noun	Gesamtheit ausgeprägter Eigenschaften	Analyse, zu welchem Grad etwas verschiedene Merkmale aufweist	none
 Profil	noun	Kerben aufweisende Struktur einer Lauffläche	Form, Ansicht oder Schatten einer Person von der Seite	none
 Profil	noun	Kerben aufweisende Struktur einer Lauffläche	Analyse, zu welchem Grad etwas verschiedene Merkmale aufweist	none
-Profil	noun	längliches Bauteil unbestimmten Querschnitts	Form, Ansicht oder Schatten einer Person von der Seite	none
+Profil	noun	längliches Bauteil unbestimmten Querschnitts	Form, Ansicht oder Schatten einer Person von der Seite	related
 Profil	noun	längliches Bauteil unbestimmten Querschnitts	Analyse, zu welchem Grad etwas verschiedene Merkmale aufweist	related
 Profil	noun	beschreibende Daten eines Benutzers einer Computeranwendung	Form, Ansicht oder Schatten einer Person von der Seite	none
 Profil	noun	beschreibende Daten eines Benutzers einer Computeranwendung	Analyse, zu welchem Grad etwas verschiedene Merkmale aufweist	none
 Schauspieler	noun	Darsteller in Film oder Theater	Eine Person, die eine bestimmte Rolle in einem Film oder Theaterstück spielt.	exact
 Schauspieler	noun	Darsteller in Film oder Theater	Eine männliche Person, die eine bestimmte Rolle in einem Film oder Theaterstück spielt.	exact
-Schauspieler	noun	Person, die sich verstellt, etwas Falsches vorgibt	Eine Person, die eine bestimmte Rolle in einem Film oder Theaterstück spielt.	none
+Schauspieler	noun	Person, die sich verstellt, etwas Falsches vorgibt	Eine Person, die eine bestimmte Rolle in einem Film oder Theaterstück spielt.	narrower
 Schauspieler	noun	Person, die sich verstellt, etwas Falsches vorgibt	Eine männliche Person, die eine bestimmte Rolle in einem Film oder Theaterstück spielt.	narrower
 Schinken	noun	Fleisch der Schenkel von Schlachtvieh meist im engeren Sinne von Schweinen	Fleisch aus dem Schenkel eines Schweins.	exact
 Schinken	noun	Fleisch der Schenkel von Schlachtvieh meist im engeren Sinne von Schweinen	Sehr dickes oder schweres Buch.	none
@@ -464,7 +464,7 @@ Schinken	noun	::a schweres oder großes Buch <<subdef marker for testing>>	Fleis
 Schinken	noun	::a schweres oder großes Buch <<subdef marker for testing>>	Sehr dickes oder schweres Buch.	narrower
 Schinken	noun	::b ein als minderwertig empfundenes oder auch großes Gemälde <<subdef marker for testing>>	Fleisch aus dem Schenkel eines Schweins.	none
 Schinken	noun	::b ein als minderwertig empfundenes oder auch großes Gemälde <<subdef marker for testing>>	Sehr dickes oder schweres Buch.	none
-Schirm	noun	ein meist runder, gewölbter Gegenstand, der vor bestimmten Dingen schützt oder eine Aktion unterbindet	Tragbarer, wasserdichter, faltbarer Schutz in Form einer Glocke, den man über den Kopf hält, um den Regen abzuhalten.	none
+Schirm	noun	ein meist runder, gewölbter Gegenstand, der vor bestimmten Dingen schützt oder eine Aktion unterbindet	Tragbarer, wasserdichter, faltbarer Schutz in Form einer Glocke, den man über den Kopf hält, um den Regen abzuhalten.	related
 Schirm	noun	ein meist runder, gewölbter Gegenstand, der vor bestimmten Dingen schützt oder eine Aktion unterbindet	Eine Abschirmung oder ein Schutz vor Unangenehmem, Unerwünschtem oder Gefährlichem.	none
 Schirm	noun	allegorisch für Schutz	Tragbarer, wasserdichter, faltbarer Schutz in Form einer Glocke, den man über den Kopf hält, um den Regen abzuhalten.	broader
 Schirm	noun	allegorisch für Schutz	Eine Abschirmung oder ein Schutz vor Unangenehmem, Unerwünschtem oder Gefährlichem.	exact
@@ -479,7 +479,7 @@ Segregation	noun	die Absonderung, die Ausscheidung, die Trennung, die Abtrennung
 Segregation	noun	die Aufspaltung der Erbfaktoren während der Reifeteilung der Geschlechtszellen	Der Akt des Trennens oder Absonderns.	none
 Segregation	noun	die Aufspaltung der Erbfaktoren während der Reifeteilung der Geschlechtszellen	Ein soziales System, das getrennte Einrichtungen für Minderheiten bereitstellt.	none
 Segregation	noun	die Trennung von Bevölkerungsgruppen aus religiösen, ethnischen oder sozialen Gründen	Der Akt des Trennens oder Absonderns.	none
-Segregation	noun	die Trennung von Bevölkerungsgruppen aus religiösen, ethnischen oder sozialen Gründen	Ein soziales System, das getrennte Einrichtungen für Minderheiten bereitstellt.	none
+Segregation	noun	die Trennung von Bevölkerungsgruppen aus religiösen, ethnischen oder sozialen Gründen	Ein soziales System, das getrennte Einrichtungen für Minderheiten bereitstellt.	broader
 Spiritus	noun	Hauch, Atem (Hauchlaut);  Lebenshauch, Geist	Farblose, mit Wasser mischbar Flüssigkeit, die als Lösungsmittel oder Reagens verwendet wird.	none
 Spiritus	noun	Hauch, Atem (Hauchlaut);  Lebenshauch, Geist	Farblose, leichtentzündliche Flüssigkeit, die unter anderem als Lösungsmittel, Desinfektionsmittel und Rauschmittel verwendet wird.	none
 Spiritus	noun	(vergällter) Alkohol; Weingeist	Farblose, mit Wasser mischbar Flüssigkeit, die als Lösungsmittel oder Reagens verwendet wird.	none
@@ -487,17 +487,17 @@ Spiritus	noun	(vergällter) Alkohol; Weingeist	Farblose, leichtentzündliche Fl�
 Spiritus	noun	diakritisches Zeichen in der griechischen Schrift, um einen Stimmeinsatz mit oder ohne Behauchung anzuzeigen	Farblose, mit Wasser mischbar Flüssigkeit, die als Lösungsmittel oder Reagens verwendet wird.	none
 Spiritus	noun	diakritisches Zeichen in der griechischen Schrift, um einen Stimmeinsatz mit oder ohne Behauchung anzuzeigen	Farblose, leichtentzündliche Flüssigkeit, die unter anderem als Lösungsmittel, Desinfektionsmittel und Rauschmittel verwendet wird.	none
 Stamm	noun	Teil des Baumes zwischen Wurzel und Krone	Eine Gruppe von Individuen, die von einem einzigen Individuum innerhalb einer Spezies abstammen.	none
-Stamm	noun	Teil des Baumes zwischen Wurzel und Krone	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	narrower
+Stamm	noun	Teil des Baumes zwischen Wurzel und Krone	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	none
 Stamm	noun	größere Gruppe von Menschen mit ethnischen Gemeinsamkeiten	Eine Gruppe von Individuen, die von einem einzigen Individuum innerhalb einer Spezies abstammen.	narrower
 Stamm	noun	größere Gruppe von Menschen mit ethnischen Gemeinsamkeiten	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	broader
 Stamm	noun	Element der biologischen Taxonomie	Eine Gruppe von Individuen, die von einem einzigen Individuum innerhalb einer Spezies abstammen.	none
 Stamm	noun	Element der biologischen Taxonomie	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	none
 Stamm	noun	kleine bearbeitbare Gruppe niederer Lebewesen	Eine Gruppe von Individuen, die von einem einzigen Individuum innerhalb einer Spezies abstammen.	broader
 Stamm	noun	kleine bearbeitbare Gruppe niederer Lebewesen	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	broader
-Stamm	noun	personelle Grundlage, personeller Bestand bei Betrieben, beim Militär, in der Seefahrt und anderen Organisationen oder Zusammenschluss|Zusammenschlüssen	Eine Gruppe von Individuen, die von einem einzigen Individuum innerhalb einer Spezies abstammen.	none
+Stamm	noun	personelle Grundlage, personeller Bestand bei Betrieben, beim Militär, in der Seefahrt und anderen Organisationen oder Zusammenschluss|Zusammenschlüssen	Eine Gruppe von Individuen, die von einem einzigen Individuum innerhalb einer Spezies abstammen.	narrower
 Stamm	noun	personelle Grundlage, personeller Bestand bei Betrieben, beim Militär, in der Seefahrt und anderen Organisationen oder Zusammenschluss|Zusammenschlüssen	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	none
 Stamm	noun	einfache oder komplexe Grundform der Flexion eines Wortes (Wortstamm)	Eine Gruppe von Individuen, die von einem einzigen Individuum innerhalb einer Spezies abstammen.	none
-Stamm	noun	einfache oder komplexe Grundform der Flexion eines Wortes (Wortstamm)	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	narrower
+Stamm	noun	einfache oder komplexe Grundform der Flexion eines Wortes (Wortstamm)	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	none
 Stamm	noun	Grundwort einer Wortfamilie	Eine Gruppe von Individuen, die von einem einzigen Individuum innerhalb einer Spezies abstammen.	none
 Stamm	noun	Grundwort einer Wortfamilie	Biologisches Taxon, eine Gruppe (verwandter) Arten, Teil eines Reichs und bestehend aus einer oder mehreren Klassen	none
 Stern	noun	massereiche, selbst leuchtende Gaskugel, Himmelskörper	Leuchtender Himmelskörper, der aus Gasen (besonders Wasserstoff und Helium) besteht und die Form einer Kugel hat.	broader
@@ -512,7 +512,7 @@ Stern	noun	Bezeichnung für etwas Populäres	Leuchtender Himmelskörper, der aus
 Stern	noun	Bezeichnung für etwas Populäres	Ein natürlicher leuchtender kosmischer Gegenstand, der wenigstens nachts bei klarem Wetter von er Erde aus am Himmel zu beobachten ist.	none
 Stern	noun	Malzeichen auf der Tastatur	Leuchtender Himmelskörper, der aus Gasen (besonders Wasserstoff und Helium) besteht und die Form einer Kugel hat.	none
 Stern	noun	Malzeichen auf der Tastatur	Ein natürlicher leuchtender kosmischer Gegenstand, der wenigstens nachts bei klarem Wetter von er Erde aus am Himmel zu beobachten ist.	none
-Stern	noun	Gegenstand mit einer kreisförmigen Mitte, um die Zacken ähnlich einem massereichen Himmelskörper symmetrisch angeordnet sind	Leuchtender Himmelskörper, der aus Gasen (besonders Wasserstoff und Helium) besteht und die Form einer Kugel hat.	broader
+Stern	noun	Gegenstand mit einer kreisförmigen Mitte, um die Zacken ähnlich einem massereichen Himmelskörper symmetrisch angeordnet sind	Leuchtender Himmelskörper, der aus Gasen (besonders Wasserstoff und Helium) besteht und die Form einer Kugel hat.	related
 Stern	noun	Gegenstand mit einer kreisförmigen Mitte, um die Zacken ähnlich einem massereichen Himmelskörper symmetrisch angeordnet sind	Ein natürlicher leuchtender kosmischer Gegenstand, der wenigstens nachts bei klarem Wetter von er Erde aus am Himmel zu beobachten ist.	narrower
 Taste	noun	Teil einer Tastatur oder einer Klaviatur, der Druck einer Taste hat ein spezifisches Ereignis zur Folge, er erzeugen|erzeugt zum Beispiel einen Buchstaben oder einen Ton	Ein Bedienelement einer grafischen Benutzeroberfläche einer Software.	none
 Taste	noun	Teil einer Tastatur oder einer Klaviatur, der Druck einer Taste hat ein spezifisches Ereignis zur Folge, er erzeugen|erzeugt zum Beispiel einen Buchstaben oder einen Ton	Eine Taste ist ein mechanisches Bedienungselement, das durch Drücken bedient wird und beim Loslassen wieder in den Ausgangszustand zurückspringt.	narrower
@@ -521,8 +521,8 @@ Taste	noun	Bedienelement von Geräten, das durch Druck ein Ereignis auslösen|au
 Tornister	noun	Gepäckstück, das ein Soldat (oder ein Wanderer oder dergleichen) auf dem Rücken trägt	Eine auf dem Rücken getragene, meist eckige Schultasche.	broader
 Tornister	noun	Gepäckstück, das ein Soldat (oder ein Wanderer oder dergleichen) auf dem Rücken trägt	Ein vorwiegend im militärischen Bereich gebrauchter Rucksack, bei der eine Fell- oder Stoffbespannung über einen rechteckigen Holz- oder Kunststoffrahmen gespannt ist.	none
 Tornister	noun	Behälter, in dem ein Schüler seine Hefte und Bücher auf dem Rücken trägt	Eine auf dem Rücken getragene, meist eckige Schultasche.	narrower
-Tornister	noun	Behälter, in dem ein Schüler seine Hefte und Bücher auf dem Rücken trägt	Ein vorwiegend im militärischen Bereich gebrauchter Rucksack, bei der eine Fell- oder Stoffbespannung über einen rechteckigen Holz- oder Kunststoffrahmen gespannt ist.	none
-Trick	noun	ein Kunststück, Streich, ein Kunstgriff, dessen Funktionsweise für Nichteingeweihte nicht offensichtlich ist; eine Überraschung, Staunen oder Entsetzen hervorrufende, unerwartete, schwer vorhersagbare oder berechenbare Handlung	Ein ausgefeilter oder hinterlistiger Plan, der entworfen wurde um zu täuschen oder auszuweichen.	none
+Tornister	noun	Behälter, in dem ein Schüler seine Hefte und Bücher auf dem Rücken trägt	Ein vorwiegend im militärischen Bereich gebrauchter Rucksack, bei der eine Fell- oder Stoffbespannung über einen rechteckigen Holz- oder Kunststoffrahmen gespannt ist.	narrower
+Trick	noun	ein Kunststück, Streich, ein Kunstgriff, dessen Funktionsweise für Nichteingeweihte nicht offensichtlich ist; eine Überraschung, Staunen oder Entsetzen hervorrufende, unerwartete, schwer vorhersagbare oder berechenbare Handlung	Ein ausgefeilter oder hinterlistiger Plan, der entworfen wurde um zu täuschen oder auszuweichen.	related
 Trick	noun	ein Kunststück, Streich, ein Kunstgriff, dessen Funktionsweise für Nichteingeweihte nicht offensichtlich ist; eine Überraschung, Staunen oder Entsetzen hervorrufende, unerwartete, schwer vorhersagbare oder berechenbare Handlung	Ein Manöver in einem Spiel oder einer Unterhaltung.	none
 Trick	noun	ein Kunstgriff am Rande von Sitte, Rechtschaffenheit und Legalität	Ein ausgefeilter oder hinterlistiger Plan, der entworfen wurde um zu täuschen oder auszuweichen.	none
 Trick	noun	ein Kunstgriff am Rande von Sitte, Rechtschaffenheit und Legalität	Ein Manöver in einem Spiel oder einer Unterhaltung.	none
@@ -535,12 +535,12 @@ Völkerwanderung	noun	Ausbreitung der Germanen in vorchristlicher Zeit nach West
 Völkerwanderung	noun	Auswanderung einer großen Anzahl von Menschen in Gebiete, aus denen sie nicht stammen	Einwanderung germanischer und slawischer Völker in den Süden und Westen Europas zwischen dem 4. und 6. Jahrhundert nach Christus.	exact
 Völkerwanderung	noun	Auswanderung einer großen Anzahl von Menschen in Gebiete, aus denen sie nicht stammen	Wanderbewegung, bei der eine große Zahl Menschen aus einer Volksgruppe oder eine ganze Volksgruppe in ein anderes Gebiet umsiedelt.	broader
 Waage	noun	Messgerät zur Bestimmung des Gewichtes	Instrument, mit dem das Gewicht von etwas bestimmt werden kann.	exact
-Waage	noun	Messgerät zur Bestimmung des Gewichtes	Eines der zwölf Sternbilder des Tierkreises	broader
+Waage	noun	Messgerät zur Bestimmung des Gewichtes	Eines der zwölf Sternbilder des Tierkreises	related
 Waage	noun	Gerät zur Prüfung der waagerechten oder senkrechten Ausrichtung von Objekten	Instrument, mit dem das Gewicht von etwas bestimmt werden kann.	none
 Waage	noun	Gerät zur Prüfung der waagerechten oder senkrechten Ausrichtung von Objekten	Eines der zwölf Sternbilder des Tierkreises	none
 Waage	noun	ein Sternbild auf der Südhalbkugel	Instrument, mit dem das Gewicht von etwas bestimmt werden kann.	none
 Waage	noun	ein Sternbild auf der Südhalbkugel	Eines der zwölf Sternbilder des Tierkreises	none
-Waage	noun	eines der zwölf Tierkreiszeichen/Sternzeichen für die Zeit vom 24.9. bis 23.10.	Instrument, mit dem das Gewicht von etwas bestimmt werden kann.	broader
+Waage	noun	eines der zwölf Tierkreiszeichen/Sternzeichen für die Zeit vom 24.9. bis 23.10.	Instrument, mit dem das Gewicht von etwas bestimmt werden kann.	none
 Waage	noun	eines der zwölf Tierkreiszeichen/Sternzeichen für die Zeit vom 24.9. bis 23.10.	Eines der zwölf Sternbilder des Tierkreises	narrower
 Waage	noun	im Sternzeichen Waage geborene Person	Instrument, mit dem das Gewicht von etwas bestimmt werden kann.	none
 Waage	noun	im Sternzeichen Waage geborene Person	Eines der zwölf Sternbilder des Tierkreises	none
@@ -554,7 +554,7 @@ Ainu	noun	ein indigenes Volk Nordjapans	Eine Sprache, die vom Volk der Ainu auf 
 Ainu	noun	ein indigenes Volk Nordjapans	Eine Ethnie, die auf Hokkaido, Nord-Honshu, Sachalin und den Kurilen heimisch war bzw. ist. Eine ethnische Minderheit in Japan. Heutzutage bezeichnen sich rund 27.000 Japaner selbst als Ainu.	none
 Ainu	noun	ein indigenes Volk Nordjapans	Eine Person, die der ethnischen Gruppe der Ainu angehört.	none
 Ainu	noun	Angehöriger des gleichnamigen Volkes	Eine Sprache, die vom Volk der Ainu auf der nordjapanischen Insel Hokkaido gesprochen wird.	broader
-Ainu	noun	Angehöriger des gleichnamigen Volkes	Eine Ethnie, die auf Hokkaido, Nord-Honshu, Sachalin und den Kurilen heimisch war bzw. ist. Eine ethnische Minderheit in Japan. Heutzutage bezeichnen sich rund 27.000 Japaner selbst als Ainu.	narrower
+Ainu	noun	Angehöriger des gleichnamigen Volkes	Eine Ethnie, die auf Hokkaido, Nord-Honshu, Sachalin und den Kurilen heimisch war bzw. ist. Eine ethnische Minderheit in Japan. Heutzutage bezeichnen sich rund 27.000 Japaner selbst als Ainu.	none
 Ainu	noun	Angehöriger des gleichnamigen Volkes	Eine Person, die der ethnischen Gruppe der Ainu angehört.	none
 Kölsch	noun	zweifarbig gewürfelter Stoff aus Baumwolle	Die Sprache der Bewohner der Stadt Köln in Deutschland und einiger Orte in der unmittelbaren Umgebung.	none
 Kölsch	noun	zweifarbig gewürfelter Stoff aus Baumwolle	Ein Bier, das exklusiv in der deutschen Stadt Köln und deren Umgebung gebraut wird.	none

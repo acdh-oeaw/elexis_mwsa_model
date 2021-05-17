@@ -19,6 +19,8 @@ mwsa_model/__pycache__/
 mwsa_model/data/
 mwsa_model/output/.DS_Store
 mwsa_model/output/models/
+mwsa_model/output/pipeline/pipeline_german.tsv.pkl
+mwsa_model/output/preprocessed_german.tsv.pkl
 mwsa_model/output/predictions/nl_predictions.txt
 mwsa_model/output/preprocessed_slovene.tsv.pkl
 mwsa_model/output/pipeline/pipeline_slovene.tsv.pkl
