@@ -37,27 +37,21 @@ spacy_models = {
 
 }
 
-models = {SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages.English]),
+models = {SupportedLanguages.Russian: StanzaLanguage(stanza.Pipeline(lang="ru")),
+          SupportedLanguages.Slovene: StanzaLanguage(stanza.Pipeline(lang="sl")),
+          SupportedLanguages.Serbian: StanzaLanguage(stanza.Pipeline(lang="sr")),
+          SupportedLanguages.Bulgarian: StanzaLanguage(stanza.Pipeline(lang="bg")),
+          SupportedLanguages.Hungarian: StanzaLanguage(stanza.Pipeline(lang="hu")),
+          SupportedLanguages.Basque: StanzaLanguage(stanza.Pipeline(lang = "eu")),
+          SupportedLanguages.Irish: StanzaLanguage(stanza.Pipeline(lang="ga")),
+          SupportedLanguages.Estonian: StanzaLanguage(stanza.Pipeline(lang="et")),
+          SupportedLanguages.Italian: spacy.load(spacy_models[SupportedLanguages.Italian]),
+          SupportedLanguages.English: spacy.load(spacy_models[SupportedLanguages.English]),
           SupportedLanguages.German: spacy.load(spacy_models[SupportedLanguages.German]),
           SupportedLanguages.Danish: spacy.load(spacy_models[SupportedLanguages.Danish]),
           SupportedLanguages.Dutch: spacy.load(spacy_models[SupportedLanguages.Dutch]),
-          SupportedLanguages.Italian: spacy.load(spacy_models[SupportedLanguages.Italian]),
-          SupportedLanguages.Portuguese: spacy.load(spacy_models[SupportedLanguages.Portuguese]),
-          # SupportedLanguages.Russian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ru")),
-          #SupportedLanguages.Serbian: StanzaLanguage(stanza.Pipeline(lang="sr", dir='/Users/seungbinyim/Development/repos/elexis/vectors/stanza') ),
-          # SupportedLanguages.Bulgarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="bg")),
-          SupportedLanguages.Slovene: StanzaLanguage(stanza.Pipeline(lang="sl"))
-          # SupportedLanguages.Hungarian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="hu")),
-          # SupportedLanguages.Estonian: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="et")),
-          # SupportedLanguages.Basque: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="eu"))
-          # SupportedLanguages.Irish: StanfordNLPLanguage(stanfordnlp.Pipeline(lang="ga")),
+          SupportedLanguages.Portuguese: spacy.load(spacy_models[SupportedLanguages.Portuguese])
           }
-
-nlp_vectors = spacy.load("/Users/seungbinyim/Development/repos/elexis/vectors/slovene_vectors")
-vocab = Vocab()
-for word in nlp_vectors.vocab:  # if vector not in vocab
-    models[SupportedLanguages.Slovene].vocab.set_vector(word.text, word.vector)
-logger.info('loaded vocabulary\n')
 
 
 def lemmatizer(doc, spacy_model):

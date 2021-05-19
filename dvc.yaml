@@ -212,3 +212,68 @@ stages:
     outs:
       - mwsa_model/output/predictions/sr_predictions.txt:
           cache: false
+
+  ru:
+    cmd: python -m mwsa_model.load_data ru
+    deps:
+      - mwsa_model/load_data.py
+    params:
+      - ru_params.yaml:
+          - data.version
+          - data.dataset
+    outs:
+      - mwsa_model/data/features_russian.tsv.pkl
+      - mwsa_model/data/labels_russian.tsv.pkl
+  ru_preprocess:
+    cmd: python -m mwsa_model.preprocess russian.tsv ru
+    deps:
+      - mwsa_model/data/features_russian.tsv.pkl
+      - mwsa_model/preprocess.py
+      - mwsa_model/service/model_trainer.py
+    outs:
+      - mwsa_model/output/preprocessed_russian.tsv.pkl
+      - mwsa_model/output/pipeline/pipeline_russian.tsv.pkl
+  ru_train:
+    cmd: python -m mwsa_model.train russian.tsv ru
+    deps:
+      - mwsa_model/output/preprocessed_russian.tsv.pkl
+      - mwsa_model/data/labels_russian.tsv.pkl
+      - mwsa_model/train.py
+      - mwsa_model/service/model_trainer.py
+    params:
+      - ru_params.yaml:
+          - lang.preprocess__lang
+          - random_forest.random_forest__random_state
+          - random_forest.random_forest__bootstrap
+          - random_forest.random_forest__class_weight
+          - random_forest.random_forest__max_depth
+          - random_forest.random_forest__max_features
+          - random_forest.random_forest__min_samples_leaf
+          - random_forest.random_forest__min_samples_split
+          - random_forest.random_forest__n_estimators
+          - random_forest.random_forest__n_jobs
+    metrics:
+      - mwsa_model/output/metrics/ru_cv_score.txt:
+          cache: false
+    outs:
+      - mwsa_model/output/models/ru.pkl
+  ru_evaluate:
+    cmd: python -m mwsa_model.evaluate ru.pkl metrics_ru.json ru_predictions.txt ru
+    deps:
+      - mwsa_model/output/pipeline/pipeline_russian.tsv.pkl
+      - mwsa_model/evaluate.py
+      - mwsa_model/output/models/ru.pkl
+    params:
+      - en_params.yaml:
+          - data.version
+          - data.dataset
+    metrics:
+      - mwsa_model/output/metrics/metrics_ru.json:
+          cache: false
+    outs:
+      - mwsa_model/output/predictions/ru_predictions.txt:
+          cache: false
+
+
+
+

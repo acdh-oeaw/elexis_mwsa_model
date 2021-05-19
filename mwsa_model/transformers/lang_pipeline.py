@@ -1,11 +1,10 @@
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 
 from mwsa_model import features
 from mwsa_model.service.util import SupportedLanguages
 from mwsa_model.transformers.pipeline import SpacyProcessor, DiffPosCountTransformer, FirstWordSameProcessor, \
     SimilarityProcessor, MatchingLemmaTransformer, DifferenceInLengthTransformer, MaxDependencyTreeDepthTransformer, \
-    ToTargetSimilarityDiffTransformer, FeatureSelector
+    ToTargetSimilarityDiffTransformer, FeatureSelector, CosineTransformer
 
 english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.English, with_wordnet=False)),
                                    (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
@@ -31,8 +30,7 @@ german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLa
                                   #(features.TFIDF_COS, TfidfTransformer()),
                                   #(features.JACCARD, JaccardTransformer()),
                                   #(features.COSINE, CosineTransformer()),
-                                  ('feature_selector', FeatureSelector()),
-                                  ('random_forest', RandomForestClassifier())])
+                                  ('feature_selector', FeatureSelector())])
 russian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Russian)),
                                    (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
                                    (features.SIMILARITY, SimilarityProcessor()),
@@ -42,9 +40,8 @@ russian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedL
                                    (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                    # (features.TFIDF_COS, TfidfTransformer()),
                                    # (features.JACCARD, JaccardTransformer()),
-                                   # (features.COSINE, CosineTransformer()),
-                                   ('feature_selector', FeatureSelector()),
-                                   ('random_forest', RandomForestClassifier())])
+                                    (features.COSINE, CosineTransformer()),
+                                   ('feature_selector', FeatureSelector())])
 
 italian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Italian)),
                                    (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -55,9 +52,8 @@ italian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedL
                                    (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                    #(features.TFIDF_COS, TfidfTransformer()),
                                    #(features.JACCARD, JaccardTransformer()),
-                                   #(features.COSINE, CosineTransformer()),
-                                   ('feature_selector', FeatureSelector()),
-                                   ('random_forest', RandomForestClassifier())])
+                                   (features.COSINE, CosineTransformer()),
+                                   ('feature_selector', FeatureSelector())])
 
 portuguese_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Portuguese)),
                                       (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -68,9 +64,8 @@ portuguese_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=Support
                                       (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                       #(features.TFIDF_COS, TfidfTransformer()),
                                       #(features.JACCARD, JaccardTransformer()),
-                                      #(features.COSINE, CosineTransformer()),
-                                      ('feature_selector', FeatureSelector()),
-                                      ('random_forest', RandomForestClassifier())])
+                                      (features.COSINE, CosineTransformer()),
+                                      ('feature_selector', FeatureSelector())])
 
 danish_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Danish)),
                                   (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -81,9 +76,8 @@ danish_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLa
                                   (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                   #(features.TFIDF_COS, TfidfTransformer()),
                                   #(features.JACCARD, JaccardTransformer()),
-                                  #(features.COSINE, CosineTransformer()),
-                                  ('feature_selector', FeatureSelector()),
-                                  ('random_forest', RandomForestClassifier())])
+                                  (features.COSINE, CosineTransformer()),
+                                  ('feature_selector', FeatureSelector())])
 
 dutch_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Dutch)),
                                  (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -94,9 +88,8 @@ dutch_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLan
                                  (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                  #(features.TFIDF_COS, TfidfTransformer()),
                                  #(features.JACCARD, JaccardTransformer()),
-                                 #(features.COSINE, CosineTransformer()),
-                                 ('feature_selector', FeatureSelector()),
-                                 ('random_forest', RandomForestClassifier())])
+                                 (features.COSINE, CosineTransformer()),
+                                 ('feature_selector', FeatureSelector())])
 
 serbian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Serbian)),
                                    (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -107,7 +100,7 @@ serbian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedL
                                    (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                    #(features.TFIDF_COS, TfidfTransformer()),
                                    #(features.JACCARD, JaccardTransformer()),
-                                   #(features.COSINE, CosineTransformer()),
+                                   (features.COSINE, CosineTransformer()),
                                    ('feature_selector', FeatureSelector())])
 
 bulgarian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Bulgarian)),
@@ -119,9 +112,8 @@ bulgarian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=Supporte
                                      (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                      #(features.TFIDF_COS, TfidfTransformer()),
                                      #(features.JACCARD, JaccardTransformer()),
-                                     #(features.COSINE, CosineTransformer()),
-                                     ('feature_selector', FeatureSelector()),
-                                     ('random_forest', RandomForestClassifier())])
+                                     (features.COSINE, CosineTransformer()),
+                                     ('feature_selector', FeatureSelector())])
 
 slovene_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Slovene)),
                                    (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -132,7 +124,7 @@ slovene_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedL
                                    (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                    #(features.TFIDF_COS, TfidfTransformer()),
                                    #(features.JACCARD, JaccardTransformer()),
-                                   #(features.COSINE, CosineTransformer()),
+                                   (features.COSINE, CosineTransformer()),
                                    ('feature_selector', FeatureSelector())])
 
 estonian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Estonian)),
@@ -144,9 +136,8 @@ estonian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=Supported
                                     (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                     #(features.TFIDF_COS, TfidfTransformer()),
                                     #(features.JACCARD, JaccardTransformer()),
-                                    #(features.COSINE, CosineTransformer()),
-                                    ('feature_selector', FeatureSelector()),
-                                    ('random_forest', RandomForestClassifier())])
+                                    (features.COSINE, CosineTransformer()),
+                                    ('feature_selector', FeatureSelector())])
 
 basque_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Basque)),
                                   (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -157,9 +148,8 @@ basque_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLa
                                   (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                   #(features.TFIDF_COS, TfidfTransformer()),
                                   #(features.JACCARD, JaccardTransformer()),
-                                  #(features.COSINE, CosineTransformer()),
-                                  ('feature_selector', FeatureSelector()),
-                                  ('random_forest', RandomForestClassifier())])
+                                  (features.COSINE, CosineTransformer()),
+                                  ('feature_selector', FeatureSelector())])
 
 irish_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Irish)),
                                  (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -170,9 +160,8 @@ irish_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLan
                                  (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                  #(features.TFIDF_COS, TfidfTransformer()),
                                  #(features.JACCARD, JaccardTransformer()),
-                                 #(features.COSINE, CosineTransformer()),
-                                 ('feature_selector', FeatureSelector()),
-                                 ('random_forest', RandomForestClassifier())])
+                                 (features.COSINE, CosineTransformer()),
+                                 ('feature_selector', FeatureSelector())])
 
 hungarian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Hungarian)),
                                      (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
@@ -183,6 +172,5 @@ hungarian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=Supporte
                                      (features.LEN_DIFF, DifferenceInLengthTransformer()),
                                      #(features.TFIDF_COS, TfidfTransformer()),
                                      #(features.JACCARD, JaccardTransformer()),
-                                     #(features.COSINE, CosineTransformer()),
-                                     ('feature_selector', FeatureSelector()),
-                                     ('random_forest', RandomForestClassifier())])
+                                     (features.COSINE, CosineTransformer()),
+                                     ('feature_selector', FeatureSelector())])
