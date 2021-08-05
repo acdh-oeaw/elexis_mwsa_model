@@ -49,6 +49,7 @@ model_trainer = MwsaModelTrainer()
 
 pipeline: Pipeline = model_trainer.build_pipeline(SupportedLanguages(lang))
 pipeline.set_params(preprocess__lang=SupportedLanguages(lang))
+pipeline.fit(features)
 preprocessed = pipeline.transform(features)
 
 with open(PIPELINE_DIR+'pipeline_'+dataset+'.pkl', 'wb+') as file:

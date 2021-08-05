@@ -4,7 +4,7 @@ from mwsa_model import features
 from mwsa_model.service.util import SupportedLanguages
 from mwsa_model.transformers.pipeline import SpacyProcessor, DiffPosCountTransformer, FirstWordSameProcessor, \
     SimilarityProcessor, MatchingLemmaTransformer, DifferenceInLengthTransformer, MaxDependencyTreeDepthTransformer, \
-    ToTargetSimilarityDiffTransformer, FeatureSelector, CosineTransformer
+    ToTargetSimilarityDiffTransformer, FeatureSelector, CosineTransformer, MostDescriptiveWordsProcessor, MeanCosineSimilarityProcessor, MeanCosineSimilarityGloveProcessor
 
 english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.English, with_wordnet=False)),
                                    (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
@@ -34,6 +34,9 @@ german_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLa
 russian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.Russian)),
                                    (features.FIRST_WORD_SAME, FirstWordSameProcessor()),
                                    (features.SIMILARITY, SimilarityProcessor()),
+                                   (features.MOST_DESCRIPTIVE, MostDescriptiveWordsProcessor()),
+                                   (features.MEANCOSINE, MeanCosineSimilarityProcessor()),
+                                   #(features.MEANCOSINEGLOVE, MeanCosineSimilarityGloveProcessor()),
                                    #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
                                    # (features.ONE_HOT_POS, OneHotPosTransformer()),
                                    (features.LEMMA_MATCH, MatchingLemmaTransformer()),

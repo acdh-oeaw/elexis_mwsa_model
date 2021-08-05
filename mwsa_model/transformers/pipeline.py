@@ -18,6 +18,13 @@ from nltk.corpus import wordnet as wn
 from spacy_stanza import StanzaLanguage
 import stanza
 import warnings
+from collections import Counter
+import gensim
+import numpy as np
+from tqdm import tqdm
+from ufal.udpipe import Model, Pipeline
+
+from navec import Navec
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -69,6 +76,10 @@ def remove_stopwords(doc, output='text'):
 
     return [token.text for token in doc if token.is_stop is not True and token.is_punct is not True]
 
+def remove_special_characters(input_string):
+    output_string = input_string.strip("0123456789|")
+    return output_string
+
 
 class Error(Exception):
     pass
@@ -100,6 +111,12 @@ class SpacyProcessor(BaseEstimator, TransformerMixin):
         logger.debug('transforming with spacy...')
 
         logger.debug(len(X['def1']), len(X['def2']))
+
+        X.loc[:, 'def1'] = X['def1'].map(lambda features: remove_special_characters(features))
+        logger.debug('-------------special characters removed 1  ------------')
+
+        X.loc[:, 'def2'] = X['def2'].map(lambda features: remove_special_characters(features))
+        logger.debug('-------------special characters removed 2  ------------')
 
         X.loc[:, 'processed_1'] = pd.Series(list(nlp.pipe(iter(X['def1']), batch_size=1000)))
         logger.debug('----------processed 1 ------------')
@@ -136,7 +153,7 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
             if col in ['word', 'pos', 'def1', 'def2',
                        'processed_1', 'processed_2', 'word_processed',
                        'lemmatized_1', 'stopwords_removed_1', 'lemmatized_2',
-                       'stopwords_removed_2', 'relation']:
+                       'stopwords_removed_2', 'relation', 'filtered_def1', 'filtered_def2']: 
                 X = X.drop(col, axis=1)
 
         logger.debug('FeatureSelector.transform() took %.3f seconds' % (time.time() - t0))
@@ -583,6 +600,151 @@ class CosineTransformer(BaseEstimator, TransformerMixin):
         vectorizer.fit(text)
         return vectorizer.transform(text).toarray()
 
+class MostDescriptiveWordsProcessor(BaseEstimator, TransformerMixin):
+
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+
+        self.vocab_dict = Counter()
+
+        for sentence in X["def1"]:
+            self.vocab_dict.update(word.strip('.,?!"\'').lower() for word in sentence.split())
+        for sentence in X["def2"]:
+            self.vocab_dict.update(word.strip('.,?!"\'').lower() for word in sentence.split())
+            
+        return self
+
+    def transform(self, X, y=None):
+        X.loc[:, "filtered_def1"] = X.apply(
+        lambda row: self.get_least_n_words(row['def1'], 5), axis=1)
+
+        X.loc[:, "filtered_def2"] = X.apply(
+        lambda row: self.get_least_n_words(row['def2'], 5), axis=1)
+
+        return X
+
+
+    def get_least_n_words(self, definition, n):
+        vocab_def = dict()
+        for word in definition.lower().split():
+            word = word.strip('.,?!"\':')
+            vocab_def[word] = self.vocab_dict[word]
+        vocab_def = sorted(vocab_def.items(), key=lambda item: item[1], reverse=False)
+        vocab_def = [item[0] for item in vocab_def]
+        return vocab_def[:n]
+
+class MeanCosineSimilarityProcessor(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.w2v_model_path = '/home/varya/data/models/skipgram_russian_300_5_2019/model.bin'
+        self.tag_model_path = '/home/varya/data/models/russian-syntagrus-ud-2.0-170801.udpipe'
+
+        self.model_w2v = None
+        self.model_tag = None
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        self.model_w2v = gensim.models.KeyedVectors.load_word2vec_format(self.w2v_model_path, binary=True)
+        self.model_tag = Model.load(self.tag_model_path)
+
+        t0 = time.time()
+
+        X.loc[:, features.MEANCOSINE] = X.apply(
+            lambda row: self.compute_similarity_based_on_mean_vectors(row['stopwords_removed_1'], row['stopwords_removed_2']), axis=1)
+
+        logger.debug('MeanCosineSimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
+        self.model_w2v = None
+        self.model_tag = None
+
+        return X
+
+    def tag(self, word):
+        pipeline = Pipeline(self.model_tag, 'tokenize', Pipeline.DEFAULT, Pipeline.DEFAULT, 'conllu')
+        processed = pipeline.process(word)
+        output = [l for l in processed.split('\n') if not l.startswith('#')]
+        tagged = ['_'.join(w.split('\t')[2:4]) for w in output if w]
+        return tagged
+    
+    def tagged_defs(self, list_of_words):
+        tagged_data = []
+        for word in list_of_words:
+            word_tagged = self.tag(word.strip('|\(\).,?!"\'').lower())
+            tagged_data += word_tagged
+        return tagged_data
+
+    def compute_similarity_based_on_mean_vectors(self, tdef1, tdef2):
+        word_vectors_def1 = [self.model_w2v.get_vector(word) for word in self.tagged_defs(tdef1) if word in self.model_w2v.key_to_index]
+        word_vectors_def2 = [self.model_w2v.get_vector(word) for word in self.tagged_defs(tdef2) if word in self.model_w2v.key_to_index]
+
+        if len(word_vectors_def1) == 0 or len(word_vectors_def2) == 0:
+            return 0.0
+
+        mean_vector_1 = np.zeros(word_vectors_def1[0].shape)
+        mean_vector_2 = np.zeros(word_vectors_def1[0].shape)
+
+        for word_vector in word_vectors_def1:
+            mean_vector_1 += word_vector
+        mean_vector_1 /= len(word_vectors_def1)
+
+        for word_vector in word_vectors_def2:
+            mean_vector_2 += word_vector
+        mean_vector_2 /= len(word_vectors_def2)
+    
+        dot_def1_def1 = mean_vector_1.dot(mean_vector_1.T)
+        dot_def2_def2 = mean_vector_2.dot(mean_vector_2.T)
+        dot_def1_def2 = mean_vector_1.dot(mean_vector_2.T)
+        return dot_def1_def2/ np.sqrt(dot_def1_def1*dot_def2_def2)
+
+class MeanCosineSimilarityGloveProcessor(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.model_glove_path = "/home/varya/data/models/navec_hudlit_v1_12B_500K_300d_100q.tar"
+
+        self.model_glove = None
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        self.model_glove = Navec.load(self.model_glove_path)
+
+        t0 = time.time()
+
+        X.loc[:, features.MEANCOSINEGLOVE] = X.apply(
+            lambda row: self.compute_similarity_based_on_mean_vectors(row['filtered_def1'], row['filtered_def2']), axis=1)
+
+        logger.debug('MeanCosineSimilarityGloveProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
+        self.model_glove = None
+
+        return X
+
+
+    def compute_similarity_based_on_mean_vectors(self, tdef1, tdef2):
+        word_vectors_def1 = [self.model_glove[word] for word in tdef1 if word in self.model_glove]
+        word_vectors_def2 = [self.model_glove[word] for word in tdef2 if word in self.model_glove]
+
+        if len(word_vectors_def1) == 0 or len(word_vectors_def2) == 0:
+            return 0.0
+
+        mean_vector_1 = np.zeros(word_vectors_def1[0].shape)
+        mean_vector_2 = np.zeros(word_vectors_def1[0].shape)
+
+        for word_vector in word_vectors_def1:
+            mean_vector_1 += word_vector
+        mean_vector_1 /= len(word_vectors_def1)
+
+        for word_vector in word_vectors_def2:
+            mean_vector_2 += word_vector
+        mean_vector_2 /= len(word_vectors_def2)
+    
+        dot_def1_def1 = mean_vector_1.dot(mean_vector_1.T)
+        dot_def2_def2 = mean_vector_2.dot(mean_vector_2.T)
+        dot_def1_def2 = mean_vector_1.dot(mean_vector_2.T)
+        return dot_def1_def2/ np.sqrt(dot_def1_def1*dot_def2_def2)
 
 class DiffPosCountTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):

@@ -32,7 +32,7 @@ if len(sys.argv) != 2:
 
 lang = sys.argv[1]
 
-config_file = '../'+lang + '_params.yaml' #changed path
+config_file = lang + '_params.yaml' #changed path
 with open(config_file, 'r') as fd:
     params = yaml.safe_load(fd)
 
