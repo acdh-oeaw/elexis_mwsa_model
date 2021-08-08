@@ -4,7 +4,8 @@ from mwsa_model import features
 from mwsa_model.service.util import SupportedLanguages
 from mwsa_model.transformers.pipeline import SpacyProcessor, DiffPosCountTransformer, FirstWordSameProcessor, \
     SimilarityProcessor, MatchingLemmaTransformer, DifferenceInLengthTransformer, MaxDependencyTreeDepthTransformer, \
-    ToTargetSimilarityDiffTransformer, FeatureSelector, CosineTransformer, MostDescriptiveWordsProcessor, MeanCosineSimilarityProcessor, MeanCosineSimilarityGloveProcessor
+    ToTargetSimilarityDiffTransformer, FeatureSelector, CosineTransformer, MostDescriptiveWordsProcessor, MeanCosineSimilarityProcessor, MeanCosineSimilarityGloveProcessor, \
+    MeanCosineSimilarityFasttextProcessor, WordMoverSimilarityProcessor
 
 english_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedLanguages.English, with_wordnet=False)),
                                    (features.POS_COUNT_DIFF, DiffPosCountTransformer()),
@@ -36,7 +37,9 @@ russian_pipeline = Pipeline(steps=[('preprocess', SpacyProcessor(lang=SupportedL
                                    (features.SIMILARITY, SimilarityProcessor()),
                                    (features.MOST_DESCRIPTIVE, MostDescriptiveWordsProcessor()),
                                    (features.MEANCOSINE, MeanCosineSimilarityProcessor()),
+                                   #(features.MEANCOSINEFASTTEXT, MeanCosineSimilarityFasttextProcessor()),
                                    #(features.MEANCOSINEGLOVE, MeanCosineSimilarityGloveProcessor()),
+                                   #(features.WORDMOVERSIMILARITY, WordMoverSimilarityProcessor()),
                                    #(features.POS_COUNT_DIFF, DiffPosCountTransformer()),
                                    # (features.ONE_HOT_POS, OneHotPosTransformer()),
                                    (features.LEMMA_MATCH, MatchingLemmaTransformer()),

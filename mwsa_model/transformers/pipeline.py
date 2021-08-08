@@ -19,10 +19,18 @@ from spacy_stanza import StanzaLanguage
 import stanza
 import warnings
 from collections import Counter
+
 import gensim
+import gensim.downloader as api
+
+from scipy.spatial import distance
+
 import numpy as np
 from tqdm import tqdm
 from ufal.udpipe import Model, Pipeline
+
+import fasttext
+import fasttext.util
 
 from navec import Navec
 
@@ -149,6 +157,9 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
 
     def transform(self, X, y=None):
         t0 = time.time()
+
+        #X.to_pickle("/home/varya/data/dataframe_with_features/data.pkl")
+
         for col in X.columns:
             if col in ['word', 'pos', 'def1', 'def2',
                        'processed_1', 'processed_2', 'word_processed',
@@ -653,7 +664,7 @@ class MeanCosineSimilarityProcessor(BaseEstimator, TransformerMixin):
         t0 = time.time()
 
         X.loc[:, features.MEANCOSINE] = X.apply(
-            lambda row: self.compute_similarity_based_on_mean_vectors(row['stopwords_removed_1'], row['stopwords_removed_2']), axis=1)
+            lambda row: self.compute_similarity_based_on_mean_vectors(row['filtered_def1'], row['filtered_def2']), axis=1)
 
         logger.debug('MeanCosineSimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
 
@@ -668,6 +679,14 @@ class MeanCosineSimilarityProcessor(BaseEstimator, TransformerMixin):
         output = [l for l in processed.split('\n') if not l.startswith('#')]
         tagged = ['_'.join(w.split('\t')[2:4]) for w in output if w]
         return tagged
+
+    # def tagged_defs(self, string_of_words):
+    #     tagged_data = []
+    #     #tagged_data = ""
+    #     for word in string_of_words.split():
+    #         word_tagged = self.tag(word.strip('123456789|\(\).,?!"\'').lower())
+    #         tagged_data += word_tagged
+    #     return tagged_data
     
     def tagged_defs(self, list_of_words):
         tagged_data = []
@@ -683,21 +702,93 @@ class MeanCosineSimilarityProcessor(BaseEstimator, TransformerMixin):
         if len(word_vectors_def1) == 0 or len(word_vectors_def2) == 0:
             return 0.0
 
-        mean_vector_1 = np.zeros(word_vectors_def1[0].shape)
-        mean_vector_2 = np.zeros(word_vectors_def1[0].shape)
+        # mean_vector_1 = np.zeros(word_vectors_def1[0].shape)
+        # mean_vector_2 = np.zeros(word_vectors_def1[0].shape)
 
-        for word_vector in word_vectors_def1:
-            mean_vector_1 += word_vector
-        mean_vector_1 /= len(word_vectors_def1)
+        # for word_vector in word_vectors_def1:
+        #     mean_vector_1 += word_vector
+        # mean_vector_1 /= len(word_vectors_def1)
 
-        for word_vector in word_vectors_def2:
-            mean_vector_2 += word_vector
-        mean_vector_2 /= len(word_vectors_def2)
+        # for word_vector in word_vectors_def2:
+        #     mean_vector_2 += word_vector
+        # mean_vector_2 /= len(word_vectors_def2)
     
-        dot_def1_def1 = mean_vector_1.dot(mean_vector_1.T)
-        dot_def2_def2 = mean_vector_2.dot(mean_vector_2.T)
-        dot_def1_def2 = mean_vector_1.dot(mean_vector_2.T)
-        return dot_def1_def2/ np.sqrt(dot_def1_def1*dot_def2_def2)
+        # dot_def1_def1 = mean_vector_1.dot(mean_vector_1.T)
+        # dot_def2_def2 = mean_vector_2.dot(mean_vector_2.T)
+        # dot_def1_def2 = mean_vector_1.dot(mean_vector_2.T)
+        # return dot_def1_def2/ np.sqrt(dot_def1_def1*dot_def2_def2)
+
+        word_vectors_def1_mean = np.mean(word_vectors_def1, axis = 0)
+        word_vectors_def2_mean = np.mean(word_vectors_def2, axis = 0)
+
+        
+        return 1. - distance.cosine(word_vectors_def1_mean, word_vectors_def2_mean)
+
+    def compute_similarity(self, def1, def2):
+        list_cos_sim_def1_def2 = []
+        max_cos = 0
+        word_vectors_def1 = [self.model_w2v.get_vector(word) for word in self.tagged_defs(def1) if word in self.model_w2v.key_to_index]
+        word_vectors_def2 = [self.model_w2v.get_vector(word) for word in self.tagged_defs(def2) if word in self.model_w2v.key_to_index]
+
+        for word_vector_1 in word_vectors_def1:
+            for word_vector_2 in word_vectors_def2:
+                cos_sim = 1. - distance.cosine(word_vector_1, word_vector_2)
+                print(cos_sim)
+                if cos_sim > max_cos:
+                    max_cos = cos_sim
+                    print(max_cos)
+            list_cos_sim_def1_def2.append(max_cos)
+        
+        if len(list_cos_sim_def1_def2) == 0:
+            return 0.0
+
+        return sum(list_cos_sim_def1_def2)/(len(list_cos_sim_def1_def2))
+
+#it does not work 
+class WordMoverSimilarityProcessor(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        #self.w2v_model_path = '/home/varya/data/models/skipgram_russian_300_5_2019/model.bin'
+        self.tag_model_path = '/home/varya/data/models/russian-syntagrus-ud-2.0-170801.udpipe'
+
+        self.model_w2v = None
+        self.model_tag = None
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        self.model_w2v = api.load("word2vec-ruscorpora-300")
+        self.model_tag = Model.load(self.tag_model_path)
+
+        t0 = time.time()
+
+        X.loc[:, features.WORDMOVERSIMILARITY] = X.apply(
+            lambda row: self.compute_similarity(row['filtered_def1'], row['filtered_def2']), axis=1)
+
+        logger.debug('WordMoverSimilarityProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
+        self.model_w2v = None
+        self.model_tag = None
+
+        return X
+
+    def tag(self, word):
+        pipeline = Pipeline(self.model_tag, 'tokenize', Pipeline.DEFAULT, Pipeline.DEFAULT, 'conllu')
+        processed = pipeline.process(word)
+        output = [l for l in processed.split('\n') if not l.startswith('#')]
+        tagged = ['_'.join(w.split('\t')[2:4]) for w in output if w]
+        return tagged
+    
+    def tagged_defs(self, list_of_words):
+        tagged_data = ''
+        for word in list_of_words:
+            word_tagged = self.tag(word.strip('|\(\).,?!"\'').lower())
+            tagged_data.join(word_tagged)
+        return tagged_data
+
+    def compute_similarity(self, tdef1, tdef2):
+        
+        return self.model_w2v.wmdistance(self.tagged_defs(tdef1), self.tagged_defs(tdef2))
 
 class MeanCosineSimilarityGloveProcessor(BaseEstimator, TransformerMixin):
     def __init__(self):
@@ -714,7 +805,7 @@ class MeanCosineSimilarityGloveProcessor(BaseEstimator, TransformerMixin):
         t0 = time.time()
 
         X.loc[:, features.MEANCOSINEGLOVE] = X.apply(
-            lambda row: self.compute_similarity_based_on_mean_vectors(row['filtered_def1'], row['filtered_def2']), axis=1)
+            lambda row: self.compute_similarity_based_on_mean_vectors(row["filtered_def1"], row["filtered_def1"]), axis=1)
 
         logger.debug('MeanCosineSimilarityGloveProcessor.transform() took %.3f seconds' % (time.time() - t0))
 
@@ -730,22 +821,68 @@ class MeanCosineSimilarityGloveProcessor(BaseEstimator, TransformerMixin):
         if len(word_vectors_def1) == 0 or len(word_vectors_def2) == 0:
             return 0.0
 
-        mean_vector_1 = np.zeros(word_vectors_def1[0].shape)
-        mean_vector_2 = np.zeros(word_vectors_def1[0].shape)
+        word_vectors_def1_mean = np.mean(word_vectors_def1, axis = 0)
+        word_vectors_def2_mean = np.mean(word_vectors_def2, axis = 0)
 
-        for word_vector in word_vectors_def1:
-            mean_vector_1 += word_vector
-        mean_vector_1 /= len(word_vectors_def1)
+        
+        return 1. - distance.cosine(word_vectors_def1_mean, word_vectors_def2_mean)
 
-        for word_vector in word_vectors_def2:
-            mean_vector_2 += word_vector
-        mean_vector_2 /= len(word_vectors_def2)
+class MeanCosineSimilarityFasttextProcessor(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.model_fasttext_path = "/home/varya/data/models/fasttext_original_ru_cc.ru.300.bin.gz/cc.ru.300.bin"
+
+        self.model_fasttext = None
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        self.model_fasttext = fasttext.load_model(self.model_fasttext_path)
+
+        t0 = time.time()
+
+        X.loc[:, features.MEANCOSINEFASTTEXT] = X.apply(
+            lambda row: self.compute_similarity(row['def1'], row['def2']), axis=1)
+
+        logger.debug('MeanCosineSimilarityFasttextProcessor.transform() took %.3f seconds' % (time.time() - t0))
+
+        self.model_fasttext = None
+
+        return X
+
+
+    def compute_similarity_based_on_mean_vectors(self, def1, def2):
+
+        word_vectors_def1 = [self.model_fasttext.get_word_vector(word) for word in def1.split() if word in self.model_fasttext]
+        word_vectors_def2 = [self.model_fasttext.get_word_vector(word) for word in def2.split() if word in self.model_fasttext]
+
+        if len(word_vectors_def1) == 0 or len(word_vectors_def2) == 0:
+            return 0.0
+        word_vectors_def1_mean = np.mean(word_vectors_def1, axis = 0)
+        word_vectors_def2_mean = np.mean(word_vectors_def2, axis = 0)
+
+        
+        return 1. - distance.cosine(word_vectors_def1_mean, word_vectors_def2_mean)
     
-        dot_def1_def1 = mean_vector_1.dot(mean_vector_1.T)
-        dot_def2_def2 = mean_vector_2.dot(mean_vector_2.T)
-        dot_def1_def2 = mean_vector_1.dot(mean_vector_2.T)
-        return dot_def1_def2/ np.sqrt(dot_def1_def1*dot_def2_def2)
+    def compute_similarity(self, def1, def2):
+        list_cos_sim_def1_def2 = []
+        max_cos = 0
+        word_vectors_def1 = [self.model_fasttext.get_word_vector(word) for word in def1.split() if word in self.model_fasttext]
+        word_vectors_def2 = [self.model_fasttext.get_word_vector(word) for word in def2.split() if word in self.model_fasttext]
 
+        for word_vector_1 in word_vectors_def1:
+            for word_vector_2 in word_vectors_def2:
+                cos_sim = 1. - distance.cosine(word_vector_1, word_vector_2)
+                print(cos_sim)
+                if cos_sim > max_cos:
+                    max_cos = cos_sim
+                    print(max_cos)
+            list_cos_sim_def1_def2.append(max_cos)
+        
+        if len(list_cos_sim_def1_def2) == 0:
+            return 0.0
+
+        return sum(list_cos_sim_def1_def2)/(len(list_cos_sim_def1_def2))
 class DiffPosCountTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
