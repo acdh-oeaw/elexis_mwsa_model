@@ -805,7 +805,7 @@ class MeanCosineSimilarityGloveProcessor(BaseEstimator, TransformerMixin):
         t0 = time.time()
 
         X.loc[:, features.MEANCOSINEGLOVE] = X.apply(
-            lambda row: self.compute_similarity_based_on_mean_vectors(row["filtered_def1"], row["filtered_def1"]), axis=1)
+            lambda row: self.compute_similarity_based_on_mean_vectors(row["filtered_def1"], row["filtered_def2"]), axis=1)
 
         logger.debug('MeanCosineSimilarityGloveProcessor.transform() took %.3f seconds' % (time.time() - t0))
 
