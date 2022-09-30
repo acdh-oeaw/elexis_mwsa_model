@@ -6,7 +6,7 @@ https://github.com/explosion/spacy-models/releases/download/da_core_news_md-2.3.
 https://github.com/explosion/spacy-models/releases/download/nl_core_news_md-2.3.0/nl_core_news_md-2.3.0.tar.gz
 https://github.com/explosion/spacy-models/releases/download/it_core_news_md-2.3.0/it_core_news_md-2.3.0.tar.gz
 https://github.com/explosion/spacy-models/releases/download/pt_core_news_md-2.3.0/pt_core_news_md-2.3.0.tar.gz
-joblib==1.0.1
+joblib==1.2.0
 pandas==1.2.4
 pytest==6.2.3
 sklearn==0.0
